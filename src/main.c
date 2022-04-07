@@ -3,23 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:43:34 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/06 16:51:46 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:10:36 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void print_prompt(t_minishell *game)
+{
+	game->prompt = readline("➜ ");
+	printf("game->prompt: %s\n", game->prompt);
+}
+
+
+void initialization(t_minishell *game)
+{
+	while (1)
+	{
+		print_prompt(game);
+	}
+}
+
 int	main(int ac, char **av)
 {
-	char	*input;
+
+	t_minishell	game;
 
 	(void)ac;
 	(void)av;
-	input = readline(">>> ");
-	printf("Input: %s", input);
-	free(input);
+
+	initialization(&game);
+
+	//penser à free tout ce qui a été initialisé avec readline
 	return (0);
 }

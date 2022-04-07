@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
+#    By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/06 16:51:02 by swillis          ###   ########.fr        #
+#    Updated: 2022/04/07 16:49:34 by vnafissi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ EXE := $(BIN_DIR)/minishell
 
 CC := cc
 LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR)
+# -g -fsanitize=address
 
 # Src files ======================================
 
@@ -59,7 +60,7 @@ OBJS := $(SRCS:.c=.o)
 # Recipes ========================================
 
 minishell : $(OBJS)
-	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $(EXE)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
 
 # Cleanup ========================================
 
