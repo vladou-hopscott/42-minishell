@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/07 18:32:39 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:57:16 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 //structure principale du programme
 typedef struct s_sh
 {
-	t_token			*lexer;
+	t_token			*token_lst;
 	char			*prompt;
 } t_sh;
 
 //********************** FUNCTIONS **********************//
-void show_prompt(t_sh *sh);
+void listen_prompt(t_sh *sh);
 
 #endif
 
