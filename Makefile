@@ -6,7 +6,7 @@
 #    By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/07 16:49:34 by vnafissi         ###   ########.fr        #
+#    Updated: 2022/04/07 18:28:32 by vnafissi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,15 @@ EXE := $(BIN_DIR)/minishell
 CC := cc
 LDFLAGS ?= -lreadline
 CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR)
-# -g -fsanitize=address
+#-g -fsanitize=address
 
 # Src files ======================================
 
 HEADERS := 	$(INC_DIR)/minishell.h\
+			$(INC_DIR)/parsing.h\
 
 SRCS	:= 	$(SRC_DIR)/main.c\
+			$(SRC_DIR)/prompt.c\
 			$(SRC_DIR)/lexer.c\
 			$(SRC_DIR)/parser.c\
 			$(SRC_DIR)/expander.c\

@@ -1,0 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/07 18:12:59 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/07 18:32:04 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PARSING_H
+# define PARSING_H
+
+//enum sert à créer un index de 0 à N (ou bien à partir de la valeur ascii du caractère). https://linux.die.net/man/3/enum
+//Ici on l'utilise pour chaque type de token
+typedef enum token_type
+{
+	PIPE = '|',
+	R_LEFT = '<',
+	R_RIGHT = '>',
+	ARG,
+} t_token_type;
+
+// liste chaînée. Chaque lexer représente un caractère tokenisé, chaîné au token précédent / suivant
+typedef struct s_token
+{
+	t_token_type	token;
+	char			value;
+	struct s_lexer	*prev;
+	struct s_lexer	*next;
+} t_token;
+
+#endif
