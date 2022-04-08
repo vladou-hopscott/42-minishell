@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/07 18:57:16 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:25:14 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,19 @@ typedef struct s_sh
 } t_sh;
 
 //********************** FUNCTIONS **********************//
-void listen_prompt(t_sh *sh);
+
+//**** PROMPT ****//
+void	listen_prompt(t_sh *sh);
+
+//**** LEXER ****//
+void	lexer(t_sh *sh);
+void	tokenizer(t_sh *sh, char first, char second);
+
+t_token	*create_token(t_token_type type, char *value);
+void	add_back_token(t_token *list, t_token_type type, char *value);
+
+
+
 
 #endif
 

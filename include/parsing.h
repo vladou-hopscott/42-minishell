@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:12:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/07 19:09:34 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:06:09 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ typedef enum token_type
 	ARG,
 } t_token_type;
 
-// liste chaînée. Chaque lexer représente un caractère tokenisé, chaîné au token précédent / suivant
+// liste chaînée. Chaque token représente un caractère tokenisé, chaîné au token précédent / suivant
 typedef struct s_token
 {
-	t_token_type	token;
-	char			value;
-	struct s_lexer	*prev;
-	struct s_lexer	*next;
+	t_token_type	type;
+	char			*value;
+	struct s_token	*prev;
+	struct s_token	*next;
 } t_token;
 
 #endif

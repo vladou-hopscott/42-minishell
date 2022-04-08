@@ -6,21 +6,25 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/07 19:21:01 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:28:09 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
+
 void	tokenizer(t_sh *sh, char first, char second)
 {
 	(void)second;
 	(void)sh;
 
-	//	add_back_token() : il faut coder la fonction pour ajouter le token à la liste chainée des tokens sh->token_lst (au lieu de printer);
+	// ajoute le bon token à la liste chainée des tokens sh->token_lst
 	if (first == PIPE)
-		printf("PIPE\n");
+	{
+		add_back_token(sh->token_lst, PIPE, "|");
+		printf("added PIPE to token linked list\n");
+	}
 	else if (first == RED_LEFT || first == RED_LEFT)
 		printf("REDIRECTION < OU >\n");
 	else
