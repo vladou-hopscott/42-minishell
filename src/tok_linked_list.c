@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:59:44 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 15:26:09 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 18:42:34 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 	t_token	*tmp;
 
 	new = create_token(type, value);
-
 	if (!new)
 		return NULL;
+
 	if (!list)
 		return (new);
 	else
 	{
+
 		tmp = list;
 		while (tmp->next)
 			tmp = tmp->next;
@@ -78,7 +79,7 @@ void	ft_set_null_free_elem(t_token *elem)
 	free(elem);
 }
 
-void	ft_set_null_free_stack(t_token **a_list)
+void	ft_set_null_free_list(t_token **a_list)
 {
 	t_token	*tmp;
 

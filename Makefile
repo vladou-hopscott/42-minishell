@@ -6,7 +6,7 @@
 #    By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/11 12:20:46 by vnafissi         ###   ########.fr        #
+#    Updated: 2022/04/11 18:35:58 by vnafissi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ SRC_DIR := src
 INC_DIR := include
 LIB_DIR := lib
 BIN_DIR := .
+
+LIBFT_DIR := libft
+LIBFTNAME := libft.a
+INCS = -I ./includes -I ./libft
 
 # Exes ==========================================
 
@@ -44,7 +48,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/expander.c\
 			$(SRC_DIR)/executor.c\
 			$(SRC_DIR)/tok_linked_list.c\
-			$(SRC_DIR)/libft.c\
+
 
 
 # Make all ========================================
@@ -65,14 +69,17 @@ OBJS := $(SRCS:.c=.o)
 # Recipes ========================================
 
 minishell : $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
+	${MAKE} -C libft
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) libft/libft.a
 
 # Cleanup ========================================
 
 clean:
+	${MAKE} -C ${LIBFT_DIR} clean
 	rm -rf $(OBJS)
 
 fclean : clean
+	${MAKE} -C ${LIBFT_DIR} fclean
 	rm -rf $(EXE)
 
 # Additional ========================================

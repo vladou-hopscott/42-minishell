@@ -6,12 +6,13 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 16:16:13 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 18:21:55 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
+#include "../libft/libft.h"
 
 int	isin_charset(char c)
 {
@@ -32,8 +33,23 @@ char *string_token(t_sh *sh, char *prompt)
 		j++;
 	}
 	str = ft_strdup(prompt, j);
-	sh->p_index += j;
+	if (j == 0)
+		printf("ERROR TO CHECK\n");
+	sh->p_index += j - 1;
 	return (str);
+}
+
+int	isonly_space(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 void	tokenizer(t_sh *sh, char first, char second)
@@ -60,7 +76,8 @@ void	tokenizer(t_sh *sh, char first, char second)
 	else
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
-		sh->token_lst = add_back_token(sh->token_lst, STR, str);
+		if (!isonly_space(str))
+			sh->token_lst = add_back_token(sh->token_lst, STR, str);
 	}
 }
 
@@ -68,10 +85,9 @@ void lexer(t_sh *sh)
 {
 	int sec;
 
-	sh->p_index = 0;
 	while (sh->prompt[sh->p_index])
 	{
-		//à faire : gérer les tabulations et les espaces (les virer)
+		//à faire à un moment : gérer les tabulations et les espaces (les virer)
 		printf("i=%d\n", sh->p_index);
 		sec = 0;
 		if ((sh->prompt[sh->p_index] == RED_LEFT || sh->prompt[sh->p_index] == RED_RIGHT) && sh->prompt[sh->p_index + 1]) //sert à vérifier si il y a 2 '<' ou 2 '>' qui s'enchainent
