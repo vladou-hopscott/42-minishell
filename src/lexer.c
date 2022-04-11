@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/08 18:28:09 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 12:26:08 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,30 @@
 
 void	tokenizer(t_sh *sh, char first, char second)
 {
-	(void)second;
 	(void)sh;
 
 	// ajoute le bon token à la liste chainée des tokens sh->token_lst
 	if (first == PIPE)
-	{
 		add_back_token(sh->token_lst, PIPE, "|");
-		printf("added PIPE to token linked list\n");
-	}
 	else if (first == RED_LEFT || first == RED_LEFT)
-		printf("REDIRECTION < OU >\n");
+	{
+		if (second == RED_LEFT)
+			add_back_token(sh->token_lst, DOUBLE_RED_LEFT, "<<");
+		else if (second == RED_RIGHT)
+			add_back_token(sh->token_lst, DOUBLE_RED_RIGHT, ">>");
+		else if (first == RED_LEFT)
+			add_back_token(sh->token_lst, RED_LEFT, "<");
+		else if (first == RED_LEFT)
+			add_back_token(sh->token_lst, RED_RIGHT, ">");
+	}
 	else
-		printf("LITTERAL\n");
+		printf("char=%c, LITTERAL\n", first);
+	int i = 0;
+	while (i < 3)
+	{
+		printf("i=%d, %s\n",i, sh->token_lst->value);
+		i++;
+	}
 }
 
 void lexer(t_sh *sh)

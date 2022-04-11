@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tok_linked_lst.c                                   :+:      :+:    :+:   */
+/*   tok_linked_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:59:44 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/08 18:24:39 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 12:21:30 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	add_back_token(t_token *list, t_token_type type, char *value)
 	t_token *new;
 	t_token	*tmp;
 
-	new = create_token(type, list);
+	new = create_token(type, value);
 	if (new)
 	{
 		if (!list)
