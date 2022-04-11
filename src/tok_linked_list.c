@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:59:44 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 12:21:30 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:26:09 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,71 @@ t_token	*create_token(t_token_type type, char *value)
 	return (elem);
 }
 
-void	add_back_token(t_token *list, t_token_type type, char *value)
+t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 {
 	t_token *new;
 	t_token	*tmp;
 
 	new = create_token(type, value);
-	if (new)
+
+	if (!new)
+		return NULL;
+	if (!list)
+		return (new);
+	else
 	{
-		if (!list)
-			list = new;
-		else
-		{
-			tmp = list;
-			while (tmp->next)
-				tmp = tmp->next;
-			tmp->next = new;
-		}
+		tmp = list;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
+	return (list);
 }
 
+void print_tokens(t_token *li)
+{
+	while(li != NULL)
+	{
+		printf("[%s] ", li->value);
+		li = li->next;
+	}
+	printf("\n");
+}
+
+int list_length(t_token *li)
+{
+	int size = 0;
+
+	while(li != NULL)
+	{
+		size++;
+		li = li->next;
+	}
+	return size;
+}
+
+void	ft_set_null_free_elem(t_token *elem)
+{
+	if (!elem)
+		return ;
+	elem->value = NULL;
+	elem->next = NULL;
+	free(elem);
+}
+
+void	ft_set_null_free_stack(t_token **a_list)
+{
+	t_token	*tmp;
+
+	if (!(*a_list))
+		return ;
+	while (*a_list)
+	{
+		tmp = (*a_list)->next;
+		ft_set_null_free_elem(*a_list);
+		*a_list = tmp;
+	}
+}
 
 /* void	ft_stack_add_front(t_stack **stack, t_stack *new)
 {

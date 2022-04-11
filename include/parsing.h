@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:12:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 12:12:22 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:36:57 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef enum token_type
 	RED_RIGHT = '>',
 	DOUBLE_RED_LEFT,
 	DOUBLE_RED_RIGHT,
-	ARG,
+	STR,
 } t_token_type;
 
 // liste chaînée. Chaque token représente un caractère tokenisé, chaîné au token précédent / suivant

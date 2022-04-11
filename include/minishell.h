@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 12:20:07 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:16:55 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_sh
 {
 	t_token			*token_lst;
 	char			*prompt;
+	int				p_index;
 } t_sh;
 
 //********************** FUNCTIONS **********************//
@@ -38,11 +39,18 @@ void	lexer(t_sh *sh);
 void	tokenizer(t_sh *sh, char first, char second);
 
 t_token	*create_token(t_token_type type, char *value);
-void	add_back_token(t_token *list, t_token_type type, char *value);
+t_token *add_back_token(t_token *list, t_token_type type, char *value);
+void print_tokens(t_token *li);
+int list_length(t_token *li);
+void	ft_set_null_free_stack(t_token **a_list);
+char *string_token(t_sh *sh, char *prompt);
+
+
+
 
 void	*ft_calloc(size_t n, size_t size);
 void	ft_bzero(void *ptr, size_t n);
-
+char	*ft_strdup(const char *s, int len);
 
 #endif
 

@@ -6,12 +6,17 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:43:34 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 12:21:48 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:16:25 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
+
+void	reset_values(t_sh *sh)
+{
+	ft_set_null_free_stack(&sh->token_lst);
+}
 
 void initialization(t_sh *sh)
 {
@@ -19,7 +24,7 @@ void initialization(t_sh *sh)
 	{
 		listen_prompt(sh); //générer un prompt avec readline() et enregistrer la commande tapée
 		lexer(sh); //analyse lexicale de la commande
-
+		reset_values(sh);
 	}
 }
 
