@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"stdio.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"stdlib.h": "c",
+		"pipex.h": "c"
 	}
 }
