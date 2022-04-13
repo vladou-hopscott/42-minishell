@@ -6,7 +6,7 @@
 #    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/13 11:24:18 by vnafissi         ###   ########.fr        #
+#    Updated: 2022/04/13 16:47:09 by swillis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,6 @@ SRC_DIR := src
 INC_DIR := include
 LIB_DIR := lib
 BIN_DIR := .
-
-LIBFT_DIR := libft
-LIBFTNAME := libft.a
-INCS = -I ./includes -I ./libft
 
 # Exes ==========================================
 
@@ -40,6 +36,9 @@ CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR)
 
 HEADERS := 	$(INC_DIR)/minishell.h\
 			$(INC_DIR)/parsing.h\
+			$(INC_DIR)/pipex.h\
+			$(INC_DIR)/libft.h\
+			$(INC_DIR)/ft_printf.h\
 
 SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/prompt.c\
@@ -55,7 +54,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 
 all : $(NAME)
 
-$(NAME): minishell
+$(NAME): minishell pipex
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -68,23 +67,38 @@ OBJS := $(SRCS:.c=.o)
 
 PIPEX := $(LIB_DIR)/pipex/pipex
 
+LIBFT := $(LIB_DIR)/libft/libft.a
+
+PRINTF := $(LIB_DIR)/libftprintf/libftprintf.a
+
+$(LIBFT) :
+	make -C lib/libft -f Makefile
+
+$(PRINTF) :
+	make -C lib/libftprintf -f Makefile
+
 $(PIPEX) :
 	make -C lib/pipex -f Makefile
 
 # Recipes ========================================
 
-minishell : $(OBJS)
-	${MAKE} -C libft
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) libft/libft.a
+minishell : $(OBJS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
+
+pipex : $(PIPEX)
 
 # Cleanup ========================================
 
 clean:
-	${MAKE} -C ${LIBFT_DIR} clean
+	make -C lib/pipex -f Makefile clean
+	make -C lib/libft -f Makefile clean
+	make -C lib/libftprintf -f Makefile clean
 	rm -rf $(OBJS)
 
 fclean : clean
-	${MAKE} -C ${LIBFT_DIR} fclean
+	make -C lib/pipex -f Makefile fclean
+	make -C lib/libft -f Makefile fclean
+	make -C lib/libftprintf -f Makefile fclean
 	rm -rf $(EXE)
 
 # Additional ========================================

@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/13 17:44:07 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:49:58 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include "libft.h"
+# include "ft_printf.h"
 # include "parsing.h"
-# include "../libft/libft.h"
+# include "pipex.h"
 
 //********************** STRUCTURES **********************//
 
@@ -28,7 +30,7 @@ typedef struct s_sh
 	t_token			*token_lst;
 	char			*prompt;
 	int				p_index;
-} t_sh;
+}			t_sh;
 
 //********************** FUNCTIONS **********************//
 
@@ -54,4 +56,3 @@ void	ft_set_null_free_list(t_token **a_list);
 int	str_has_only_spaces(char *str);
 
 #endif
-
