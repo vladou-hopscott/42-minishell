@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 11:49:05 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:33:02 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
 
 char *string_token(t_sh *sh, char *prompt)
 {
@@ -21,10 +20,10 @@ char *string_token(t_sh *sh, char *prompt)
 	while (prompt[j])
 	{
 		if (isin_charset(prompt[j], "<>|"))
-			break;
+			break ;
 		j++;
 	}
-	str = ft_strdup(prompt, j);
+	str = ft_strndup(prompt, j);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);

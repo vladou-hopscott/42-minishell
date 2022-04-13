@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/13 11:46:17 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:30:12 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include "libft.h"
+# include "ft_printf.h"
 # include "parsing.h"
-# include "../libft/libft.h"
+# include "pipex.h"
 
 //********************** STRUCTURES **********************//
 
@@ -28,7 +30,7 @@ typedef struct s_sh
 	t_token			*token_lst;
 	char			*prompt;
 	int				p_index;
-} t_sh;
+}			t_sh;
 
 //********************** FUNCTIONS **********************//
 
@@ -51,8 +53,7 @@ int		list_length(t_token *li);
 void	ft_set_null_free_list(t_token **a_list);
 
 //********** UTILS **********//
-int	isin_charset(char c, char *charset);
-int	str_has_only_spaces(char *str);
+int		isin_charset(char c, char *charset);
+int		str_has_only_spaces(char *str);
 
 #endif
-
