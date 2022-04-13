@@ -6,7 +6,7 @@
 #    By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 18:13:14 by vnafissi          #+#    #+#              #
-#    Updated: 2022/04/11 18:18:56 by vnafissi         ###   ########.fr        #
+#    Updated: 2022/04/13 16:49:29 by vnafissi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 NAME = libft.a
 
-SRCS = ft_bzero.c ft_calloc.c ft_strlen.c ft_strdup.c \
+SRCS = ft_bzero.c ft_calloc.c ft_strdup.c ft_strlcpy.c ft_strlen.c ft_strtrim.c ft_is_in_charset.c\
 
 #${SRCS:.c=.o} means, take the variable value ${SRCS},
 # which is a string composed of words separated by spaces,

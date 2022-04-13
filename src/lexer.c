@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 11:49:05 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:44:35 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char *string_token(t_sh *sh, char *prompt)
 
 	while (prompt[j])
 	{
-		if (isin_charset(prompt[j], "<>|"))
+		if (is_in_charset(prompt[j], "<>|"))
 			break;
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/13 11:46:17 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:44:07 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		list_length(t_token *li);
 void	ft_set_null_free_list(t_token **a_list);
 
 //********** UTILS **********//
-int	isin_charset(char c, char *charset);
 int	str_has_only_spaces(char *str);
 
 #endif

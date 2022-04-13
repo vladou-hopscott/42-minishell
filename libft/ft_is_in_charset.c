@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_is_in_charset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:12:20 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 16:50:48 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/04/13 16:49:56 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/13 17:43:01 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+#include "libft.h"
 
-//integrer egalement les tabulations
-int	str_has_only_spaces(char *str)
+int	is_in_charset(char c, const char *charset)
 {
-	int i = 0;
+	int	i;
 
-	while (str[i])
+	i = 0;
+	while (charset[i])
 	{
-		if (str[i] != ' ')
-			return (0);
+		if (c == charset[i])
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }

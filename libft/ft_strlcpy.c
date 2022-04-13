@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:12:20 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 16:50:48 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/04/13 16:44:03 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/13 16:44:04 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+// The strlcpy() function copies up to size - 1 characters from
+// the NUL-terminated string src to dst, NUL-terminating the result.
 
-//integrer egalement les tabulations
-int	str_has_only_spaces(char *str)
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 {
-	int i = 0;
+	size_t	i;
+	size_t	src_size;
 
-	while (str[i])
+	src_size = ft_strlen(src);
+	if (dst_size == 0)
+		return (src_size);
+	i = 0;
+	while (i < dst_size - 1 && i < src_size)
 	{
-		if (str[i] != ' ')
-			return (0);
+		dst[i] = src[i];
 		i++;
 	}
-	return (1);
+	dst[i] = '\0';
+	return (src_size);
 }
