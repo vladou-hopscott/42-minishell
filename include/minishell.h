@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 18:43:17 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 11:46:17 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,27 @@ typedef struct s_sh
 
 //********************** FUNCTIONS **********************//
 
-//**** PROMPT ****//
+//********** INITIALIZATION **********//
+void	init_values(t_sh *sh);
+
+//********** PROMPT **********//
 void	listen_prompt(t_sh *sh);
 
-//**** LEXER ****//
+//********** LEXER **********//
 void	lexer(t_sh *sh);
-void	tokenizer(t_sh *sh, char first, char second);
-void	reset_values(t_sh *sh);
+void	tokenizer(t_sh *sh);
+char	*string_token(t_sh *sh, char *prompt);
 
+//********** LINKED LIST TOKENS **********//
 t_token	*create_token(t_token_type type, char *value);
-t_token *add_back_token(t_token *list, t_token_type type, char *value);
-void print_tokens(t_token *li);
-int list_length(t_token *li);
+t_token	*add_back_token(t_token *list, t_token_type type, char *value);
+void	print_tokens(t_token *li);
+int		list_length(t_token *li);
 void	ft_set_null_free_list(t_token **a_list);
-char *string_token(t_sh *sh, char *prompt);
 
-void	*ft_calloc(size_t n, size_t size);
-void	ft_bzero(void *ptr, size_t n);
-char	*ft_strdup(const char *s, int len);
+//********** UTILS **********//
+int	isin_charset(char c, char *charset);
+int	str_has_only_spaces(char *str);
 
 #endif
 

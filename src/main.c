@@ -6,25 +6,12 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:43:34 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 18:42:59 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 11:06:26 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
-
-//penser à faire une fonction pour initialiser toutes les variables à 0 ou NULL
-void	init_values(t_sh *sh)
-{
-	sh->token_lst = NULL;
-	sh->prompt = NULL;
-	sh->p_index = 0;
-}
-
-void	reset_values(t_sh *sh)
-{
-	ft_set_null_free_list(&sh->token_lst);
-}
 
 void initialization(t_sh *sh)
 {
