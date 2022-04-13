@@ -1,21 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 17:56:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 14:55:50 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/04/13 11:12:20 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/13 11:25:34 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
-void listen_prompt(t_sh *sh)
+int	isin_charset(char c, char *charset)
 {
-	sh->prompt = readline("➜ minishell ");
+	int	i;
 
-	//il faut stocker la commande entrée dans le prompt dans l'historique, voir la fonction
+	i = 0;
+	while (charset[i])
+	{
+		if (c == charset[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+//integrer egalement les tabulations
+int	str_has_only_spaces(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }

@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 17:56:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 14:55:50 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/04/11 18:09:36 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/11 18:09:43 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+#include "libft.h"
 
-void listen_prompt(t_sh *sh)
+char	*ft_strdup(const char *s, int len)
 {
-	sh->prompt = readline("➜ minishell ");
+	char	*dup;
+	int		i;
 
-	//il faut stocker la commande entrée dans le prompt dans l'historique, voir la fonction
+	dup = ft_calloc(len + 1 , sizeof(char));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }
