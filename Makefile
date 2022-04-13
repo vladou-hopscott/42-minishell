@@ -6,7 +6,7 @@
 #    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/11 22:59:08 by swillis          ###   ########.fr        #
+#    Updated: 2022/04/13 11:24:18 by vnafissi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ SRC_DIR := src
 INC_DIR := include
 LIB_DIR := lib
 BIN_DIR := .
+
+LIBFT_DIR := libft
+LIBFTNAME := libft.a
+INCS = -I ./includes -I ./libft
 
 # Exes ==========================================
 
@@ -43,6 +47,9 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/parser.c\
 			$(SRC_DIR)/expander.c\
 			$(SRC_DIR)/executor.c\
+			$(SRC_DIR)/tokens_linked_list.c\
+			$(SRC_DIR)/init_values.c\
+			$(SRC_DIR)/utils.c\
 
 # Make all ========================================
 
@@ -66,17 +73,18 @@ $(PIPEX) :
 
 # Recipes ========================================
 
-minishell : $(OBJS) $(PIPEX)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
+minishell : $(OBJS)
+	${MAKE} -C libft
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) libft/libft.a
 
 # Cleanup ========================================
 
 clean:
-	make -C lib/pipex -f Makefile clean
+	${MAKE} -C ${LIBFT_DIR} clean
 	rm -rf $(OBJS)
 
 fclean : clean
-	make -C lib/pipex -f Makefile fclean
+	${MAKE} -C ${LIBFT_DIR} fclean
 	rm -rf $(EXE)
 
 # Additional ========================================

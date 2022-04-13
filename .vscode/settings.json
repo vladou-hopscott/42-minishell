@@ -4,5 +4,6 @@
 		"history.h": "c",
 		"stdlib.h": "c",
 		"pipex.h": "c"
+		"type_traits": "c"
 	}
 }

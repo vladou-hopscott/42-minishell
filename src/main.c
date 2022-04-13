@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:43:34 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/07 19:20:09 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 11:06:26 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 void initialization(t_sh *sh)
 {
+	init_values(sh);
 	while (1)
 	{
 		listen_prompt(sh); //générer un prompt avec readline() et enregistrer la commande tapée
-	//	lexer(sh); //analyse lexicale de la commande
-
+		lexer(sh); //analyse lexicale de la commande
+		init_values(sh);
 	}
 }
 

@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 17:56:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 14:55:50 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/04/11 18:10:53 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/11 18:12:26 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-void listen_prompt(t_sh *sh)
-{
-	sh->prompt = readline("➜ minishell ");
+// necessary libraries.
+# include <stdlib.h>
+# include <unistd.h>
+// libraries for testing functions
+# include <stdio.h>
+# include <ctype.h>
+# include <string.h>
 
-	//il faut stocker la commande entrée dans le prompt dans l'historique, voir la fonction
-}
+// prototypes
+size_t	ft_strlen(const char *s);
+void	ft_bzero(void *ptr, size_t n);
+void	*ft_calloc(size_t n, size_t size);
+char	*ft_strdup(const char *s, int len);
+char	**ft_split(char const *s, char c);
+
+#endif

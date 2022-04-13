@@ -6,46 +6,73 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/07 19:21:01 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 11:49:05 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
-void	tokenizer(t_sh *sh, char first, char second)
+char *string_token(t_sh *sh, char *prompt)
 {
-	(void)second;
-	(void)sh;
+	char *str;
+	int j = 0;
 
-	//	add_back_token() : il faut coder la fonction pour ajouter le token à la liste chainée des tokens sh->token_lst (au lieu de printer);
-	if (first == PIPE)
-		printf("PIPE\n");
-	else if (first == RED_LEFT || first == RED_LEFT)
-		printf("REDIRECTION < OU >\n");
+	while (prompt[j])
+	{
+		if (isin_charset(prompt[j], "<>|"))
+			break;
+		j++;
+	}
+	str = ft_strdup(prompt, j);
+	if (j > 0)
+		sh->p_index += j - 1;
+	return (str);
+}
+
+// ajoute le bon token à la liste chainée des tokens sh->token_lst
+//fonction a separer en plusieurs sous fonctions (tokenize string, tokenize separators...)
+void	tokenizer(t_sh *sh)
+{
+	char	*str;
+
+	str = NULL;
+	if (sh->prompt[sh->p_index] == PIPE)
+		sh->token_lst = add_back_token(sh->token_lst, PIPE, "|");
+	else if (sh->prompt[sh->p_index] == RED_LEFT || sh->prompt[sh->p_index] == RED_RIGHT)
+	{
+		if (sh->prompt[sh->p_index] == RED_LEFT && sh->prompt[sh->p_index + 1] == RED_LEFT)
+		{
+			sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_LEFT, "<<");
+			sh->p_index++;
+		}
+		else if (sh->prompt[sh->p_index] == RED_RIGHT && sh->prompt[sh->p_index + 1] == RED_RIGHT)
+		{
+			sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_RIGHT, ">>");
+			sh->p_index++;
+		}
+		else if (sh->prompt[sh->p_index] == RED_LEFT)
+			sh->token_lst = add_back_token(sh->token_lst, RED_LEFT, "<");
+		else if (sh->prompt[sh->p_index] == RED_RIGHT)
+			sh->token_lst = add_back_token(sh->token_lst, RED_RIGHT, ">");
+	}
 	else
-		printf("LITTERAL\n");
+	{
+		str = string_token(sh, &sh->prompt[sh->p_index]);
+		if (!str_has_only_spaces(str))
+			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+	}
 }
 
 void lexer(t_sh *sh)
 {
-	int	i;
-	int sec;
 
-	i = 0;
-	while (sh->prompt[i])
+	while (sh->prompt[sh->p_index])
 	{
-		//à faire : gérer les tabulations et les espaces (les virer)
-
-		sec = 0;
-		if (sh->prompt[i + 1]) //sert à vérifier si il y a 2 '<' ou 2 '>' qui s'enchainent
-		{
-			if (sh->prompt[i + 1] == RED_LEFT)
-				sec = RED_LEFT;
-			else if (sh->prompt[i + 1] == RED_RIGHT)
-				sec = RED_RIGHT;
-		}
-		tokenizer(sh, sh->prompt[i], sec);
-		i++;
+		//à faire à un moment : gérer les tabulations et les espaces (les virer)
+		tokenizer(sh);
+		sh->p_index ++;
 	}
+	print_tokens(sh->token_lst);
+	printf("list length=%d\n", list_length(sh->token_lst));
 }

@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 17:56:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 14:55:50 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/04/11 18:10:06 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/04/11 18:10:25 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+#include "libft.h"
 
-void listen_prompt(t_sh *sh)
+// calcule la longueur de la chaîne de caractères s,
+// sans compter l'octet nul « \0 » final.
+size_t	ft_strlen(const char *s)
 {
-	sh->prompt = readline("➜ minishell ");
+	size_t	i;
 
-	//il faut stocker la commande entrée dans le prompt dans l'historique, voir la fonction
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
+
