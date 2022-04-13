@@ -6,56 +6,50 @@
 #    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/13 11:24:18 by vnafissi         ###   ########.fr        #
+#    Updated: 2022/04/11 22:08:53 by swillis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Name ==========================================
 
-NAME := minishell.a
+NAME := pipex.a
 
 # Dirs ==========================================
 
 SRC_DIR := src
 INC_DIR := include
-LIB_DIR := lib
 BIN_DIR := .
-
-LIBFT_DIR := libft
-LIBFTNAME := libft.a
-INCS = -I ./includes -I ./libft
 
 # Exes ==========================================
 
-EXE := $(BIN_DIR)/minishell
+EXE := $(BIN_DIR)/pipex
 
 # Compilation ====================================
 
 CC := cc
-LDFLAGS ?= -lreadline
+LDFLAGS ?= 
 CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR)
 #-g -fsanitize=address
 
 # Src files ======================================
 
-HEADERS := 	$(INC_DIR)/minishell.h\
-			$(INC_DIR)/parsing.h\
+HEADERS := 	$(INC_DIR)/pipex.h\
 
 SRCS	:= 	$(SRC_DIR)/main.c\
-			$(SRC_DIR)/prompt.c\
-			$(SRC_DIR)/lexer.c\
-			$(SRC_DIR)/parser.c\
-			$(SRC_DIR)/expander.c\
-			$(SRC_DIR)/executor.c\
-			$(SRC_DIR)/tokens_linked_list.c\
-			$(SRC_DIR)/init_values.c\
 			$(SRC_DIR)/utils.c\
+			$(SRC_DIR)/ft_split.c\
+			$(SRC_DIR)/ft_strdup.c\
+			$(SRC_DIR)/ft_strjoin.c\
+			$(SRC_DIR)/ft_strlen.c\
+			$(SRC_DIR)/ft_strncmp.c\
+			$(SRC_DIR)/ft_strnstr.c\
+			$(SRC_DIR)/ft_substr.c\
 
 # Make all ========================================
 
 all : $(NAME)
 
-$(NAME): minishell
+$(NAME): pipex
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -66,25 +60,17 @@ OBJS := $(SRCS:.c=.o)
 
 # Libs ==========================================
 
-PIPEX := $(LIB_DIR)/pipex/pipex
-
-$(PIPEX) :
-	make -C lib/pipex -f Makefile
-
 # Recipes ========================================
 
-minishell : $(OBJS)
-	${MAKE} -C libft
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) libft/libft.a
+pipex : $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
 
 # Cleanup ========================================
 
 clean:
-	${MAKE} -C ${LIBFT_DIR} clean
 	rm -rf $(OBJS)
 
 fclean : clean
-	${MAKE} -C ${LIBFT_DIR} fclean
 	rm -rf $(EXE)
 
 # Additional ========================================
