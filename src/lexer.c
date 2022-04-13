@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:41:45 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 18:06:03 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:22:34 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 char *string_token(t_sh *sh, char *prompt)
 {
-	char *str;
+	char	*tmp;
+	char	*str;
 	int j = 0;
 
 	while (prompt[j])
 	{
-		if (is_in_charset(prompt[j], "<>|"))
+		if (is_in_charset(prompt[j], CHARSET_SEP))
 			break;
 		j++;
 	}
-	str = ft_strndup(prompt, j);
+	tmp = ft_strndup(prompt, j);
+	str = ft_strtrim(tmp, CHARSET_SPACE_TABS);
+	free(tmp);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);
