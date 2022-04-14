@@ -56,13 +56,17 @@ void	tokenizer(t_sh *sh)
 
 void lexer(t_sh *sh)
 {
-
+	//manage quotes
+	//manage_quotes(sh);
+	if (check_for_quotes(sh))
+		return;
+	printf("quote_status=%c\n", sh->p_quote);
 	while (sh->prompt[sh->p_index])
 	{
-		//à faire à un moment : gérer les tabulations et les espaces (les virer)
 		tokenizer(sh);
 		sh->p_index ++;
 	}
+
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
 }

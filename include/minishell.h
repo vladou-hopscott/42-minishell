@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/13 17:49:58 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/14 14:59:07 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_sh
 	t_token			*token_lst;
 	char			*prompt;
 	int				p_index;
-}			t_sh;
+	int				p_quote;
+} t_sh;
 
 //********************** FUNCTIONS **********************//
 
@@ -44,6 +45,9 @@ void	listen_prompt(t_sh *sh);
 void	lexer(t_sh *sh);
 void	tokenizer(t_sh *sh);
 char	*string_token(t_sh *sh, char *prompt);
+
+//********** QUOTES **********//
+int 	check_for_quotes(t_sh *sh);
 
 //********** LINKED LIST TOKENS **********//
 t_token	*create_token(t_token_type type, char *value);

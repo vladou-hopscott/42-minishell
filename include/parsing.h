@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:12:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 18:16:53 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/14 14:42:50 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef enum token_type
 	DOUBLE_RED_RIGHT,
 	STR,
 } t_token_type;
+
+typedef enum quote
+{
+	SINGLE_QUOTE = '\'',
+	DOUBLE_QUOTE = '\"',
+	NO_QUOTE
+} t_quote;
 
 // liste chaînée. Chaque token représente un caractère tokenisé, chaîné au token précédent / suivant
 typedef struct s_token
