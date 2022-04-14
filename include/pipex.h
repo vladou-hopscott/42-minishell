@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 22:58:10 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/14 14:06:18 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_pvars {
 //********************** LIBFT **********************//
 size_t	ft_strlen(const char *str);
 char	**ft_freetbl(char **tbl, int pos);
-char	**ft_split(char *s, char c);
-char	*ft_strdup(const char *src);
-char	*ft_strjoin(char const *s1, char const *s2);
+// char	**ft_split(char *s, char c);
+// char	*ft_strdup(const char *src);
+// char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *str, const char *find, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

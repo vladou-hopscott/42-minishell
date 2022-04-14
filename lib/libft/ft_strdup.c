@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_values.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:05:39 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/14 13:35:20 by swillis          ###   ########.fr       */
+/*   Created: 2021/11/23 18:32:56 by swillis           #+#    #+#             */
+/*   Updated: 2022/04/14 14:03:14 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	init_values(t_sh *sh)
+char	*ft_strdup(char *src)
 {
-	sh->token_lst = NULL;
-	sh->prompt = NULL;
-	sh->p_index = 0;
+	char	*dst;
+	int		i;
+	int		len_src;
+
+	len_src = ft_strlen(src);
+	dst = malloc(sizeof(dst) * (len_src + 1));
+	if (!dst)
+		return (0);
+	i = 0;
+	while (src[i] != 0)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

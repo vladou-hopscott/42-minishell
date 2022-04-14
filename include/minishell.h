@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/13 16:30:12 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/14 14:18:44 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct s_sh
 	int				p_index;
 }			t_sh;
 
+//********************** GLOBAL VAR **********************//
+extern char	**g_env;
+
 //********************** FUNCTIONS **********************//
 
 //********** INITIALIZATION **********//
@@ -55,5 +58,8 @@ void	ft_set_null_free_list(t_token **a_list);
 //********** UTILS **********//
 int		isin_charset(char c, char *charset);
 int		str_has_only_spaces(char *str);
+
+//********** ENV_MANAGER **********//
+char	**init_environment(void);
 
 #endif

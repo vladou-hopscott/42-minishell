@@ -6,7 +6,7 @@
 #    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/13 16:47:09 by swillis          ###   ########.fr        #
+#    Updated: 2022/04/14 14:21:29 by swillis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,7 @@ EXE := $(BIN_DIR)/minishell
 
 CC := cc
 LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR)
-#-g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
 
 # Src files ======================================
 
@@ -49,6 +48,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/tokens_linked_list.c\
 			$(SRC_DIR)/init_values.c\
 			$(SRC_DIR)/utils.c\
+			$(SRC_DIR)/env_manager.c\
 
 # Make all ========================================
 

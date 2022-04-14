@@ -6,13 +6,15 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:43:34 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/13 16:43:06 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/14 14:21:07 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void initialization(t_sh *sh)
+char	**g_env;
+
+void	initialization(t_sh *sh)
 {
 	init_values(sh);
 	while (1)
@@ -23,16 +25,13 @@ void initialization(t_sh *sh)
 	}
 }
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	//Faut-il déclarer sh comme une variable globale (pour garder en mémoire les commandes successives ?)
 	t_sh	sh;
 
-	(void)ac;
-	(void)av;
-
+	g_env = init_environment();
 	initialization(&sh);
-
 	//penser à free tout ce qui a été initialisé avec readline
 	return (0);
 }
