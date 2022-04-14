@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/14 15:48:12 by vnafissi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -50,6 +39,7 @@ void	process_redirect_token(t_sh *sh);
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);
 void	check_quote_status(t_sh *sh, char *prompt, int i);
+void	interpret_remove_quotes(t_sh *sh);
 
 //********** LINKED LIST TOKENS **********//
 t_token	*create_token(t_token_type type, char *value);

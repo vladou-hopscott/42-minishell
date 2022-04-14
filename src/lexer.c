@@ -69,17 +69,23 @@ void	tokenizer(t_sh *sh)
 
 void lexer(t_sh *sh)
 {
+	//verifier qu'il n'y a pas de quotes ouvertes
 	if (check_for_quotes(sh))
 	{
 		printf("ERROR : unclosed quotes\n");
 		return; //voir quel message d'erreur et comment traiter l'erreur
 	}
-	//printf("quote_status=%c\n", sh->p_quote);
+
+	//tokeniser (separation entre strings et separateurs, stockage dans une liste chainee) en tenant compte des single et double quotes;
 	while (sh->prompt[sh->p_index])
 	{
 		tokenizer(sh);
 		sh->p_index ++;
 	}
+
+	//suppression des quotes qui ne seront pas interpretes dans les tokens STR. Exemple : la commande ***echo "t'" oi*** renvoie ***t oi***
+	//il faudrait eventuellement rajouter ici l'interpretation du $ dans les double quotes egalement
+	//interpret_remove_quotes(sh);
 
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));

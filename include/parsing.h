@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 18:12:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/14 14:42:50 by vnafissi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -43,6 +32,7 @@ typedef struct s_token
 {
 	t_token_type	type;
 	char			*value;
+	int				quote;
 	struct s_token	*prev;
 	struct s_token	*next;
 } t_token;
