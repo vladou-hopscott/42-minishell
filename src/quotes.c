@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+void	check_quote_status(t_sh *sh, char *prompt, int i)
+{
+	if (sh->p_quote == NO_QUOTE)
+	{
+		if (prompt[i] == SINGLE_QUOTE)
+			sh->p_quote = SINGLE_QUOTE;
+		else if (prompt[i] == DOUBLE_QUOTE)
+			sh->p_quote = DOUBLE_QUOTE;
+	}
+	else if (sh->p_quote == SINGLE_QUOTE)
+	{
+		if (prompt[i] == SINGLE_QUOTE)
+			sh->p_quote = NO_QUOTE;
+	}
+	else if (sh->p_quote == DOUBLE_QUOTE)
+	{
+		if (prompt[i] == DOUBLE_QUOTE)
+			sh->p_quote = NO_QUOTE;
+	}
+}
+
 //check if there are unclosed quotes. if so, return error status 1
 int check_for_quotes(t_sh *sh)
 {
@@ -8,23 +29,7 @@ int check_for_quotes(t_sh *sh)
 	i = 0;
 	while (sh->prompt[i])
 	{
-		if (sh->p_quote == NO_QUOTE)
-		{
-			if (sh->prompt[i] == SINGLE_QUOTE)
-				sh->p_quote = SINGLE_QUOTE;
-			else if (sh->prompt[i] == DOUBLE_QUOTE)
-				sh->p_quote = DOUBLE_QUOTE;
-		}
-		else if (sh->p_quote == SINGLE_QUOTE)
-		{
-			if (sh->prompt[i] == SINGLE_QUOTE)
-				sh->p_quote = NO_QUOTE;
-		}
-		else if (sh->p_quote == DOUBLE_QUOTE)
-		{
-			if (sh->prompt[i] == DOUBLE_QUOTE)
-				sh->p_quote = NO_QUOTE;
-		}
+		check_quote_status(sh, sh->prompt, i);
 		i++;
 	}
 	if (sh->p_quote != NO_QUOTE)

@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/14 14:59:07 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:48:12 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ void	listen_prompt(t_sh *sh);
 //********** LEXER **********//
 void	lexer(t_sh *sh);
 void	tokenizer(t_sh *sh);
-char	*string_token(t_sh *sh, char *prompt);
+char 	*process_string_token(t_sh *sh, char *prompt);
+void	process_redirect_token(t_sh *sh);
 
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);
+void	check_quote_status(t_sh *sh, char *prompt, int i);
 
 //********** LINKED LIST TOKENS **********//
 t_token	*create_token(t_token_type type, char *value);
