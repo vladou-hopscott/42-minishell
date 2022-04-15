@@ -7,6 +7,7 @@ int	main(void)
 	t_sh	sh;
 
 	init_values(&sh);
+	sh.env = init_environment();
 
 	while (1)
 	{
