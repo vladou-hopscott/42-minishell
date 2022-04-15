@@ -1,3 +1,4 @@
+
 # Name ==========================================
 
 NAME := minishell.a
@@ -17,8 +18,7 @@ EXE := $(BIN_DIR)/minishell
 
 CC := cc
 LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR)
-#-g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
 
 # Src files ======================================
 
@@ -37,6 +37,8 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/tokens_linked_list.c\
 			$(SRC_DIR)/init_values.c\
 			$(SRC_DIR)/utils.c\
+			$(SRC_DIR)/env_manager.c\
+			$(SRC_DIR)/env_manager_utils.c\
 			$(SRC_DIR)/quotes.c\
 
 

@@ -1,4 +1,5 @@
 
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -10,22 +11,28 @@
 # include "ft_printf.h"
 # include "parsing.h"
 # include "pipex.h"
+# include "env_manager.h"
 
 //********************** STRUCTURES **********************//
 
 //structure principale du programme
 typedef struct s_sh
 {
+	char			**env;
 	t_token			*token_lst;
 	char			*prompt;
 	int				p_index;
 	int				p_quote;
 } t_sh;
 
+//********************** GLOBAL VAR **********************//
+// extern char	**g_env;
+
 //********************** FUNCTIONS **********************//
 
 //********** INITIALIZATION **********//
 void	init_values(t_sh *sh);
+void	free_values(t_sh *sh);
 
 //********** PROMPT **********//
 void	listen_prompt(t_sh *sh);

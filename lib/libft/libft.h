@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 18:10:53 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 17:57:15 by vnafissi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -31,4 +20,11 @@ char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, char const *set);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size);
 
+char	**ft_split(char *s, char c);
+
+int		ft_atoi(char *nptr);
+char	*ft_strdup(char *s);
+char	*ft_strdup(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 #endif

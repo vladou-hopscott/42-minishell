@@ -1,5 +1,5 @@
+
 #include "minishell.h"
-#include "parsing.h"
 
 void listen_prompt(t_sh *sh)
 {

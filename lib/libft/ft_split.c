@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 18:36:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/15 12:35:09 by swillis          ###   ########.fr       */
+/*   Created: 2021/11/25 13:43:24 by swillis           #+#    #+#             */
+/*   Updated: 2022/04/15 12:35:52 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
 char	**ft_freetbl(char **tbl, int pos)
 {
@@ -43,7 +43,7 @@ int	ft_wordcount(char *str, char c)
 
 	i = 0;
 	wrd = 0;
-	while (str && str[i])
+	while (str[i])
 	{
 		while ((c == str[i]) && str[i])
 			i++;
