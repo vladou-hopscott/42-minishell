@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 20:02:28 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/15 20:03:55 by swillis          ###   ########.fr       */
+/*   Created: 2021/12/17 15:50:12 by swillis           #+#    #+#             */
+/*   Updated: 2022/04/15 20:03:33 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-int	main(int ac, char **av)
-{
-	int	i;
+# include <unistd.h>
 
-	i = 1;
-	while (i < ac)
-	{
-		ft_putstr(av[i]);
-		if (i < ac - 1)
-			ft_putchar(' ');
-		i++;
-	}
-	ft_putchar('\n');
-}
+//********** UTILS **********//
+size_t	ft_strlen(char *str);
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
+
+//********** ECHO **********//
+
+#endif
