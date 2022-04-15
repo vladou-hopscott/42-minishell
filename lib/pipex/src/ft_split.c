@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 18:36:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 22:02:31 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/15 12:35:09 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 char	**ft_freetbl(char **tbl, int pos)
 {
-	if (pos == -1)
+	int	free_ptr;
+
+	free_ptr = 1;
+	if (pos == -2)
+		free_ptr = 0;
+	if (pos < 0)
 	{
 		pos = 0;
 		while (tbl && tbl[pos])
@@ -26,7 +31,8 @@ char	**ft_freetbl(char **tbl, int pos)
 			free(tbl[pos]);
 		pos--;
 	}
-	free(tbl);
+	if (free_ptr)
+		free(tbl);
 	return (0);
 }
 

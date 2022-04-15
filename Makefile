@@ -6,7 +6,7 @@
 #    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/14 14:21:29 by swillis          ###   ########.fr        #
+#    Updated: 2022/04/15 12:30:05 by swillis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/init_values.c\
 			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/env_manager.c\
+			$(SRC_DIR)/env_manager_utils.c\
 
 # Make all ========================================
 
