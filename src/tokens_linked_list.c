@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tok_linked_list.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 17:59:44 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 18:42:34 by vnafissi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "parsing.h"
 
@@ -23,6 +11,7 @@ t_token	*create_token(t_token_type type, char *value)
 	elem->type = type;
 	elem->value = value;
 	elem->next = NULL;
+	elem->quote = NO_QUOTE;
 	return (elem);
 }
 

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_values.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:05:39 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/15 17:21:46 by swillis          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -18,6 +7,7 @@ void	init_values(t_sh *sh)
 	sh->prompt = NULL;
 	sh->p_index = 0;
 	sh->env = init_environment();
+	sh->p_quote = NO_QUOTE;
 }
 
 void	free_token_lst(t_token *token)

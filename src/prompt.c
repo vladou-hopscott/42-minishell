@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 17:56:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/15 16:21:04 by swillis          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
 void listen_prompt(t_sh *sh)
 {
 	sh->prompt = readline("➜ minishell ");
-
-	//il faut stocker la commande entrée dans le prompt dans l'historique, voir la fonction
+	add_history(sh->prompt); //verifier si il y a d'autres choses a ajouter pour securiser ou stocker l'historique
 }

@@ -1,14 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/11 18:13:14 by vnafissi          #+#    #+#              #
-#    Updated: 2022/04/14 14:11:26 by swillis          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+
 
 #*********** VARIABLES ************
 
@@ -23,7 +13,7 @@ SRCS = ft_bzero.c ft_calloc.c ft_strlen.c ft_strndup.c \
 		ft_strjoin.c\
 		ft_split.c\
 		ft_strncmp.c\
-
+    ft_bzero.c ft_calloc.c ft_strndup.c ft_strlcpy.c ft_strlen.c ft_strtrim.c ft_is_in_charset.c\
 
 #${SRCS:.c=.o} means, take the variable value ${SRCS},
 # which is a string composed of words separated by spaces,

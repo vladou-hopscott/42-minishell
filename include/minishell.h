@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/15 17:21:58 by swillis          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -32,7 +22,8 @@ typedef struct s_sh
 	t_token			*token_lst;
 	char			*prompt;
 	int				p_index;
-}			t_sh;
+	int				p_quote;
+} t_sh;
 
 //********************** GLOBAL VAR **********************//
 // extern char	**g_env;
@@ -49,7 +40,13 @@ void	listen_prompt(t_sh *sh);
 //********** LEXER **********//
 void	lexer(t_sh *sh);
 void	tokenizer(t_sh *sh);
-char	*string_token(t_sh *sh, char *prompt);
+char 	*process_string_token(t_sh *sh, char *prompt);
+void	process_redirect_token(t_sh *sh);
+
+//********** QUOTES **********//
+int 	check_for_quotes(t_sh *sh);
+void	check_quote_status(t_sh *sh, char *prompt, int i);
+void	interpret_remove_quotes(t_sh *sh);
 
 //********** LINKED LIST TOKENS **********//
 t_token	*create_token(t_token_type type, char *value);
@@ -59,7 +56,6 @@ int		list_length(t_token *li);
 void	ft_set_null_free_list(t_token **a_list);
 
 //********** UTILS **********//
-int		isin_charset(char c, char *charset);
-int		str_has_only_spaces(char *str);
+int	str_has_only_spaces(char *str);
 
 #endif
