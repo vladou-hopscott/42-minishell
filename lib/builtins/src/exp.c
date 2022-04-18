@@ -1,40 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   exp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:02:28 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/18 21:36:02 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/18 19:41:53 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+extern char	**environ;
+
+char	*str_exportvalue(char **tbl)
+{
+	int		i;
+	char	*value;
+
+	if (tbl[1] == NULL)
+		return (NULL);
+	value = ft_strdup(tbl[1]);
+	i = 2;
+	while (tbl && tbl[i])
+	{
+		value = ft_strjoin(value, tbl[i]);
+		i++;
+	}
+	return (value);
+}
+
 int	main(int ac, char **av)
 {
-	int	i;
-	int	ntrail;
+	int		i;
+	char	**tbl;
+	char	*key;
+	char	*value;
 
-	ntrail = 1;
 	i = 1;
 	while (i < ac)
 	{
-		if ((ntrail == 1) && (ft_strncmp(av[i], "-n", 2) == 0))
-			ntrail = 0;
-		else if ((i > 1) && (ft_strncmp(av[i], "-n", 2) == 0) \
-								&& (ft_strncmp(av[i - 1], "-n", 2) == 0))
-			ntrail = 0;
-		else
-		{
-			ft_putstr(av[i]);
-			if (i < ac - 1)
-				ft_putchar(' ');
-		}
+		tbl = ft_split(av[i], '=');
+		key = tbl[0];
+		value = str_exportvalue(tbl);
+		environ = env_export(key, value, environ);
+		ft_freetbl(tbl, -1);
+		free(value);
 		i++;
 	}
-	if (ntrail)
-		ft_putchar('\n');
 	return (0);
 }
