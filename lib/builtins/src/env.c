@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:02:28 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/18 21:14:13 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/18 22:51:38 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 	{
 		ft_putstr(environ[i]);
 		ft_putchar('\n');
+		i++;
 	}
 	return (0);
 }

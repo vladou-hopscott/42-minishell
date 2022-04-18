@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:02:28 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/18 19:41:53 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/18 22:53:47 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int	main(int ac, char **av)
 	while (i < ac)
 	{
 		tbl = ft_split(av[i], '=');
-		key = tbl[0];
+		key = ft_strdup(tbl[0]);
 		value = str_exportvalue(tbl);
 		environ = env_export(key, value, environ);
-		ft_freetbl(tbl, -1);
+		free(key);
 		free(value);
+		ft_freetbl(tbl, -1);
 		i++;
 	}
 	return (0);
