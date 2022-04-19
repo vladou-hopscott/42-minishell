@@ -25,7 +25,7 @@ char	**ft_split(char *s, char c);
 
 int		ft_atoi(char *nptr);
 char	*ft_strdup(char *s);
-char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
 #endif

@@ -58,4 +58,7 @@ void	ft_set_null_free_list(t_token **a_list);
 //********** UTILS **********//
 int	str_has_only_spaces(char *str);
 
+//********** EXECUTOR **********//
+char	**executor(t_token *token, char **env);
+
 #endif

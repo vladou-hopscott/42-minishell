@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:25:56 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/15 17:16:43 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/15 21:32:00 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**env_getcwd(char **env)
 	buf = getcwd(NULL, 0);
 	cwd = ft_strdup(buf);
 	free(buf);
-	env = env_export("CWD", cwd, env);
+	env = env_export("PWD", cwd, env);
 	free(cwd);
 	return (env);
 }
@@ -30,7 +30,7 @@ char	**env_getpath(char **env)
 	char	*path;
 	char	*cwd;
 
-	cwd = env_findkeyvalue("CWD", env);
+	cwd = env_findkeyvalue("PWD", env);
 	path = ft_strjoin(cwd, "/bin");
 	free(cwd);
 	env = env_export("PATH", path, env);

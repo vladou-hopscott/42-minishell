@@ -8,17 +8,17 @@ NAME := minishell.a
 SRC_DIR := src
 INC_DIR := include
 LIB_DIR := lib
-BIN_DIR := .
+BIN_DIR := bin
 
 # Exes ==========================================
 
-EXE := $(BIN_DIR)/minishell
+EXE := minishell
 
 # Compilation ====================================
 
 CC := cc
 LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) #-g -fsanitize=address
 
 # Src files ======================================
 
@@ -46,7 +46,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 
 all : $(NAME)
 
-$(NAME): minishell pipex
+$(NAME): minishell pipex builtins
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -57,11 +57,21 @@ OBJS := $(SRCS:.c=.o)
 
 # Libs ==========================================
 
-PIPEX := $(LIB_DIR)/pipex/pipex
-
 LIBFT := $(LIB_DIR)/libft/libft.a
 
 PRINTF := $(LIB_DIR)/libftprintf/libftprintf.a
+
+PIPEX := $(LIB_DIR)/pipex/pipex
+
+LIB_BIN := $(LIB_DIR)/builtins/bin
+
+BINS := 	$(LIB_BIN)/echo \
+			$(LIB_BIN)/env \
+			$(LIB_BIN)/pwd \
+
+BUILTINS := $(BIN_DIR)/echo \
+			$(BIN_DIR)/env \
+			$(BIN_DIR)/pwd \
 
 $(LIBFT) :
 	make -C lib/libft -f Makefile
@@ -72,6 +82,10 @@ $(PRINTF) :
 $(PIPEX) :
 	make -C lib/pipex -f Makefile
 
+$(BUILTINS) :
+	make -C lib/builtins -f Makefile
+	cp $(BINS) $(BIN_DIR)
+
 # Recipes ========================================
 
 minishell : $(OBJS) $(LIBFT) $(PRINTF)
@@ -79,19 +93,23 @@ minishell : $(OBJS) $(LIBFT) $(PRINTF)
 
 pipex : $(PIPEX)
 
+builtins : $(BUILTINS)
+
 # Cleanup ========================================
 
 clean:
 	make -C lib/pipex -f Makefile clean
+	make -C lib/builtins -f Makefile clean
 	make -C lib/libft -f Makefile clean
 	make -C lib/libftprintf -f Makefile clean
-	rm -rf $(OBJS)
+	rm -f $(OBJS)
 
 fclean : clean
 	make -C lib/pipex -f Makefile fclean
+	make -C lib/builtins -f Makefile fclean
 	make -C lib/libft -f Makefile fclean
 	make -C lib/libftprintf -f Makefile fclean
-	rm -rf $(EXE)
+	rm -f $(EXE) $(BUILTINS)
 
 # Additional ========================================
 
