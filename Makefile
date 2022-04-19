@@ -44,7 +44,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 
 # Make all ========================================
 
-all : $(NAME)
+all : $(BIN_DIR) $(NAME)
 
 $(NAME): minishell pipex builtins
 
@@ -87,6 +87,9 @@ $(BUILTINS) :
 	cp $(BINS) $(BIN_DIR)
 
 # Recipes ========================================
+
+$(BIN_DIR) :
+	mkdir -p $(BIN_DIR)
 
 minishell : $(OBJS) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)

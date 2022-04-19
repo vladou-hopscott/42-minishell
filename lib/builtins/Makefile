@@ -6,7 +6,7 @@
 #    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/19 16:10:44 by swillis          ###   ########.fr        #
+#    Updated: 2022/04/19 17:38:13 by swillis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRCS_ENV	:= 	$(SRC_DIR)/env.c\
 
 # Make all ========================================
 
-all : $(NAME)
+all : $(BIN_DIR) $(NAME)
 
 $(NAME): echo pwd env
 
@@ -76,6 +76,9 @@ OBJS_ENV := $(SRCS_ENV:.c=.o)
 # Libs ==========================================
 
 # Recipes ========================================
+
+$(BIN_DIR) :
+	mkdir -p $(BIN_DIR)
 
 echo : $(OBJS_ECHO)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE_ECHO)
