@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:57:15 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/18 23:10:17 by swillis          ###   ########.fr       */
+/*   Updated: 2022/04/19 16:34:34 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ char	*cmd_strfinder(char *str)
 {
 	char	**tbl;
 	char	*cmd;
-	char	*cmd_path;
 
 	tbl = ft_split(str, ' ');
 	cmd = ft_strdup(tbl[0]);
 	ft_freetbl(tbl, -1);
-	cmd_path = ft_strjoin("/", cmd);
-	free(cmd);
-	return (cmd_path);
+	return (cmd);
 }
 
 char	*cmd_pathfinder(char *cmd, char *env_path)
@@ -34,6 +31,7 @@ char	*cmd_pathfinder(char *cmd, char *env_path)
 
 	if (!cmd || !env_path)
 		return (NULL);
+	cmd = ft_strjoin("/", cmd);
 	paths = ft_split(env_path, ':');
 	i = 0;
 	while (paths && paths[i])
@@ -74,7 +72,7 @@ char	*str_exportvalue(char **tbl)
 	return (value);
 }
 
-void	exec_export(t_token *token, char **env)
+char	**exec_export(t_token *token, char **env)
 {
 	int		i;
 	char	**args;
@@ -96,6 +94,7 @@ void	exec_export(t_token *token, char **env)
 		i++;
 	}
 	ft_freetbl(args, -1);
+	return (env);
 }
 
 char	**tbl_remove(char **tbl, char *key)
@@ -122,7 +121,7 @@ char	**tbl_remove(char **tbl, char *key)
 	return (new);
 }
 
-void	exec_unset(t_token *token, char **env)
+char	**exec_unset(t_token *token, char **env)
 {
 	int		i;
 	char	**args;
@@ -134,9 +133,24 @@ void	exec_unset(t_token *token, char **env)
 		env = tbl_remove(env, args[i]);
 		i++;
 	}
+	return (env);
 }
 
-void	executor(t_token *token, char **env)
+int	exec_bin(char *cmd, char **args, char **env)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid < 0)
+		return (1);
+	if (pid == 0)
+		execve(cmd, args, env);
+	waitpid(pid, NULL, 0);
+	close(pid);
+	return (0);
+}
+
+char	**executor(t_token *token, char **env)
 {
 	char	*cmd;
 	char	*path;
@@ -144,16 +158,23 @@ void	executor(t_token *token, char **env)
 
 	cmd = cmd_strfinder(token->value);
 	if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
-		exec_export(token, env);
+		env = exec_export(token, env);
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
-		exec_unset(token, env);
-	path = env_findkeyvalue("PATH", env);
-	cmd = cmd_pathfinder(cmd, path);
-	if (!cmd)
-		return ;
-	args = cmd_argstbl(token->value, cmd);
-	execve(cmd, args, env);
-	free(cmd);
-	free(path);
-	ft_freetbl(args, -1);
+		env = exec_unset(token, env);
+	else
+	{
+		path = env_findkeyvalue("PATH", env);
+		cmd = cmd_pathfinder(cmd, path);
+		if (!cmd)
+		{
+			ft_printf("minishell: command not found: %s\n", cmd);
+			return (env);
+		}
+		args = cmd_argstbl(token->value, cmd);
+		exec_bin(cmd, args, env);
+		free(cmd);
+		free(path);
+		ft_freetbl(args, -1);
+	}
+	return (env);
 }

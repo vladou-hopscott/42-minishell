@@ -42,7 +42,7 @@ int check_for_quotes(t_sh *sh)
 	int	i;
 
 	i = 0;
-	while (sh->prompt[i])
+	while (sh->prompt && sh->prompt[i])
 	{
 		check_quote_status(sh, sh->prompt, i);
 		i++;

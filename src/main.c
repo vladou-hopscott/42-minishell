@@ -18,7 +18,7 @@ int	main(void)
 		token = sh.token_lst;
 		while (token)
 		{
-			executor(token, sh.env);
+			sh.env = executor(token, sh.env);
 			token = token->next;
 		}
 

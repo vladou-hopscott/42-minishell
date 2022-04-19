@@ -18,7 +18,7 @@ EXE := minishell
 
 CC := cc
 LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) #-g -fsanitize=address
 
 # Src files ======================================
 
@@ -67,15 +67,11 @@ LIB_BIN := $(LIB_DIR)/builtins/bin
 
 BINS := 	$(LIB_BIN)/echo \
 			$(LIB_BIN)/env \
-			$(LIB_BIN)/export \
 			$(LIB_BIN)/pwd \
-			$(LIB_BIN)/unset \
 
 BUILTINS := $(BIN_DIR)/echo \
 			$(BIN_DIR)/env \
-			$(BIN_DIR)/export \
 			$(BIN_DIR)/pwd \
-			$(BIN_DIR)/unset \
 
 $(LIBFT) :
 	make -C lib/libft -f Makefile
