@@ -73,6 +73,8 @@ BUILTINS := $(BIN_DIR)/echo \
 			$(BIN_DIR)/env \
 			$(BIN_DIR)/pwd \
 
+PIPE := $(BIN_DIR)/pipex
+
 $(LIBFT) :
 	make -C lib/libft -f Makefile
 
@@ -85,6 +87,7 @@ $(PIPEX) :
 $(BUILTINS) :
 	make -C lib/builtins -f Makefile
 	cp $(BINS) $(BIN_DIR)
+	cp $(PIPEX) $(BIN_DIR)
 
 # Recipes ========================================
 
@@ -112,7 +115,7 @@ fclean : clean
 	make -C lib/builtins -f Makefile fclean
 	make -C lib/libft -f Makefile fclean
 	make -C lib/libftprintf -f Makefile fclean
-	rm -f $(EXE) $(BUILTINS)
+	rm -f $(EXE) $(BUILTINS) $(PIPE)
 
 # Additional ========================================
 
