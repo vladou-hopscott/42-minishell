@@ -52,10 +52,43 @@ int check_for_quotes(t_sh *sh)
 	return (0);
 }
 
-void	remove_quotes_in_token(t_token **a_tmp)
+int	str_has_quotes(char *str)
 {
-	(void)a_tmp;
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (is_in_charset(str[i], "\'\""))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	remove_quotes_in_token(t_token **a_tok)
+{
+	int	i;
+
+	//d'abord verifier si il y a des quotes ou double quotes presentes dans l'argument, sinon on passe
+	if (!str_has_quotes((*a_tok)->value))
+		return;
+
+
 	//parcourir le token STR
+	i = 0;
+	while ((*a_tok)->value[i])
+	{
+		if (1)
+		{
+			i = 1;
+		}
+
+		i++;
+	}
+
+	//traitement des simple quotes : il suffit de considerer tout
+
 	//faire varier le statut de token->quote : il faut supprimer au fur et a mesure les quotes inutiles
 	//plusieurs manieres possibles envsageables
 		//parcourir la boucle une fois avec une boucle while, et traiter au fur et a mesure. il faudrait reallouer et recreer le string au fur et a mesure qu on enleve les quotes

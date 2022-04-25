@@ -87,6 +87,6 @@ void lexer(t_sh *sh)
 	//il faudrait eventuellement rajouter ici l'interpretation du $ dans les double quotes egalement
 	//interpret_remove_quotes(sh);
 
-	// print_tokens(sh->token_lst);
-	// printf("list length=%d\n", list_length(sh->token_lst));
+	print_tokens(sh->token_lst);
+	printf("list length=%d\n", list_length(sh->token_lst));
 }

@@ -9,18 +9,18 @@ int	main(void)
 
 	init_values(&sh);
 	sh.env = init_environment();
-	
+	printf("env0=%s, env1=%s, env2=%s\n\n", sh.env[0], sh.env[1], sh.env[2]);
 	while (1)
 	{
 		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
 		lexer(&sh); //analyse lexicale de la commande
 
 		token = sh.token_lst;
-		while (token)
-		{
-			sh.env = executor(token, sh.env);
-			token = token->next;
-		}
+		// while (token)
+		// {
+		// 	sh.env = executor(token, sh.env);
+		// 	token = token->next;
+		// }
 
 		init_values(&sh);
 	}
