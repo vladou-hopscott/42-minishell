@@ -17,7 +17,12 @@ typedef enum token_type
 	RED_RIGHT = '>',
 	DOUBLE_RED_LEFT,
 	DOUBLE_RED_RIGHT,
+	FILEOUT, //1er token apres '>'
+	FILEIN, //1er token apres '<'
+	FILEOUT_APPEND, //1er token apres ">>"
+	HEREDOC_LIMIT, //1er token apres "<<"
 	STR,
+	BUILTIN, //type a rajouter : identifier avec une fonction isbuiltin sur un token => est-ce que c'est utile ?
 } t_token_type;
 
 typedef enum quote
@@ -36,5 +41,12 @@ typedef struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 } t_token;
+
+typedef struct s_cmd_line
+{
+	char				*cmd;
+	t_token				*token_lst;
+	struct s_cmd_line	*next;
+} t_cmd_line;
 
 #endif

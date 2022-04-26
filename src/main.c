@@ -13,8 +13,12 @@ int	main(void)
 	while (1)
 	{
 		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
-		lexer(&sh); //analyse lexicale de la commande
+		lexer(&sh); //analyse lexicale de la commande et verif erreurs de syntaxe des redirections
 
+		//refonte en 1 liste chainee. chaque maillon contient une commande line, separees par des pipes.
+		//chaque command line contient des tokens labelises par type. structure finale paree pour l'execution
+		parser(&sh);
+		
 		token = sh.token_lst;
 		// while (token)
 		// {

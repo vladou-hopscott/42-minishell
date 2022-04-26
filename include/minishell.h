@@ -20,6 +20,7 @@ typedef struct s_sh
 {
 	char			**env;
 	t_token			*token_lst;
+	t_cmd_line		*cmd_line_lst;
 	char			*prompt;
 	int				p_index;
 	int				p_quote;
