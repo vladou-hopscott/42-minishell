@@ -43,9 +43,13 @@ void	lexer(t_sh *sh);
 void	tokenizer(t_sh *sh);
 char 	*process_string_token(t_sh *sh, char *prompt);
 void	process_redirect_token(t_sh *sh);
+void	update_token_type_str(t_sh *sh);
+
 
 //********** PARSER **********//
 void	parser(t_sh *s);
+t_cmd_line	*add_back_cmd_line(t_cmd_line *list);
+t_cmd_line	*create_cmd_line();
 
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);

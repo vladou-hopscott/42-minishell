@@ -24,20 +24,20 @@ char *process_string_token(t_sh *sh, char *prompt)
 
 void	process_redirect_token(t_sh *sh)
 {
-	if (sh->prompt[sh->p_index] == RED_LEFT && sh->prompt[sh->p_index + 1] == RED_LEFT)
+	if (sh->prompt[sh->p_index] == RED_INPUT && sh->prompt[sh->p_index + 1] == RED_INPUT)
 	{
-		sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_LEFT, "<<");
+		sh->token_lst = add_back_token(sh->token_lst, HEREDOC, "<<");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_RIGHT && sh->prompt[sh->p_index + 1] == RED_RIGHT)
+	else if (sh->prompt[sh->p_index] == RED_OUTPUT && sh->prompt[sh->p_index + 1] == RED_OUTPUT)
 	{
-		sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_RIGHT, ">>");
+		sh->token_lst = add_back_token(sh->token_lst, RED_APPEND, ">>");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_LEFT)
-		sh->token_lst = add_back_token(sh->token_lst, RED_LEFT, "<");
-	else if (sh->prompt[sh->p_index] == RED_RIGHT)
-		sh->token_lst = add_back_token(sh->token_lst, RED_RIGHT, ">");
+	else if (sh->prompt[sh->p_index] == RED_INPUT)
+		sh->token_lst = add_back_token(sh->token_lst, RED_INPUT, "<");
+	else if (sh->prompt[sh->p_index] == RED_OUTPUT)
+		sh->token_lst = add_back_token(sh->token_lst, RED_OUTPUT, ">");
 }
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
@@ -51,7 +51,6 @@ void	tokenizer(t_sh *sh)
 	//A chaque debut on verifie si on entre ou sort de quotes
 	check_quote_status(sh, sh->prompt, sh->p_index);
 
-	//A RAJOUTER : IL FAUT CONSIDERER LE CHAR ' ' COMME UN SEPARATEUR EGALEMENT
 	if (sh->p_quote == NO_QUOTE && is_in_charset(sh->prompt[sh->p_index], CHARSET_SEP))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
@@ -76,7 +75,7 @@ void lexer(t_sh *sh)
 		return; //voir quel message d'erreur et comment traiter l'erreur
 	}
 
-	//tokeniser (separation entre strings et separateurs, stockage dans une liste chainee) en tenant compte des single et double quotes;
+	//tokeniser (traitement du prompt pour en sortir une liste chainee avec maillon = string ou separateur) en tenant compte des single et double quotes;
 	while (sh->prompt[sh->p_index])
 	{
 		tokenizer(sh);

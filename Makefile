@@ -35,6 +35,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/expander.c\
 			$(SRC_DIR)/executor.c\
 			$(SRC_DIR)/tokens_linked_list.c\
+			$(SRC_DIR)/cmds_linked_list.c\
 			$(SRC_DIR)/init_values.c\
 			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/env_manager.c\

@@ -41,7 +41,7 @@ void print_tokens(t_token *li)
 {
 	while(li != NULL)
 	{
-		printf("[%s] ", li->value);
+		printf("[%s] type=%u, ", li->value, li->type);
 		li = li->next;
 	}
 	printf("\n");

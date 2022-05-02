@@ -8,20 +8,23 @@
 //enum sert à créer un index de 0 à N (ou bien à partir de la valeur ascii du caractère). https://linux.die.net/man/3/enum
 //Ici on l'utilise pour chaque type de token :
 // redirections
+
 // args (tout le reste, les "littéraux")
 // autres? parenthèses, single/double quotes, keywords spécifiques ?
 typedef enum token_type
 {
 	PIPE = '|',
-	RED_LEFT = '<',
-	RED_RIGHT = '>',
-	DOUBLE_RED_LEFT,
-	DOUBLE_RED_RIGHT,
+	RED_INPUT = '<',
+	RED_OUTPUT = '>',
+	HEREDOC,
+	RED_APPEND,
 	FILEOUT, //1er token apres '>'
 	FILEIN, //1er token apres '<'
 	FILEOUT_APPEND, //1er token apres ">>"
 	HEREDOC_LIMIT, //1er token apres "<<"
 	STR,
+	ARG, //arguments de la commande
+	CMD, //1ere commande : tout le reste sera des arguments
 	BUILTIN, //type a rajouter : identifier avec une fonction isbuiltin sur un token => est-ce que c'est utile ?
 } t_token_type;
 
@@ -46,9 +49,9 @@ typedef struct s_cmd_line
 {
 	char				*cmd;
 	t_token				*token_lst;
+	char				*str;
+	char				**args;
 	struct s_cmd_line	*next;
 } t_cmd_line;
-
-
 
 #endif
