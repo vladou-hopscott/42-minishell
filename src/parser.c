@@ -3,36 +3,58 @@
 void	parse_tokens_in_cmd_lines(t_sh *sh)
 {
 	t_token		*token;
-	t_cmd_line	*cmd_line;
+	t_cmd_line	*start;
 
 	token = sh->token_lst;
-	cmd_line = add_back_cmd_line(sh->cmd_line_lst);
+	sh->cmd_line_lst = add_back_cmd_line(sh->cmd_line_lst);
+	start = sh->cmd_line_lst;
 	while (token)
 	{
-		while (token && token->type != PIPE)
-		{
-			cmd_line->token_lst = add_back_token(cmd_line->token_lst, token->type, token->value);
-			if (token->next)
-				token = token->next;
-			else
-				break;
-		}
-		if (token && token->type == PIPE)
-		{
-			cmd_line = add_back_cmd_line(cmd_line);
-			cmd_line = cmd_line->next;
-		}
-		if (token->next)
-			token = token->next;
+		if (token->type != PIPE)
+			sh->cmd_line_lst->token_lst = add_back_token(sh->cmd_line_lst->token_lst, token->type, token->value);
 		else
-			break;
+		{
+			sh->cmd_line_lst = add_back_cmd_line(sh->cmd_line_lst);
+			sh->cmd_line_lst = sh->cmd_line_lst->next;
+		}
+		token = token->next;
+	}
+	sh->cmd_line_lst = start;
+}
+
+void	update_tokens(t_cmd_line **cmd_line)
+{
+	t_token		*token;
+
+	token = (*cmd_line)->token_lst;
+	token->type = CMD;
+	token = token->next;
+
+	while (token)
+	{
+		if (token->type == RED_INPUT)
+			token->next->type = INPUT;
+		else if (token->type == RED_OUTPUT)
+			token->next->type = OUTPUT;
+		else if (token->type == STR)
+			token->type = ARG;
+		token = token->next;
 	}
 }
 
-// void	update_token_type_str(t_sh *sh)
-// {
-// 	t_token	tmp;
-// }
+void	update_token_type_str(t_sh *sh)
+{
+	t_cmd_line	*start;
+
+	start = sh->cmd_line_lst;
+
+	while (sh->cmd_line_lst)
+	{
+		update_tokens(&sh->cmd_line_lst);
+		sh->cmd_line_lst = sh->cmd_line_lst->next;
+	}
+	sh->cmd_line_lst = start;
+}
 
 //transformation des tokens en list chainee de commandes via le parser
 void	parser(t_sh *sh)
@@ -45,12 +67,10 @@ void	parser(t_sh *sh)
 	parse_tokens_in_cmd_lines(sh);
 
 	//derniere phase de tokenisation : remplacement du type STR par le type output/input (ceux qui suivent les redirections)
-	//update_token_type_str(sh);
+	update_token_type_str(sh);
 
-	// while (sh->cmd_line_lst)
-	// print_tokens(cmd_line->token_lst);
-	// printf("\n\n");
-
+	print_tokens(sh->cmd_line_lst->token_lst);
+	print_tokens(sh->cmd_line_lst->next->token_lst);
 
 	//4)gestion des quotes et des variables d'environnement : voir en dessous
 

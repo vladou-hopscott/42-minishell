@@ -18,9 +18,9 @@ typedef enum token_type
 	RED_OUTPUT = '>',
 	HEREDOC,
 	RED_APPEND,
-	FILEOUT, //1er token apres '>'
-	FILEIN, //1er token apres '<'
-	FILEOUT_APPEND, //1er token apres ">>"
+	OUTPUT, //1er token apres '>'
+	INPUT, //1er token apres '<'
+	OUTPUT_APPEND, //1er token apres ">>"
 	HEREDOC_LIMIT, //1er token apres "<<"
 	STR,
 	ARG, //arguments de la commande

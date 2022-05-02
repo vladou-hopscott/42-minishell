@@ -28,7 +28,6 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 		return (new);
 	else
 	{
-
 		tmp = list;
 		while (tmp->next)
 			tmp = tmp->next;

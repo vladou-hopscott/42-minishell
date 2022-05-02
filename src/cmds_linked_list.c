@@ -8,6 +8,11 @@ t_cmd_line	*create_cmd_line()
 	elem = ft_calloc(1, sizeof(t_cmd_line));
 	if (!elem)
 		return (NULL);
+	elem->args = NULL;
+	elem->cmd = NULL;
+	elem->next = NULL;
+	elem->str = NULL;
+	elem->token_lst = NULL;
 	return (elem);
 }
 
@@ -24,7 +29,6 @@ t_cmd_line	*add_back_cmd_line(t_cmd_line *list)
 		return (new);
 	else
 	{
-
 		tmp = list;
 		while (tmp->next)
 			tmp = tmp->next;
