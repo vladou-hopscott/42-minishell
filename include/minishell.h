@@ -44,6 +44,9 @@ void	tokenizer(t_sh *sh);
 char 	*process_string_token(t_sh *sh, char *prompt);
 void	process_redirect_token(t_sh *sh);
 
+//********** PARSER **********//
+void	parser(t_sh *s);
+
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);
 void	check_quote_status(t_sh *sh, char *prompt, int i);

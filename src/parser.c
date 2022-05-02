@@ -4,6 +4,7 @@
 
 void	parser(t_sh *s)
 {
+	(void)s;
 	//1) creation du 1er maillon cmd_line
 	//2) tant qu on ne tombe pas sur un pipe, on stock tous les tokens dans la 1ere command line
 	//3) quand on tombe sur un pipe, on cree un 2nd maillon cmd_line, et on y fourre tous les tokens suivants jusqu'au prochain pipe

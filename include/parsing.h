@@ -2,7 +2,7 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-#define CHARSET_SEP "<>|"
+#define CHARSET_SEP "<>| "
 #define CHARSET_SPACE_TABS " \n\v\t\f\r"
 
 //enum sert à créer un index de 0 à N (ou bien à partir de la valeur ascii du caractère). https://linux.die.net/man/3/enum
@@ -48,5 +48,7 @@ typedef struct s_cmd_line
 	t_token				*token_lst;
 	struct s_cmd_line	*next;
 } t_cmd_line;
+
+
 
 #endif
