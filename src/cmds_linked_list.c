@@ -13,6 +13,8 @@ t_cmd_line	*create_cmd_line()
 	elem->next = NULL;
 	elem->str = NULL;
 	elem->token_lst = NULL;
+	elem->fdin = 0; //standard input
+	elem->fdout = 1; //standard output
 	return (elem);
 }
 

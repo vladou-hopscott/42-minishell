@@ -51,6 +51,8 @@ typedef struct s_cmd_line
 	t_token				*token_lst;
 	char				*str;
 	char				**args;
+	int					fdin;
+	int					fdout;
 	struct s_cmd_line	*next;
 } t_cmd_line;
 

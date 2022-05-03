@@ -25,11 +25,10 @@ void	parse_tokens_in_cmd_lines(t_sh *sh)
 void	update_tokens(t_cmd_line **cmd_line)
 {
 	t_token		*token;
+	int			has_cmd;
 
 	token = (*cmd_line)->token_lst;
-	token->type = CMD;
-	token = token->next;
-
+	has_cmd = 0;
 	while (token)
 	{
 		if (token->type == RED_INPUT)
@@ -41,7 +40,15 @@ void	update_tokens(t_cmd_line **cmd_line)
 		else if (token->type == HEREDOC)
 			token->next->type = HEREDOC_LIMIT;
 		else if (token->type == STR)
-			token->type = ARG;
+		{
+			if (!has_cmd)
+			{
+				token->type = CMD;
+				has_cmd = 1;
+			}
+			else
+				token->type = ARG;
+		}
 		token = token->next;
 	}
 }
@@ -82,15 +89,23 @@ void	parser(t_sh *sh)
 	//1) parsing des tokens en commande lines. chaque commande line est separee par un pipe. pour l'instant on stocke les tokens dans les commandes lines
 	parse_tokens_in_cmd_lines(sh);
 
-	//2)derniere phase de tokenisation : remplacement du type STR par le type output/input (ceux qui suivent les redirections)
+	//2)derniere phase de tokenisation : remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
 	update_token_type_str(sh);
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin
+
+	//print tokens
+	t_cmd_line *temp;
+	temp = sh->cmd_line_lst;
+	while (temp)
+	{
+		print_tokens(temp->token_lst);
+		temp = temp->next;
+	}
 
 	//3)Ajout de tous les autres elements necessaires dans les structures commande line
 	update_elems_cmd_lines(sh);
 
 	//print cmds & args
-	t_cmd_line *temp;
 	temp = sh->cmd_line_lst;
 	while (temp)
 	{
