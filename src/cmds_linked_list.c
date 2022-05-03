@@ -15,6 +15,8 @@ t_cmd_line	*create_cmd_line()
 	elem->token_lst = NULL;
 	elem->fdin = 0; //standard input
 	elem->fdout = 1; //standard output
+	elem->heredoc_mode = 0;
+	elem->append_mode = 0;
 	return (elem);
 }
 

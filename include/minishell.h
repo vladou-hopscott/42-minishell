@@ -54,6 +54,8 @@ void	update_elems_cmd_line(t_sh *sh);
 void	update_cmd(t_cmd_line **cmd_line);
 void	update_args(t_cmd_line **cmd_line);
 int		count_arg_tokens(t_token *li);
+void	update_fdin(t_cmd_line **cmd_line);
+void	update_fdout(t_cmd_line **cmd_line);
 
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);

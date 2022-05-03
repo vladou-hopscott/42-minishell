@@ -16,8 +16,8 @@ typedef enum token_type
 	PIPE = '|',
 	RED_INPUT = '<',
 	RED_OUTPUT = '>',
-	HEREDOC,
-	RED_APPEND,
+	HEREDOC, //"<<"
+	RED_APPEND, //">>"
 	OUTPUT, //1er token apres '>'
 	INPUT, //1er token apres '<'
 	OUTPUT_APPEND, //1er token apres ">>"
@@ -52,7 +52,9 @@ typedef struct s_cmd_line
 	char				*str;
 	char				**args;
 	int					fdin;
+	int					heredoc_mode;
 	int					fdout;
+	int					append_mode;
 	struct s_cmd_line	*next;
 } t_cmd_line;
 

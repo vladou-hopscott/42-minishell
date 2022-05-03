@@ -75,7 +75,7 @@ void	update_elems_cmd_lines(t_sh *sh)
 	{
 		update_cmd(&sh->cmd_line_lst);
 		update_args(&sh->cmd_line_lst);
-
+		update_fdout(&sh->cmd_line_lst);
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
@@ -117,13 +117,16 @@ void	parser(t_sh *sh)
 			printf("[%s] ", temp->args[i]);
 			i++;
 		}
+		printf("\nfdout=%d\n", temp->fdout);
+
 		printf("\n\n");
 		temp = temp->next;
 	}
 
-	//4)gestion des quotes et des variables d'environnement : voir en dessous
+	//0) gestion des quotes et des variables d'environnement : voir en dessous
 }
 
 //suppression des quotes qui ne seront pas interpretes dans les tokens STR. Exemple : la commande ***echo "t'" oi*** renvoie ***t oi***
 //il faudrait eventuellement rajouter ici l'interpretation du $ dans les double quotes egalement
 //interpret_remove_quotes(sh);
+//ETAPE A FAIRE APRES LE CHECK LEXICAL ET AVANT LE PASSAGE AUX CMD_LINES
