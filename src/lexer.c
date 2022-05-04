@@ -8,7 +8,6 @@ char *process_string_token(t_sh *sh, char *prompt)
 
 	while (prompt[j])
 	{
-		//printf("i=%d, status=%c\n", j, sh->p_quote);
 		if (is_in_charset(prompt[j], CHARSET_SEP) && sh->p_quote == NO_QUOTE)
 			break;
 		j++;
@@ -24,20 +23,20 @@ char *process_string_token(t_sh *sh, char *prompt)
 
 void	process_redirect_token(t_sh *sh)
 {
-	if (sh->prompt[sh->p_index] == RED_LEFT && sh->prompt[sh->p_index + 1] == RED_LEFT)
+	if (sh->prompt[sh->p_index] == RED_INPUT && sh->prompt[sh->p_index + 1] == RED_INPUT)
 	{
-		sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_LEFT, "<<");
+		sh->token_lst = add_back_token(sh->token_lst, HEREDOC, "<<");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_RIGHT && sh->prompt[sh->p_index + 1] == RED_RIGHT)
+	else if (sh->prompt[sh->p_index] == RED_OUTPUT && sh->prompt[sh->p_index + 1] == RED_OUTPUT)
 	{
-		sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_RIGHT, ">>");
+		sh->token_lst = add_back_token(sh->token_lst, RED_APPEND, ">>");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_LEFT)
-		sh->token_lst = add_back_token(sh->token_lst, RED_LEFT, "<");
-	else if (sh->prompt[sh->p_index] == RED_RIGHT)
-		sh->token_lst = add_back_token(sh->token_lst, RED_RIGHT, ">");
+	else if (sh->prompt[sh->p_index] == RED_INPUT)
+		sh->token_lst = add_back_token(sh->token_lst, RED_INPUT, "<");
+	else if (sh->prompt[sh->p_index] == RED_OUTPUT)
+		sh->token_lst = add_back_token(sh->token_lst, RED_OUTPUT, ">");
 }
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
@@ -51,7 +50,6 @@ void	tokenizer(t_sh *sh)
 	//A chaque debut on verifie si on entre ou sort de quotes
 	check_quote_status(sh, sh->prompt, sh->p_index);
 
-	//printf("sh->p_index=%d, status=%c\n", sh->p_index, sh->p_quote);
 	if (sh->p_quote == NO_QUOTE && is_in_charset(sh->prompt[sh->p_index], CHARSET_SEP))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
@@ -76,17 +74,13 @@ void lexer(t_sh *sh)
 		return; //voir quel message d'erreur et comment traiter l'erreur
 	}
 
-	//tokeniser (separation entre strings et separateurs, stockage dans une liste chainee) en tenant compte des single et double quotes;
+	//tokeniser (traitement du prompt pour en sortir une liste chainee avec maillon = string ou separateur) en tenant compte des single et double quotes;
 	while (sh->prompt[sh->p_index])
 	{
 		tokenizer(sh);
 		sh->p_index ++;
 	}
 
-	//suppression des quotes qui ne seront pas interpretes dans les tokens STR. Exemple : la commande ***echo "t'" oi*** renvoie ***t oi***
-	//il faudrait eventuellement rajouter ici l'interpretation du $ dans les double quotes egalement
-	//interpret_remove_quotes(sh);
-
-	// print_tokens(sh->token_lst);
-	// printf("list length=%d\n", list_length(sh->token_lst));
+	//A partir de cette 1ere liste de tokens, verification des erreurs de syntaxe des redirections (exemples : > >, >|, ||, etc...)
+	//fonction a coder qui liste toutes les erreurs de syntaxe liees aux redirections : check_syntax_error();
 }

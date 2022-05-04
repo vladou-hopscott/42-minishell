@@ -15,6 +15,7 @@ t_token	*create_token(t_token_type type, char *value)
 	return (elem);
 }
 
+
 t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 {
 	t_token *new;
@@ -28,7 +29,6 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 		return (new);
 	else
 	{
-
 		tmp = list;
 		while (tmp->next)
 			tmp = tmp->next;
@@ -41,10 +41,24 @@ void print_tokens(t_token *li)
 {
 	while(li != NULL)
 	{
-		printf("[%s] ", li->value);
+		printf("[%s] type=%u, ", li->value, li->type);
 		li = li->next;
 	}
 	printf("\n");
+}
+
+
+int count_arg_tokens(t_token *li)
+{
+	int size = 0;
+
+	while(li != NULL)
+	{
+		if (li->type == ARG)
+			size++;
+		li = li->next;
+	}
+	return size;
 }
 
 int list_length(t_token *li)
