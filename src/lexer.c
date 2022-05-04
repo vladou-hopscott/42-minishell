@@ -11,7 +11,7 @@ char *process_string_token(t_sh *sh, char *prompt)
 		if (is_in_charset(prompt[j], CHARSET_SEP) && sh->p_quote == NO_QUOTE)
 			break;
 		j++;
-		check_quote_status(sh, prompt, j);
+		check_quote_status_in_prompt(sh, prompt, j);
 	}
 	tmp = ft_strndup(prompt, j);
 	str = ft_strtrim(tmp, CHARSET_SPACE_TABS);
@@ -48,7 +48,7 @@ void	tokenizer(t_sh *sh)
 	str = NULL;
 
 	//A chaque debut on verifie si on entre ou sort de quotes
-	check_quote_status(sh, sh->prompt, sh->p_index);
+	check_quote_status_in_prompt(sh, sh->prompt, sh->p_index);
 
 	if (sh->p_quote == NO_QUOTE && is_in_charset(sh->prompt[sh->p_index], CHARSET_SEP))
 	{
