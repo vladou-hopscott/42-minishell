@@ -85,41 +85,28 @@ void	update_elems_cmd_lines(t_sh *sh)
 //transformation des tokens en list chainee de commandes via le parser
 void	parser(t_sh *sh)
 {
-	printf("PARSER\n\n");
-
-	//1) parsing des tokens en commande lines. chaque commande line est separee par un pipe. pour l'instant on stocke les tokens dans les commandes lines
-	parse_tokens_in_cmd_lines(sh);
-
-	//2)derniere phase de tokenisation : remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
-	update_token_type_str(sh);
+	parse_tokens_in_cmd_lines(sh);//chaque commande line est separee par un pipe
+	update_token_type_str(sh); //remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin
+	update_elems_cmd_lines(sh);//Ajout de fdin, fdout, cmd & args dans les structures commande line
 
-	//print tokens
+	//for each cmd line structure, print tokens, cmd, args, fdin, fdout
 	t_cmd_line *temp;
 	temp = sh->cmd_line_lst;
 	while (temp)
 	{
+		printf("tokens : \n");
 		print_tokens(temp->token_lst);
-		temp = temp->next;
-	}
-
-	//3)Ajout de tous les autres elements necessaires dans les structures commande line
-	update_elems_cmd_lines(sh);
-
-	//print cmds & args
-	temp = sh->cmd_line_lst;
-	while (temp)
-	{
 		printf("cmd=%s\n",temp->cmd);
 		int i = 0;
-		printf("args: ");
+		printf("args: [");
 		while (temp->args[i])
 		{
-			printf("[%s] ", temp->args[i]);
+			printf("%s,", temp->args[i]);
 			i++;
 		}
-		printf("\nfdout=%d\n", temp->fdout);
-		printf("\nfdin=%d\n", temp->fdin);
+		printf("]");
+		printf("\nfdout=%d, fdin=%d\n", temp->fdout, temp->fdin);
 		printf("\n\n");
 		temp = temp->next;
 	}

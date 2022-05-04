@@ -8,7 +8,6 @@ char *process_string_token(t_sh *sh, char *prompt)
 
 	while (prompt[j])
 	{
-		//printf("i=%d, status=%c\n", j, sh->p_quote);
 		if (is_in_charset(prompt[j], CHARSET_SEP) && sh->p_quote == NO_QUOTE)
 			break;
 		j++;
@@ -84,7 +83,4 @@ void lexer(t_sh *sh)
 
 	//A partir de cette 1ere liste de tokens, verification des erreurs de syntaxe des redirections (exemples : > >, >|, ||, etc...)
 	//fonction a coder qui liste toutes les erreurs de syntaxe liees aux redirections : check_syntax_error();
-
-	print_tokens(sh->token_lst);
-	printf("list length=%d\n", list_length(sh->token_lst));
 }
