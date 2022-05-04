@@ -75,7 +75,8 @@ void	update_elems_cmd_lines(t_sh *sh)
 	{
 		update_cmd(&sh->cmd_line_lst);
 		update_args(&sh->cmd_line_lst);
-		update_fdout(&sh->cmd_line_lst);
+		update_fdout(&sh->cmd_line_lst); //update fdout and create/truncate files if needed
+		update_fdin(&sh->cmd_line_lst); //update fdin
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
@@ -118,7 +119,7 @@ void	parser(t_sh *sh)
 			i++;
 		}
 		printf("\nfdout=%d\n", temp->fdout);
-
+		printf("\nfdin=%d\n", temp->fdin);
 		printf("\n\n");
 		temp = temp->next;
 	}
