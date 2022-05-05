@@ -1,20 +1,7 @@
 #include "minishell.h"
 
-//besoin d'un statut pour le prompt ou les tokens, permettant de verifier si on est actuellement en single, double ou sans quotes
+extern char	**environ;
 
-//il faut utiliser ce statut lorsqu'on va tokeniser, pour savoir si on est dans un string litteral qui n'interprete pas les commandes,
-//ou bien si on est dans une situation ou les commandes doivent etre interpretees
-
-//ensuite important de garder en tete les comportements des double quotes avec certains caracteres => les $
-
-//Est-ce quon prend egalement en  compte le caractere backslash \ (echappement ?) => normalement non
-
-//Apres avoir tokenise correctement (differences entre strings et separators), il faut supprimer les quotes inutiles des strings => les quotes qui ne sont pas interpretes en bash
-
-
-
-//At first, you should check if quotes are properly closed, following quoting rules: The first quote you see cancel the other type of quote until you see it again.
-//passage d'une 1ere fonction qui verifie si les quotes (single et double) sont bien fermees
 void	check_quote_status_in_prompt(t_sh *sh, char *prompt, int i)
 {
 	if (sh->p_quote == NO_QUOTE)
@@ -87,34 +74,76 @@ int	str_has_quotes(char *str)
 	return (0);
 }
 
+// i = 0;
+// while (environ && i < 3)
+// {
+// 	printf("%s\n", environ[i]);
+// 	i++;
+// }
+
+	// var = env_findkeyvalue("USER", environ);
+	// var = env_findkeyvalue("P", environ);
+	// if (var)
+	// 	printf("env_var=[%s]\n", var);
+	// else
+	// 	printf("no matching\n");
+
+
+//BASH VARIABLE NAME
+    // a-z, A-Z, _ and 0-9
+    // May NOT begin with a number
+
+
+char	*delimit_envvar(char *str)
+{
+	char	*ret;
+	int		i;
+
+	ret = NULL;
+	i = 0;
+	
+	printf("env_var=\n");
+	while(str[i] && str[i] != ' ') //need to be completed
+	{
+		printf("%c", str[i]);
+		i++;
+	}
+	printf("\n");
+
+	return (ret);
+}
+
 char	*trim_double_quotes_in_token(t_token **token, int *i, int *j)
 {
 	char	*s1;
 	char	*s2;
-	
+	// char	*var;
+
 	s1 = NULL;
 	s2 = NULL;
-	//on garde de cote la 1ere partie du string avant le quote
+		
 	s1 = ft_strndup(&(*token)->value[*j], *i - *j);
 	//if NULL free tout
-	printf("s1=%s\n",s1);
 	
 	*i = *i + 1;
-	*j = *i; //on parcourt ensuite a la recherche de la 2eme quote simple
-	while ((*token)->value[*i] && (*token)->value[*i] != SINGLE_QUOTE)
+	*j = *i;
+	while ((*token)->value[*i] && (*token)->value[*i] != DOUBLE_QUOTE)
+	{
+		if ((*token)->value[*i] == '$')
+		{
+			delimit_envvar(&((*token)->value[*i]));
+		}
 		*i = *i + 1;
-	if ((*token)->value[*i] == SINGLE_QUOTE)
+	}		
+	if ((*token)->value[*i] == DOUBLE_QUOTE)
 	{
 		s2 = ft_strndup(&(*token)->value[*j], *i - *j);
 		//if NULL free tout
-		printf("s2=%s\n", s2);			
 	}
 	*j = *i + 1;
 	
-	//join and free s1 & s2 with new
 	return (ft_strjoin_free(&s1, &s2));
 }
-
 
 char	*trim_single_quotes_in_token(t_token **token, int *i, int *j)
 {
@@ -156,6 +185,12 @@ char	*process_quotes_in_token(t_token **token)
 		if ((*token)->value[i] == SINGLE_QUOTE) //on entre dans des single quotes externes -> on doit les virer
 		{
 			temp = trim_single_quotes_in_token(token, &i, &j); 
+			new = ft_strjoin_free(&new, &temp);
+			//A RAJOUTER Si l'allocation de memoire echoue on arrete tout ?
+		}
+		else if ((*token)->value[i] == DOUBLE_QUOTE) //on entre dans des single quotes externes -> on doit les virer
+		{
+			temp = trim_double_quotes_in_token(token, &i, &j); 
 			new = ft_strjoin_free(&new, &temp);
 			//A RAJOUTER Si l'allocation de memoire echoue on arrete tout ?
 		}
