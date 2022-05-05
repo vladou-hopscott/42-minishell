@@ -57,7 +57,7 @@ int		count_arg_tokens(t_token *li);
 void	update_fdin(t_cmd_line **cmd_line);
 void	update_fdout(t_cmd_line **cmd_line);
 void	process_quotes_in_tokens(t_cmd_line **cmd_line);
-void	process_quotes_in_token(t_token **token);
+char	*process_quotes_in_token(t_token **token);
 
 
 //********** QUOTES **********//
