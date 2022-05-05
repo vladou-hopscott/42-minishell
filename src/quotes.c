@@ -57,7 +57,6 @@ void	check_quote_status_in_token(t_token **token, int i)
 	}
 }
 
-
 //check if there are unclosed quotes. if so, return error status 1
 int check_for_quotes(t_sh *sh)
 {
@@ -90,23 +89,63 @@ int	str_has_quotes(char *str)
 
 //suppression des quotes qui ne seront pas interpretes dans les tokens STR. Exemple : la commande ***echo "t'" oi*** renvoie ***t oi***
 //il faudrait eventuellement rajouter ici l'interpretation du $ dans les double quotes egalement
-//interpret_remove_quotes(sh);
-//ETAPE A FAIRE APRES LE CHECK LEXICAL ET AVANT LE PASSAGE AUX CMD_LINES
 void	process_quotes_in_token(t_token **token)
 {
-	//d'abord verifier si il y a des quotes ou double quotes presentes dans l'argument, sinon on passe
-	if (!str_has_quotes((*token)->value))
+	char	*s1;
+	char	*s2;
+	char	*new;
+	int		i;
+	int		j;
+	int		len;
+
+	if (!str_has_quotes((*token)->value)) //if no quotes in token, skip
 		return;
 
 	//echo c'ou'"c"'o"u'
 	//traitement des quotes simples pour l'instant
-	//parcourir le token. on reprend le statut quotes du token. on veut virer les quotes externes
-	int i = 0;
+	i = 0;
+	j = 0;
+	s1 = NULL;
+	s2 = NULL;
+	new = NULL;
 	while ((*token)->value[i])
 	{
-		check_quote_status_in_token(token, i);
+		//check_quote_status_in_token(token, i); //maj statut des quotes
+		if ((*token)->value[i] == SINGLE_QUOTE) //on entre dans des single quotes externes -> on doit les virer
+		{
+			len = i - j; //on garde de cote la 1ere partie du string avant le quote
+			printf("i=%d, j=%d\n", i, j);
+			s1 = ft_strndup(&(*token)->value[j], len);
+			//if NULL free tout
+			printf("s1=%s\n",s1);
+			
+			i++;
+			j = i; //on parcourt ensuite a la recherche de la 2eme quote simple
+			while ((*token)->value[i] && (*token)->value[i] != SINGLE_QUOTE)
+				i++;
+			if ((*token)->value[i] == SINGLE_QUOTE)
+			{
+				len = i - j; //on garde de cote la 1ere partie du string avant le quote
+				printf("i=%d, j=%d\n", i, j);
+				s2 = ft_strndup(&(*token)->value[j], len);
+				//if NULL free tout
+				printf("s2=%s\n", s2);			
+			}
+
+			//join and free s1 & s2 with new
+			s1 = ft_strjoin_free(&s1, &s2); //A RAJOUTER Si l'allocation de memoire echoue on arrete tout ?
+			printf("joined s1 et s2=%s\n",s1);
+			new = ft_strjoin_free(&new, &s1);
+			printf("new=%s\n", new);
+
+			j = i + 1;
+		}
 		i++;
 	}
+	//join last part of string to new
+	s1 = ft_strndup(&(*token)->value[j], i - j);
+	new = ft_strjoin_free(&new, &s1);
+	printf("new=%s\n", new);
 }
 
 //void	remove_quotes_in_token(t_token **a_tok)

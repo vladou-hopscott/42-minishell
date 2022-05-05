@@ -89,7 +89,7 @@ void	process_quotes_in_cmd_lines(t_sh *sh)
 	start = sh->cmd_line_lst;
 	while (sh->cmd_line_lst)
 	{
-		process_quotes(&sh->cmd_line_lst);
+		process_quotes_in_tokens(&sh->cmd_line_lst);
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
