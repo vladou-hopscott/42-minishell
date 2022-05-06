@@ -23,27 +23,6 @@ void	check_quote_status_in_prompt(t_sh *sh, char *prompt, int i)
 	}
 }
 
-void	check_quote_status_in_token(t_token **token, int i)
-{
-	if ((*token)->quote == NO_QUOTE)
-	{
-		if ((*token)->value[i] == SINGLE_QUOTE)
-			(*token)->quote = SINGLE_QUOTE;
-		else if ((*token)->value[i] == DOUBLE_QUOTE)
-			(*token)->quote = DOUBLE_QUOTE;
-	}
-	else if ((*token)->quote == SINGLE_QUOTE)
-	{
-		if ((*token)->value[i] == SINGLE_QUOTE)
-			(*token)->quote = NO_QUOTE;
-	}
-	else if ((*token)->quote == DOUBLE_QUOTE)
-	{
-		if ((*token)->value[i] == DOUBLE_QUOTE)
-			(*token)->quote = NO_QUOTE;
-	}
-}
-
 //check if there are unclosed quotes. if so, return error status 1
 int check_for_quotes(t_sh *sh)
 {
@@ -74,26 +53,9 @@ int	str_has_quotes(char *str)
 	return (0);
 }
 
-// i = 0;
-// while (environ && i < 3)
-// {
-// 	printf("%s\n", environ[i]);
-// 	i++;
-// }
-
-	// var = env_findkeyvalue("USER", environ);
-	// var = env_findkeyvalue("P", environ);
-	// if (var)
-	// 	printf("env_var=[%s]\n", var);
-	// else
-	// 	printf("no matching\n");
-
-
 //BASH VARIABLE NAME
     // a-z, A-Z, _ and 0-9
     // May NOT begin with a number
-
-
 char	*delimit_envvar(char *str)
 {
 	int		i;
@@ -109,43 +71,43 @@ char	*delimit_envvar(char *str)
 	return (env_key);
 }
 
+char	*expand_envvar_in_token(char *str, int *i, int *j, char **s1)
+{
+	char	*env_key;
+	char	*env_val;
+
+	env_key = delimit_envvar(str);
+	env_val = env_findkeyvalue(env_key, environ);
+	if (ft_strlen(env_key) == 0)
+		*i = *i + 1; //le 1er char apres le $ est faux, on le saute	
+	*i = *i + ft_strlen(env_key); //on fait avancer i et j pour passer l'index apres la variable d'env
+	*j = *i + 1;
+	if (env_val) //si il s'agit bien d'une variable d'environnement on append sa valeur
+		*s1 = ft_strjoin_free(s1, &env_val);
+	ft_free_null_str(&env_key);
+	return (*s1);
+}
+
 char	*trim_double_quotes_in_token(t_token **token, int *i, int *j)
 {
 	char	*s1;
 	char	*s2;
-	char	*env_key;
-	char	*env_val;
 
-	s1 = NULL;
-	s2 = NULL;
 	s1 = ft_strndup(&(*token)->value[*j], *i - *j);
-	//if NULL free tout
 	*i = *i + 1;
 	*j = *i;
 	while ((*token)->value[*i] && (*token)->value[*i] != DOUBLE_QUOTE)
 	{
 		if ((*token)->value[*i] == '$')
 		{
-			env_key = delimit_envvar(&((*token)->value[*i]));
-			env_val = env_findkeyvalue(env_key, environ);
-			printf("env_key=%s, len=%zu, env_val=%s\n", env_key, ft_strlen(env_key), env_val);
 			s2 = ft_strndup(&(*token)->value[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
 			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			if (ft_strlen(env_key) == 0)
-				*i = *i + 1; //le 1er char apres le $ est faux, on le saute	
-			*i = *i + ft_strlen(env_key); //on fait avancer i et j pour passer l'index apres la variable d'env
-			*j = *i + 1;
-			if (env_val) //si il s'agit bien d'une variable d'environnement on append sa valeur
-				s1 = ft_strjoin_free(&s1, &env_val);
-			ft_free_null_str(&env_key);
+			s1 = expand_envvar_in_token(&(*token)->value[*j], i, j, &s1);
 		}
 		*i = *i + 1;
 	}
 	if ((*token)->value[*i] == DOUBLE_QUOTE)
-	{
 		s2 = ft_strndup(&(*token)->value[*j], *i - *j);
-		//if NULL free tout
-	}
 	*j = *i + 1;
 	return (ft_strjoin_free(&s1, &s2));
 }
@@ -158,16 +120,12 @@ char	*trim_single_quotes_in_token(t_token **token, int *i, int *j)
 	s1 = NULL;
 	s2 = NULL;
 	s1 = ft_strndup(&(*token)->value[*j], *i - *j);
-	//if NULL free tout
 	*i = *i + 1;
 	*j = *i;
 	while ((*token)->value[*i] && (*token)->value[*i] != SINGLE_QUOTE)
 		*i = *i + 1;
 	if ((*token)->value[*i] == SINGLE_QUOTE)
-	{
 		s2 = ft_strndup(&(*token)->value[*j], *i - *j);
-		//if NULL free tout
-	}
 	*j = *i + 1;	
 	return (ft_strjoin_free(&s1, &s2));
 }
@@ -187,27 +145,16 @@ char	*process_quotes_in_token(t_token **token)
 	new = NULL;
 	while ((*token)->value[i])
 	{
-		if ((*token)->value[i] == SINGLE_QUOTE) //on entre dans des single quotes externes -> on doit les virer
+		if ((*token)->value[i] == SINGLE_QUOTE || (*token)->value[i] == DOUBLE_QUOTE) //on entre dans des single ou double quotes externes -> on doit les virer
 		{
-			temp = trim_single_quotes_in_token(token, &i, &j); 
+			if ((*token)->value[i] == SINGLE_QUOTE)
+				temp = trim_single_quotes_in_token(token, &i, &j);
+			else 
+				temp = trim_double_quotes_in_token(token, &i, &j);
 			new = ft_strjoin_free(&new, &temp);
-			//A RAJOUTER Si l'allocation de memoire echoue on arrete tout ?
-		}
-		else if ((*token)->value[i] == DOUBLE_QUOTE) //on entre dans des single quotes externes -> on doit les virer
-		{
-			temp = trim_double_quotes_in_token(token, &i, &j); 
-			new = ft_strjoin_free(&new, &temp);
-			//A RAJOUTER Si l'allocation de memoire echoue on arrete tout ?
 		}
 		i++;
 	}
-	//join last part of string to new
-	temp = ft_strndup(&(*token)->value[j], i - j);
+	temp = ft_strndup(&(*token)->value[j], i - j); 	//join last part of string to new
 	return (ft_strjoin_free(&new, &temp));
 }
-
-//void	remove_quotes_in_token(t_token **a_tok)
-	//faire varier le statut de token->quote : il faut supprimer au fur et a mesure les quotes inutiles
-	//plusieurs manieres possibles envsageables
-		//parcourir la boucle une fois avec une boucle while, et traiter au fur et a mesure. il faudrait reallouer et recreer le string au fur et a mesure qu on enleve les quotes
-		//faire une fonction recursive qui enleve les quotes inutiles, jusqu a ce qu'il y en ait plus ?

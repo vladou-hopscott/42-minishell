@@ -100,6 +100,7 @@ void	parser(t_sh *sh)
 {
 	parse_tokens_in_cmd_lines(sh);//chaque commande line est separee par un pipe
 	//A rajouter : fonction pour remplir cmd_line->str avant d'enlever quotes et autres
+	//A RAJOUTER : avant les quotes, il faut expand ls variables d'env qui n'ont pas de quotes
 	process_quotes_in_cmd_lines(sh);// a voir si on met pas ca dans le lexer au lieu du parser
 	update_token_type_str(sh); //remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin
