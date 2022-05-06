@@ -27,4 +27,6 @@ char	**ft_split(char *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_free_null_str(char **str);
 int	ft_isalnum(int c);
+int	ft_isdigit(int c);
+
 #endif

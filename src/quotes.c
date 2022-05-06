@@ -101,6 +101,8 @@ char	*delimit_envvar(char *str)
 
 	env_key = NULL;
 	i = 1;
+	if (ft_isdigit(str[i])) //si le 1er char est un digit, abort
+		return (env_key);
 	while(str[i] && (ft_isalnum(str[i]) || str[i] == '_')) //A VERIFIER si ce sont les bonnes conditions
 		i++;
 	env_key = ft_strndup(str + 1, i - 1);
@@ -129,6 +131,8 @@ char	*trim_double_quotes_in_token(t_token **token, int *i, int *j)
 			printf("env_key=%s, len=%zu, env_val=%s\n", env_key, ft_strlen(env_key), env_val);
 			s2 = ft_strndup(&(*token)->value[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
 			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
+			if (ft_strlen(env_key) == 0)
+				*i = *i + 1; //le 1er char apres le $ est faux, on le saute	
 			*i = *i + ft_strlen(env_key); //on fait avancer i et j pour passer l'index apres la variable d'env
 			*j = *i + 1;
 			if (env_val) //si il s'agit bien d'une variable d'environnement on append sa valeur
