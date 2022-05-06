@@ -96,52 +96,53 @@ int	str_has_quotes(char *str)
 
 char	*delimit_envvar(char *str)
 {
-	char	*ret;
 	int		i;
+	char	*env_key;
 
-	ret = NULL;
-	i = 0;
-	
-	printf("env_var=\n");
-	while(str[i] && str[i] != ' ') //need to be completed
-	{
-		printf("%c", str[i]);
+	env_key = NULL;
+	i = 1;
+	while(str[i] && (ft_isalnum(str[i]) || str[i] == '_')) //A VERIFIER si ce sont les bonnes conditions
 		i++;
-	}
-	printf("\n");
-
-	return (ret);
+	env_key = ft_strndup(str + 1, i - 1);
+	return (env_key);
 }
 
 char	*trim_double_quotes_in_token(t_token **token, int *i, int *j)
 {
 	char	*s1;
 	char	*s2;
-	// char	*var;
+	char	*env_key;
+	char	*env_val;
 
 	s1 = NULL;
 	s2 = NULL;
-		
 	s1 = ft_strndup(&(*token)->value[*j], *i - *j);
 	//if NULL free tout
-	
 	*i = *i + 1;
 	*j = *i;
 	while ((*token)->value[*i] && (*token)->value[*i] != DOUBLE_QUOTE)
 	{
 		if ((*token)->value[*i] == '$')
 		{
-			delimit_envvar(&((*token)->value[*i]));
+			env_key = delimit_envvar(&((*token)->value[*i]));
+			env_val = env_findkeyvalue(env_key, environ);
+			printf("env_key=%s, len=%zu, env_val=%s\n", env_key, ft_strlen(env_key), env_val);
+			s2 = ft_strndup(&(*token)->value[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
+			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
+			*i = *i + ft_strlen(env_key); //on fait avancer i et j pour passer l'index apres la variable d'env
+			*j = *i + 1;
+			if (env_val) //si il s'agit bien d'une variable d'environnement on append sa valeur
+				s1 = ft_strjoin_free(&s1, &env_val);
+			ft_free_null_str(&env_key);
 		}
 		*i = *i + 1;
-	}		
+	}
 	if ((*token)->value[*i] == DOUBLE_QUOTE)
 	{
 		s2 = ft_strndup(&(*token)->value[*j], *i - *j);
 		//if NULL free tout
 	}
 	*j = *i + 1;
-	
 	return (ft_strjoin_free(&s1, &s2));
 }
 
