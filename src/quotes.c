@@ -88,73 +88,81 @@ char	*expand_envvar_in_token(char *str, int *i, int *j, char **s1)
 	return (*s1);
 }
 
-char	*trim_double_quotes_in_token(t_token **token, int *i, int *j)
+char	*trim_double_quotes_in_token(char **value, int *i, int *j)
 {
 	char	*s1;
 	char	*s2;
 
-	s1 = ft_strndup(&(*token)->value[*j], *i - *j);
+	s1 = ft_strndup(&(*value)[*j], *i - *j);
+	printf("A\n");
 	*i = *i + 1;
 	*j = *i;
-	while ((*token)->value[*i] && (*token)->value[*i] != DOUBLE_QUOTE)
+	while ((*value)[*i] && (*value)[*i] != DOUBLE_QUOTE)
 	{
-		if ((*token)->value[*i] == '$')
+		printf("B\n");
+		if ((*value)[*i] == '$')
 		{
-			s2 = ft_strndup(&(*token)->value[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
+			s2 = ft_strndup(&(*value)[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
 			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar_in_token(&(*token)->value[*j], i, j, &s1);
+			s1 = expand_envvar_in_token(&(*value)[*j], i, j, &s1);
 		}
 		*i = *i + 1;
 	}
-	if ((*token)->value[*i] == DOUBLE_QUOTE)
-		s2 = ft_strndup(&(*token)->value[*j], *i - *j);
+	printf("C\n");
+	if ((*value)[*i] == DOUBLE_QUOTE)
+		s2 = ft_strndup(&(*value)[*j], *i - *j);
 	*j = *i + 1;
 	return (ft_strjoin_free(&s1, &s2));
 }
 
-char	*trim_single_quotes_in_token(t_token **token, int *i, int *j)
+char	*trim_single_quotes_in_token(char **value, int *i, int *j)
 {
 	char	*s1;
 	char	*s2;
 	
 	s1 = NULL;
 	s2 = NULL;
-	s1 = ft_strndup(&(*token)->value[*j], *i - *j);
+	s1 = ft_strndup(&(*value)[*j], *i - *j);
 	*i = *i + 1;
 	*j = *i;
-	while ((*token)->value[*i] && (*token)->value[*i] != SINGLE_QUOTE)
+	while ((*value)[*i] && (*value)[*i] != SINGLE_QUOTE)
 		*i = *i + 1;
-	if ((*token)->value[*i] == SINGLE_QUOTE)
-		s2 = ft_strndup(&(*token)->value[*j], *i - *j);
+	if ((*value)[*i] == SINGLE_QUOTE)
+		s2 = ft_strndup(&(*value)[*j], *i - *j);
 	*j = *i + 1;	
 	return (ft_strjoin_free(&s1, &s2));
 }
 
 //echo c'ou'"c"'o"u'
-char	*process_quotes_in_token(t_token **token)
+char	*process_quotes_in_token(char **value)
 {
 	char	*new;
 	char	*temp;
 	int		i;
 	int		j;
 
-	if (!str_has_quotes((*token)->value)) //if no quotes in token, skip
+	if (!str_has_quotes(*value)) //if no quotes in token, skip
 		return (NULL);
 	i = 0;
 	j = 0;
 	new = NULL;
-	while ((*token)->value[i])
+	printf("test1\n");
+	while ((*value)[i])
 	{
-		if ((*token)->value[i] == SINGLE_QUOTE || (*token)->value[i] == DOUBLE_QUOTE) //on entre dans des single ou double quotes externes -> on doit les virer
+		printf("test2\n");
+		if ((*value)[i] == SINGLE_QUOTE || (*value)[i] == DOUBLE_QUOTE) //on entre dans des single ou double quotes externes -> on doit les virer
 		{
-			if ((*token)->value[i] == SINGLE_QUOTE)
-				temp = trim_single_quotes_in_token(token, &i, &j);
+			printf("test3\n");
+			if ((*value)[i] == SINGLE_QUOTE)
+				temp = trim_single_quotes_in_token(value, &i, &j);
 			else 
-				temp = trim_double_quotes_in_token(token, &i, &j);
+				temp = trim_double_quotes_in_token(value, &i, &j);
 			new = ft_strjoin_free(&new, &temp);
 		}
 		i++;
+		printf("test3BIS\n");
 	}
-	temp = ft_strndup(&(*token)->value[j], i - j); 	//join last part of string to new
+	printf("test4\n");
+	temp = ft_strndup(&(*value)[j], i - j); 	//join last part of string to new
 	return (ft_strjoin_free(&new, &temp));
 }

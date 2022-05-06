@@ -12,11 +12,11 @@ void	process_quotes_in_tokens(t_cmd_line **cmd_line)
 	{
 		if (token->type == STR)
 		{
-			new_value = process_quotes_in_token(&token);
+			new_value = process_quotes_in_token(&token->value);
 			if (new_value)
 			{			
 				temp = token->value;
-				token->value = new_value; //replace token value
+				token->value = new_value;
 				ft_free_null_str(&temp);
 			}
 		}
