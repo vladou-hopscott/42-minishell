@@ -82,6 +82,8 @@ char	*expand_envvar_in_token(char *str, int *i, int *j, char **s1)
 		*i = *i + 1; //le 1er char apres le $ est faux, on le saute	
 	*i = *i + ft_strlen(env_key); //on fait avancer i et j pour passer l'index apres la variable d'env
 	*j = *i + 1;
+//	printf("str=%s\n", str);
+//	printf("s1=%s, env_key=%s envval=%s\n", *s1, env_key, env_val);
 	if (env_val) //si il s'agit bien d'une variable d'environnement on append sa valeur
 		*s1 = ft_strjoin_free(s1, &env_val);
 	ft_free_null_str(&env_key);
@@ -94,21 +96,18 @@ char	*trim_double_quotes_in_token(char **value, int *i, int *j)
 	char	*s2;
 
 	s1 = ft_strndup(&(*value)[*j], *i - *j);
-	printf("A\n");
 	*i = *i + 1;
 	*j = *i;
 	while ((*value)[*i] && (*value)[*i] != DOUBLE_QUOTE)
 	{
-		printf("B\n");
 		if ((*value)[*i] == '$')
 		{
 			s2 = ft_strndup(&(*value)[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
 			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar_in_token(&(*value)[*j], i, j, &s1);
+			s1 = expand_envvar_in_token(&(*value)[*i], i, j, &s1);
 		}
 		*i = *i + 1;
 	}
-	printf("C\n");
 	if ((*value)[*i] == DOUBLE_QUOTE)
 		s2 = ft_strndup(&(*value)[*j], *i - *j);
 	*j = *i + 1;
@@ -146,23 +145,18 @@ char	*process_quotes_in_token(char **value)
 	i = 0;
 	j = 0;
 	new = NULL;
-	printf("test1\n");
 	while ((*value)[i])
 	{
-		printf("test2\n");
 		if ((*value)[i] == SINGLE_QUOTE || (*value)[i] == DOUBLE_QUOTE) //on entre dans des single ou double quotes externes -> on doit les virer
 		{
-			printf("test3\n");
 			if ((*value)[i] == SINGLE_QUOTE)
 				temp = trim_single_quotes_in_token(value, &i, &j);
-			else 
+			else
 				temp = trim_double_quotes_in_token(value, &i, &j);
 			new = ft_strjoin_free(&new, &temp);
 		}
 		i++;
-		printf("test3BIS\n");
 	}
-	printf("test4\n");
 	temp = ft_strndup(&(*value)[j], i - j); 	//join last part of string to new
 	return (ft_strjoin_free(&new, &temp));
 }
