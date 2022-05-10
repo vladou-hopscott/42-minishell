@@ -13,6 +13,10 @@ SRCS = ft_bzero.c ft_calloc.c ft_strlen.c ft_strndup.c \
 		ft_strjoin.c\
 		ft_split.c\
 		ft_strncmp.c\
+		ft_strjoin_free.c\
+		ft_free.c\
+		ft_isalnum.c\
+		ft_isdigit.c\
     ft_bzero.c ft_calloc.c ft_strndup.c ft_strlcpy.c ft_strlen.c ft_strtrim.c ft_is_in_charset.c\
 
 #${SRCS:.c=.o} means, take the variable value ${SRCS},

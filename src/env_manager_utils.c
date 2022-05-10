@@ -53,7 +53,8 @@ int	env_findkeypos(char *key, char **env)
 	{
 		tbl = ft_split(env[i], '=');
 		str = tbl[0];
-		if (ft_strncmp(str, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(str, key, ft_strlen(key)) == 0
+			&& ft_strlen(key) == ft_strlen(str))
 		{
 			ft_freetbl(tbl, -1);
 			return (i);

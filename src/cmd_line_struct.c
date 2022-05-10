@@ -1,6 +1,29 @@
 #include "minishell.h"
 #include "parsing.h"
 
+void	process_quotes_in_tokens(t_cmd_line **cmd_line)
+{
+	t_token	*token;
+	char	*new_value;
+	char	*temp;
+
+	token = (*cmd_line)->token_lst;
+	while (token)
+	{
+		if (token->type == STR)
+		{
+			new_value = process_quotes_in_token(&token->value);
+			if (new_value)
+			{			
+				temp = token->value;
+				token->value = new_value;
+				ft_free_null_str(&temp);
+			}
+		}
+		token = token->next;
+	}
+}
+
 void	update_cmd(t_cmd_line **cmd_line)
 {
 	t_token	*token;

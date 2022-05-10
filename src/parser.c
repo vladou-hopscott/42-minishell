@@ -82,10 +82,62 @@ void	update_elems_cmd_lines(t_sh *sh)
 	sh->cmd_line_lst = start;
 }
 
+void	process_quotes_in_cmd_lines(t_sh *sh)
+{
+	t_cmd_line	*start;
+
+	start = sh->cmd_line_lst;
+	while (sh->cmd_line_lst)
+	{
+		process_quotes_in_tokens(&sh->cmd_line_lst);
+		sh->cmd_line_lst = sh->cmd_line_lst->next;
+	}
+	sh->cmd_line_lst = start;
+}
+
+void	expand_envvars_without_quotes(t_sh *sh)
+{
+	t_cmd_line	*start;
+
+	start = sh->cmd_line_lst;
+	while (sh->cmd_line_lst)
+	{
+		expand_envvars_in_tokens(&sh->cmd_line_lst);
+		sh->cmd_line_lst = sh->cmd_line_lst->next;
+	}
+	sh->cmd_line_lst = start;
+}
+
+void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
+{
+	t_token	*token;
+	char	*new_value;
+	char	*temp;
+
+	token = (*cmd_line)->token_lst;
+	while (token)
+	{
+		if (token->type == STR)
+		{
+			new_value = expand_envvars_in_token(&token->value);
+			if (new_value)
+			{			
+				temp = token->value;
+				token->value = new_value;
+				ft_free_null_str(&temp);
+			}
+		}
+		token = token->next;
+	}
+}
+
 //transformation des tokens en list chainee de commandes via le parser
 void	parser(t_sh *sh)
 {
 	parse_tokens_in_cmd_lines(sh);//chaque commande line est separee par un pipe
+	//A rajouter : fonction pour remplir cmd_line->str avant d'enlever quotes et autres
+	expand_envvars_without_quotes(sh);
+	process_quotes_in_cmd_lines(sh);// a voir si on met pas ca dans le lexer au lieu du parser
 	update_token_type_str(sh); //remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin
 	update_elems_cmd_lines(sh);//Ajout de fdin, fdout, cmd & args dans les structures commande line
@@ -110,11 +162,4 @@ void	parser(t_sh *sh)
 		printf("\n\n");
 		temp = temp->next;
 	}
-
-	//0) gestion des quotes et des variables d'environnement : voir en dessous
 }
-
-//suppression des quotes qui ne seront pas interpretes dans les tokens STR. Exemple : la commande ***echo "t'" oi*** renvoie ***t oi***
-//il faudrait eventuellement rajouter ici l'interpretation du $ dans les double quotes egalement
-//interpret_remove_quotes(sh);
-//ETAPE A FAIRE APRES LE CHECK LEXICAL ET AVANT LE PASSAGE AUX CMD_LINES
