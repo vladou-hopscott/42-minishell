@@ -14,3 +14,34 @@ int	str_has_only_spaces(char *str)
 	}
 	return (1);
 }
+
+int	str_has_quotes(char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (is_in_charset(str[i], "\'\""))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	str_has_dollar_without_quotes(char *str)
+{
+	int	quote_status;
+	int	i;
+
+	i = 0;
+	quote_status = NO_QUOTE;
+	while (str[i])
+	{
+		quote_status = check_quote_status_in_str(str[i], quote_status);
+		if (quote_status == NO_QUOTE && str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
+}

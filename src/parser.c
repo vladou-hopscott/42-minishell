@@ -95,20 +95,20 @@ void	process_quotes_in_cmd_lines(t_sh *sh)
 	sh->cmd_line_lst = start;
 }
 
-void	expand_envvar_without_quotes(t_sh *sh)
+void	expand_envvars_without_quotes(t_sh *sh)
 {
 	t_cmd_line	*start;
 
 	start = sh->cmd_line_lst;
 	while (sh->cmd_line_lst)
 	{
-		expand_envvar_in_tokens(&sh->cmd_line_lst);
+		expand_envvars_in_tokens(&sh->cmd_line_lst);
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
 }
 
-void	expand_envvar_in_tokens(t_cmd_line **cmd_line)
+void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
 {
 	t_token	*token;
 	char	*new_value;
@@ -119,7 +119,7 @@ void	expand_envvar_in_tokens(t_cmd_line **cmd_line)
 	{
 		if (token->type == STR)
 		{
-			new_value = expand_envvar_in_token(&token->value);
+			new_value = expand_envvars_in_token(&token->value);
 			if (new_value)
 			{			
 				temp = token->value;
@@ -131,94 +131,12 @@ void	expand_envvar_in_tokens(t_cmd_line **cmd_line)
 	}
 }
 
-int	str_has_dollar_without_quotes(char *str)
-{
-
-}
-
-int	check_quote_status_in_str(char c, int quote_status)
-{
-	if (quote_status == NO_QUOTE)
-	{
-		if (c == SINGLE_QUOTE)
-			quote_status = SINGLE_QUOTE;
-		else if (c == DOUBLE_QUOTE)
-			quote_status = DOUBLE_QUOTE;
-	}
-	else if (quote_status == SINGLE_QUOTE)
-	{
-		if (c == SINGLE_QUOTE)
-			quote_status = NO_QUOTE;
-	}
-	else if (quote_status == DOUBLE_QUOTE)
-	{
-		if (c == DOUBLE_QUOTE)
-			quote_status = NO_QUOTE;
-	}
-	return quote_status;
-}
-
-char	*expand_envvar_in_token(char **value)
-{
-	char	*new;
-	char	*temp;
-	int		i;
-	int		j;
-	int		quote_status;
-
-	if (!str_has_dollar_without_quotes(*value)) //if no dollars without quotes in token, skip
-		return (NULL);
-	i = 0;
-	j = 0;
-	new = NULL;
-	while ((*value)[i])
-	{
-		quote_status = check_quote_status_in_str((*value)[i], NO_QUOTE);
-		if (quote_status = NO_QUOTE && (*value)[*i] == '$')
-		{
-			s2 = ft_strndup(&(*value)[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
-			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar_in_token(&(*value)[*i], i, j, &s1);
-		}
-		*i = *i + 1;
-
-		i++;
-	}
-	temp = ft_strndup(&(*value)[j], i - j); 	//join last part of string to new
-	return (ft_strjoin_free(&new, &temp));
-
-
-	char	*s1;
-	char	*s2;
-
-	s1 = ft_strndup(&(*value)[*j], *i - *j);
-	*i = *i + 1;
-	*j = *i;
-	while ((*value)[*i] && (*value)[*i] != DOUBLE_QUOTE)
-	{
-		if ((*value)[*i] == '$')
-		{
-			s2 = ft_strndup(&(*value)[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
-			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar_in_token(&(*value)[*i], i, j, &s1);
-		}
-		*i = *i + 1;
-	}
-	if ((*value)[*i] == DOUBLE_QUOTE)
-		s2 = ft_strndup(&(*value)[*j], *i - *j);
-	*j = *i + 1;
-	return (ft_strjoin_free(&s1, &s2));
-
-
-}
-
 //transformation des tokens en list chainee de commandes via le parser
 void	parser(t_sh *sh)
 {
 	parse_tokens_in_cmd_lines(sh);//chaque commande line est separee par un pipe
 	//A rajouter : fonction pour remplir cmd_line->str avant d'enlever quotes et autres
-	//A RAJOUTER : avant les quotes, il faut expand ls variables d'env qui n'ont pas de quotes
-	expand_envvar_without_quotes(sh);
+	expand_envvars_without_quotes(sh);
 	process_quotes_in_cmd_lines(sh);// a voir si on met pas ca dans le lexer au lieu du parser
 	update_token_type_str(sh); //remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin

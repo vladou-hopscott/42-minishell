@@ -2,25 +2,26 @@
 
 extern char	**environ;
 
-void	check_quote_status_in_prompt(t_sh *sh, char *prompt, int i)
+int	check_quote_status_in_str(char c, int quote_status)
 {
-	if (sh->p_quote == NO_QUOTE)
+	if (quote_status == NO_QUOTE)
 	{
-		if (prompt[i] == SINGLE_QUOTE)
-			sh->p_quote = SINGLE_QUOTE;
-		else if (prompt[i] == DOUBLE_QUOTE)
-			sh->p_quote = DOUBLE_QUOTE;
+		if (c == SINGLE_QUOTE)
+			quote_status = SINGLE_QUOTE;
+		else if (c == DOUBLE_QUOTE)
+			quote_status = DOUBLE_QUOTE;
 	}
-	else if (sh->p_quote == SINGLE_QUOTE)
+	else if (quote_status == SINGLE_QUOTE)
 	{
-		if (prompt[i] == SINGLE_QUOTE)
-			sh->p_quote = NO_QUOTE;
+		if (c == SINGLE_QUOTE)
+			quote_status = NO_QUOTE;
 	}
-	else if (sh->p_quote == DOUBLE_QUOTE)
+	else if (quote_status == DOUBLE_QUOTE)
 	{
-		if (prompt[i] == DOUBLE_QUOTE)
-			sh->p_quote = NO_QUOTE;
+		if (c == DOUBLE_QUOTE)
+			quote_status = NO_QUOTE;
 	}
+	return quote_status;
 }
 
 //check if there are unclosed quotes. if so, return error status 1
@@ -31,63 +32,12 @@ int check_for_quotes(t_sh *sh)
 	i = 0;
 	while (sh->prompt && sh->prompt[i])
 	{
-		check_quote_status_in_prompt(sh, sh->prompt, i);
+		sh->p_quote = check_quote_status_in_str(sh->prompt[i], sh->p_quote);
 		i++;
 	}
 	if (sh->p_quote != NO_QUOTE)
 		return (1);
 	return (0);
-}
-
-int	str_has_quotes(char *str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-	{
-		if (is_in_charset(str[i], "\'\""))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-//BASH VARIABLE NAME
-    // a-z, A-Z, _ and 0-9
-    // May NOT begin with a number
-char	*delimit_envvar(char *str)
-{
-	int		i;
-	char	*env_key;
-
-	env_key = NULL;
-	i = 1;
-	if (ft_isdigit(str[i])) //si le 1er char est un digit, abort
-		return (env_key);
-	while(str[i] && (ft_isalnum(str[i]) || str[i] == '_')) //A VERIFIER si ce sont les bonnes conditions
-		i++;
-	env_key = ft_strndup(str + 1, i - 1);
-	return (env_key);
-}
-
-char	*expand_envvar_in_token(char *str, int *i, int *j, char **s1)
-{
-	char	*env_key;
-	char	*env_val;
-
-	env_key = delimit_envvar(str);
-	env_val = env_findkeyvalue(env_key, environ);
-	if (ft_strlen(env_key) == 0)
-		*i = *i + 1; //le 1er char apres le $ est faux, on le saute	
-	*i = *i + ft_strlen(env_key); //on fait avancer i et j pour passer l'index apres la variable d'env
-	*j = *i + 1;
-//	printf("str=%s\n", str);
-//	printf("s1=%s, env_key=%s envval=%s\n", *s1, env_key, env_val);
-	if (env_val) //si il s'agit bien d'une variable d'environnement on append sa valeur
-		*s1 = ft_strjoin_free(s1, &env_val);
-	ft_free_null_str(&env_key);
-	return (*s1);
 }
 
 char	*trim_double_quotes_in_token(char **value, int *i, int *j)
@@ -104,7 +54,7 @@ char	*trim_double_quotes_in_token(char **value, int *i, int *j)
 		{
 			s2 = ft_strndup(&(*value)[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
 			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar_in_token(&(*value)[*i], i, j, &s1);
+			s1 = expand_envvar(&(*value)[*i], i, j, &s1);
 		}
 		*i = *i + 1;
 	}
@@ -132,7 +82,6 @@ char	*trim_single_quotes_in_token(char **value, int *i, int *j)
 	return (ft_strjoin_free(&s1, &s2));
 }
 
-//echo c'ou'"c"'o"u'
 char	*process_quotes_in_token(char **value)
 {
 	char	*new;

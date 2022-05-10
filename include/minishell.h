@@ -59,10 +59,14 @@ void	update_fdout(t_cmd_line **cmd_line);
 void	process_quotes_in_tokens(t_cmd_line **cmd_line);
 char	*process_quotes_in_token(char **value);
 
+void	expand_envvars_in_tokens(t_cmd_line **cmd_line);
+char	*expand_envvars_in_token(char **value);
+char	*expand_envvar(char *str, int *i, int *j, char **s1);
+char	*delimit_envvar(char *str);
 
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);
-void	check_quote_status_in_prompt(t_sh *sh, char *prompt, int i);
+int		check_quote_status_in_str(char c, int quote_status);
 void	interpret_remove_quotes(t_sh *sh);
 
 //********** LINKED LIST TOKENS **********//
@@ -74,6 +78,10 @@ void	ft_set_null_free_list(t_token **a_list);
 
 //********** UTILS **********//
 int	str_has_only_spaces(char *str);
+int	str_has_quotes(char *str);
+int	str_has_dollar_without_quotes(char *str);
+
+
 
 //********** EXECUTOR **********//
 char	**executor(t_token *token, char **env);

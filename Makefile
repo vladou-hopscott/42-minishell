@@ -41,6 +41,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/env_manager.c\
 			$(SRC_DIR)/env_manager_utils.c\
+			$(SRC_DIR)/env_expand.c\
 			$(SRC_DIR)/quotes.c\
 
 
