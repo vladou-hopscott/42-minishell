@@ -64,6 +64,8 @@ char	*expand_envvars_in_token(char **value);
 char	*expand_envvar(char *str, int *i, int *j, char **s1);
 char	*delimit_envvar(char *str);
 
+
+
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);
 int		check_quote_status_in_str(char c, int quote_status);
@@ -75,12 +77,13 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value);
 void	print_tokens(t_token *li);
 int		list_length(t_token *li);
 void	ft_set_null_free_list(t_token **a_list);
+t_token	*add_middle_token(t_token *current, t_token_type type, char *value);
 
 //********** UTILS **********//
 int	str_has_only_spaces(char *str);
 int	str_has_quotes(char *str);
 int	str_has_dollar_without_quotes(char *str);
-
+int	str_has_space(char *str);
 
 
 //********** EXECUTOR **********//
