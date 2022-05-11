@@ -15,7 +15,6 @@ t_token	*create_token(t_token_type type, char *value)
 	return (elem);
 }
 
-
 t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 {
 	t_token *new;
@@ -36,6 +35,24 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 	}
 	return (list);
 }
+
+t_token	*add_middle_token(t_token *current, t_token_type type, char *value)
+{
+	t_token *new;
+
+	new = create_token(type, value);
+	if (!new)
+		return NULL;
+	if (!current)
+		return (new);
+	else
+	{
+		new->next = current->next;
+		current->next = new;
+	}
+	return (new);
+}
+
 
 void print_tokens(t_token *li)
 {

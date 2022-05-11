@@ -29,6 +29,23 @@ int	str_has_quotes(char *str)
 	return (0);
 }
 
+int	str_has_space_without_quotes(char *str)
+{
+	int	i;
+	int	quote_status;
+	
+	quote_status = NO_QUOTE;
+	i = 0;
+	while(str[i])
+	{
+		quote_status = check_quote_status_in_str(str[i], quote_status);
+		if (quote_status == NO_QUOTE && str[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	str_has_dollar_without_quotes(char *str)
 {
 	int	quote_status;

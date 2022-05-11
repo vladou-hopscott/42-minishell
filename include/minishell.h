@@ -50,7 +50,7 @@ void	update_token_type_str(t_sh *sh);
 void	parser(t_sh *s);
 t_cmd_line	*add_back_cmd_line(t_cmd_line *list);
 t_cmd_line	*create_cmd_line();
-void	update_elems_cmd_line(t_sh *sh);
+void	update_elems_cmd_lines(t_sh *sh);
 void	update_cmd(t_cmd_line **cmd_line);
 void	update_args(t_cmd_line **cmd_line);
 int		count_arg_tokens(t_token *li);
@@ -64,6 +64,9 @@ char	*expand_envvars_in_token(char **value);
 char	*expand_envvar(char *str, int *i, int *j, char **s1);
 char	*delimit_envvar(char *str);
 
+t_token	*tokenize_within_token(t_token **token);
+t_token *create_tokens_within_tokens(t_token **token, char *str);
+
 //********** QUOTES **********//
 int 	check_for_quotes(t_sh *sh);
 int		check_quote_status_in_str(char c, int quote_status);
@@ -75,12 +78,13 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value);
 void	print_tokens(t_token *li);
 int		list_length(t_token *li);
 void	ft_set_null_free_list(t_token **a_list);
+t_token	*add_middle_token(t_token *current, t_token_type type, char *value);
 
 //********** UTILS **********//
 int	str_has_only_spaces(char *str);
 int	str_has_quotes(char *str);
 int	str_has_dollar_without_quotes(char *str);
-
+int	str_has_space_without_quotes(char *str);
 
 
 //********** EXECUTOR **********//

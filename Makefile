@@ -32,6 +32,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/prompt.c\
 			$(SRC_DIR)/lexer.c\
 			$(SRC_DIR)/parser.c\
+			$(SRC_DIR)/parser2.c\
 			$(SRC_DIR)/expander.c\
 			$(SRC_DIR)/executor.c\
 			$(SRC_DIR)/tokens_linked_list.c\
