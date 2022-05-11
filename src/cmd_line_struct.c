@@ -28,7 +28,7 @@ void	update_args(t_cmd_line **cmd_line)
 	i = 0;
 	while (token)
 	{
-		if (token->type == ARG)
+		if (token->type == CMD || token->type == ARG)
 		{
 			(*cmd_line)->args[i] = ft_calloc(ft_strlen(token->value) + 1, sizeof(char));
 			if (!(*cmd_line)->args[i])

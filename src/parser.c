@@ -87,6 +87,7 @@ void	parser(t_sh *sh)
 	temp = sh->cmd_line_lst;
 	while (temp)
 	{
+		printf("***CMD_LINE***\n");
 		printf("tokens : \n");
 		print_tokens(temp->token_lst);
 		printf("cmd=%s\n",temp->cmd);
