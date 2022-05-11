@@ -131,33 +131,51 @@ void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
 	}
 }
 
+	// int	quote_status;
+	// int	i;
+	// i = 0;
+	// quote_status = NO_QUOTE;
+	// while (str[i])
+	// 	quote_status = check_quote_status_in_str(str[i], quote_status);
+
+
 t_token	*tokenize_within_token(t_token **token)
 {
-	char	**tbl;
 	char	*temp;
 	int		i;
+	int		j;
+	int		quote_status;
+	int		current;
 
-	if (!str_has_space((*token)->value))	
-		return (NULL);
-	tbl = ft_split((*token)->value, ' ');
-	if (!tbl)
-		return (NULL);
-	if (tbl[0])
-	{		
-		temp = (*token)->value;
-		(*token)->value = tbl[0];
-		ft_free_null_str(&temp);
-	}
-	(*token) = (*token)->next;
-
-	i = 1;
-	while (tbl[i])
+	if (!str_has_space_without_quotes((*token)->value))	
+		return (*token);
+	current = 1;
+	quote_status = NO_QUOTE;
+	i = 0;
+	j = 0;
+	while((*token)->value[i])
 	{
-		*token = add_middle_token((*token), STR, tbl[i]);
-		*token = (*token)->next;
+		quote_status = check_quote_status_in_str((*token)->value[i], quote_status);
+		if (quote_status == NO_QUOTE && (*token)->value[i] == ' ')
+		{
+			if (current == 1)
+			{
+				temp = (*token)->value;
+				(*token)->value = ft_strndup((*token)->value, i - 1);
+				ft_free_null_str(&temp);
+				j = i;
+				current = 0;
+			}
+			else
+			{
+				*token = add_middle_token((*token), STR, ft_strndup(&(*token)->value[j], i - j));
+				*token = (*token)->next;
+				j = i;
+			}
+			
+		}
 		i++;
 	}
-	//free tbl
 	return (*token);
 }
 
@@ -187,11 +205,12 @@ void	parser(t_sh *sh)
 	parse_tokens_in_cmd_lines(sh);//chaque commande line est separee par un pipe
 	//A rajouter : fonction pour remplir cmd_line->str avant d'enlever quotes et autres
 	expand_envvars_without_quotes(sh);
-	process_quotes_in_cmd_lines(sh);// a voir si on met pas ca dans le lexer au lieu du parser
 
-	//Apres avoir expand les variables d'env, besoin de reseparer les tokens STR avec espaces
+	//Apres avoir expand les variables d'env HORS DES QUOTES, besoin de reseparer les tokens STR avec espaces
 	//export TEST="ls -la"; $TEST => doit renvoyer la commande ls, avec l'argument -la. DONC il faut retokeniser
 	tokenize_after_env_exp(sh);
+
+	process_quotes_in_cmd_lines(sh);// a voir si on met pas ca dans le lexer au lieu du parser
 
 	update_token_type_str(sh); //remplacement du type STR par CMD, ARG, INPUTS ou OUTPUTS
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin

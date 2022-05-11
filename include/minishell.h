@@ -83,7 +83,7 @@ t_token	*add_middle_token(t_token *current, t_token_type type, char *value);
 int	str_has_only_spaces(char *str);
 int	str_has_quotes(char *str);
 int	str_has_dollar_without_quotes(char *str);
-int	str_has_space(char *str);
+int	str_has_space_without_quotes(char *str);
 
 
 //********** EXECUTOR **********//

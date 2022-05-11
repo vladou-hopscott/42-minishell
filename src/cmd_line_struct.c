@@ -91,6 +91,7 @@ void	update_fdout(t_cmd_line **cmd_line)
 		}
 		token = token->next;
 	}
+	
 }
 
 void	update_fdin(t_cmd_line **cmd_line)
