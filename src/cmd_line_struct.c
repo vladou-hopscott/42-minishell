@@ -1,28 +1,4 @@
 #include "minishell.h"
-#include "parsing.h"
-
-void	process_quotes_in_tokens(t_cmd_line **cmd_line)
-{
-	t_token	*token;
-	char	*new_value;
-	char	*temp;
-
-	token = (*cmd_line)->token_lst;
-	while (token)
-	{
-		if (token->type == STR)
-		{
-			new_value = process_quotes_in_token(&token->value);
-			if (new_value)
-			{			
-				temp = token->value;
-				token->value = new_value;
-				ft_free_null_str(&temp);
-			}
-		}
-		token = token->next;
-	}
-}
 
 void	update_cmd(t_cmd_line **cmd_line)
 {
@@ -121,6 +97,22 @@ void	update_fdin(t_cmd_line **cmd_line)
 	}
 }
 
+void	update_elems_cmd_lines(t_sh *sh)
+{
+	t_cmd_line	*start;
+
+	start = sh->cmd_line_lst;
+	while (sh->cmd_line_lst)
+	{
+		update_cmd(&sh->cmd_line_lst);
+		update_args(&sh->cmd_line_lst);
+		update_fdout(&sh->cmd_line_lst); //update fdout and create/truncate files if needed
+		update_fdin(&sh->cmd_line_lst); //update fdin
+		sh->cmd_line_lst = sh->cmd_line_lst->next;
+	}
+	sh->cmd_line_lst = start;
+}
+
 //MODE ARGUMENT OF OPEN FUNCTION : need to check which modes have to be applied
 // S_IRWXU  00700 user (file owner) has read, write, and execute permission
 // S_IRUSR  00400 user has read permission
@@ -134,3 +126,4 @@ void	update_fdin(t_cmd_line **cmd_line)
 // S_IROTH  00004 others have read permission
 // S_IWOTH  00002 others have write permission
 // S_IXOTH  00001 others have execute permission
+

@@ -50,7 +50,7 @@ t_token	*add_middle_token(t_token *current, t_token_type type, char *value)
 		new->next = current->next;
 		current->next = new;
 	}
-	return (current);
+	return (new);
 }
 
 
