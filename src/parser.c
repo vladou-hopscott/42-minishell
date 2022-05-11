@@ -82,7 +82,7 @@ void	parser(t_sh *sh)
 	//A rajouter eventuellement : modifier les tokens CMD en token BUILTIN quand on reconnait un str correspondant a une fonction builtin
 	update_elems_cmd_lines(sh);//Ajout de fdin, fdout, cmd & args dans les structures commande line
 
-	//for each cmd line structure, print tokens, cmd, args, fdin, fdout
+	//for each cmd line structure, print tokens, cmd, args, fdin, fdout, heredoc_mode, append_mode
 	t_cmd_line *temp;
 	temp = sh->cmd_line_lst;
 	while (temp)
@@ -99,6 +99,7 @@ void	parser(t_sh *sh)
 		}
 		printf("]");
 		printf("\nfdout=%d, fdin=%d\n", temp->fdout, temp->fdin);
+		printf("heredoc_mode=%d, append_mode=%d\n", temp->heredoc_mode, temp->append_mode);
 		printf("\n\n");
 		temp = temp->next;
 	}

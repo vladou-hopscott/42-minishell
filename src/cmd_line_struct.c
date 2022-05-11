@@ -53,14 +53,18 @@ void	update_fdout(t_cmd_line **cmd_line)
 	{
 		if (token->type == OUTPUT || token->type == OUTPUT_APPEND)
 		{
-			// if there is already a fd opened (different from initial value standard output), close it
 			if ((*cmd_line)->fdout != 1)
 				close((*cmd_line)->fdout);
-			// open and erase content or create file. update cmd_line->fdout
 			if (token->type == OUTPUT)
+			{
 				(*cmd_line)->fdout = open(token->value, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+				(*cmd_line)->append_mode = 0;
+			}	
 			else
+			{	
 				(*cmd_line)->fdout = open(token->value, O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+				(*cmd_line)->append_mode = 1;
+			}
 			//A RAJOUTER : gestion d'erreur si la fct open fail
 			// if ((*cmd_line)->fdout == -1)
 				//gestion erreur
