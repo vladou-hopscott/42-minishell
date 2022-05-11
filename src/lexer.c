@@ -81,5 +81,6 @@ void lexer(t_sh *sh)
 	}
 
 	//A partir de cette 1ere liste de tokens, verification des erreurs de syntaxe des redirections (exemples : > >, >|, ||, etc...)
-	//fonction a coder qui liste toutes les erreurs de syntaxe liees aux redirections : check_syntax_error();
+	if (check_syntax_errors(sh))
+		return;
 }

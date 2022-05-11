@@ -44,7 +44,7 @@ void	tokenizer(t_sh *sh);
 char 	*process_string_token(t_sh *sh, char *prompt);
 void	process_redirect_token(t_sh *sh);
 void	update_token_type_str(t_sh *sh);
-
+int check_syntax_errors(t_sh *sh);
 
 //********** PARSER **********//
 void	parser(t_sh *s);

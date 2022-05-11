@@ -31,6 +31,7 @@ HEADERS := 	$(INC_DIR)/minishell.h\
 SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/prompt.c\
 			$(SRC_DIR)/lexer.c\
+			$(SRC_DIR)/syntax_validation.c\
 			$(SRC_DIR)/parser.c\
 			$(SRC_DIR)/parser2.c\
 			$(SRC_DIR)/expander.c\
