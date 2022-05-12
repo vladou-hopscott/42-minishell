@@ -3,7 +3,6 @@
 
 int	main(void)
 {
-	//Faut-il déclarer sh comme une variable globale (pour garder en mémoire les commandes successives ?)
 	t_sh	sh;
 	t_token	*token;
 
@@ -20,11 +19,11 @@ int	main(void)
 		// 	sh.env = executor(token, sh.env);
 		// 	token = token->next;
 		// }
+		free_values(&sh, 0);
 		init_values(&sh);
 	}
 
 	//penser à free tout ce qui a été initialisé avec readline
-	free_values(&sh);
-
+	free_values(&sh, 1);
 	return (0);
 }

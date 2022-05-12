@@ -46,8 +46,6 @@ void	tokenizer(t_sh *sh)
 	char	*str;
 
 	str = NULL;
-
-	//A chaque debut on verifie si on entre ou sort de quotes
 	sh->p_quote = check_quote_status_in_str(sh->prompt[sh->p_index], sh->p_quote);
 	if (sh->p_quote == NO_QUOTE && is_in_charset(sh->prompt[sh->p_index], CHARSET_SEP))
 	{
@@ -66,21 +64,16 @@ void	tokenizer(t_sh *sh)
 
 void lexer(t_sh *sh)
 {
-	//verifier qu'il n'y a pas de quotes ouvertes
 	if (check_for_quotes(sh))
 	{
 		printf("ERROR : unclosed quotes\n");
 		return; //voir quel message d'erreur et comment traiter l'erreur
 	}
-
-	//tokeniser (traitement du prompt pour en sortir une liste chainee avec maillon = string ou separateur) en tenant compte des single et double quotes;
 	while (sh->prompt[sh->p_index])
 	{
 		tokenizer(sh);
 		sh->p_index ++;
 	}
-
-	//A partir de cette 1ere liste de tokens, verification des erreurs de syntaxe des redirections (exemples : > >, >|, ||, etc...)
 	if (check_syntax_errors(sh))
 		return;
 }

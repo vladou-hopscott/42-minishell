@@ -24,6 +24,7 @@ typedef struct s_sh
 	char			*prompt;
 	int				p_index;
 	int				p_quote;
+	int				error;
 } t_sh;
 
 //********************** GLOBAL VAR **********************//
@@ -33,7 +34,8 @@ typedef struct s_sh
 
 //********** INITIALIZATION **********//
 void	init_values(t_sh *sh);
-void	free_values(t_sh *sh);
+void	free_values(t_sh *sh, int free_env);
+void	pgm_error(t_sh *sh);
 
 //********** PROMPT **********//
 void	listen_prompt(t_sh *sh);
