@@ -19,7 +19,6 @@ int	main(void)
 		// 	sh.env = executor(token, sh.env);
 		// 	token = token->next;
 		// }
-		printf("END\n");
 		free_values(&sh, 0);
 		init_values(&sh);
 	}
