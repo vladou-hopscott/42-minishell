@@ -13,8 +13,8 @@ t_cmd_line	*create_cmd_line()
 	elem->next = NULL;
 	elem->str = NULL;
 	elem->token_lst = NULL;
-	elem->fdin = 0; //standard input
-	elem->fdout = 1; //standard output
+	elem->fdin = 0;
+	elem->fdout = 1;
 	elem->heredoc_mode = 0;
 	elem->append_mode = 0;
 	return (elem);
@@ -28,7 +28,6 @@ t_cmd_line	*add_back_cmd_line(t_cmd_line *list)
 	new = create_cmd_line();
 	if (!new)
 		return NULL;
-
 	if (!list)
 		return (new);
 	else

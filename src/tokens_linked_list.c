@@ -71,7 +71,7 @@ int count_arg_tokens(t_token *li)
 
 	while(li != NULL)
 	{
-		if (li->type == ARG)
+		if (li->type == ARG || li->type == CMD)
 			size++;
 		li = li->next;
 	}

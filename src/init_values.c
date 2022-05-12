@@ -33,7 +33,6 @@ void	free_cmd_line_lst(t_cmd_line *cmd_line)
 		next = cmd_line->next;
 		free_token_lst(cmd_line->token_lst);
 		ft_free_null_str(&cmd_line->cmd);
-		//ft_free_null_str(&cmd_line->str);
 		ft_freetbl(cmd_line->args, -1);
 		free(cmd_line);
 		cmd_line = NULL;
@@ -48,13 +47,4 @@ void	free_values(t_sh *sh, int free_env)
 	free_cmd_line_lst(sh->cmd_line_lst);
 	if (free_env)
 		ft_freetbl(sh->env, -1);
-}
-
-void	pgm_error(t_sh *sh)
-{
-	if (sh->error == 1)
-	{
-		free_values(sh, 1);
-		exit(1);
-	}
 }

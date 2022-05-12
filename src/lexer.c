@@ -64,16 +64,19 @@ void	tokenizer(t_sh *sh)
 
 void lexer(t_sh *sh)
 {
+	if (sh->error)
+		return;
 	if (check_for_quotes(sh))
-	{
-		printf("ERROR : unclosed quotes\n");
-		return; //voir quel message d'erreur et comment traiter l'erreur
-	}
+		return;
 	while (sh->prompt[sh->p_index])
 	{
 		tokenizer(sh);
 		sh->p_index ++;
 	}
-	if (check_syntax_errors(sh))
+	if (!sh->token_lst)
+	{
+		sh->error = 1;
 		return;
+	}
+	check_syntax_errors(sh);
 }

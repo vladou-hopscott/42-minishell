@@ -14,7 +14,7 @@ int	error_next_is_pipe(t_token *token)
 {
 	if (token->type == PIPE)
 	{
-		printf("bash: syntax error near unexpected token '|'\n");
+		ft_putstr_fd("bash: syntax error near unexpected token '|'\n", 2);
 		return (1);
 	}
 	return (0);
@@ -24,7 +24,7 @@ int	error_next_is_null(t_token *token)
 {
 	if (token == NULL)
 	{
-		printf("bash: syntax error near unexpected token 'newline'\n");
+		ft_putstr_fd("bash: syntax error near unexpected token 'newline'\n", 2);
 		return (1);
 	}
 	return (0);
@@ -45,38 +45,39 @@ int	error_next_is_redirection(t_token *token)
 		err=">>";
 	if (err)
 	{
-		printf("bash: syntax error near unexpected token '");
-		printf("%s", err);
-		printf("'\n");
+		ft_putstr_fd("bash: syntax error near unexpected token '", 2);
+		ft_putstr_fd(err, 2);
+		ft_putstr_fd("'\n", 2);
 		return (1);
 	}
 	return (0);
 }
 
-int check_syntax_errors(t_sh *sh)
+void	check_syntax_errors(t_sh *sh)
 {
-    t_token *token;
+	t_token *token;
 
-    token = sh->token_lst;
-    while (token)
-    {
-        if (is_redirection(token->type))
-        {
-            if (error_next_is_null(token->next))
-				return (1);
+	token = sh->token_lst;
+	while (token)
+	{
+		if (is_redirection(token->type))
+		{
+			if (error_next_is_null(token->next))
+				sh->error = 1;
 			else if (error_next_is_pipe(token->next))
-				return (1);
+				sh->error = 1;
 			else if (error_next_is_redirection(token->next))
-				return (1);
-        }
+				sh->error = 1;
+		}
 		else if (token->type == PIPE)
 		{
 			if (error_next_is_null(token->next))
-				return (1);
+				sh->error = 1;
 			else if (error_next_is_pipe(token->next))
-				return (1);
+				sh->error = 1;
 		}
-        token = token->next;
-    }
-    return (0);
+		token = token->next;
+		if (sh->error == 1)
+			return;
+	}
 }

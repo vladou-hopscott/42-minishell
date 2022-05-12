@@ -30,10 +30,10 @@ void	update_args(t_cmd_line **cmd_line)
 	{
 		if (token->type == CMD || token->type == ARG)
 		{
-			(*cmd_line)->args[i] = ft_calloc(ft_strlen(token->value) + 1, sizeof(char));
+			//(*cmd_line)->args[i] = ft_calloc(ft_strlen(token->value) + 1, sizeof(char));
+			(*cmd_line)->args[i] = ft_strndup(token->value, ft_strlen(token->value));
 			if (!(*cmd_line)->args[i])
-				return; //need to free all table
-			(*cmd_line)->args[i] = ft_strdup(token->value);
+				return;
 			i++;
 		}
 		token = token->next;
@@ -59,9 +59,9 @@ void	update_fdout(t_cmd_line **cmd_line)
 			{
 				(*cmd_line)->fdout = open(token->value, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 				(*cmd_line)->append_mode = 0;
-			}	
+			}
 			else
-			{	
+			{
 				(*cmd_line)->fdout = open(token->value, O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 				(*cmd_line)->append_mode = 1;
 			}
@@ -71,7 +71,7 @@ void	update_fdout(t_cmd_line **cmd_line)
 		}
 		token = token->next;
 	}
-	
+
 }
 
 void	update_fdin(t_cmd_line **cmd_line)
