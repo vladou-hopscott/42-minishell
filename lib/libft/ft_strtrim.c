@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:41:32 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 16:47:16 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:03:41 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		while (is_in_charset(s1[len - 1], set))
 			len--;
 	}
-	dst = ft_calloc(len + 1 , sizeof(char));
+	dst = ft_calloc(len + 1, sizeof(char));
 	if (!dst)
 		return (NULL);
 	ft_strlcpy(dst, s1, len + 1);

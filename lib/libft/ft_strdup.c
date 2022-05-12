@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 18:32:56 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/14 14:03:14 by swillis          ###   ########.fr       */
+/*   Updated: 2022/05/12 18:03:17 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(char *src)
 	int		len_src;
 
 	len_src = ft_strlen(src);
-	dst = ft_calloc(len_src + 1 , sizeof(char));
+	dst = ft_calloc(len_src + 1, sizeof(char));
 	if (!dst)
 		return (0);
 	i = 0;
