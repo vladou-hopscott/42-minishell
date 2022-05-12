@@ -9,7 +9,7 @@ t_token	*create_token(t_token_type type, char *value)
 	if (!elem)
 		return (NULL);
 	elem->type = type;
-	elem->value = value;
+	elem->value = ft_strdup(value);
 	elem->next = NULL;
 	elem->quote = NO_QUOTE;
 	return (elem);
@@ -71,7 +71,7 @@ int count_arg_tokens(t_token *li)
 
 	while(li != NULL)
 	{
-		if (li->type == ARG)
+		if (li->type == ARG || li->type == CMD)
 			size++;
 		li = li->next;
 	}
@@ -113,40 +113,29 @@ void	ft_set_null_free_list(t_token **a_list)
 	}
 }
 
-/* void	ft_stack_add_front(t_stack **stack, t_stack *new)
-{
-	if (new)
-	{
-		new->next = *stack;
-		*stack = new;
-	}
-}
+//void	ft_stack_add_front(t_stack **stack, t_stack *new)
+//{
+//	if (new)
+//	{
+//		new->next = *stack;
+//		*stack = new;
+//	}
+//}
 
 
-int	ft_stack_len(t_stack **stack)
-{
-	int		i;
-	t_stack	*tmp;
+//int	ft_stack_len(t_stack **stack)
+//{
+//	int		i;
+//	t_stack	*tmp;
 
-	if (!(*stack))
-		return (0);
-	tmp = *stack;
-	i = 1;
-	while (tmp->next)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
-}
-
-void	ft_set_null_free_elem(t_stack *elem)
-{
-	if (!elem)
-		return ;
-	elem->n = 0;
-	elem->index = 0;
-	elem->next = NULL;
-	free(elem);
-}
-*/
+//	if (!(*stack))
+//		return (0);
+//	tmp = *stack;
+//	i = 1;
+//	while (tmp->next)
+//	{
+//		tmp = tmp->next;
+//		i++;
+//	}
+//	return (i);
+//}

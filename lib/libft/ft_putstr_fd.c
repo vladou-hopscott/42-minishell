@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 18:32:56 by swillis           #+#    #+#             */
-/*   Updated: 2022/05/12 18:03:17 by vnafissi         ###   ########.fr       */
+/*   Created: 2022/05/12 18:02:35 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/12 18:02:36 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//Écrit la chaine de caractères ’s’ sur le file
+//descriptor donné.
+
 #include "libft.h"
 
-char	*ft_strdup(char *src)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*dst;
-	int		i;
-	int		len_src;
+	size_t	len;
 
-	len_src = ft_strlen(src);
-	dst = ft_calloc(len_src + 1, sizeof(char));
-	if (!dst)
-		return (0);
-	i = 0;
-	while (src[i] != 0)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+	len = ft_strlen(s);
+	write(fd, s, len);
 }

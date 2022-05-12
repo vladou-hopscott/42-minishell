@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 18:10:06 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/11 18:10:25 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:03:25 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-

@@ -1,15 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/12 18:05:21 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/12 18:07:07 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char *process_string_token(t_sh *sh, char *prompt)
+char	*process_string_token(t_sh *sh, char *prompt)
 {
 	char	*tmp;
 	char	*str;
-	int		j = 0;
+	int		j;
 
+	j = 0;
 	while (prompt[j])
 	{
 		if (is_in_charset(prompt[j], CHARSET_SEP) && sh->p_quote == NO_QUOTE)
-			break;
+			break ;
 		j++;
 		sh->p_quote = check_quote_status_in_str(prompt[j], sh->p_quote);
 	}
@@ -23,12 +36,14 @@ char *process_string_token(t_sh *sh, char *prompt)
 
 void	process_redirect_token(t_sh *sh)
 {
-	if (sh->prompt[sh->p_index] == RED_INPUT && sh->prompt[sh->p_index + 1] == RED_INPUT)
+	if (sh->prompt[sh->p_index] == RED_INPUT
+		&& sh->prompt[sh->p_index + 1] == RED_INPUT)
 	{
 		sh->token_lst = add_back_token(sh->token_lst, HEREDOC, "<<");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_OUTPUT && sh->prompt[sh->p_index + 1] == RED_OUTPUT)
+	else if (sh->prompt[sh->p_index] == RED_OUTPUT
+		&& sh->prompt[sh->p_index + 1] == RED_OUTPUT)
 	{
 		sh->token_lst = add_back_token(sh->token_lst, RED_APPEND, ">>");
 		sh->p_index++;
@@ -39,17 +54,15 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, RED_OUTPUT, ">");
 }
 
-// ajoute le bon token à la liste chainée des tokens sh->token_lst
-//fonction a separer en plusieurs sous fonctions (tokenize string, tokenize separators...)
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
 
 	str = NULL;
-
-	//A chaque debut on verifie si on entre ou sort de quotes
-	sh->p_quote = check_quote_status_in_str(sh->prompt[sh->p_index], sh->p_quote);
-	if (sh->p_quote == NO_QUOTE && is_in_charset(sh->prompt[sh->p_index], CHARSET_SEP))
+	sh->p_quote = check_quote_status_in_str(
+			sh->prompt[sh->p_index], sh->p_quote);
+	if (sh->p_quote == NO_QUOTE && is_in_charset(
+			sh->prompt[sh->p_index], CHARSET_SEP))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
 			sh->token_lst = add_back_token(sh->token_lst, PIPE, "|");
@@ -64,23 +77,21 @@ void	tokenizer(t_sh *sh)
 	}
 }
 
-void lexer(t_sh *sh)
+void	lexer(t_sh *sh)
 {
-	//verifier qu'il n'y a pas de quotes ouvertes
+	if (sh->error)
+		return ;
 	if (check_for_quotes(sh))
-	{
-		printf("ERROR : unclosed quotes\n");
-		return; //voir quel message d'erreur et comment traiter l'erreur
-	}
-
-	//tokeniser (traitement du prompt pour en sortir une liste chainee avec maillon = string ou separateur) en tenant compte des single et double quotes;
+		return ;
 	while (sh->prompt[sh->p_index])
 	{
 		tokenizer(sh);
 		sh->p_index ++;
 	}
-
-	//A partir de cette 1ere liste de tokens, verification des erreurs de syntaxe des redirections (exemples : > >, >|, ||, etc...)
-	if (check_syntax_errors(sh))
-		return;
+	if (!sh->token_lst)
+	{
+		sh->error = 1;
+		return ;
+	}
+	check_syntax_errors(sh);
 }

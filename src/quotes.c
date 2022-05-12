@@ -36,7 +36,11 @@ int check_for_quotes(t_sh *sh)
 		i++;
 	}
 	if (sh->p_quote != NO_QUOTE)
+	{
+		sh->error = 1;
+		ft_putstr_fd("bash : unclosed quotes\n", 2);
 		return (1);
+	}
 	return (0);
 }
 
@@ -68,7 +72,7 @@ char	*trim_single_quotes_in_token(char **value, int *i, int *j)
 {
 	char	*s1;
 	char	*s2;
-	
+
 	s1 = NULL;
 	s2 = NULL;
 	s1 = ft_strndup(&(*value)[*j], *i - *j);
@@ -78,7 +82,7 @@ char	*trim_single_quotes_in_token(char **value, int *i, int *j)
 		*i = *i + 1;
 	if ((*value)[*i] == SINGLE_QUOTE)
 		s2 = ft_strndup(&(*value)[*j], *i - *j);
-	*j = *i + 1;	
+	*j = *i + 1;
 	return (ft_strjoin_free(&s1, &s2));
 }
 

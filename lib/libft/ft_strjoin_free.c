@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/12 18:02:48 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/12 18:02:49 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strjoin_free(char **s1, char **s2)
@@ -10,7 +22,7 @@ char	*ft_strjoin_free(char **s1, char **s2)
 	if (!*s1 && !*s2)
 		return (NULL);
 	dst_size = ft_strlen(*s1) + ft_strlen(*s2) + 1;
-	dst = malloc(sizeof(char) * dst_size);
+	dst = ft_calloc(dst_size, sizeof(char));
 	if (!dst)
 		return (NULL);
 	ft_strlcpy(dst, *s1, dst_size);

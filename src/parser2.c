@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/12 18:09:52 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/12 18:13:59 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 extern char	**environ;
 
 t_token	*tokenize_within_token(t_token **token)
-{	
-	if (!str_has_space_without_quotes((*token)->value))	
+{
+	if (!str_has_space_without_quotes((*token)->value))
 		return (*token);
 	return (create_tokens_within_tokens(token, (*token)->value));
 }
 
-t_token *create_tokens_within_tokens(t_token **token, char *str)
+t_token	*create_tokens_within_tokens(t_token **token, char *str)
 {
 	int		i;
 	int		j;
@@ -18,7 +30,7 @@ t_token *create_tokens_within_tokens(t_token **token, char *str)
 	quote_status = NO_QUOTE;
 	i = 0;
 	j = 0;
-	while(str[i])
+	while (str[i])
 	{
 		quote_status = check_quote_status_in_str(str[i], quote_status);
 		if (quote_status == NO_QUOTE && str[i] == ' ')
@@ -26,7 +38,8 @@ t_token *create_tokens_within_tokens(t_token **token, char *str)
 			if (j == 0)
 				(*token)->value = ft_strndup(str, i);
 			else
-				*token = add_middle_token((*token), STR, ft_strndup(&str[j], i - j));
+				*token = add_middle_token(
+						(*token), STR, ft_strndup(&str[j], i - j));
 			j = i + 1;
 		}
 		i++;
@@ -49,7 +62,7 @@ void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
 		{
 			new_value = expand_envvars_in_token(&token->value);
 			if (new_value)
-			{			
+			{
 				temp = token->value;
 				token->value = new_value;
 				ft_free_null_str(&temp);
@@ -58,6 +71,11 @@ void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
 		token = token->next;
 	}
 }
+
+//update_redirection_types()
+//{
+
+//}
 
 void	update_tokens(t_cmd_line **cmd_line)
 {
@@ -116,7 +134,7 @@ void	process_quotes_in_tokens(t_cmd_line **cmd_line)
 		{
 			new_value = process_quotes_in_token(&token->value);
 			if (new_value)
-			{			
+			{
 				temp = token->value;
 				token->value = new_value;
 				ft_free_null_str(&temp);

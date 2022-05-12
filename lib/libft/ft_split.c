@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:43:24 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/15 12:35:52 by swillis          ###   ########.fr       */
+/*   Updated: 2022/05/12 18:02:39 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**ft_split(char *s, char c)
 
 	if (!s)
 		return (0);
-	tbl = malloc((ft_wordcount(s, c) + 1) * sizeof(tbl));
+	tbl = malloc((ft_wordcount(s, c) + 1) * sizeof(elem));
 	if (!tbl)
 		return (0);
 	i = 0;
@@ -101,7 +101,7 @@ char	**ft_split(char *s, char c)
 	{
 		while ((c == s[i]) && s[i])
 			i++;
-		elem = malloc((ft_wordlen(&s[i], c) + 1) * sizeof(elem));
+		elem = malloc((ft_wordlen(&s[i], c) + 1) * sizeof(char));
 		if (!elem)
 			return (ft_freetbl(tbl, x));
 		tbl[x++] = ft_fillelem(s, c, i, elem);

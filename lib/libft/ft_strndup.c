@@ -17,7 +17,7 @@ char	*ft_strndup(const char *s, int len)
 	char	*dup;
 	int		i;
 
-	dup = ft_calloc(len + 1 , sizeof(char));
+	dup = ft_calloc(len + 1, sizeof(char));
 	if (!dup)
 		return (NULL);
 	i = 0;

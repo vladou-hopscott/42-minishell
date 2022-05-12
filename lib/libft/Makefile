@@ -7,7 +7,10 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 NAME = libft.a
 
-SRCS = ft_bzero.c ft_calloc.c ft_strlen.c ft_strndup.c \
+SRCS = ft_bzero.c\
+		ft_calloc.c\
+		ft_strlen.c\
+		ft_strndup.c\
 		ft_atoi.c\
 		ft_strdup.c\
 		ft_strjoin.c\
@@ -17,7 +20,13 @@ SRCS = ft_bzero.c ft_calloc.c ft_strlen.c ft_strndup.c \
 		ft_free.c\
 		ft_isalnum.c\
 		ft_isdigit.c\
-    ft_bzero.c ft_calloc.c ft_strndup.c ft_strlcpy.c ft_strlen.c ft_strtrim.c ft_is_in_charset.c\
+		ft_putstr_fd.c\
+		ft_bzero.c ft_calloc.c\
+		ft_strndup.c\
+		ft_strlcpy.c\
+		ft_strlen.c\
+		ft_strtrim.c\
+		ft_is_in_charset.c
 
 #${SRCS:.c=.o} means, take the variable value ${SRCS},
 # which is a string composed of words separated by spaces,
