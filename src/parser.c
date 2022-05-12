@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/12 18:08:20 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/12 18:09:35 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	parse_tokens_in_cmd_lines(t_sh *sh)
@@ -11,7 +23,8 @@ void	parse_tokens_in_cmd_lines(t_sh *sh)
 	while (token && sh->cmd_line_lst)
 	{
 		if (token->type != PIPE)
-			sh->cmd_line_lst->token_lst = add_back_token(sh->cmd_line_lst->token_lst, token->type, token->value);
+			sh->cmd_line_lst->token_lst = add_back_token(
+					sh->cmd_line_lst->token_lst, token->type, token->value);
 		else
 		{
 			sh->cmd_line_lst = add_back_cmd_line(sh->cmd_line_lst);
@@ -51,7 +64,7 @@ void	expand_envvars_without_quotes(t_sh *sh)
 void	tokenize_after_env_exp(t_sh *sh)
 {
 	t_cmd_line	*start;
-	t_token	*token;
+	t_token		*token;
 
 	start = sh->cmd_line_lst;
 	while (sh->cmd_line_lst)
@@ -72,7 +85,7 @@ void	tokenize_after_env_exp(t_sh *sh)
 void	parser(t_sh *sh)
 {
 	if (sh->error)
-		return;
+		return ;
 	parse_tokens_in_cmd_lines(sh);
 	expand_envvars_without_quotes(sh);
 	tokenize_after_env_exp(sh);
@@ -82,7 +95,7 @@ void	parser(t_sh *sh)
 	if (!sh->cmd_line_lst)
 		sh->error = 1;
 
-	//for each cmd line structure, print tokens, cmd, args, fdin, fdout, heredoc_mode, append_mode
+	//printing parsing result
 	t_cmd_line *temp;
 	temp = sh->cmd_line_lst;
 	while (temp)
