@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:04:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:04:41 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:09:19 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	ft_free_null_str(char **str);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
+void	*ft_memset(void *ptr, int c, size_t n);
 
 #endif

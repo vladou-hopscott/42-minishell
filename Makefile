@@ -45,6 +45,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/env_manager_utils.c\
 			$(SRC_DIR)/env_expand.c\
 			$(SRC_DIR)/quotes.c\
+			$(SRC_DIR)/signals.c\
 
 
 # Make all ========================================

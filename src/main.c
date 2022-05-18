@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 int	main(void)
@@ -6,6 +5,7 @@ int	main(void)
 	t_sh	sh;
 	//t_token	*token;
 
+	handle_signals();
 	init_values(&sh);
 	sh.env = init_environment();
 	while (1)

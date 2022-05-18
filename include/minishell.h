@@ -2,6 +2,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <signal.h>
+# include <stdarg.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -64,6 +66,9 @@ char		*expand_envvar(char *str, int *i, int *j, char **s1);
 char		*delimit_envvar(char *str);
 t_token		*tokenize_within_token(t_token **token);
 t_token		*create_tokens_within_tokens(t_token **token, char *str);
+
+//********** SIGNALS **********//
+void	handle_signals(void);
 
 //********** QUOTES **********//
 int 		check_for_quotes(t_sh *sh);
