@@ -24,10 +24,12 @@ char	*ft_strndup(const char *s, int len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_free(char **s1, char **s2);
 char	**ft_split(char *s, char c);
+char	**ft_freetbl(char **tbl, int pos);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_free_null_str(char **str);
-int	ft_isalnum(int c);
-int	ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
+void	*ft_memset(void *ptr, int c, size_t n);
 
 #endif
