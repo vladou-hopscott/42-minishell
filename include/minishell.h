@@ -62,7 +62,7 @@ void		process_quotes_in_tokens(t_cmd_line **cmd_line);
 char		*process_quotes_in_token(char **value);
 void		expand_envvars_in_tokens(t_cmd_line **cmd_line);
 char		*expand_envvars_in_token(char **value);
-char		*expand_envvar(char *str, int *i, int *j, char **s1);
+char		*expand_envvar(char *str, int *i, int *j, char **s1, t_quote quote_status);
 char		*delimit_envvar(char *str);
 t_token		*tokenize_within_token(t_token **token);
 t_token		*create_tokens_within_tokens(t_token **token, char *str);

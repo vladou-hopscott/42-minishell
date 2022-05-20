@@ -58,8 +58,10 @@ char	*trim_double_quotes_in_token(char **value, int *i, int *j)
 		{
 			s2 = ft_strndup(&(*value)[*j], *i - *j); //on enregistre ce qu'il y a entre le double quote et le $
 			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar(&(*value)[*i], i, j, &s1);
+			s1 = expand_envvar(&(*value)[*i], i, j, &s1, DOUBLE_QUOTE);
 		}
+		if ((*value)[*i] == DOUBLE_QUOTE)
+			continue;
 		*i = *i + 1;
 	}
 	if ((*value)[*i] == DOUBLE_QUOTE)
