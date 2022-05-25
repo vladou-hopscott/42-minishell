@@ -97,6 +97,11 @@ void	update_fdin(t_cmd_line **cmd_line)
 			if ((*cmd_line)->fdin == -1)
 				printf("fdin : file '%s' does not exist, cannot be opened\n", token->value);
 		}
+		else if (token->type == HEREDOC_LIMIT)
+		{
+			heredoc(token->value);
+
+		}
 		token = token->next;
 	}
 }

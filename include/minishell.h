@@ -83,6 +83,10 @@ int			list_length(t_token *li);
 void		ft_set_null_free_list(t_token **a_list);
 t_token		*add_middle_token(t_token *current, t_token_type type, char *value);
 
+//********** HERE DOCUMENTS **********//
+int	heredoc(char *delimitor);
+int	run_children(char *delimitor);
+
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);
 int			str_has_quotes(char *str);
