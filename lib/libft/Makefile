@@ -27,7 +27,8 @@ SRCS = ft_bzero.c\
 		ft_strlen.c\
 		ft_strtrim.c\
 		ft_is_in_charset.c\
-		ft_memset.c
+		ft_memset.c\
+		ft_itoa.c
 
 #${SRCS:.c=.o} means, take the variable value ${SRCS},
 # which is a string composed of words separated by spaces,

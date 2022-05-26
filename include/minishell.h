@@ -53,11 +53,11 @@ void		parser(t_sh *s);
 t_cmd_line	*add_back_cmd_line(t_cmd_line *list);
 t_cmd_line	*create_cmd_line();
 void		update_elems_cmd_lines(t_sh *sh);
-void		update_cmd(t_cmd_line **cmd_line);
-void		update_args(t_cmd_line **cmd_line);
+int			update_cmd(t_cmd_line **cmd_line);
+int			update_args(t_cmd_line **cmd_line);
 int			count_arg_tokens(t_token *li);
-void		update_fdin(t_cmd_line **cmd_line);
-void		update_fdout(t_cmd_line **cmd_line);
+int			update_fdin(t_cmd_line **cmd_line);
+int			update_fdout(t_cmd_line **cmd_line);
 void		process_quotes_in_tokens(t_cmd_line **cmd_line);
 char		*process_quotes_in_token(char **value);
 void		expand_envvars_in_tokens(t_cmd_line **cmd_line);
@@ -82,6 +82,10 @@ void		print_tokens(t_token *li);
 int			list_length(t_token *li);
 void		ft_set_null_free_list(t_token **a_list);
 t_token		*add_middle_token(t_token *current, t_token_type type, char *value);
+
+//********** HERE DOCUMENTS **********//
+int	heredoc(char *delimitor, t_cmd_line ** cmd_line);
+int	run_children(char *delimitor);
 
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);

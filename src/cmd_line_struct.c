@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	update_cmd(t_cmd_line **cmd_line)
+int	update_cmd(t_cmd_line **cmd_line)
 {
 	t_token	*token;
 
@@ -10,13 +10,15 @@ void	update_cmd(t_cmd_line **cmd_line)
 		if (token->type == CMD)
 		{
 			(*cmd_line)->cmd = ft_strdup(token->value);
-			return;
+			if (!(*cmd_line)->cmd)
+				return (1);
 		}
 		token = token->next;
 	}
+	return (0);
 }
 
-void	update_args(t_cmd_line **cmd_line)
+int	update_args(t_cmd_line **cmd_line)
 {
 	t_token	*token;
 	int		i;
@@ -24,28 +26,28 @@ void	update_args(t_cmd_line **cmd_line)
 	token = (*cmd_line)->token_lst;
 	(*cmd_line)->args = ft_calloc(count_arg_tokens(token) + 1, sizeof(char *));
 	if (!(*cmd_line)->args)
-		return;
+		return (1);
 	i = 0;
 	while (token)
 	{
 		if (token->type == CMD || token->type == ARG)
 		{
-			//(*cmd_line)->args[i] = ft_calloc(ft_strlen(token->value) + 1, sizeof(char));
 			(*cmd_line)->args[i] = ft_strndup(token->value, ft_strlen(token->value));
 			if (!(*cmd_line)->args[i])
-				return;
+				return (1);
 			i++;
 		}
 		token = token->next;
 	}
 	(*cmd_line)->args[i] = NULL;
+	return (0);
 }
 
-void	update_fdout(t_cmd_line **cmd_line)
+//while loop through tokens
+//on cherche si 1 fichier de redirection de sortie existe. si oui, on l'ouvre/cree, on ecrase son contenu ou on append, et ca devient le fdout
+//on continue a chercher. si d'autres se presentent : on ferme (close) le precedent, le nouveau devient le nouveau fd, etc
+int	update_fdout(t_cmd_line **cmd_line)
 {
-	//while loop through tokens
-	//on cherche si 1 fichier de redirection de sortie existe. si oui, on l'ouvre/cree, on ecrase son contenu ou on append, et ca devient le fdout
-	//on continue a chercher. si d'autres se presentent : on ferme (close) le precedent, le nouveau devient le nouveau fd, etc
 	t_token	*token;
 
 	token = (*cmd_line)->token_lst;
@@ -65,40 +67,54 @@ void	update_fdout(t_cmd_line **cmd_line)
 				(*cmd_line)->fdout = open(token->value, O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 				(*cmd_line)->append_mode = 1;
 			}
-			//A RAJOUTER : gestion d'erreur si la fct open fail
-			// if ((*cmd_line)->fdout == -1)
-				//gestion erreur
+			if ((*cmd_line)->fdout == -1)
+				return (1);
 		}
 		token = token->next;
 	}
-
+	return (0);
 }
 
-void	update_fdin(t_cmd_line **cmd_line)
+//while loop through tokens
+//on cherche si 1 fichier de redirection d'entree existe. si oui, on l'ouvre en read only, et ca devient le fdin
+//on continue a chercher. si d'autres se presentent : on ferme (close) le precedent, le nouveau devient le nouveau fd, etc
+int	update_fdin(t_cmd_line **cmd_line)
 {
-	//while loop through tokens
-	//on cherche si 1 fichier de redirection d'entree existe. si oui, on l'ouvre en read only, et ca devient le fdin
-	//on continue a chercher. si d'autres se presentent : on ferme (close) le precedent, le nouveau devient le nouveau fd, etc
 	t_token	*token;
 
 	token = (*cmd_line)->token_lst;
 	while (token)
 	{
-		if (token->type == INPUT)
+		if (token->type == INPUT || token->type == HEREDOC_LIMIT)
 		{
-			// if there is already a fd opened (different from initial value standard output), close it
 			if ((*cmd_line)->fdin != 0)
 				close((*cmd_line)->fdin);
-			// open file in read only. update cmd_line->fdin
+			if ((*cmd_line)->heredoc_mode == 1)
+			{
+				(*cmd_line)->heredoc_mode = 0;
+				unlink((*cmd_line)->heredoc_name);
+			}
 			if (token->type == INPUT)
-				(*cmd_line)->fdin = open(token->value, O_RDONLY);
-			//A RAJOUTER : gestion d'erreur si la fct open fail, par exemple si le fichier n'existe pas ?
-			//A RAJOUTER : gestion des heredocs
-			if ((*cmd_line)->fdin == -1)
-				printf("fdin : file '%s' does not exist, cannot be opened\n", token->value);
+			{
+				if (token->type == INPUT)
+					(*cmd_line)->fdin = open(token->value, O_RDONLY);
+				if ((*cmd_line)->fdin == -1)
+				{
+					ft_putstr_fd("bash: ", 2);
+					ft_putstr_fd(token->value, 2);
+					ft_putstr_fd(": No such file or directory\n", 2);
+					return (1);
+				}
+			}
+			else
+			{
+				if (heredoc(token->value, cmd_line) == 1)
+					return (1);
+			}
 		}
 		token = token->next;
 	}
+	return (0);
 }
 
 void	update_elems_cmd_lines(t_sh *sh)
@@ -108,10 +124,14 @@ void	update_elems_cmd_lines(t_sh *sh)
 	start = sh->cmd_line_lst;
 	while (sh->cmd_line_lst)
 	{
-		update_cmd(&sh->cmd_line_lst);
-		update_args(&sh->cmd_line_lst);
-		update_fdout(&sh->cmd_line_lst); //update fdout and create/truncate files if needed
-		update_fdin(&sh->cmd_line_lst); //update fdin
+		if (update_cmd(&sh->cmd_line_lst))
+			sh->error = 1;
+		if (update_args(&sh->cmd_line_lst))
+			sh->error = 1;
+		if (update_fdout(&sh->cmd_line_lst))
+			sh->error = 1;
+		if (update_fdin(&sh->cmd_line_lst))
+			sh->error = 1;
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
@@ -130,4 +150,3 @@ void	update_elems_cmd_lines(t_sh *sh)
 // S_IROTH  00004 others have read permission
 // S_IWOTH  00002 others have write permission
 // S_IXOTH  00001 others have execute permission
-
