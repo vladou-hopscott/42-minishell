@@ -107,7 +107,10 @@ int	update_fdin(t_cmd_line **cmd_line)
 				}
 			}
 			else
-				heredoc(token->value, cmd_line);
+			{
+				if (heredoc(token->value, cmd_line) == 1)
+					return (1);
+			}
 		}
 		token = token->next;
 	}
