@@ -84,7 +84,7 @@ void		ft_set_null_free_list(t_token **a_list);
 t_token		*add_middle_token(t_token *current, t_token_type type, char *value);
 
 //********** HERE DOCUMENTS **********//
-int	heredoc(char *delimitor);
+int	heredoc(char *delimitor, t_cmd_line ** cmd_line);
 int	run_children(char *delimitor);
 
 //********** UTILS **********//
