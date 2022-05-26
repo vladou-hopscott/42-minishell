@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:45:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/26 21:52:21 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/26 22:00:27 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int	heredoc(char *delimitor, t_cmd_line ** cmd_line)
 			ft_free_null_str(&tmp);
 			close((*cmd_line)->fdin);
 			unlink(filename);
-			printf("check1\n");
 			ft_free_null_str(&filename);
-			printf("check2\n");
 			return(1);
 		}
 		if (!ft_strncmp(tmp, delimitor, ft_strlen(delimitor)) && ft_strlen(tmp) == ft_strlen(delimitor))

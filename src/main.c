@@ -14,7 +14,11 @@ int	main(void)
 		lexer(&sh); //analyse lexicale de la commande et verif erreurs de syntaxe des redirections
 		parser(&sh); //traitement des tokens en cmd lines, separees par des pipes. chaque cmd line represente un processus
 		if (sh.error)
+		{
+			free_values(&sh, 0);
+			init_values(&sh);
 			continue ;
+		}
 		//token = sh.token_lst;
 		// while (token)
 		// {
