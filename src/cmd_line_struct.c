@@ -92,7 +92,7 @@ int	update_fdin(t_cmd_line **cmd_line)
 			if ((*cmd_line)->heredoc_mode == 1)
 			{
 				(*cmd_line)->heredoc_mode = 0;
-				unlink("./heredoc");
+				unlink((*cmd_line)->heredoc_name);
 			}
 			if (token->type == INPUT)
 			{

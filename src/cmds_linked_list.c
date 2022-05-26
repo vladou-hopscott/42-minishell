@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmds_linked_list.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 22:35:38 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/26 22:35:39 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "parsing.h"
 
@@ -17,6 +29,7 @@ t_cmd_line	*create_cmd_line()
 	elem->fdout = 1;
 	elem->heredoc_mode = 0;
 	elem->append_mode = 0;
+	elem->heredoc_name = NULL;
 	return (elem);
 }
 

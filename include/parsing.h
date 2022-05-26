@@ -53,6 +53,7 @@ typedef struct s_cmd_line
 	char				**args;
 	int					fdin;
 	int					heredoc_mode;
+	char				*heredoc_name;
 	int					fdout;
 	int					append_mode;
 	struct s_cmd_line	*next;
