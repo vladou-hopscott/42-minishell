@@ -56,7 +56,7 @@ void		update_elems_cmd_lines(t_sh *sh);
 void		update_cmd(t_cmd_line **cmd_line);
 void		update_args(t_cmd_line **cmd_line);
 int			count_arg_tokens(t_token *li);
-void		update_fdin(t_cmd_line **cmd_line);
+int		update_fdin(t_cmd_line **cmd_line);
 void		update_fdout(t_cmd_line **cmd_line);
 void		process_quotes_in_tokens(t_cmd_line **cmd_line);
 char		*process_quotes_in_token(char **value);

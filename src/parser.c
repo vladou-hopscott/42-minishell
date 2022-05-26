@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:08:20 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:09:35 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/26 12:36:08 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	parser(t_sh *sh)
 		sh->error = 1;
 
 	//printing parsing result
+	if (sh->error == 1)
+		return;
 	t_cmd_line *temp;
 	temp = sh->cmd_line_lst;
 	while (temp)

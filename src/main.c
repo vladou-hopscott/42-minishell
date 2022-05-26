@@ -13,6 +13,8 @@ int	main(void)
 		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
 		lexer(&sh); //analyse lexicale de la commande et verif erreurs de syntaxe des redirections
 		parser(&sh); //traitement des tokens en cmd lines, separees par des pipes. chaque cmd line represente un processus
+		if (sh.error)
+			continue ;
 		//token = sh.token_lst;
 		// while (token)
 		// {

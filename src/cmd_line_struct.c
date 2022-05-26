@@ -77,7 +77,7 @@ void	update_fdout(t_cmd_line **cmd_line)
 //while loop through tokens
 //on cherche si 1 fichier de redirection d'entree existe. si oui, on l'ouvre en read only, et ca devient le fdin
 //on continue a chercher. si d'autres se presentent : on ferme (close) le precedent, le nouveau devient le nouveau fd, etc
-void	update_fdin(t_cmd_line **cmd_line)
+int	update_fdin(t_cmd_line **cmd_line)
 {
 	t_token	*token;
 
@@ -97,15 +97,20 @@ void	update_fdin(t_cmd_line **cmd_line)
 			{
 				if (token->type == INPUT)
 					(*cmd_line)->fdin = open(token->value, O_RDONLY);
-				//A RAJOUTER : gestion d'erreur si la fct open fail, par exemple si le fichier n'existe pas ?
 				if ((*cmd_line)->fdin == -1)
-					printf("fdin : file '%s' does not exist, cannot be opened\n", token->value);
+				{
+					ft_putstr_fd("bash: ", 2);
+					ft_putstr_fd(token->value, 2);
+					ft_putstr_fd(": No such file or directory\n", 2);
+					return (1);
+				}
 			}
 			else
 				heredoc(token->value, cmd_line);
 		}
 		token = token->next;
 	}
+	return (0);
 }
 
 void	update_elems_cmd_lines(t_sh *sh)
@@ -118,7 +123,8 @@ void	update_elems_cmd_lines(t_sh *sh)
 		update_cmd(&sh->cmd_line_lst);
 		update_args(&sh->cmd_line_lst);
 		update_fdout(&sh->cmd_line_lst);
-		update_fdin(&sh->cmd_line_lst);
+		if (update_fdin(&sh->cmd_line_lst))
+			sh->error = 1;
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
