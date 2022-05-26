@@ -31,5 +31,6 @@ int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	*ft_memset(void *ptr, int c, size_t n);
+char	*ft_itoa(int n);
 
 #endif
