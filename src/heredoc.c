@@ -6,11 +6,13 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:45:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/27 15:33:09 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:30:17 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern char	**environ;
 
 static	char *choose_filename(void)
 {
@@ -34,31 +36,57 @@ static	char *choose_filename(void)
 	return (filename);
 }
 
+char	*expand_envvar_in_heredoc(char *str, int *i, int *j, char **s1)
+{
+	char	*env_key;
+	char	*env_val;
+
+	env_key = NULL;
+	env_val = NULL;
+	if (!ft_strncmp(str, "$$", 2))
+	{
+		*s1 = ft_strjoin(*s1, "$");
+		*i = *i + 1;
+		*j = *i;
+		return (*s1);
+	}
+	env_key = delimit_envvar(str);
+	if (env_key && env_key[0] == '\0')
+		env_val = ft_strdup("$");
+	else
+		env_val = env_findkeyvalue(env_key, environ);
+	if (!env_key)
+		*i = *i + 1;
+	*i = *i + ft_strlen(env_key);
+	*j = *i + 1;
+	if (env_val)
+		*s1 = ft_strjoin_free(s1, &env_val);
+	ft_free_null_str(&env_key);
+	return (*s1);
+}
+
+
 char	*expand_envvars_in_heredoc(char **value)
 {
 	char	*s1;
 	char	*s2;
 	int		i;
 	int		j;
-	int		quote_status;
 
 	i = 0;
 	j = 0;
 	s1 = NULL;
-	quote_status = NO_QUOTE;
 	while ((*value)[i])
 	{
-		//quote_status = check_quote_status_in_str((*value)[i], quote_status);
-		//if (quote_status == NO_QUOTE && (*value)[i] == '$')
 		if ((*value)[i] == '$')
 		{
-			s2 = ft_strndup(&(*value)[j], i - j); //on enregistre ce qu'il y a avant le $
-			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
-			s1 = expand_envvar(&(*value)[i], &i, &j, &s1, quote_status);
+			s2 = ft_strndup(&(*value)[j], i - j);
+			s1 = ft_strjoin_free(&s1, &s2);
+			s1 = expand_envvar_in_heredoc(&(*value)[i], &i, &j, &s1);
 		}
 		i++;
 	}
-	s2 = ft_strndup(&(*value)[j], i - j); 	//join last part of string to new
+	s2 = ft_strndup(&(*value)[j], i - j);
 	return (ft_strjoin_free(&s1, &s2));
 }
 
