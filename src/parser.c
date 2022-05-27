@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 18:08:20 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/26 13:47:12 by vnafissi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void	parse_tokens_in_cmd_lines(t_sh *sh)
@@ -87,6 +75,7 @@ void	parser(t_sh *sh)
 	if (sh->error)
 		return ;
 	parse_tokens_in_cmd_lines(sh);
+	update_token_type_heredoc_limit(sh);
 	expand_envvars_without_quotes(sh);
 	tokenize_after_env_exp(sh);
 	process_quotes_in_cmd_lines(sh);

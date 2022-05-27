@@ -66,9 +66,11 @@ char		*expand_envvar(char *str, int *i, int *j, char **s1, t_quote quote_status)
 char		*delimit_envvar(char *str);
 t_token		*tokenize_within_token(t_token **token);
 t_token		*create_tokens_within_tokens(t_token **token, char *str);
+void		update_token_type_heredoc_limit(t_sh *sh);
+void		update_tokens_hd_limit(t_cmd_line **cmd_line);
 
 //********** SIGNALS **********//
-void	handle_signals(void);
+void		handle_signals(void);
 
 //********** QUOTES **********//
 int 		check_for_quotes(t_sh *sh);
@@ -89,6 +91,7 @@ int	run_children(char *delimitor);
 
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);
+int 		str_has_charset(char *str, char *charset);
 int			str_has_quotes(char *str);
 int			str_has_dollar_without_quotes(char *str);
 int			str_has_space_without_quotes(char *str);
