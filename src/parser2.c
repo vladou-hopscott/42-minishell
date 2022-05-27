@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:09:52 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:13:59 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/27 13:34:47 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,6 @@ void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
 	}
 }
 
-//update_redirection_types()
-//{
-
-//}
-
 void	update_tokens(t_cmd_line **cmd_line)
 {
 	t_token		*token;
@@ -116,6 +111,34 @@ void	update_token_type_str(t_sh *sh)
 	while (sh->cmd_line_lst)
 	{
 		update_tokens(&sh->cmd_line_lst);
+		sh->cmd_line_lst = sh->cmd_line_lst->next;
+	}
+	sh->cmd_line_lst = start;
+}
+
+void	update_tokens_hd_limit(t_cmd_line **cmd_line)
+{
+	t_token		*token;
+	int			has_cmd;
+
+	token = (*cmd_line)->token_lst;
+	has_cmd = 0;
+	while (token)
+	{
+		if (token->type == HEREDOC)
+			token->next->type = HEREDOC_LIMIT;
+		token = token->next;
+	}
+}
+
+void	update_token_type_heredoc_limit(t_sh *sh)
+{
+	t_cmd_line	*start;
+
+	start = sh->cmd_line_lst;
+	while (sh->cmd_line_lst)
+	{
+		update_tokens_hd_limit(&sh->cmd_line_lst);
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;

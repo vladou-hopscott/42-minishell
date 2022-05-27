@@ -29,11 +29,25 @@ int	str_has_quotes(char *str)
 	return (0);
 }
 
+int str_has_charset(char *str, char *charset)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (is_in_charset(str[i], charset))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	str_has_space_without_quotes(char *str)
 {
 	int	i;
 	int	quote_status;
-	
+
 	quote_status = NO_QUOTE;
 	i = 0;
 	while(str[i])
