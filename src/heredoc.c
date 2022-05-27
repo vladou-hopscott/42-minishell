@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:45:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/27 17:30:17 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:11:00 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	*expand_envvar_in_heredoc(char *str, int *i, int *j, char **s1)
 	return (*s1);
 }
 
-
 char	*expand_envvars_in_heredoc(char **value)
 {
 	char	*s1;
@@ -95,9 +94,7 @@ char	*expand_heredoc_line(char **str)
 	char	*tmp;
 
 	tmp = expand_envvars_in_heredoc(str);
-
-	//ft_free_null_str(str);
-
+	ft_free_null_str(str);
 	return (tmp);
 }
 
@@ -118,7 +115,7 @@ void	initialize_heredoc(t_cmd_line **cmd_line)
 	(*cmd_line)->fdin = open((*cmd_line)->heredoc_name, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 }
 
-char	*read_heredoc_line(t_cmd_line **cmd_line, int quotes)
+char	*read_heredoc_line(t_cmd_line **cmd_line, int quotes, char *delimitor)
 {
 	char	*str;
 
@@ -128,9 +125,55 @@ char	*read_heredoc_line(t_cmd_line **cmd_line, int quotes)
 		process_eof_heredoc(&str, cmd_line);
 		return (NULL);
 	}
-	if (!quotes && str_has_charset(str, "$"))
-		str = expand_heredoc_line(&str);
+	if (!quotes)
+	{
+		if (!ft_strncmp(str, delimitor, ft_strlen(delimitor)) && ft_strlen(str) == ft_strlen(delimitor))
+			return (str);
+		else if (str_has_charset(str, "$"))
+			str = expand_heredoc_line(&str);
+	}
 	return (str);
+}
+
+char	*trim_quotes_in_delimitor(char **value, int *i, int *j)
+{
+	char	*s1;
+	char	*s2;
+
+	s1 = NULL;
+	s2 = NULL;
+	s1 = ft_strndup(&(*value)[*j], *i - *j);
+	*i = *i + 1;
+	*j = *i;
+	while ((*value)[*i] && (*value)[*i] != SINGLE_QUOTE && (*value)[*i] != DOUBLE_QUOTE)
+		*i = *i + 1;
+	if ((*value)[*i] == SINGLE_QUOTE || (*value)[*i] == DOUBLE_QUOTE)
+		s2 = ft_strndup(&(*value)[*j], *i - *j);
+	*j = *i + 1;
+	return (ft_strjoin_free(&s1, &s2));
+}
+
+char	*process_quotes_in_delimitor(char **value)
+{
+	char	*new;
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new = NULL;
+	while ((*value)[i])
+	{
+		if ((*value)[i] == SINGLE_QUOTE || (*value)[i] == DOUBLE_QUOTE)
+		{
+			temp = trim_quotes_in_delimitor(value, &i, &j);
+			new = ft_strjoin_free(&new, &temp);
+		}
+		i++;
+	}
+	temp = ft_strndup(&(*value)[j], i - j);
+	return (ft_strjoin_free(&new, &temp));
 }
 
 //CTR+C => A voir si il faut vraiment le faire (ca a l'air tres relou)
@@ -150,7 +193,7 @@ int	heredoc(char *delimitor, t_cmd_line ** cmd_line)
 	quotes = 0;
 	if (str_has_quotes(delimitor))
 	{
-		delimitor = process_quotes_in_token(&delimitor);
+		delimitor = process_quotes_in_delimitor(&delimitor);
 		quotes = 1;
 	}
 	initialize_heredoc(cmd_line);
@@ -159,7 +202,7 @@ int	heredoc(char *delimitor, t_cmd_line ** cmd_line)
 	i = 0;
 	while (1)
 	{
-		tmp = read_heredoc_line(cmd_line, quotes);
+		tmp = read_heredoc_line(cmd_line, quotes, delimitor);
 		if (!tmp)
 			return(1);
 		if (!ft_strncmp(tmp, delimitor, ft_strlen(delimitor)) && ft_strlen(tmp) == ft_strlen(delimitor))
