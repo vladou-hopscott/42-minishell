@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/31 20:55:00 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 extern char	**environ;
@@ -86,7 +98,8 @@ char	*read_heredoc_line(t_cmd_line **cmd_line, int quotes, char *delimitor)
 	}
 	if (!quotes)
 	{
-		if (!ft_strncmp(str, delimitor, ft_strlen(delimitor)) && ft_strlen(str) == ft_strlen(delimitor))
+		if (!ft_strncmp(str, delimitor, ft_strlen(delimitor))
+			&& ft_strlen(str) == ft_strlen(delimitor))
 			return (str);
 		else if (str_has_charset(str, "$"))
 			str = expand_heredoc_line(&str);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 20:56:16 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/31 21:04:27 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	parse_tokens_in_cmd_lines(t_sh *sh)
@@ -83,29 +95,4 @@ void	parser(t_sh *sh)
 	update_elems_cmd_lines(sh);
 	if (!sh->cmd_line_lst)
 		sh->error = 1;
-
-	//printing parsing result
-	if (sh->error == 1)
-		return;
-	t_cmd_line *temp;
-	temp = sh->cmd_line_lst;
-	while (temp)
-	{
-		printf("***CMD_LINE***\n");
-		printf("tokens : \n");
-		print_tokens(temp->token_lst);
-		printf("cmd=%s\n",temp->cmd);
-		int i = 0;
-		printf("args: [");
-		while (temp->args[i])
-		{
-			printf("%s,", temp->args[i]);
-			i++;
-		}
-		printf("]");
-		printf("\nfdout=%d, fdin=%d\n", temp->fdout, temp->fdin);
-		printf("heredoc_mode=%d, append_mode=%d\n", temp->heredoc_mode, temp->append_mode);
-		printf("\n\n");
-		temp = temp->next;
-	}
 }

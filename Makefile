@@ -33,7 +33,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/lexer.c\
 			$(SRC_DIR)/syntax_validation.c\
 			$(SRC_DIR)/parser.c\
-			$(SRC_DIR)/parser2.c\
+			$(SRC_DIR)/update_token_type.c\
 			$(SRC_DIR)/expander.c\
 			$(SRC_DIR)/executor.c\
 			$(SRC_DIR)/tokens_linked_list.c\
@@ -44,13 +44,14 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/env_manager.c\
 			$(SRC_DIR)/env_manager_utils.c\
 			$(SRC_DIR)/env_expand.c\
+			$(SRC_DIR)/env_expand2.c\
 			$(SRC_DIR)/quotes.c\
+			$(SRC_DIR)/quotes_utils.c\
 			$(SRC_DIR)/signals.c\
 			$(SRC_DIR)/heredoc.c\
 			$(SRC_DIR)/heredoc2.c\
 			$(SRC_DIR)/heredoc3.c\
 			$(SRC_DIR)/redirections.c\
-
 
 # Make all ========================================
 
