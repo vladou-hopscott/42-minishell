@@ -47,6 +47,9 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/quotes.c\
 			$(SRC_DIR)/signals.c\
 			$(SRC_DIR)/heredoc.c\
+			$(SRC_DIR)/heredoc2.c\
+			$(SRC_DIR)/heredoc3.c\
+			$(SRC_DIR)/redirections.c\
 
 
 # Make all ========================================

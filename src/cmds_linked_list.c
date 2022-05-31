@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "parsing.h"
 
-t_cmd_line	*create_cmd_line()
+t_cmd_line	*create_cmd_line(void)
 {
 	t_cmd_line	*elem;
 
@@ -23,12 +23,12 @@ t_cmd_line	*create_cmd_line()
 
 t_cmd_line	*add_back_cmd_line(t_cmd_line *list)
 {
-	t_cmd_line *new;
+	t_cmd_line	*new;
 	t_cmd_line	*tmp;
 
 	new = create_cmd_line();
 	if (!new)
-		return NULL;
+		return (NULL);
 	if (!list)
 		return (new);
 	else
