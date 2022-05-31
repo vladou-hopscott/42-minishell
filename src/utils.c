@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 21:33:51 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/31 21:34:47 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "parsing.h"
 
 //integrer egalement les tabulations
 int	str_has_only_spaces(char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (!is_in_charset(str[i], CHARSET_SPACE_TABS))
@@ -20,7 +33,7 @@ int	str_has_quotes(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (is_in_charset(str[i], "\'\""))
 			return (1);
@@ -29,12 +42,12 @@ int	str_has_quotes(char *str)
 	return (0);
 }
 
-int str_has_charset(char *str, char *charset)
+int	str_has_charset(char *str, char *charset)
 {
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (is_in_charset(str[i], charset))
 			return (1);
@@ -50,7 +63,7 @@ int	str_has_space_without_quotes(char *str)
 
 	quote_status = NO_QUOTE;
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		quote_status = check_quote_status_in_str(str[i], quote_status);
 		if (quote_status == NO_QUOTE && str[i] == ' ')

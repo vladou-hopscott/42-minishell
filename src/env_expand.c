@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_expand.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/05/31 21:37:35 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 extern char	**environ;
@@ -33,8 +45,8 @@ char	*expand_envvar(char *str, int *i, int *j, char **s1, t_quote qs)
 }
 
 //BASH VARIABLE NAME
-    // a-z, A-Z, _ and 0-9
-    // May NOT begin with a number
+// a-z, A-Z, _ and 0-9
+// May NOT begin with a number
 char	*delimit_envvar(char *str)
 {
 	int		i;
@@ -42,9 +54,9 @@ char	*delimit_envvar(char *str)
 
 	env_key = NULL;
 	i = 1;
-	if (ft_isdigit(str[i])) //si le 1er char est un digit, abort
+	if (ft_isdigit(str[i]))
 		return (env_key);
-	while(str[i] && (ft_isalnum(str[i]) || str[i] == '_')) //A VERIFIER si ce sont les bonnes conditions
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	env_key = ft_strndup(str + 1, i - 1);
 	return (env_key);
@@ -58,7 +70,7 @@ char	*expand_envvars_in_token(char **value)
 	int		j;
 	int		quote_status;
 
-	if (!str_has_dollar_without_quotes(*value)) //if no dollars without quotes in token, skip
+	if (!str_has_dollar_without_quotes(*value))
 		return (NULL);
 	i = 0;
 	j = 0;
@@ -69,12 +81,12 @@ char	*expand_envvars_in_token(char **value)
 		quote_status = check_quote_status_in_str((*value)[i], quote_status);
 		if (quote_status == NO_QUOTE && (*value)[i] == '$')
 		{
-			s2 = ft_strndup(&(*value)[j], i - j); //on enregistre ce qu'il y a avant le $
-			s1 = ft_strjoin_free(&s1, &s2); //on join ca a s1
+			s2 = ft_strndup(&(*value)[j], i - j);
+			s1 = ft_strjoin_free(&s1, &s2);
 			s1 = expand_envvar(&(*value)[i], &i, &j, &s1, quote_status);
 		}
 		i++;
 	}
-	s2 = ft_strndup(&(*value)[j], i - j); 	//join last part of string to new
+	s2 = ft_strndup(&(*value)[j], i - j);
 	return (ft_strjoin_free(&s1, &s2));
 }
