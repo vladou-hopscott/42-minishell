@@ -6,35 +6,35 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:22:41 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:25:11 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:01:24 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*trim_double_quotes_in_token(char **value, int *i, int *j)
+char	*trim_double_quotes_in_token(char **value, t_idx *idx)
 {
 	char	*s1;
 	char	*s2;
 
-	s1 = ft_strndup(&(*value)[*j], *i - *j);
-	*i = *i + 1;
-	*j = *i;
-	while ((*value)[*i] && (*value)[*i] != DOUBLE_QUOTE)
+	s1 = ft_strndup(&(*value)[idx->j], idx->i - idx->j);
+	idx->i++;
+	idx->j = idx->i;
+	while ((*value)[idx->i] && (*value)[idx->i] != DOUBLE_QUOTE)
 	{
-		if ((*value)[*i] == '$')
+		if ((*value)[idx->i] == '$')
 		{
-			s2 = ft_strndup(&(*value)[*j], *i - *j);
+			s2 = ft_strndup(&(*value)[idx->j], idx->i - idx->j);
 			s1 = ft_strjoin_free(&s1, &s2);
-			s1 = expand_envvar(&(*value)[*i], i, j, &s1, DOUBLE_QUOTE);
+			s1 = expand_envvar(&(*value)[idx->i], idx, &s1, DOUBLE_QUOTE);
 		}
-		if ((*value)[*i] == DOUBLE_QUOTE)
+		if ((*value)[idx->i] == DOUBLE_QUOTE)
 			continue ;
-		*i = *i + 1;
+		idx->i++;
 	}
-	if ((*value)[*i] == DOUBLE_QUOTE)
-		s2 = ft_strndup(&(*value)[*j], *i - *j);
-	*j = *i + 1;
+	if ((*value)[idx->i] == DOUBLE_QUOTE)
+		s2 = ft_strndup(&(*value)[idx->j], idx->i - idx->j);
+	idx->j = idx->i + 1;
 	return (ft_strjoin_free(&s1, &s2));
 }
 
@@ -60,27 +60,26 @@ char	*process_quotes_in_token(char **value)
 {
 	char	*new;
 	char	*temp;
-	int		i;
-	int		j;
+	t_idx	idx;
 
 	if (!str_has_quotes(*value))
 		return (NULL);
-	i = 0;
-	j = 0;
+	idx.i = 0;
+	idx.j = 0;
 	new = NULL;
-	while ((*value)[i])
+	while ((*value)[idx.i])
 	{
-		if ((*value)[i] == SINGLE_QUOTE || (*value)[i] == DOUBLE_QUOTE)
+		if ((*value)[idx.i] == SINGLE_QUOTE || (*value)[idx.i] == DOUBLE_QUOTE)
 		{
-			if ((*value)[i] == SINGLE_QUOTE)
-				temp = trim_single_quotes_in_token(value, &i, &j);
+			if ((*value)[idx.i] == SINGLE_QUOTE)
+				temp = trim_single_quotes_in_token(value, &idx.i, &idx.j);
 			else
-				temp = trim_double_quotes_in_token(value, &i, &j);
+				temp = trim_double_quotes_in_token(value, &idx);
 			new = ft_strjoin_free(&new, &temp);
 		}
-		i++;
+		idx.i++;
 	}
-	temp = ft_strndup(&(*value)[j], i - j);
+	temp = ft_strndup(&(*value)[idx.j], idx.i - idx.j);
 	return (ft_strjoin_free(&new, &temp));
 }
 

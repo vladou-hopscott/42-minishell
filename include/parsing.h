@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:42:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:45:03 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:23:04 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_idx
+{
+	int				i;
+	int				j;
+}	t_idx;
 
 typedef struct s_cmd_line
 {
