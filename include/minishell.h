@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:41:59 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:00:51 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void		process_quotes_in_tokens(t_cmd_line **cmd_line);
 char		*process_quotes_in_token(char **value);
 void		expand_envvars_in_tokens(t_cmd_line **cmd_line);
 char		*expand_envvars_in_token(char **value);
-char		*expand_envvar(char *str, int *i, int *j,
-				char **s1, t_quote quote_status);
+char		*expand_envvar(char *str, t_idx *idx, char **s1, t_quote qs);
 char		*delimit_envvar(char *str);
 t_token		*tokenize_within_token(t_token **token);
 t_token		*create_tokens_within_tokens(t_token **token, char *str);
