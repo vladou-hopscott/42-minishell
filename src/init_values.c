@@ -21,6 +21,10 @@ void	init_values(t_sh *sh)
 	sh->p_quote = NO_QUOTE;
 	sh->error = 0;
 }
+void	init_program_values(t_sh *sh)
+{
+	sh->exit_status = 0;
+}
 
 void	free_token_lst(t_token *token)
 {

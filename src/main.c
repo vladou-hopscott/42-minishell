@@ -38,6 +38,8 @@ int	main(void)
 	//t_token	*token;
 
 	handle_signals();
+	init_program_values(&sh);
+	printf("exit_status=%d\n", sh.exit_status);
 	init_values(&sh);
 	sh.env = init_environment();
 	while (1)

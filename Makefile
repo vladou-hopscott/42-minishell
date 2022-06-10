@@ -106,7 +106,7 @@ $(BIN_DIR) :
 	mkdir -p $(BIN_DIR)
 
 minishell : $(OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) -lreadline
 
 pipex : $(PIPEX)
 
