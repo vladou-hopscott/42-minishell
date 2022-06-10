@@ -59,7 +59,7 @@ typedef struct s_sh
 
 //********** INITIALIZATION **********//
 void		init_program_values(t_sh *sh);
-void		init_values(t_sh *sh);
+void		init_prompt_values(t_sh *sh);
 void		free_values(t_sh *sh, int free_env);
 
 //********** PROMPT **********//

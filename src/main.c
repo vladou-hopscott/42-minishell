@@ -39,9 +39,6 @@ int	main(void)
 
 	handle_signals();
 	init_program_values(&sh);
-	printf("exit_status=%d\n", sh.exit_status);
-	init_values(&sh);
-	sh.env = init_environment();
 	while (1)
 	{
 		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
@@ -50,7 +47,7 @@ int	main(void)
 		if (sh.error)
 		{
 			free_values(&sh, 0);
-			init_values(&sh);
+			init_prompt_values(&sh);
 			continue ;
 		}
 		print_parser_result(&sh);
@@ -62,7 +59,9 @@ int	main(void)
 		// 	token = token->next;
 		// }
 		free_values(&sh, 0);
-		init_values(&sh);
+		if (!sh.error)
+			sh.exit_status = SUCCESS;
+		init_prompt_values(&sh);
 	}
 	free_values(&sh, 1);
 	if (sh.error == 1)

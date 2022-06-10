@@ -74,22 +74,22 @@ void	check_syntax_errors(t_sh *sh)
 	{
 		if (is_redirection(token->type))
 		{
-			if (error_next_is_null(token->next))
-				sh->error = 1;
-			else if (error_next_is_pipe(token->next))
-				sh->error = 1;
-			else if (error_next_is_redirection(token->next))
-				sh->error = 1;
+			if (error_next_is_null(token->next)
+				|| error_next_is_pipe(token->next)
+				|| error_next_is_redirection(token->next))
+					sh->error = 1;
 		}
 		else if (token->type == PIPE)
 		{
-			if (error_next_is_null(token->next))
-				sh->error = 1;
-			else if (error_next_is_pipe(token->next))
-				sh->error = 1;
+			if (error_next_is_null(token->next)
+				|| error_next_is_pipe(token->next))
+					sh->error = 1;
 		}
 		token = token->next;
 		if (sh->error == 1)
+		{
+			sh->exit_status = MAJOR_FAILURE;
 			return ;
+		}
 	}
 }

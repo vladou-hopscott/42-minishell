@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	init_values(t_sh *sh)
+void	init_prompt_values(t_sh *sh)
 {
 	sh->token_lst = NULL;
 	sh->cmd_line_lst = NULL;
@@ -21,9 +21,12 @@ void	init_values(t_sh *sh)
 	sh->p_quote = NO_QUOTE;
 	sh->error = 0;
 }
+
 void	init_program_values(t_sh *sh)
 {
-	sh->exit_status = 0;
+	init_prompt_values(sh);
+	sh->exit_status = SUCCESS;
+	sh->env = init_environment();
 }
 
 void	free_token_lst(t_token *token)

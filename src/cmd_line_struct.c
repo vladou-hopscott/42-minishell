@@ -70,7 +70,10 @@ void	update_elems_cmd_lines(t_sh *sh)
 		if (update_fdout(&sh->cmd_line_lst))
 			sh->error = 1;
 		if (update_fdin(&sh->cmd_line_lst))
+		{
 			sh->error = 1;
+			sh->exit_status = FAILURE;
+		}
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;
