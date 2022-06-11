@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:15 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:27:16 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:36:05 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* Link global variable declared in main.c to this program */
+extern t_sh sh;
 
 static void	handler(int sigtype, siginfo_t *siginfo, void *ucontext)
 {
@@ -22,6 +25,7 @@ static void	handler(int sigtype, siginfo_t *siginfo, void *ucontext)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		sh.exit_status = 130;
 	}
 }
 
