@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/01 16:00:51 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 13:52:06 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int			str_has_charset(char *str, char *charset);
 int			str_has_quotes(char *str);
 int			str_has_dollar_without_quotes(char *str);
 int			str_has_space_without_quotes(char *str);
+int			open_file_check(int	fd, char *filename);
 
 //********** EXECUTOR **********//
 char		**executor(t_token *token, char **env);
