@@ -49,6 +49,7 @@ int	check_for_quotes(t_sh *sh)
 	{
 		sh->error = 1;
 		ft_putstr_fd("bash : unclosed quotes\n", 2);
+		sh->exit_status = MAJOR_FAILURE;
 		return (1);
 	}
 	return (0);

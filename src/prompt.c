@@ -21,7 +21,7 @@ void	listen_prompt(t_sh *sh)
 	{
 		sh->error = 1;
 		ft_putstr_fd("exit\n", 1);
-		exit(0);
+		exit(SUCCESS);
 	}
 	add_history(sh->prompt);
 }

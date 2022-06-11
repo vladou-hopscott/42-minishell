@@ -63,13 +63,10 @@ void	update_elems_cmd_lines(t_sh *sh)
 	start = sh->cmd_line_lst;
 	while (sh->cmd_line_lst)
 	{
-		if (update_cmd(&sh->cmd_line_lst))
-			sh->error = 1;
-		if (update_args(&sh->cmd_line_lst))
-			sh->error = 1;
-		if (update_fdout(&sh->cmd_line_lst))
-			sh->error = 1;
-		if (update_fdin(&sh->cmd_line_lst))
+		if (update_cmd(&sh->cmd_line_lst)
+			|| update_args(&sh->cmd_line_lst) 
+			|| update_fdout(&sh->cmd_line_lst)
+			|| update_fdin(&sh->cmd_line_lst))
 		{
 			sh->error = 1;
 			sh->exit_status = FAILURE;
