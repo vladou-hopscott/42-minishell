@@ -39,16 +39,21 @@ void	print_parser_result(t_sh *sh)
 	}
 }
 
-int	main(int argc, char **argv)
+void	check_program_args(int argc)
 {
-	//t_token	*token;
-
-	(void)argv;
 	if (argc != 1)
 	{
 		ft_putstr_fd("Error: wrong number of arguments\n", 2);
 		exit(FAILURE);
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	//t_token	*token;
+
+	(void)argv;
+	check_program_args(argc);
 	handle_signals();
 	init_program_values(&sh);
 	while (1)
