@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:55:25 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:16:40 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static	char	*choose_filename(void)
 //MODE ARGUMENTS : S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 int	initialize_heredoc(t_cmd_line **cmd_line)
 {
+	ft_free_null_str(&(*cmd_line)->heredoc_name);
 	(*cmd_line)->heredoc_name = choose_filename();
 	(*cmd_line)->heredoc_mode = 1;
 	(*cmd_line)->fdin = open((*cmd_line)->heredoc_name,

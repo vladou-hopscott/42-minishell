@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:56:01 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:56:02 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:47:45 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	tokenizer(t_sh *sh)
 		str = process_string_token(sh, &sh->prompt[sh->p_index]);
 		if (!str_has_only_spaces(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+		ft_free_null_str(&str);
 	}
 }
 
