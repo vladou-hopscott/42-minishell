@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+/**
+Static scope global variable declarations
+Need to declare sh as global variable
+so that the signal handler can access its properties
+ */
+static t_sh	sh;
+
 //printing parsing result
 void	print_parser_result(t_sh *sh)
 {
@@ -34,7 +41,6 @@ void	print_parser_result(t_sh *sh)
 
 int	main(void)
 {
-	t_sh	sh;
 	//t_token	*token;
 
 	handle_signals();
