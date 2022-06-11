@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+/**
+Static scope global variable declarations
+Need to declare sh as global variable
+so that the signal handler can access its properties
+ */
+t_sh	sh;
+
 //printing parsing result
 void	print_parser_result(t_sh *sh)
 {
@@ -32,14 +39,23 @@ void	print_parser_result(t_sh *sh)
 	}
 }
 
-int	main(void)
+void	check_program_args(int argc)
 {
-	t_sh	sh;
+	if (argc != 1)
+	{
+		ft_putstr_fd("Error: wrong number of arguments\n", 2);
+		exit(FAILURE);
+	}
+}
+
+int	main(int argc, char **argv)
+{
 	//t_token	*token;
 
+	(void)argv;
+	check_program_args(argc);
 	handle_signals();
-	init_values(&sh);
-	sh.env = init_environment();
+	init_program_values(&sh);
 	while (1)
 	{
 		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
@@ -48,7 +64,7 @@ int	main(void)
 		if (sh.error)
 		{
 			free_values(&sh, 0);
-			init_values(&sh);
+			init_prompt_values(&sh);
 			continue ;
 		}
 		print_parser_result(&sh);
@@ -60,7 +76,9 @@ int	main(void)
 		// 	token = token->next;
 		// }
 		free_values(&sh, 0);
-		init_values(&sh);
+		if (!sh.error)
+			sh.exit_status = SUCCESS;
+		init_prompt_values(&sh);
 	}
 	free_values(&sh, 1);
 	if (sh.error == 1)

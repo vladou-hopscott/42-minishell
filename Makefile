@@ -41,6 +41,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/cmd_line_struct.c\
 			$(SRC_DIR)/init_values.c\
 			$(SRC_DIR)/utils.c\
+			$(SRC_DIR)/utils2.c\
 			$(SRC_DIR)/env_manager.c\
 			$(SRC_DIR)/env_manager_utils.c\
 			$(SRC_DIR)/env_expand.c\
@@ -106,7 +107,7 @@ $(BIN_DIR) :
 	mkdir -p $(BIN_DIR)
 
 minishell : $(OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) -lreadline
 
 pipex : $(PIPEX)
 

@@ -66,10 +66,8 @@ void	update_token_type_str(t_sh *sh)
 void	update_tokens_hd_limit(t_cmd_line **cmd_line)
 {
 	t_token		*token;
-	int			has_cmd;
 
 	token = (*cmd_line)->token_lst;
-	has_cmd = 0;
 	while (token)
 	{
 		if (token->type == HEREDOC)

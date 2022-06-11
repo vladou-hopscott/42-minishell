@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/01 16:00:51 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 13:52:06 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,32 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <errno.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "parsing.h"
 # include "pipex.h"
 # include "env_manager.h"
 
-//********************** STRUCTURES **********************//
+//********************** EXIT STATUS **********************//
 
+typedef enum s_exit_status
+{
+	SUCCESS = 0,
+	FAILURE = 1,
+	MAJOR_FAILURE = 2,
+	CMD_NOT_FOUND = 127,
+	PGM_ABORTED = 132,
+}	t_exit_status;
+
+//********************** STRUCTURES **********************//
 //structure principale du programme
 typedef struct s_sh
 {
 	char			**env;
 	t_token			*token_lst;
 	t_cmd_line		*cmd_line_lst;
+	t_exit_status	exit_status;
 	char			*prompt;
 	int				p_index;
 	int				p_quote;
@@ -40,12 +52,14 @@ typedef struct s_sh
 }	t_sh;
 
 //********************** GLOBAL VAR **********************//
-// extern char	**g_env;
+
+
 
 //********************** FUNCTIONS **********************//
 
 //********** INITIALIZATION **********//
-void		init_values(t_sh *sh);
+void		init_program_values(t_sh *sh);
+void		init_prompt_values(t_sh *sh);
 void		free_values(t_sh *sh, int free_env);
 
 //********** PROMPT **********//
@@ -110,6 +124,7 @@ int			str_has_charset(char *str, char *charset);
 int			str_has_quotes(char *str);
 int			str_has_dollar_without_quotes(char *str);
 int			str_has_space_without_quotes(char *str);
+int			open_file_check(int	fd, char *filename);
 
 //********** EXECUTOR **********//
 char		**executor(t_token *token, char **env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_line_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:55:13 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 13:52:32 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void	update_elems_cmd_lines(t_sh *sh)
 	start = sh->cmd_line_lst;
 	while (sh->cmd_line_lst)
 	{
-		if (update_cmd(&sh->cmd_line_lst))
+		if (update_cmd(&sh->cmd_line_lst)
+			|| update_args(&sh->cmd_line_lst) 
+			|| update_fdout(&sh->cmd_line_lst)
+			|| update_fdin(&sh->cmd_line_lst))
+		{
 			sh->error = 1;
-		if (update_args(&sh->cmd_line_lst))
-			sh->error = 1;
-		if (update_fdout(&sh->cmd_line_lst))
-			sh->error = 1;
-		if (update_fdin(&sh->cmd_line_lst))
-			sh->error = 1;
+			sh->exit_status = FAILURE;
+		}
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}
 	sh->cmd_line_lst = start;

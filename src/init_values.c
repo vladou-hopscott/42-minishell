@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:55:53 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:25:45 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_values(t_sh *sh)
+void	init_prompt_values(t_sh *sh)
 {
 	sh->token_lst = NULL;
 	sh->cmd_line_lst = NULL;
@@ -20,6 +20,14 @@ void	init_values(t_sh *sh)
 	sh->p_index = 0;
 	sh->p_quote = NO_QUOTE;
 	sh->error = 0;
+}
+
+void	init_program_values(t_sh *sh)
+{
+	ft_memset(sh, 0, sizeof(t_sh));
+	init_prompt_values(sh);
+	sh->exit_status = SUCCESS;
+	sh->env = init_environment();
 }
 
 void	free_token_lst(t_token *token)

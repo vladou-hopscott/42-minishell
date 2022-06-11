@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/01 18:46:10 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:01:34 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern char	**environ;
+extern t_sh	sh;
 
 int	check_lonely_dollar(char *str, t_quote qs)
 {
@@ -39,9 +40,12 @@ char	*expand_envvar(char *str, t_idx *idx, char **s1, t_quote qs)
 		return (*s1);
 	}
 	env_key = delimit_envvar(str);
-	env_val = env_findkeyvalue(env_key, environ);
+	if (!ft_strncmp(env_key, "?", 1))
+		env_val = ft_strdup(ft_itoa(sh.exit_status));
+	else
+		env_val = env_findkeyvalue(env_key, environ);
 	if (ft_strlen(env_key) == 0)
-		k++;
+		k++;	
 	k += ft_strlen(env_key);
 	idx->i += k;
 	if (str[k] != DOUBLE_QUOTE && str[k] != SINGLE_QUOTE)
@@ -66,6 +70,8 @@ char	*delimit_envvar(char *str)
 	i = 1;
 	if (ft_isdigit(str[i]))
 		return (env_key);
+	if (str[i] == '?')
+		return ft_strdup("?");
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	env_key = ft_strndup(str + 1, i - 1);
