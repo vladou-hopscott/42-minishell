@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swillis <swillis@student.42.fr>            +#+  +:+       +#+         #
+#    By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:15:41 by swillis           #+#    #+#              #
-#    Updated: 2022/04/19 17:38:13 by swillis          ###   ########.fr        #
+#    Updated: 2022/06/13 16:55:27 by vladimir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ BIN_DIR := bin
 EXE_ECHO := $(BIN_DIR)/echo
 EXE_PWD := $(BIN_DIR)/pwd
 EXE_ENV := $(BIN_DIR)/env
+EXE_CD := $(BIN_DIR)/cd
 
 # Compilation ====================================
 
@@ -56,11 +57,19 @@ SRCS_ENV	:= 	$(SRC_DIR)/env.c\
 				$(SRC_DIR)/ft_strncmp.c\
 				$(SRC_DIR)/ft_strjoin.c\
 
+SRCS_CD		:= 	$(SRC_DIR)/cd.c\
+				$(SRC_DIR)/utils.c\
+				$(SRC_DIR)/utils_env.c\
+				$(SRC_DIR)/ft_split.c\
+				$(SRC_DIR)/ft_strdup.c\
+				$(SRC_DIR)/ft_strncmp.c\
+				$(SRC_DIR)/ft_strjoin.c\
+
 # Make all ========================================
 
 all : $(BIN_DIR) $(NAME)
 
-$(NAME): echo pwd env
+$(NAME): echo pwd env cd
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -72,6 +81,8 @@ OBJS_ECHO := $(SRCS_ECHO:.c=.o)
 OBJS_PWD := $(SRCS_PWD:.c=.o)
 
 OBJS_ENV := $(SRCS_ENV:.c=.o)
+
+OBJS_CD := $(SRCS_CD:.c=.o)
 
 # Libs ==========================================
 
@@ -89,13 +100,16 @@ pwd : $(OBJS_PWD)
 env : $(OBJS_ENV)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE_ENV)
 
+cd : $(OBJS_CD)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE_CD)
+
 # Cleanup ========================================
 
 clean:
-	rm -f $(OBJS_ECHO) $(OBJS_PWD) $(OBJS_ENV)
+	rm -f $(OBJS_ECHO) $(OBJS_PWD) $(OBJS_ENV) $(OBJS_CD)
 
 fclean : clean
-	rm -f $(EXE_ECHO) $(EXE_PWD) $(EXE_ENV)
+	rm -f $(EXE_ECHO) $(EXE_PWD) $(EXE_ENV) $(EXE_CD)
 
 # Additional ========================================
 

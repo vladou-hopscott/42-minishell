@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:25:56 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/15 20:22:09 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/13 17:13:07 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**env_export(char *key, char *value, char **env)
 		env = tbl_append(env, str);
 	else
 	{
-		free(env[i]);
+		// free(env[i]); J'ai une erreur de segmentation fault avec ce free : env n'a pas été alloué avec malloc donc pas besoin de free
 		env[i] = str;
 	}
 	return (env);
