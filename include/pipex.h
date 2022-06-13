@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 23:47:18 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/14 14:06:18 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/13 19:36:16 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ char	*ft_strnstr(const char *str, const char *find, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 //********************** UTILS **********************//
-int		close_fds(int file1, int file2);
-char	*env_pathfinder(char **env);
-char	*cmd_pathfinder(char *cmd, char *env_path);
-char	*cmd_strfinder(char *str);
-char	**cmd_argstbl(char *str, char *path);
+// int		close_fds(int file1, int file2);
+// char	*env_pathfinder(char **env);
+// char	*cmd_pathfinder(char *cmd, char *env_path);
+// char	*cmd_strfinder(char *str);
+// char	**cmd_argstbl(char *str, char *path);
 
 //********************** MAIN **********************//
-int		close_fds(int file1, int file2);
-char	*env_pathfinder(char **env);
-char	*cmd_pathfinder(char *cmd, char *env_path);
-char	*cmd_strfinder(char *str);
-char	**cmd_argstbl(char *str, char *path);
+// int		close_fds(int file1, int file2);
+// char	*env_pathfinder(char **env);
+// char	*cmd_pathfinder(char *cmd, char *env_path);
+// char	*cmd_strfinder(char *str);
+// char	**cmd_argstbl(char *str, char *path);
 
 #endif

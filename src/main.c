@@ -48,10 +48,20 @@ void	check_program_args(int argc)
 	}
 }
 
+void	execute_cmds(t_sh *sh)
+{
+	t_cmd_line	*cmdl;
+
+	cmdl = sh->cmd_line_lst;
+	while (cmdl)
+	{
+		executor(cmdl, &sh->env);
+		cmdl = cmdl->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	//t_token	*token;
-
 	(void)argv;
 	check_program_args(argc);
 	handle_signals();
@@ -67,14 +77,8 @@ int	main(int argc, char **argv)
 			init_prompt_values(&sh);
 			continue ;
 		}
-		print_parser_result(&sh);
-
-		//token = sh.token_lst;
-		// while (token)
-		// {
-		// 	sh.env = executor(token, sh.env);
-		// 	token = token->next;
-		// }
+		// print_parser_result(&sh);
+		execute_cmds(&sh);
 		free_values(&sh, 0);
 		if (!sh.error)
 			sh.exit_status = SUCCESS;

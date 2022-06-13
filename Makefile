@@ -59,7 +59,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 
 all : $(BIN_DIR) $(NAME)
 
-$(NAME): minishell pipex builtins
+$(NAME): minishell pipex
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -75,17 +75,6 @@ LIBFT := $(LIB_DIR)/libft/libft.a
 PRINTF := $(LIB_DIR)/libftprintf/libftprintf.a
 
 PIPEX := $(LIB_DIR)/pipex/pipex
-
-LIB_BIN := $(LIB_DIR)/builtins/bin
-
-BINS := 	$(LIB_BIN)/echo \
-			$(LIB_BIN)/env \
-			$(LIB_BIN)/pwd \
-
-BUILTINS := $(BIN_DIR)/echo \
-			$(BIN_DIR)/env \
-			$(BIN_DIR)/pwd \
-
 PIPE := $(BIN_DIR)/pipex
 
 $(LIBFT) :
@@ -96,10 +85,6 @@ $(PRINTF) :
 
 $(PIPEX) :
 	make -C lib/pipex -f Makefile
-
-$(BUILTINS) :
-	make -C lib/builtins -f Makefile
-	cp $(BINS) $(BIN_DIR)
 	cp $(PIPEX) $(BIN_DIR)
 
 # Recipes ========================================
@@ -112,23 +97,20 @@ minishell : $(OBJS) $(LIBFT) $(PRINTF)
 
 pipex : $(PIPEX)
 
-builtins : $(BUILTINS)
-
 # Cleanup ========================================
 
 clean:
 	make -C lib/pipex -f Makefile clean
-	make -C lib/builtins -f Makefile clean
 	make -C lib/libft -f Makefile clean
 	make -C lib/libftprintf -f Makefile clean
 	rm -f $(OBJS)
 
 fclean : clean
 	make -C lib/pipex -f Makefile fclean
-	make -C lib/builtins -f Makefile fclean
 	make -C lib/libft -f Makefile fclean
 	make -C lib/libftprintf -f Makefile fclean
-	rm -f $(EXE) $(BUILTINS) $(PIPE)
+	rm -f $(EXE) $(PIPE)
+	rmdir $(BIN_DIR)
 
 # Additional ========================================
 

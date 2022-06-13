@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:57:15 by swillis           #+#    #+#             */
-/*   Updated: 2022/04/11 23:31:18 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:39:58 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	run_children(t_pvars *pv)
 	waitpid(pv->pid1, NULL, 0);
 	waitpid(pv->pid2, NULL, 0);
 	close_fds(pv->file1, pv->file2);
+	// while (wait(NULL) != -1)
+	// 	;
 	return (0);
 }
 
