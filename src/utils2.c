@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:51:21 by vladimir          #+#    #+#             */
-/*   Updated: 2022/06/16 09:48:57 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/16 13:02:01 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,36 @@ int	ft_str_tbl_len(char **tbl)
 	while (tbl[i])
 		i++;
 	return (i);
+}
+
+//printing parsing result
+void	print_parser_result(t_sh *sh)
+{
+	t_cmd_line *temp;
+	int j;
+
+	if (sh->error == 1)
+		return;
+	temp = sh->cmd_line_lst;
+	j = 1;
+	while (temp)
+	{
+		printf("***CMD_LINE %d ***\n", j);
+		printf("tokens : \n");
+		print_tokens(temp->token_lst);
+		printf("cmd=%s\n",temp->cmd);
+		int i = 0;
+		printf("args: [");
+		while (temp->args[i])
+		{
+			printf("%s,", temp->args[i]);
+			i++;
+		}
+		printf("]");
+		printf("\nfdout=%d, fdin=%d\n", temp->fdout, temp->fdin);
+		printf("heredoc_mode=%d, append_mode=%d\n"	, temp->heredoc_mode, temp->append_mode);
+		printf("\n");
+		temp = temp->next;
+		j++;
+	}
 }
