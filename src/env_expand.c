@@ -6,13 +6,12 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/11 18:56:47 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:30:46 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern char	**environ;
 extern t_sh	sh;
 
 int	check_lonely_dollar(char *str, t_quote qs)
@@ -43,7 +42,7 @@ char	*expand_envvar(char *str, t_idx *idx, char **s1, t_quote qs)
 	if (!ft_strncmp(env_key, "?", 1))
 		env_val = ft_itoa(sh.exit_status);
 	else
-		env_val = env_findkeyvalue(env_key, environ);
+		env_val = env_findkeyvalue(env_key, sh.env);
 	if (ft_strlen(env_key) == 0)
 		k++;	
 	k += ft_strlen(env_key);

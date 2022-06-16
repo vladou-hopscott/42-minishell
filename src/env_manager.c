@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:35:57 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:35:58 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:13:34 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,37 @@ char	**env_getpath(char **env)
 	return (env);
 }
 
-char	**init_environment(void)
-{
-	char	**env;
+// char	**init_environment(void)
+// {
+// 	char	**env;
 
-	env = malloc(sizeof(char *));
-	if (!env)
+// 	env = malloc(sizeof(char *));
+// 	if (!env)
+// 		return (NULL);
+// 	env[0] = NULL;
+// 	env = env_getcwd(env);
+// 	env = env_getpath(env);
+// 	return (env);
+// }
+
+
+
+char	**copy_environment(char **env)
+{
+	char	**env_cpy;
+	int		i;
+
+	env_cpy = ft_calloc(ft_str_tbl_len(env) + 1, sizeof(char *));
+	if (!env_cpy)
 		return (NULL);
-	env[0] = NULL;
-	env = env_getcwd(env);
-	env = env_getpath(env);
-	return (env);
+	i = 0;
+	while (i < ft_str_tbl_len(env))
+	{
+		env_cpy[i] = ft_strdup(env[i]);
+		if (!env_cpy[i])
+			return (ft_freetbl(env_cpy, i));
+		i++;
+	}
+	env_cpy[i] = NULL;
+	return (env_cpy);
 }

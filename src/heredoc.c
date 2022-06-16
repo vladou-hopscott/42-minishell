@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:55:05 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:31:33 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern char	**environ;
 
 char	*trim_quotes_in_delimitor(char **value, int *i, int *j)
 {

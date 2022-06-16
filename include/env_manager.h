@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:24:15 by swillis           #+#    #+#             */
-/*   Updated: 2022/05/31 21:45:58 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:16:07 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ENV_MANAGER_H
 
 //********** ENV_MANAGER **********//
+char	**copy_environment(char **env);
 char	**init_environment(void);
 char	**env_getcwd(char **env);
 char	**env_getpath(char **env);

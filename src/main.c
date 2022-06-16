@@ -1,10 +1,5 @@
 #include "minishell.h"
 
-/**
-Static scope global variable declarations
-Need to declare sh as global variable
-so that the signal handler can access its properties
- */
 t_sh	sh;
 
 //printing parsing result
@@ -60,12 +55,20 @@ void	execute_cmds(t_sh *sh)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
 	check_program_args(argc);
 	handle_signals();
-	init_program_values(&sh);
+	init_program_values(&sh, env);
+
+	// int i = 0;
+	// while (sh.env[i])
+	// {
+	// 	printf("%s\n", sh.env[i]);
+	// 	i++;
+	// }
+	
 	while (1)
 	{
 		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée

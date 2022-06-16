@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/11 19:24:14 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:39:23 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ void	init_prompt_values(t_sh *sh)
 	sh->error = 0;
 }
 
-void	init_program_values(t_sh *sh)
+void	init_program_values(t_sh *sh, char **env)
 {
 	ft_memset(sh, 0, sizeof(t_sh));
 	init_prompt_values(sh);
 	sh->exit_status = SUCCESS;
-	sh->env = init_environment();
+	sh->env = copy_environment(env);
+	if (sh->error || sh->env == NULL)
+	{
+		ft_putstr_fd("Error\n", 2);
+		exit(FAILURE);
+	}
 }
