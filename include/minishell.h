@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/13 16:13:52 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/16 10:15:43 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum s_exit_status
 	FAILURE = 1,
 	MAJOR_FAILURE = 2,
 	CMD_NOT_FOUND = 127,
-	PGM_ABORTED = 132,
+	PGM_ABORTED = 132
 }	t_exit_status;
 
 //********************** STRUCTURES **********************//
@@ -58,7 +58,7 @@ typedef struct s_sh
 //********************** FUNCTIONS **********************//
 
 //********** INITIALIZATION **********//
-void		init_program_values(t_sh *sh);
+void		init_program_values(t_sh *sh, char **env);
 void		init_prompt_values(t_sh *sh);
 void		free_values(t_sh *sh, int free_env);
 
@@ -125,6 +125,8 @@ int			str_has_quotes(char *str);
 int			str_has_dollar_without_quotes(char *str);
 int			str_has_space_without_quotes(char *str);
 int			open_file_check(int	fd, char *filename);
+int			ft_str_tbl_len(char **tbl);
+
 
 //********** EXECUTOR **********//
 void		executor(t_cmd_line *cmdl, char ***env);
