@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:13:30 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:39:23 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_program_values(t_sh *sh, char **env)
 	sh->env = copy_environment(env);
 	if (sh->error || sh->env == NULL)
 	{
-		sh->exit_status = FAILURE;
+		ft_putstr_fd("Error\n", 2);
 		exit(FAILURE);
 	}
 }

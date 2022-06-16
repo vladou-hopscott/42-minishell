@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_expand2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:18:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:18:23 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/16 10:31:07 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern char	**environ;
 
 t_token	*tokenize_within_token(t_token **token)
 {

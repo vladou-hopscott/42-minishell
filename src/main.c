@@ -59,36 +59,36 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
 	check_program_args(argc);
-	// handle_signals();
+	handle_signals();
 	init_program_values(&sh, env);
 
-	int i = 0;
-	while (sh.env[i])
-	{
-		printf("%s\n", sh.env[i]);
-		i++;
-	}
-	
-	// while (1)
+	// int i = 0;
+	// while (sh.env[i])
 	// {
-	// 	listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
-	// 	lexer(&sh); //analyse lexicale de la commande et verif erreurs de syntaxe des redirections
-	// 	parser(&sh); //traitement des tokens en cmd lines, separees par des pipes. chaque cmd line represente un processus
-	// 	if (sh.error)
-	// 	{
-	// 		free_values(&sh, 0);
-	// 		init_prompt_values(&sh);
-	// 		continue ;
-	// 	}
-	// 	// print_parser_result(&sh);
-	// 	execute_cmds(&sh);
-	// 	free_values(&sh, 0);
-	// 	if (!sh.error)
-	// 		sh.exit_status = SUCCESS;
-	// 	init_prompt_values(&sh);
+	// 	printf("%s\n", sh.env[i]);
+	// 	i++;
 	// }
-	// free_values(&sh, 1);
-	// if (sh.error == 1)
-	// 	return (1);
+	
+	while (1)
+	{
+		listen_prompt(&sh); //générer un prompt avec readline() et enregistrer la commande tapée
+		lexer(&sh); //analyse lexicale de la commande et verif erreurs de syntaxe des redirections
+		parser(&sh); //traitement des tokens en cmd lines, separees par des pipes. chaque cmd line represente un processus
+		if (sh.error)
+		{
+			free_values(&sh, 0);
+			init_prompt_values(&sh);
+			continue ;
+		}
+		// print_parser_result(&sh);
+		execute_cmds(&sh);
+		free_values(&sh, 0);
+		if (!sh.error)
+			sh.exit_status = SUCCESS;
+		init_prompt_values(&sh);
+	}
+	free_values(&sh, 1);
+	if (sh.error == 1)
+		return (1);
 	return (0);
 }
