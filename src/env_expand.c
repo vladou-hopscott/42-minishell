@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   env_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:30:46 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:36:07 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_sh	sh;
+extern t_sh	g_sh;
 
-int	check_lonely_dollar(char *str, t_quote qs)
+int	manage_lonely_dollar(char *str, t_quote qs, t_idx *idx, char **s1)
 {
 	if (ft_strlen(str) == 1
 		|| !ft_strncmp(str, "$$", 2)
 		|| (!ft_strncmp(str, "$\"", 2) && qs == DOUBLE_QUOTE)
 		|| (!ft_strncmp(str, "$\'", 2) && qs == SINGLE_QUOTE))
+	{
+		*s1 = ft_strjoin(*s1, "$");
+		idx->i++;
+		idx->j = idx->i;
 		return (1);
+	}
 	return (0);
 }
 
@@ -31,20 +36,15 @@ char	*expand_envvar(char *str, t_idx *idx, char **s1, t_quote qs)
 	int		k;
 
 	k = 0;
-	if (check_lonely_dollar(str, qs))
-	{
-		*s1 = ft_strjoin(*s1, "$");
-		idx->i++;
-		idx->j = idx->i;
+	if (manage_lonely_dollar(str, qs, idx, s1))
 		return (*s1);
-	}
 	env_key = delimit_envvar(str);
 	if (!ft_strncmp(env_key, "?", 1))
-		env_val = ft_itoa(sh.exit_status);
+		env_val = ft_itoa(g_sh.exit_status);
 	else
-		env_val = env_findkeyvalue(env_key, sh.env);
+		env_val = env_findkeyvalue(env_key, g_sh.env);
 	if (ft_strlen(env_key) == 0)
-		k++;	
+		k++;
 	k += ft_strlen(env_key);
 	idx->i += k;
 	if (str[k] != DOUBLE_QUOTE && str[k] != SINGLE_QUOTE)
@@ -70,11 +70,30 @@ char	*delimit_envvar(char *str)
 	if (ft_isdigit(str[i]))
 		return (env_key);
 	if (str[i] == '?')
-		return ft_strdup("?");
+		return (ft_strdup("?"));
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	env_key = ft_strndup(str + 1, i - 1);
 	return (env_key);
+}
+
+//void	expansion_mechanism(s1, s2, value, quote_status, idx)
+//{
+//	s2 = ft_strndup(&(*value)[idx.j], idx.i - idx.j);
+//	s1 = ft_strjoin_free(&s1, &s2);
+//	s1 = expand_envvar(&(*value)[idx.i], &idx, &s1, quote_status);
+//	if ((*value)[idx.i] == DOUBLE_QUOTE || (*value)[idx.i] == SINGLE_QUOTE)
+//		quote_status = check_quote_status_in_str((*value)[idx.i], quote_status);
+
+//}
+
+void	set_init_values(t_idx *idx, char **s1, char **s2, int *quote_status)
+{
+	idx->i = 0;
+	idx->j = 0;
+	*s1 = NULL;
+	*s2 = NULL;
+	*quote_status = NO_QUOTE;
 }
 
 char	*expand_envvars_in_token(char **value)
@@ -86,10 +105,7 @@ char	*expand_envvars_in_token(char **value)
 
 	if (!str_has_dollar_without_quotes(*value))
 		return (NULL);
-	idx.i = 0;
-	idx.j = 0;
-	s1 = NULL;
-	quote_status = NO_QUOTE;
+	set_init_values(&idx, &s1, &s2, &quote_status);
 	while ((*value)[idx.i])
 	{
 		quote_status = check_quote_status_in_str((*value)[idx.i], quote_status);
@@ -98,8 +114,10 @@ char	*expand_envvars_in_token(char **value)
 			s2 = ft_strndup(&(*value)[idx.j], idx.i - idx.j);
 			s1 = ft_strjoin_free(&s1, &s2);
 			s1 = expand_envvar(&(*value)[idx.i], &idx, &s1, quote_status);
-			if ((*value)[idx.i] == DOUBLE_QUOTE || (*value)[idx.i] == SINGLE_QUOTE)
-				quote_status = check_quote_status_in_str((*value)[idx.i], quote_status);
+			if ((*value)[idx.i] == DOUBLE_QUOTE
+				|| (*value)[idx.i] == SINGLE_QUOTE)
+				quote_status = check_quote_status_in_str(
+						(*value)[idx.i], quote_status);
 		}
 		idx.i++;
 	}

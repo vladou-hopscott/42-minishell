@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:32:19 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:06:29 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_sh	sh;
+extern t_sh	g_sh;
 
 int	process_eof_heredoc(char **tmp, t_cmd_line **cmd_line)
 {
@@ -42,7 +42,7 @@ char	*expand_envvar_in_heredoc(char *str, int *i, int *j, char **s1)
 	if (env_key && env_key[0] == '\0')
 		env_val = ft_strdup("$");
 	else
-		env_val = env_findkeyvalue(env_key, sh.env);
+		env_val = env_findkeyvalue(env_key, g_sh.env);
 	if (!env_key)
 		*i = *i + 1;
 	*i = *i + ft_strlen(env_key);

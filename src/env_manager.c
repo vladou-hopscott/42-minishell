@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:35:57 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:13:34 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:27:32 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char	**env_getpath(char **env)
 // 	env = env_getpath(env);
 // 	return (env);
 // }
-
-
 
 char	**copy_environment(char **env)
 {

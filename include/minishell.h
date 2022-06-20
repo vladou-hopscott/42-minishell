@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:15:43 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:39:02 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ typedef enum s_exit_status
 	PGM_ABORTED = 132
 }	t_exit_status;
 
-//********************** STRUCTURES **********************//
-//structure principale du programme
+//*************** STRUCTURE PRINCIPALE ***************//
 typedef struct s_sh
 {
 	char			**env;
@@ -50,10 +49,6 @@ typedef struct s_sh
 	int				p_quote;
 	int				error;
 }	t_sh;
-
-//********************** GLOBAL VAR **********************//
-
-
 
 //********************** FUNCTIONS **********************//
 
@@ -124,9 +119,8 @@ int			str_has_charset(char *str, char *charset);
 int			str_has_quotes(char *str);
 int			str_has_dollar_without_quotes(char *str);
 int			str_has_space_without_quotes(char *str);
-int			open_file_check(int	fd, char *filename);
+int			open_file_check(int fd, char *filename);
 int			ft_str_tbl_len(char **tbl);
-
 
 //********** EXECUTOR **********//
 void		executor(t_cmd_line *cmdl, char ***env);

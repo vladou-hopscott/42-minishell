@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/06/20 14:39:18 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_sh	sh;
+t_sh	g_sh;
 
 void	check_program_args(int argc)
 {
@@ -28,27 +40,26 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	check_program_args(argc);
 	handle_signals();
-	init_program_values(&sh, env);
+	init_program_values(&g_sh, env);
 	while (1)
 	{
-		listen_prompt(&sh);
-		lexer(&sh);
-		parser(&sh);
-		if (sh.error)
+		listen_prompt(&g_sh);
+		lexer(&g_sh);
+		parser(&g_sh);
+		if (g_sh.error)
 		{
-			free_values(&sh, 0);
-			init_prompt_values(&sh);
+			free_values(&g_sh, 0);
+			init_prompt_values(&g_sh);
 			continue ;
 		}
-		// print_parser_result(&sh);
-		execute_cmds(&sh);
-		free_values(&sh, 0);
-		if (!sh.error)
-			sh.exit_status = SUCCESS;
-		init_prompt_values(&sh);
+		execute_cmds(&g_sh);
+		free_values(&g_sh, 0);
+		if (!g_sh.error)
+			g_sh.exit_status = SUCCESS;
+		init_prompt_values(&g_sh);
 	}
-	free_values(&sh, 1);
-	if (sh.error == 1)
+	free_values(&g_sh, 1);
+	if (g_sh.error == 1)
 		return (1);
 	return (0);
 }

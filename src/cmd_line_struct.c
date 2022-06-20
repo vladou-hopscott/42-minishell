@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_line_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/11 13:52:32 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:30:11 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	update_elems_cmd_lines(t_sh *sh)
 	while (sh->cmd_line_lst)
 	{
 		if (update_cmd(&sh->cmd_line_lst)
-			|| update_args(&sh->cmd_line_lst) 
+			|| update_args(&sh->cmd_line_lst)
 			|| update_fdout(&sh->cmd_line_lst)
 			|| update_fdin(&sh->cmd_line_lst))
 		{
