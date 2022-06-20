@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+extern t_sh	g_sh;
+
 // ======================= ECHO ====================================
 
 void	builtin_echo(int ac, char **av, int fdout)
@@ -70,45 +72,75 @@ char	*cut_root(char *path, int i)
 	return (new);
 }
 
+// not working for . and .. alone
+// should not accept no argument as subject says that only relative and absolute paths are accepted.
+//void	builtin_cd(int ac, char **av, char ***penv)
+//{
+//	char	**env;
+//	char	*path;
+//	char	*root;
+//	size_t	i;
+//	int		n;
+
+//	env = *penv;
+//	if ((ac == 1) && (chdir("/") == 0))
+//		*penv = env_export("PWD", "/", env);
+//	else if (ac == 2)
+//	{
+//		path = av[1];
+//		i = 0;
+//		if (path[i] == '.')
+//		{
+//			n = 1;
+//			while ((i + 1 < ft_strlen(path)) && (path[i + 1] == '.' || path[i + 1] == '/'))
+//			{
+//				if ((path[i] == '.') && (path[i + 1] == '.'))
+//					n++;
+//				i++;
+//			}
+//			root = env_findkeyvalue("PWD", env);
+//			root = cut_root(root, n - 1);
+//			if (root && (ft_strlen(root) > 1))
+//				path = ft_strjoin(root, &path[i]);
+//			else if (root)
+//				path = &path[i];
+//		}
+//		path = remove_trailing_slash(path);
+//		if ((path[0] == '/') && (chdir(path) == 0))
+//			*penv = env_export("PWD", path, env);
+//		else
+//			ft_printf("cd: no such file or directory: %s\n", av[1]);
+//	}
+//	else
+//		ft_printf("cd: too many arguments\n");
+//}
+
 void	builtin_cd(int ac, char **av, char ***penv)
 {
-	char	**env;
 	char	*path;
-	char	*root;
-	size_t	i;
-	int		n;
+	char	*newpath;
 
-	env = *penv;
-	if ((ac == 1) && (chdir("/") == 0))
-		*penv = env_export("PWD", "/", env);
-	else if (ac == 2)
+	if (ac != 2)
 	{
-		path = av[1];
-		i = 0;
-		if (path[i] == '.')
-		{
-			n = 1;
-			while ((i + 1 < ft_strlen(path)) && (path[i + 1] == '.' || path[i + 1] == '/'))
-			{
-				if ((path[i] == '.') && (path[i + 1] == '.'))
-					n++;
-				i++;
-			}
-			root = env_findkeyvalue("PWD", env);
-			root = cut_root(root, n - 1);
-			if (root && (ft_strlen(root) > 1))
-				path = ft_strjoin(root, &path[i]);
-			else if (root)
-				path = &path[i];
-		}
-		path = remove_trailing_slash(path);
-		if ((path[0] == '/') && (chdir(path) == 0))
-			*penv = env_export("PWD", path, env);
-		else
-			ft_printf("cd: no such file or directory: %s\n", av[1]);
+		ft_putstr_fd("command cd only accepts relative or absolute paths\n", 2);
+		g_sh.error = 1;
+		g_sh.exit_status = 1;
+		return ;
 	}
-	else
-		ft_printf("cd: too many arguments\n");
+	path = getcwd(NULL, 999999);
+	*penv = env_export("OLDPWD", path, *penv);
+	free(path);
+	if (chdir(av[1]) == -1)
+	{
+		perror(av[1]);
+		g_sh.error = 1;
+		g_sh.exit_status = 1;
+		return ;
+	}
+	newpath = getcwd(NULL, 999999);
+	*penv = env_export("PWD", newpath, *penv);
+	free(newpath);
+	return ;
 }
 
 // ======================= PWD ====================================
@@ -124,7 +156,7 @@ void	builtin_pwd(int ac, char **env, int fdout)
 		ft_putchar_fd('\n', fdout);
 		free(pwd);
 	}
-	else 
+	else
 		ft_printf("pwd: too many arguments\n");
 }
 
@@ -231,7 +263,7 @@ void	builtin_env(int ac, char **env, int fdout)
 			i++;
 		}
 	}
-	else 
+	else
 		ft_printf("env: too many arguments\n");
 }
 
