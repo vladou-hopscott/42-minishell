@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/11 19:16:40 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:33:46 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	char	*choose_filename(void)
 	char	*nbr;
 
 	i = 1;
-	filename = ft_strdup("./heredoc");
+	filename = ft_strdup("./.heredoc");
 	file_exists = open(filename, O_RDONLY);
 	while (file_exists != -1)
 	{
