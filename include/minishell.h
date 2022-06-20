@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:39:02 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:04:18 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_token		*create_tokens_within_tokens(t_token **token, char *str);
 void		update_token_type_heredoc_limit(t_sh *sh);
 void		update_tokens_hd_limit(t_cmd_line **cmd_line);
 void		print_parser_result(t_sh *sh);
+void		close_file_fdin(t_cmd_line **cmd_line);
 
 //********** SIGNALS **********//
 void		handle_signals(void);

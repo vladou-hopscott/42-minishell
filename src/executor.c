@@ -72,8 +72,8 @@ char	*cut_root(char *path, int i)
 	return (new);
 }
 
-// not working for . and .. alone
-// should not accept no argument as subject says that only relative and absolute paths are accepted.
+// not working for relative paths . and .. and ./..
+// should not accept cd without arguments as subject says that only relative and absolute paths are accepted.
 //void	builtin_cd(int ac, char **av, char ***penv)
 //{
 //	char	**env;
@@ -138,20 +138,24 @@ void	builtin_cd(int ac, char **av, char ***penv)
 		return ;
 	}
 	newpath = getcwd(NULL, 999999);
-	*penv = env_export("PWD", newpath, *penv);
+	if (env_findkeypos("PWD", *penv) != -1)
+		*penv = env_export("PWD", newpath, *penv);
 	free(newpath);
 	return ;
 }
 
 // ======================= PWD ====================================
 
-void	builtin_pwd(int ac, char **env, int fdout)
+void	builtin_pwd(int ac, int fdout)
 {
 	char	*pwd;
+	char	*buf;
 
 	if (ac == 1)
 	{
-		pwd = env_findkeyvalue("PWD", env);
+		buf = getcwd(NULL, 0);
+		pwd = ft_strdup(buf);
+		free(buf);
 		ft_putstr_fd(pwd, fdout);
 		ft_putchar_fd('\n', fdout);
 		free(pwd);
@@ -301,24 +305,53 @@ void	cmd_pathfinder(char **pcmd, char **env)
 	free(env_path);
 }
 
-void	exec_bin(char *cmd, char **args, char **env)
+void	update_stdin_stdout(int *cpy_stdin, int *cpy_stdout, t_cmd_line *cmdl)
 {
-	char	*cpy;
-	int		pid;
+	*cpy_stdin = dup(0);
+	*cpy_stdout = dup(1);
+	dup2(cmdl->fdin, 0);
+	dup2(cmdl->fdout, 1);
+}
 
-	cpy = ft_strdup(cmd);
-	cmd_pathfinder(&cmd, env);
-	if (cmd)
+void	reset_stdin_stdout(int cpy_stdin, int cpy_stdout, t_cmd_line *cmdl)
+{
+	dup2(cpy_stdin, 0);
+	dup2(cpy_stdout, 1);
+	close(cpy_stdin);
+	close(cpy_stdout);
+	if (cmdl->fdin != 0)
+		close(cmdl->fdin);
+	if (cmdl->fdout != 1)
+		close(cmdl->fdout);
+}
+
+void	exec_bin(t_cmd_line *cmdl, char **env)
+{
+	int		pid;
+	int		exists;
+	int		cpy_stdin;
+	int		cpy_stdout;
+	char	*cpy;
+
+	cpy = ft_strdup(cmdl->cmd);
+	exists = 0;
+	if (access(cmdl->cmd, F_OK) == 0)
+		exists = 1;
+	if (!exists)
+		cmd_pathfinder(&cmdl->cmd, env);
+	if (cmdl->cmd)
 	{
-		free(args[0]);
-		args[0] = ft_strdup(cmd);
+		update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
+		free(cmdl->args[0]);
+		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		pid = fork();
 		if (pid < 0)
 			return ;
 		if (pid == 0)
-			execve(cmd, args, env);
+			execve(cmdl->cmd, cmdl->args, env);
 		waitpid(pid, NULL, 0);
 		close(pid);
+		reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
 	}
 	else
 	{
@@ -326,6 +359,32 @@ void	exec_bin(char *cmd, char **args, char **env)
 		free(cpy);
 	}
 }
+
+//void	exec_bin(char *cmd, char **args, char **env)
+//{
+//	char	*cpy;
+//	int		pid;
+
+//	cpy = ft_strdup(cmd);
+//	cmd_pathfinder(&cmd, env);
+//	if (cmd)
+//	{
+//		free(args[0]);
+//		args[0] = ft_strdup(cmd);
+//		pid = fork();
+//		if (pid < 0)
+//			return ;
+//		if (pid == 0)
+//			execve(cmd, args, env);
+//		waitpid(pid, NULL, 0);
+//		close(pid);
+//	}
+//	else
+//	{
+//		ft_printf("minishell: command not found: %s\n", cpy);
+//		free(cpy);
+//	}
+//}
 
 
 // ======================= EXEC ====================================
@@ -345,20 +404,21 @@ void	executor(t_cmd_line *cmdl, char ***penv)
 	char	**env;
 
 	env = *penv;
-	if (ft_strncmp(cmdl->cmd, "echo", ft_strlen("echo")) == 0)
+	if (ft_strncmp(cmdl->cmd, "echo", ft_strlen("echo") + 1) == 0)
 		builtin_echo(args_to_ac(cmdl->args), cmdl->args, cmdl->fdout);
-	else if (ft_strncmp(cmdl->cmd, "cd", ft_strlen("cd")) == 0)
+	else if (ft_strncmp(cmdl->cmd, "cd", ft_strlen("cd") + 1) == 0)
 		builtin_cd(args_to_ac(cmdl->args), cmdl->args, penv);
-	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd")) == 0)
-		builtin_pwd(args_to_ac(cmdl->args), env, cmdl->fdout);
-	else if (ft_strncmp(cmdl->cmd, "export", ft_strlen("export")) == 0)
+	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd") + 1) == 0)
+		builtin_pwd(args_to_ac(cmdl->args), cmdl->fdout);
+	else if (ft_strncmp(cmdl->cmd, "export", ft_strlen("export") + 1) == 0)
 		builtin_export(args_to_ac(cmdl->args), cmdl->args, penv);
-	else if (ft_strncmp(cmdl->cmd, "unset", ft_strlen("unset")) == 0)
+	else if (ft_strncmp(cmdl->cmd, "unset", ft_strlen("unset") + 1) == 0)
 		builtin_unset(args_to_ac(cmdl->args), cmdl->args, penv);
-	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env")) == 0)
+	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env") + 1) == 0)
 		builtin_env(args_to_ac(cmdl->args), env, cmdl->fdout);
-	else if (ft_strncmp(cmdl->cmd, "exit", ft_strlen("exit")) == 0)
+	else if (ft_strncmp(cmdl->cmd, "exit", ft_strlen("exit") + 1) == 0)
 		exit(0);
 	else
-		exec_bin(cmdl->cmd, cmdl->args, env);
+		exec_bin(cmdl, env);
+		//exec_bin(cmdl->cmd, cmdl->args, env);
 }
