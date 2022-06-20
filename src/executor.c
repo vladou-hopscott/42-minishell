@@ -328,12 +328,17 @@ void	reset_stdin_stdout(int cpy_stdin, int cpy_stdout, t_cmd_line *cmdl)
 void	exec_bin(t_cmd_line *cmdl, char **env)
 {
 	int		pid;
+	int		exists;
 	int		cpy_stdin;
 	int		cpy_stdout;
 	char	*cpy;
 
 	cpy = ft_strdup(cmdl->cmd);
-	cmd_pathfinder(&cmdl->cmd, env);
+	exists = 0;
+	if (access(cmdl->cmd, F_OK) == 0)
+		exists = 1;
+	if (!exists)
+		cmd_pathfinder(&cmdl->cmd, env);
 	if (cmdl->cmd)
 	{
 		update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
