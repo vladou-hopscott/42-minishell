@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/22 16:02:16 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:33:02 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ int			ft_str_tbl_len(char **tbl);
 
 //********** EXECUTOR **********//
 void		executor(t_cmd_line *cmdl, char ***env);
+void		err_cmd_not_found(t_sh *sh, char *cmd);
 
 #endif

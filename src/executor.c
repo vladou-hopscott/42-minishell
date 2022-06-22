@@ -74,6 +74,8 @@ char	*cut_root(char *path, int i)
 
 // not working for relative paths . and .. and ./..
 // should not accept cd without arguments as subject says that only relative and absolute paths are accepted.
+// need to update OLDPWD in environment
+// need to update sh->exit_status and sh->error
 //void	builtin_cd(int ac, char **av, char ***penv)
 //{
 //	char	**env;
@@ -332,6 +334,7 @@ void	exec_bin(t_cmd_line *cmdl, char **env)
 	int		cpy_stdin;
 	int		cpy_stdout;
 	char	*cpy;
+	int		status;
 
 	cpy = ft_strdup(cmdl->cmd);
 	exists = 0;
@@ -349,43 +352,20 @@ void	exec_bin(t_cmd_line *cmdl, char **env)
 			return ;
 		if (pid == 0)
 			execve(cmdl->cmd, cmdl->args, env);
-		waitpid(pid, NULL, 0);
+		if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
+		{
+			g_sh.exit_status = WEXITSTATUS(status);
+			g_sh.error = 1;
+		}
 		close(pid);
 		reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
 	}
 	else
 	{
-		ft_printf("minishell: command not found: %s\n", cpy);
+		err_cmd_not_found(&g_sh, cpy);
 		free(cpy);
 	}
 }
-
-//void	exec_bin(char *cmd, char **args, char **env)
-//{
-//	char	*cpy;
-//	int		pid;
-
-//	cpy = ft_strdup(cmd);
-//	cmd_pathfinder(&cmd, env);
-//	if (cmd)
-//	{
-//		free(args[0]);
-//		args[0] = ft_strdup(cmd);
-//		pid = fork();
-//		if (pid < 0)
-//			return ;
-//		if (pid == 0)
-//			execve(cmd, args, env);
-//		waitpid(pid, NULL, 0);
-//		close(pid);
-//	}
-//	else
-//	{
-//		ft_printf("minishell: command not found: %s\n", cpy);
-//		free(cpy);
-//	}
-//}
-
 
 // ======================= EXEC ====================================
 
@@ -420,5 +400,4 @@ void	executor(t_cmd_line *cmdl, char ***penv)
 		exit(0);
 	else
 		exec_bin(cmdl, env);
-		//exec_bin(cmdl->cmd, cmdl->args, env);
 }
