@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:31:33 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:02:55 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ void	process_delimitor(char **delimitor, int	*quotes)
 	}
 }
 
-int	is_delimitor(char **tmp, char **delimitor)
+int	is_delimitor_process(char **tmp, char **delimitor, t_cmd_line **cmd_line)
 {
 	if (!ft_strncmp(*tmp, *delimitor, ft_strlen(*delimitor))
 		&& ft_strlen(*tmp) == ft_strlen(*delimitor))
 	{
+		ft_putstr_fd("\n", (*cmd_line)->fdin);
 		ft_free_null_str(tmp);
 		return (1);
 	}
@@ -90,13 +91,13 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 		tmp = read_heredoc_line(cmd_line, quotes, delimitor);
 		if (!tmp)
 			return (1);
-		if (is_delimitor(&tmp, &delimitor))
+		if (is_delimitor_process(&tmp, &delimitor, cmd_line))
 			break ;
-		if (i > 0)
-			ft_putstr_fd("\n", (*cmd_line)->fdin);
-		ft_putstr_fd(tmp, (*cmd_line)->fdin);
-		ft_free_null_str(&tmp);
+		write_heredoc_line(&tmp, cmd_line, i);
 		i++;
 	}
+	close((*cmd_line)->fdin);
+	if (open_file_fdin((*cmd_line)->heredoc_name, cmd_line))
+		return (1);
 	return (0);
 }

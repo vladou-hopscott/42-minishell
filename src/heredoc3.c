@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 19:33:46 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:01:58 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,12 @@ int	initialize_heredoc(t_cmd_line **cmd_line)
 	if ((*cmd_line)->fdin == -1)
 		return (1);
 	return (0);
+}
+
+void	write_heredoc_line(char **tmp, t_cmd_line **cmd_line, int i)
+{
+	if (i > 0)
+		ft_putstr_fd("\n", (*cmd_line)->fdin);
+	ft_putstr_fd(*tmp, (*cmd_line)->fdin);
+	ft_free_null_str(tmp);
 }

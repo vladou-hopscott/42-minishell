@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 18:04:18 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:02:16 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		update_token_type_heredoc_limit(t_sh *sh);
 void		update_tokens_hd_limit(t_cmd_line **cmd_line);
 void		print_parser_result(t_sh *sh);
 void		close_file_fdin(t_cmd_line **cmd_line);
+int			open_file_fdin(char *filename, t_cmd_line **cmd_line);
 
 //********** SIGNALS **********//
 void		handle_signals(void);
@@ -113,6 +114,7 @@ int			run_children(char *delimitor);
 char		*read_heredoc_line(t_cmd_line **cmd_line,
 				int quotes, char *delimitor);
 char		*expand_heredoc_line(char **str);
+void		write_heredoc_line(char **tmp, t_cmd_line **cmd_line, int i);
 
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);
