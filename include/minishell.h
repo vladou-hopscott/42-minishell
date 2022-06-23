@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/23 10:27:05 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:34:04 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void		update_elems_cmd_lines(t_sh *sh);
 int			update_cmd(t_cmd_line **cmd_line);
 int			update_args(t_cmd_line **cmd_line);
 int			count_arg_tokens(t_token *li);
-int			update_fdin(t_cmd_line **cmd_line);
-int			update_fdout(t_cmd_line **cmd_line);
 void		process_quotes_in_tokens(t_cmd_line **cmd_line);
 char		*process_quotes_in_token(char **value);
 void		expand_envvars_in_tokens(t_cmd_line **cmd_line);
@@ -89,8 +87,12 @@ t_token		*create_tokens_within_tokens(t_token **token, char *str);
 void		update_token_type_heredoc_limit(t_sh *sh);
 void		update_tokens_hd_limit(t_cmd_line **cmd_line);
 void		print_parser_result(t_sh *sh);
+
+//********** REDIRECTIONS **********//
 void		close_file_fdin(t_cmd_line **cmd_line);
 int			open_file_fdin(char *filename, t_cmd_line **cmd_line);
+int			update_fdin(t_cmd_line **cmd_line);
+int			update_fdout(t_cmd_line **cmd_line);
 
 //********** SIGNALS **********//
 void		handle_signals(void);
@@ -116,6 +118,22 @@ char		*read_heredoc_line(t_cmd_line **cmd_line,
 char		*expand_heredoc_line(char **str);
 void		write_heredoc_line(char **tmp, t_cmd_line **cmd_line, int i);
 
+//********** EXECUTOR **********//
+void		executor(t_cmd_line *cmdl, char ***env);
+void		exec_bin(t_cmd_line *cmdl, char **env);
+void		cmd_pathfinder(char **pcmd, char **env);
+
+//********** BUILTINS **********//
+void		builtin_echo(int ac, char **av, int fdout);
+void		builtin_pwd(int ac, int fdout);
+void		builtin_cd(int ac, char **av, char ***penv);
+void		builtin_env(int ac, char **env, int fdout);
+void		builtin_unset(int ac, char **av, char ***penv);
+void		builtin_export(int ac, char **av, char ***penv);
+
+//********** ERRORS **********//
+void		err_cmd_not_found(t_sh *sh, char *cmd);
+
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);
 int			str_has_charset(char *str, char *charset);
@@ -125,9 +143,5 @@ int			str_has_space_without_quotes(char *str);
 int			open_file_check(int fd, char *filename);
 int			ft_str_tbl_len(char **tbl);
 void		set_error_exit_status(t_sh *sh, int status);
-
-//********** EXECUTOR **********//
-void		executor(t_cmd_line *cmdl, char ***env);
-void		err_cmd_not_found(t_sh *sh, char *cmd);
 
 #endif
