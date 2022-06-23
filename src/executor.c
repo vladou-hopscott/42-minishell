@@ -327,39 +327,42 @@ void	reset_stdin_stdout(int cpy_stdin, int cpy_stdout, t_cmd_line *cmdl)
 		close(cmdl->fdout);
 }
 
-void	exec_bin(t_cmd_line *cmdl, char **env)
+int	process_cmd(t_cmd_line *cmdl, char **env)
 {
 	int		pid;
-	int		exists;
 	int		cpy_stdin;
 	int		cpy_stdout;
-	char	*cpy;
 	int		status;
 
+	update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
+	free(cmdl->args[0]);
+	cmdl->args[0] = ft_strdup(cmdl->cmd);
+	pid = fork();
+	if (pid < 0)
+	{
+		set_error_exit_status(&g_sh, MAJOR_FAILURE);
+		reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
+		return (1);
+	}
+	if (pid == 0)
+		execve(cmdl->cmd, cmdl->args, env);
+	if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
+		set_error_exit_status(&g_sh, WEXITSTATUS(status));
+	close(pid);
+	reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
+	return (0);
+}
+
+void	exec_bin(t_cmd_line *cmdl, char **env)
+{
+	char	*cpy;
+
 	cpy = ft_strdup(cmdl->cmd);
-	exists = 0;
-	if (access(cmdl->cmd, F_OK) == 0)
-		exists = 1;
-	if (!exists)
+
+	if (access(cmdl->cmd, F_OK) != 0)
 		cmd_pathfinder(&cmdl->cmd, env);
 	if (cmdl->cmd)
-	{
-		update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
-		free(cmdl->args[0]);
-		cmdl->args[0] = ft_strdup(cmdl->cmd);
-		pid = fork();
-		if (pid < 0)
-			return ;
-		if (pid == 0)
-			execve(cmdl->cmd, cmdl->args, env);
-		if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
-		{
-			g_sh.exit_status = WEXITSTATUS(status);
-			g_sh.error = 1;
-		}
-		close(pid);
-		reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
-	}
+		process_cmd(cmdl, env);
 	else
 	{
 		err_cmd_not_found(&g_sh, cpy);

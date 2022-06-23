@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/22 17:33:02 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:27:05 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int			str_has_dollar_without_quotes(char *str);
 int			str_has_space_without_quotes(char *str);
 int			open_file_check(int fd, char *filename);
 int			ft_str_tbl_len(char **tbl);
+void		set_error_exit_status(t_sh *sh, int status);
 
 //********** EXECUTOR **********//
 void		executor(t_cmd_line *cmdl, char ***env);

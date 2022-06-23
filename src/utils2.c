@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:51:21 by vladimir          #+#    #+#             */
-/*   Updated: 2022/06/20 14:29:12 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:26:41 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int	ft_str_tbl_len(char **tbl)
 	while (tbl[i])
 		i++;
 	return (i);
+}
+
+void	set_error_exit_status(t_sh *sh, int status)
+{
+	sh->exit_status = status;
+	sh->error = 1;
 }
 
 //printing parsing result
