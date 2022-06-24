@@ -34,7 +34,6 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/syntax_validation.c\
 			$(SRC_DIR)/parser.c\
 			$(SRC_DIR)/update_token_type.c\
-			$(SRC_DIR)/expander.c\
 			$(SRC_DIR)/executor.c\
 			$(SRC_DIR)/executor_errors.c\
 			$(SRC_DIR)/executor_binary.c\
