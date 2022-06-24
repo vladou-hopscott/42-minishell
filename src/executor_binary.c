@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:18 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/23 11:37:19 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:46:42 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	process_cmd(t_cmd_line *cmdl, char **env)
 		execve(cmdl->cmd, cmdl->args, env);
 	if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
 		set_error_exit_status(&g_sh, WEXITSTATUS(status));
-	close(pid);
 	reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
 	return (0);
 }
