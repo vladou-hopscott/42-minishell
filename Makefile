@@ -18,7 +18,7 @@ EXE := minishell
 
 CC := cc
 LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) #-g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
 
 # Src files ======================================
 
