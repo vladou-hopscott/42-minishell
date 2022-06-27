@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:18 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/26 23:40:16 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:27:48 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,6 @@ void	reset_stdin_stdout(int cpy_stdin, int cpy_stdout, t_cmd_line *cmdl)
 // 	return (0);
 // }
 
-int	process_cmd(t_cmd_line *cmdl, char **env)
-{
-	int		cpy_stdin;
-	int		cpy_stdout;
-
-	update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
-	free(cmdl->args[0]);
-	cmdl->args[0] = ft_strdup(cmdl->cmd);
-	execve(cmdl->cmd, cmdl->args, env);
-	reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
-	return (0);
-}
-
 void	exec_bin(t_cmd_line *cmdl, char **env)
 {
 	char	*cpy;
@@ -82,8 +69,12 @@ void	exec_bin(t_cmd_line *cmdl, char **env)
 	if (access(cmdl->cmd, F_OK) != 0)
 		cmd_pathfinder(&cmdl->cmd, env);
 	if (cmdl->cmd)
+	{
+		free(cmdl->args[0]);
+		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		execve(cmdl->cmd, cmdl->args, env);
-	// 	process_cmd(cmdl, env);
+		// process_cmd(cmdl, env);
+	}
 	else
 	{
 		err_cmd_not_found(&g_sh, cpy);

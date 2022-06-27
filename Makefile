@@ -62,7 +62,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 
 all : $(BIN_DIR) $(NAME)
 
-$(NAME): minishell pipex
+$(NAME): minishell
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -77,18 +77,11 @@ LIBFT := $(LIB_DIR)/libft/libft.a
 
 PRINTF := $(LIB_DIR)/libftprintf/libftprintf.a
 
-PIPEX := $(LIB_DIR)/pipex/pipex
-PIPE := $(BIN_DIR)/pipex
-
 $(LIBFT) :
 	make -C lib/libft -f Makefile
 
 $(PRINTF) :
 	make -C lib/libftprintf -f Makefile
-
-$(PIPEX) :
-	make -C lib/pipex -f Makefile
-	cp $(PIPEX) $(BIN_DIR)
 
 # Recipes ========================================
 
@@ -98,21 +91,17 @@ $(BIN_DIR) :
 minishell : $(OBJS) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) -lreadline
 
-pipex : $(PIPEX)
-
 # Cleanup ========================================
 
 clean:
-	make -C lib/pipex -f Makefile clean
 	make -C lib/libft -f Makefile clean
 	make -C lib/libftprintf -f Makefile clean
 	rm -f $(OBJS)
 
 fclean : clean
-	make -C lib/pipex -f Makefile fclean
 	make -C lib/libft -f Makefile fclean
 	make -C lib/libftprintf -f Makefile fclean
-	rm -f $(EXE) $(PIPE)
+	rm -f $(EXE)
 	rmdir $(BIN_DIR)
 
 # Additional ========================================

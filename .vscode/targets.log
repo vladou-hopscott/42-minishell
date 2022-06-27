@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 26 17:32:14 2022
+# Make data base, printed on Mon Jun 27 22:51:28 2022
 
 # Variables
 
@@ -39,6 +39,8 @@ CURDIR := /sgoinfre/goinfre/Perso/swillis/minishell
 # makefile
 SHELL = /bin/sh
 # environment
+GDM_LANG = en
+# environment
 VTE_VERSION = 6003
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
@@ -47,7 +49,7 @@ _ = /usr/bin/code
 # makefile (from 'Makefile', line 21)
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -g -fsanitize=address
 # environment
-JOURNAL_STREAM = 9:133400
+JOURNAL_STREAM = 9:53928
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -71,15 +73,15 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from 'Makefile', line 72)
 OBJS := src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/redirections.o
 # environment
-MANAGERPID = 26976
+MANAGERPID = 2983
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-a9d84273-7b09-4ef9-94ea-cb2710290c38.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-69116d6a-3323-46b4-9beb-ec41a4dc8d9b.sock
 # environment
 VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis/minishell
 # environment
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
 # environment
-KRB5CCNAME = FILE:/tmp/krb5cc_40596_pC6rxC
+KRB5CCNAME = FILE:/tmp/krb5cc_40596_yS1w5O
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -91,7 +93,7 @@ LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from 'Makefile', line 11)
 BIN_DIR := bin
 # environment
-SESSION_MANAGER = local/e1r11p12.42.fr:@/tmp/.ICE-unix/27432,unix/e1r11p12.42.fr:/tmp/.ICE-unix/27432
+SESSION_MANAGER = local/e1r10p9.42.fr:@/tmp/.ICE-unix/3473,unix/e1r10p9.42.fr:/tmp/.ICE-unix/3473
 # environment
 XDG_RUNTIME_DIR = /run/user/40596
 # environment
@@ -101,7 +103,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 8d42898206454a80b7165bb3990bb8f7
+INVOCATION_ID = aefbaef0e33c4ddf9bfba43a126e4104
 # makefile (from 'Makefile', line 20)
 LDFLAGS = -lreadline
 # default
@@ -129,7 +131,7 @@ PWD = /mnt/nfs/homes/swillis/sgoinfre/minishell
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 27396
+SSH_AGENT_PID = 3437
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'Makefile', line 9)
@@ -186,8 +188,6 @@ USER = swillis
 XDG_CURRENT_DESKTOP = Unity
 # environment
 LIBVIRT_DEFAULT_URI = qemu:///system
-# makefile (from 'Makefile', line 81)
-PIPE := bin/pipex
 # environment
 LESS = -R
 # automatic
@@ -200,6 +200,8 @@ OLDPWD = /mnt/nfs/homes/swillis/sgoinfre
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
+# environment
+LANGUAGE = en
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
@@ -217,6 +219,8 @@ GDK_BACKEND = x11
 # automatic
 +F = $(notdir $+)
 # environment
+NO_AT_BRIDGE = 1
+# environment
 QT_ACCESSIBILITY = 1
 # environment
 DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
@@ -233,15 +237,13 @@ LC_ALL = C
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/33edc1f0_db09_4abd_a39a_c184e6914e05
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/453ce415_3a30_46cf_944a_54cf896fac2b
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.134
+GNOME_TERMINAL_SERVICE = :1.80
 # default
 SUFFIXES := 
-# makefile (from 'Makefile', line 80)
-PIPEX := lib/pipex/pipex
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # default
@@ -261,9 +263,9 @@ TERM = xterm-256color
 # environment
 DOCKER_HOST = unix:///run/user/40596/docker.sock
 # environment
-VSCODE_PID = 41975
+VSCODE_PID = 5538
 # variable set hash-table stats:
-# Load=126/1024=12%, Rehash=0, Collisions=26/210=12%
+# Load=127/1024=12%, Rehash=0, Collisions=25/201=12%
 
 # Pattern-specific Variable Values
 
@@ -273,10 +275,10 @@ VSCODE_PID = 41975
 
 # include (device 56, inode 17313652): 8 files, no impossibilities so far.
 # . (device 56, inode 17313589): 11 files, no impossibilities.
-# src (device 56, inode 17313713): 24 files, no impossibilities so far.
-
+# src (device 56, inode 17313713): 61 files, no impossibilities so far.
  
-# 43 files, no impossibilities in 3 directories.
+
+# 80 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -288,41 +290,66 @@ VSCODE_PID = 41975
 
 # Files
 
-# Not a target:
-src/executor_binary.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/executor_binary.o: src/executor_binary.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/executor_binary'
+#  Last modified 2022-06-27 22:51:21.409802137
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/syntax_validation.o: src/syntax_validation.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/syntax_validation'
+#  Last modified 2022-06-27 22:51:21.021817253
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/utils2.o: src/utils2.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/utils2'
+#  Last modified 2022-06-27 22:51:22.089775645
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/update_token_type.o: src/update_token_type.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/update_token_type'
+#  Last modified 2022-06-27 22:51:21.177811175
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/executor.o: src/executor.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/executor'
+#  Last modified 2022-06-27 22:51:21.257808058
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/env_expand.o: src/env_expand.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/env_expand'
+#  Last modified 2022-06-27 22:51:22.341765828
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/syntax_validation.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/utils2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/update_token_type.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/executor.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/env_expand.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/builtins.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.105115756
+#  File has been updated.
+#  Successfully updated.
 
 all: bin minishell.a
 #  Phony target (prerequisite of .PHONY).
@@ -330,16 +357,14 @@ all: bin minishell.a
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+#  Successfully updated.
 
 bin:
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-26 02:38:42.034389822
+#  Last modified 2022-06-27 22:51:20.681830497
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 96):
+#  recipe to execute (from 'Makefile', line 89):
 	mkdir -p $(BIN_DIR)
 
 # Not a target:
@@ -354,130 +379,271 @@ include/minishell.h:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+src/prompt.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-13 14:28:31.744670442
+#  File has been updated.
+#  Successfully updated.
+
 src/main.o: src/main.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/main'
-#  Last modified 2022-06-26 02:38:37.846557021
+#  Last modified 2022-06-27 22:51:20.765827226
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := src/main.o
-# automatic
-# % := 
-# automatic
-# * := src/main
-# automatic
-# + := src/main.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
-# automatic
-# | := 
-# automatic
-# < := src/main.c
-# automatic
-# ^ := src/main.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
-# automatic
-# ? := src/main.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/16=6%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 68):
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/builtins2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/cmds_linked_list.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 15:00:40.559392536
+#  File has been updated.
+#  Successfully updated.
+
+src/builtins2.o: src/builtins2.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/builtins2'
+#  Last modified 2022-06-27 22:51:21.561796215
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/executor_errors.o: src/executor_errors.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/executor_errors'
+#  Last modified 2022-06-27 22:51:21.333805097
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/executor_errors.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/heredoc.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.201111802
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-src/lexer.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/quotes_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-13 14:28:31.76466958
+#  File has been updated.
+#  Successfully updated.
+
+src/lexer.o: src/lexer.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/lexer'
+#  Last modified 2022-06-27 22:51:20.941820369
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/quotes.o: src/quotes.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/quotes'
+#  Last modified 2022-06-27 22:51:22.52575866
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/heredoc2.o: src/heredoc2.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/heredoc2'
+#  Last modified 2022-06-27 22:51:22.841746349
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/quotes.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/heredoc2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/tokens_linked_list.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 15:00:40.739385072
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-24 19:06:42.474192586
+#  Last modified 2022-06-27 22:51:19.193888468
 #  File has been updated.
 #  Successfully updated.
 
-lib/pipex/pipex:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 90):
-	make -C lib/pipex -f Makefile
-	cp $(PIPEX) $(BIN_DIR)
+# Not a target:
+src/redirections.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.281108508
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/heredoc3.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.233110485
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/env_manager.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.16111345
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/parser.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 15:00:40.723385736
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/cmd_line_struct.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.121115097
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/executor_binary.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-27 15:27:48.437937736
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/syntax_validation.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-13 14:28:31.788668545
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/free_values.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.189112297
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/utils2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.297107849
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/update_token_type.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.293108014
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/executor.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-26 23:30:28.041562731
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/env_expand.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.125114932
+ 
+#  File has been updated.
+#  Successfully updated.
 
 minishell: src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/redirections.o lib/libft/libft.a lib/libftprintf/libftprintf.a
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-26 02:38:41.458412818
+#  Last modified 2022-06-27 22:51:24.533680431
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
-#  recipe to execute (from 'Makefile', line 99):
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 92):
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) -lreadline
 
-# Not a target:
-src/env_expand2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/env_expand2.o: src/env_expand2.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/env_expand2'
+#  Last modified 2022-06-27 22:51:22.413763023
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 112):
-	make -C lib/pipex -f Makefile fclean
+#  recipe to execute (from 'Makefile', line 102):
 	make -C lib/libft -f Makefile fclean
 	make -C lib/libftprintf -f Makefile fclean
-	rm -f $(EXE) $(PIPE)
+	rm -f $(EXE)
 	rmdir $(BIN_DIR)
 
-# Not a target:
-src/free_values.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/free_values.o: src/free_values.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/free_values'
+#  Last modified 2022-06-27 22:51:21.949781099
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-# Not a target:
-src/signals.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/signals.o: src/signals.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/signals'
+#  Last modified 2022-06-27 22:51:22.677752738
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-minishell.a: minishell pipex
+minishell.a: minishell
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+#  Successfully updated.
 
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-26 03:07:41.356895269
+#  Last modified 2022-06-27 22:49:51.761294567
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/builtins2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.109115591
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/executor_errors.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.181112626
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/lexer.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-13 14:28:31.708671994
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/quotes.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 15:00:40.72738557
 #  File has been updated.
 #  Successfully updated.
 
@@ -488,17 +654,30 @@ include/parsing.h:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-src/init_values.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/init_values.o: src/init_values.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/init_values'
+#  Last modified 2022-06-27 22:51:21.87378406
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/heredoc2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.225110814
+#  File has been updated.
+#  Successfully updated.
+
+src/utils.o: src/utils.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/utils'
+#  Last modified 2022-06-27 22:51:22.025778139
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
 .DEFAULT:
@@ -506,17 +685,23 @@ src/utils.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-src/env_manager_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/env_manager_utils.o: src/env_manager_utils.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/env_manager_utils'
+#  Last modified 2022-06-27 22:51:22.253769256
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-# Not a target:
-src/heredoc3.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/heredoc3.o: src/heredoc3.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/heredoc3'
+#  Last modified 2022-06-27 22:51:22.913743544
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -529,8 +714,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 106):
-	make -C lib/pipex -f Makefile clean
+#  recipe to execute (from 'Makefile', line 97):
 	make -C lib/libft -f Makefile clean
 	make -C lib/libftprintf -f Makefile clean
 	rm -f $(OBJS)
@@ -542,19 +726,38 @@ include/pipex.h:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-src/builtins.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/builtins.o: src/builtins.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/builtins'
+#  Last modified 2022-06-27 22:51:21.485799175
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+src/prompt.o: src/prompt.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/prompt'
+#  Last modified 2022-06-27 22:51:20.849823954
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/prompt.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/init_values.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.253109662
+#  File has been updated.
+#  Successfully updated.
 
- 
+# Not a target:
+src/env_expand2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.141114273
+#  File has been updated.
+#  Successfully updated.
+
 # Not a target:
 include/ft_printf.h:
 #  Implicit rule search has been done.
@@ -562,36 +765,54 @@ include/ft_printf.h:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-src/cmds_linked_list.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/cmds_linked_list.o: src/cmds_linked_list.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/cmds_linked_list'
+#  Last modified 2022-06-27 22:51:21.713790293
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/heredoc.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/signals.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-24 18:07:36.285108344
+#  File has been updated.
+#  Successfully updated.
+
+src/heredoc.o: src/heredoc.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/heredoc'
+#  Last modified 2022-06-27 22:51:22.757749621
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 lib/libft/libft.a:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 84):
+#  Last modified 2022-06-27 22:51:24.001701157
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 81):
 	make -C lib/libft -f Makefile
 
-# Not a target:
-src/quotes_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/quotes_utils.o: src/quotes_utils.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/quotes_utils'
+#  Last modified 2022-06-27 22:51:22.597755854
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 lib/libftprintf/libftprintf.a:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 87):
+#  Last modified 2022-06-27 22:51:24.217692743
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 84):
 	make -C lib/libftprintf -f Makefile
 
 # Not a target:
@@ -601,55 +822,80 @@ include/libft.h:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-src/tokens_linked_list.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/tokens_linked_list.o: src/tokens_linked_list.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/tokens_linked_list'
+#  Last modified 2022-06-27 22:51:21.63379341
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/redirections.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 15:00:40.743384906
+#  File has been updated.
+#  Successfully updated.
+
+src/redirections.o: src/redirections.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/redirections'
+ 
+#  Last modified 2022-06-27 22:51:22.989740583
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # Not a target:
-src/env_manager.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/env_manager_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 15:00:40.587391375
+#  File has been updated.
+#  Successfully updated.
 
-pipex: lib/pipex/pipex
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/env_manager.o: src/env_manager.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/env_manager'
+#  Last modified 2022-06-27 22:51:22.173772373
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-# Not a target:
-src/parser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/parser.o: src/parser.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/parser'
+#  Last modified 2022-06-27 22:51:21.101814135
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-# Not a target:
-src/cmd_line_struct.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/cmd_line_struct.o: src/cmd_line_struct.c include/minishell.h include/parsing.h include/pipex.h include/libft.h include/ft_printf.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/cmd_line_struct'
+#  Last modified 2022-06-27 22:51:21.79778702
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 68):
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 # files hash-table stats:
-# Load=50/1024=5%, Rehash=0, Collisions=0/121=0%
+# Load=76/1024=7%, Rehash=0, Collisions=9/508=2%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 91 / storage = 1198 B / avg = 13 B
-# current buf: size = 8162 B / used = 1198 B / count = 91 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 182 / storage = 2617 B / avg = 14 B
+# current buf: size = 8162 B / used = 2617 B / count = 182 / avg = 14 B
 
-# strcache performance: lookups = 141 / hit rate = 35%
+# strcache performance: lookups = 536 / hit rate = 66%
 # hash-table stats:
-# Load=91/8192=1%, Rehash=0, Collisions=4/141=3%
-# Finished Make data base on Sun Jun 26 17:32:14 2022
+# Load=182/8192=2%, Rehash=0, Collisions=12/536=2%
+# Finished Make data base on Mon Jun 27 22:51:28 2022
 
  
