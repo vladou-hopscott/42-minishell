@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 02:21:52 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/28 12:08:48 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	check_program_args(int argc)
 // 		pid = fork();
 // 		if (pid < 0)
 // 			return (-1);
-// 		if (pid == 0) 
+// 		if (pid == 0)
 // 			execve(cmdl->cmd, cmdl->args, env);
 // 		wait(NULL);
 // 		return (0);
@@ -107,7 +107,7 @@ void	check_program_args(int argc)
 // 		if (pid < 0)
 // 			return (-1);
 // 		// child process
-// 		if (pid == 0) 
+// 		if (pid == 0)
 // 		{
 // 			// dups
 // 			if (i == 0)
@@ -154,14 +154,14 @@ void	check_program_args(int argc)
 // 	// 	waitpid(pids[i], NULL, 0);
 // 	// 	i++;
 // 	// }
-    
+
 // 	// free tbls
 // 	i = 0;
 // 	while (i < npipe)
 // 		free(fd[i++]);
 // 	free(fd);
 // 	free(pids);
-	
+
 //     return (0);
 // }
 
@@ -195,54 +195,141 @@ int	spawn_process(int fdin, int fdout, t_cmd_line *cmdl, t_sh *sh)
 	return (pid);
 }
 
-int	execute_pipes(t_sh *sh)
+
+//void	execute_pipes(t_sh *sh)
+//{
+//	int 		i;
+//	int 		n;
+//	int 		status;
+//	int 		fdin;
+//	int			fd[2];
+//	t_cmd_line	*cmdl;
+
+//	//cmdl = sh->cmd_line_lst;;
+//	//cmdl = cmdl->next;
+//	//n = 0;
+//	//while (cmdl)
+//	//{
+//	//	n++;
+//	//	cmdl = cmdl->next;
+//	//}
+//	cmdl = sh->cmd_line_lst;
+//	fdin = cmdl->fdin;
+//	i = 0;
+//	while (i < n)
+//	{
+//		pipe(fd);
+//		cmdl->pid = spawn_process(fdin, fd[1], cmdl, sh);
+//		close(fd[1]);
+//		fdin = fd[0];
+//		cmdl = cmdl->next;
+//		i++;
+//	}
+//	cmdl->pid = spawn_process(fdin, cmdl->fdout, cmdl, sh);
+//	//if (n > 0)
+//	//{
+//	//	close(fd[0]);
+//	//	close(fd[1]);
+//	//}
+//	cmdl = sh->cmd_line_lst;
+//	while (cmdl)
+//	{
+//		if ((0 < waitpid(cmdl->pid, &status, 0)) && (WIFEXITED(status)))
+//			set_error_exit_status(&g_sh, WEXITSTATUS(status));
+//		cmdl = cmdl->next;
+//	}
+//}
+
+void	close_fds(int fd1, int fd2)
 {
-	int 		i;
-	int 		n;
+	close(fd1);
+	close(fd2);
+}
+
+void	execute_pipes(t_sh *sh)
+{
 	int 		status;
 	int 		fdin;
 	int			fd[2];
 	t_cmd_line	*cmdl;
-	char		**env;
-
-	env = sh->env;
-	cmdl = sh->cmd_line_lst;;
-	cmdl = cmdl->next;
-	n = 0;
-	while (cmdl)
-	{
-		n++;
-		cmdl = cmdl->next;
-	}
 
 	cmdl = sh->cmd_line_lst;
 	fdin = cmdl->fdin;
-	i = 0;
-	while (i < n)
+	while (cmdl->next)
 	{
 		pipe(fd);
 		cmdl->pid = spawn_process(fdin, fd[1], cmdl, sh);
 		close(fd[1]);
 		fdin = fd[0];
 		cmdl = cmdl->next;
-		i++;
 	}
 	cmdl->pid = spawn_process(fdin, cmdl->fdout, cmdl, sh);
-
-	if (n > 0)
-	{
-		close(fd[0]);
-		close(fd[1]);
-	}
-
+	if ((sh->cmd_line_lst)->next != NULL)
+		close_fds(fd[0], fd[1]);
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
-	{	
+	{
 		if ((0 < waitpid(cmdl->pid, &status, 0)) && (WIFEXITED(status)))
 			set_error_exit_status(&g_sh, WEXITSTATUS(status));
 		cmdl = cmdl->next;
 	}
-	return (0);
+}
+
+// ======================================
+
+int	check_exec_bin(t_cmd_line *cmdl, char **env)
+{
+	char	*cmd;
+
+	cmd = ft_strdup(cmdl->cmd);
+	if (access(cmd, F_OK) != 0)
+		cmd_pathfinder(&cmd, env);
+	if (cmd == NULL)
+	{
+		free(cmd);
+		return (FAILURE);
+	}
+	free(cmd);
+	return (SUCCESS);
+}
+
+int	check_cmd(t_cmd_line *cmdl, char **env)
+{
+	if (ft_strncmp(cmdl->cmd, "echo", ft_strlen("echo") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "cd", ft_strlen("cd") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "export", ft_strlen("export") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "unset", ft_strlen("unset") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "exit", ft_strlen("exit") + 1) == 0)
+		return (SUCCESS);
+	else
+		return (check_exec_bin(cmdl, env));
+	return (FAILURE);
+}
+
+void	check_cmds(t_sh *sh)
+{
+	t_cmd_line	*cmdl;
+	char		**env;
+
+	env = sh->env;
+	cmdl = sh->cmd_line_lst;;
+	while (cmdl)
+	{
+		if (check_cmd(cmdl, env) == FAILURE)
+		{
+			err_cmd_not_found(&g_sh, cmdl->cmd);
+			return ;
+		}
+		cmdl = cmdl->next;
+	}
 }
 
 // ======================================
@@ -258,6 +345,7 @@ int	main(int argc, char **argv, char **env)
 		listen_prompt(&g_sh);
 		lexer(&g_sh);
 		parser(&g_sh);
+		check_cmds(&g_sh);
 		if (g_sh.error)
 		{
 			free_values(&g_sh, 0);

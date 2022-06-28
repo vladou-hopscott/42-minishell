@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_binary.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:18 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/27 15:27:48 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/28 11:43:58 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	exec_bin(t_cmd_line *cmdl, char **env)
 		free(cmdl->args[0]);
 		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		execve(cmdl->cmd, cmdl->args, env);
-		// process_cmd(cmdl, env);
 	}
 	else
 	{
