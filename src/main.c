@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/27 22:49:51 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/28 02:21:52 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,151 @@ void	check_program_args(int argc)
 	}
 }
 
-void	execute_cmds(t_sh *sh)
-{
-	t_cmd_line	*cmdl;
+// ==================================
 
-	cmdl = sh->cmd_line_lst;
-	while (cmdl)
-	{
-		executor(cmdl, &sh->env);
-		cmdl = cmdl->next;
-	}
-}
+// void	execute_cmds(t_sh *sh)
+// {
+// 	t_cmd_line	*cmdl;
+
+// 	cmdl = sh->cmd_line_lst;
+// 	while (cmdl)
+// 	{
+// 		executor(cmdl, &sh->env);
+// 		cmdl = cmdl->next;
+// 	}
+// }
+
+// ==================================
+
+// http://web.cse.ohio-state.edu/~mamrak.1/CIS762/pipes_lab_notes.html
+
+// int	execute_pipes(t_cmdl **lst, char **env, int fdin, int fdout)
+// {
+// 	int 	i;
+// 	int 	n;
+// 	int 	npipe;
+// 	int 	pid;
+// 	int 	*pids;
+// 	int 	**fd;
+// 	t_cmdl	*cmdl;
+
+// 	// count pipes
+// 	npipe = 0;
+// 	cmdl = *lst;
+// 	cmdl = cmdl->next;
+// 	while (cmdl)
+// 	{
+// 		npipe++;
+// 		cmdl = cmdl->next;
+// 	}
+
+// 	// if single cmd
+// 	cmdl = *lst;
+// 	if (npipe == 0)
+// 	{
+// 		pid = fork();
+// 		if (pid < 0)
+// 			return (-1);
+// 		if (pid == 0) 
+// 			execve(cmdl->cmd, cmdl->args, env);
+// 		wait(NULL);
+// 		return (0);
+// 	}
+
+// 	// malloc tbls
+// 	pids = malloc(sizeof(int) * (npipe + 1));
+// 	if (!pids)
+// 		return (-1);
+// 	fd = malloc(sizeof(int *) * npipe);
+// 	if (!fd)
+// 		return (-1);
+// 	i = 0;
+// 	while (i < npipe)
+// 	{
+// 		fd[i] = malloc(sizeof(int) * 2);
+// 		if (!fd[i])
+// 			return (-1);
+// 		i++;
+// 	}
+
+// 	// instantiate pipes in tbl
+// 	i = 0;
+// 	while (i < npipe)
+// 		if (pipe(fd[i++]) == -1)
+// 			return (-1);
+
+// 	// loop over commands
+// 	i = 0;
+// 	while (cmdl)
+// 	{
+// 		// printf("Running cmd[%d]: %s\n", i, cmdl->cmd);
+// 		pid = fork();
+// 		if (pid < 0)
+// 			return (-1);
+// 		// child process
+// 		if (pid == 0) 
+// 		{
+// 			// dups
+// 			if (i == 0)
+// 				dup2(fdin, STDIN_FILENO);
+// 			if (i > 0)
+// 				dup2(fd[i - 1][0], STDIN_FILENO);
+// 			if (i < npipe - 1)
+// 				dup2(fd[i][1], STDOUT_FILENO);
+// 			if (i == npipe - 1)
+// 				dup2(fdout, STDOUT_FILENO);
+// 			// close all pipes
+// 			n = 0;
+// 			while (n < npipe)
+// 			{
+// 				close(fd[n][0]);
+// 				close(fd[n][1]);
+// 				n++;
+// 			}
+// 			// exec
+// 			execve(cmdl->cmd, cmdl->args, env);
+// 		}
+// 		pids[i] = pid;
+// 		cmdl = cmdl->next;
+// 		i++;
+// 	}
+
+// 	// parent process
+// 	// close all pipes
+// 	n = 0;
+// 	while (n < npipe)
+// 	{
+// 		close(fd[n][0]);
+// 		close(fd[n][1]);
+// 		n++;
+// 	}
+
+// 	// wait for all processes in parallel
+// 	// waitpid(-1, NULL, 0);
+// 	while (wait(NULL) != -1)
+// 		;
+// 	// i = 0;
+// 	// while (i < npipe + 1)
+// 	// {
+// 	// 	waitpid(pids[i], NULL, 0);
+// 	// 	i++;
+// 	// }
+    
+// 	// free tbls
+// 	i = 0;
+// 	while (i < npipe)
+// 		free(fd[i++]);
+// 	free(fd);
+// 	free(pids);
+	
+//     return (0);
+// }
+
+// ==================================
 
 // ============= MULTIPIPE ==========================================
-
+// https://stackoverflow.com/questions/8082932/connecting-n-commands-with-pipes-in-a-shell?answertab=trending#tab-top
+// ==================================================================
 int	spawn_process(int fdin, int fdout, t_cmd_line *cmdl, t_sh *sh)
 {
 	pid_t pid;
@@ -53,7 +184,7 @@ int	spawn_process(int fdin, int fdout, t_cmd_line *cmdl, t_sh *sh)
 			dup2(fdin, STDIN_FILENO);
 			close(fdin);
 		}
-		if (fdout != STDOUT_FILENO)
+		if ((fdout != STDOUT_FILENO) && (cmdl->next != NULL))
 		{
 			dup2(fdout, STDOUT_FILENO);
 			close(fdout);
@@ -67,9 +198,9 @@ int	spawn_process(int fdin, int fdout, t_cmd_line *cmdl, t_sh *sh)
 int	execute_pipes(t_sh *sh)
 {
 	int 		i;
-	int 		fdin;
-	int 		fdout;
 	int 		n;
+	int 		status;
+	int 		fdin;
 	int			fd[2];
 	t_cmd_line	*cmdl;
 	char		**env;
@@ -81,22 +212,36 @@ int	execute_pipes(t_sh *sh)
 	while (cmdl)
 	{
 		n++;
-		fdout = cmdl->fdout;
 		cmdl = cmdl->next;
 	}
+
 	cmdl = sh->cmd_line_lst;
 	fdin = cmdl->fdin;
 	i = 0;
 	while (i < n)
 	{
 		pipe(fd);
-		spawn_process(fdin, fd[1], cmdl, sh);
+		cmdl->pid = spawn_process(fdin, fd[1], cmdl, sh);
 		close(fd[1]);
 		fdin = fd[0];
 		cmdl = cmdl->next;
 		i++;
 	}
-	spawn_process(fdin, fdout, cmdl, sh);
+	cmdl->pid = spawn_process(fdin, cmdl->fdout, cmdl, sh);
+
+	if (n > 0)
+	{
+		close(fd[0]);
+		close(fd[1]);
+	}
+
+	cmdl = sh->cmd_line_lst;
+	while (cmdl)
+	{	
+		if ((0 < waitpid(cmdl->pid, &status, 0)) && (WIFEXITED(status)))
+			set_error_exit_status(&g_sh, WEXITSTATUS(status));
+		cmdl = cmdl->next;
+	}
 	return (0);
 }
 
