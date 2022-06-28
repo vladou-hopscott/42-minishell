@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/23 11:40:24 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:21:04 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	builtin_echo(int ac, char **av, int fdout)
 	}
 	if (ntrail)
 		ft_putchar_fd('\n', fdout);
+	exit(SUCCESS);
 }
 
 // ======================= PWD ====================================
@@ -55,11 +56,13 @@ void	builtin_pwd(int ac, int fdout)
 		ft_putstr_fd(pwd, fdout);
 		ft_putchar_fd('\n', fdout);
 		free(pwd);
+		exit(SUCCESS);
 	}
 	else
 	{
 		ft_putstr_fd("pwd: too many arguments\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
+		exit(FAILURE);
 	}
 }
 
@@ -74,7 +77,7 @@ void	builtin_cd(int ac, char **av, char ***penv)
 	{
 		ft_putstr_fd("command cd only accepts relative or absolute paths\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
-		return ;
+		exit(FAILURE);
 	}
 	path = getcwd(NULL, 999999);
 	*penv = env_export("OLDPWD", path, *penv);
@@ -83,13 +86,13 @@ void	builtin_cd(int ac, char **av, char ***penv)
 	{
 		perror(av[1]);
 		set_error_exit_status(&g_sh, FAILURE);
-		return ;
+		exit(FAILURE);
 	}
 	newpath = getcwd(NULL, 999999);
 	if (env_findkeypos("PWD", *penv) != -1)
 		*penv = env_export("PWD", newpath, *penv);
 	free(newpath);
-	return ;
+	exit(SUCCESS);
 }
 
 // ======= OLD CD =======//

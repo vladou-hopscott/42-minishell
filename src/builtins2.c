@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/23 11:37:15 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:22:11 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	builtin_export(int ac, char **av, char ***penv)
 		ft_freetbl(tbl, -1);
 		i++;
 	}
+	exit(SUCCESS);
 }
 
 // ======================= UNSET ====================================
@@ -99,6 +100,7 @@ void	builtin_unset(int ac, char **av, char ***penv)
 		tbl_remove(penv, av[i]);
 		i++;
 	}
+	exit(SUCCESS);
 }
 
 // ======================= ENV ====================================
@@ -116,10 +118,12 @@ void	builtin_env(int ac, char **env, int fdout)
 			ft_putchar_fd('\n', fdout);
 			i++;
 		}
+		exit(SUCCESS);
 	}
 	else
 	{
 		ft_putstr_fd("env: too many arguments\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
+		exit(FAILURE);
 	}
 }
