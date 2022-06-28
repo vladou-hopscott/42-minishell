@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 00:43:37 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/28 12:15:10 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "parsing.h"
@@ -145,5 +146,8 @@ int			str_has_space_without_quotes(char *str);
 int			open_file_check(int fd, char *filename);
 int			ft_str_tbl_len(char **tbl);
 void		set_error_exit_status(t_sh *sh, int status);
+
+//********** MULTIPIPE **********//
+void		execute_pipes(t_sh *sh);
 
 #endif

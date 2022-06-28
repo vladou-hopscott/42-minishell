@@ -6,15 +6,13 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:18 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 11:43:58 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:18:10 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_sh	g_sh;
-
-// ======================= BIN ====================================
 
 void	update_stdin_stdout(int *cpy_stdin, int *cpy_stdout, t_cmd_line *cmdl)
 {
@@ -64,15 +62,19 @@ void	reset_stdin_stdout(int cpy_stdin, int cpy_stdout, t_cmd_line *cmdl)
 void	exec_bin(t_cmd_line *cmdl, char **env)
 {
 	char	*cpy;
+ 	int		cpy_stdin;
+ 	int		cpy_stdout;
 
 	cpy = ft_strdup(cmdl->cmd);
 	if (access(cmdl->cmd, F_OK) != 0)
 		cmd_pathfinder(&cmdl->cmd, env);
 	if (cmdl->cmd)
 	{
+	 	update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
 		free(cmdl->args[0]);
 		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		execve(cmdl->cmd, cmdl->args, env);
+	 	reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
 	}
 	else
 	{

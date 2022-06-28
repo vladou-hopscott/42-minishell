@@ -57,6 +57,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/heredoc2.c\
 			$(SRC_DIR)/heredoc3.c\
 			$(SRC_DIR)/redirections.c\
+			$(SRC_DIR)/multipipe.c\
 
 # Make all ========================================
 
