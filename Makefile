@@ -8,7 +8,6 @@ NAME := minishell.a
 SRC_DIR := src
 INC_DIR := include
 LIB_DIR := lib
-BIN_DIR := bin
 
 # Exes ==========================================
 
@@ -17,8 +16,8 @@ EXE := minishell
 # Compilation ====================================
 
 CC := cc
-LDFLAGS ?= -lreadline
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) #-g -fsanitize=address
+LDFLAGS ?= -lreadline -L/usr/local/opt/readline/lib/
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include #-g -fsanitize=address
 
 # Src files ======================================
 
@@ -61,7 +60,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 
 # Make all ========================================
 
-all : $(BIN_DIR) $(NAME)
+all : $(NAME)
 
 $(NAME): minishell
 
@@ -86,9 +85,6 @@ $(PRINTF) :
 
 # Recipes ========================================
 
-$(BIN_DIR) :
-	mkdir -p $(BIN_DIR)
-
 minishell : $(OBJS) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) -lreadline
 
@@ -103,7 +99,6 @@ fclean : clean
 	make -C lib/libft -f Makefile fclean
 	make -C lib/libftprintf -f Makefile fclean
 	rm -f $(EXE)
-	rmdir $(BIN_DIR)
 
 # Additional ========================================
 
