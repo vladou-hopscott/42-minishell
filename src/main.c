@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 12:12:09 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:07:40 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,14 @@ void	check_program_args(int argc)
 
 int	check_exec_bin(t_cmd_line *cmdl, char **env)
 {
-	char	*cmd;
+	char	*cpy;
 
-	cmd = ft_strdup(cmdl->cmd);
-	if (access(cmd, F_OK) != 0)
-		cmd_pathfinder(&cmd, env);
-	if (cmd == NULL)
-	{
-		free(cmd);
+	cpy = ft_strdup(cmdl->cmd);
+	if (access(cpy, F_OK) != 0)
+		cmd_pathfinder(&cpy, env);
+	free(cpy);
+	if (cmdl->cmd == NULL)
 		return (FAILURE);
-	}
-	free(cmd);
 	return (SUCCESS);
 }
 
