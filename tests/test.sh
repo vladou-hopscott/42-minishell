@@ -26,11 +26,12 @@ chmod 755 minishell
 
 function exec_test()
 {
-	TEST1=$(echo $@ | ./minishell 2>&-)
+	TEST1=$(echo $@ | ./minishell 2>&- | tail -n +2 | sed '$d')
 	ES_1=$?
-	PROMPT="➜ minishell"
-	OUTPUT=$(echo $@ | bash --posix 2>&-)
-	TEST2="$PROMPT $@\n$OUTPUT\n$PROMPT exit"
+	# PROMPT="➜ minishell"
+	# OUTPUT=$(echo $@ | bash --posix 2>&-)
+	# TEST2="$PROMPT $@\n$OUTPUT\n$PROMPT exit"
+	TEST2=$(echo $@ | bash --posix 2>&-)
 	ES_2=$?
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "
@@ -70,10 +71,21 @@ exec_test 'echo -n -n -n test tout'
 
 
 # CD TESTS
-exec_test 'cd .. ; pwd'
-exec_test 'cd /Users ; pwd'
-exec_test 'cd ; pwd'
-exec_test 'mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; pwd ; cd . ; pwd ; cd .. ; pwd'
+exec_test 'cd ..'
+exec_test 'pwd'
+exec_test 'cd /Users'
+exec_test 'pwd'
+exec_test 'cd'
+exec_test 'pwd'
+exec_test 'mkdir test_dir'
+exec_test 'cd test_dir' 
+exec_test 'rm -rf ../test_dir'
+exec_test 'cd .' 
+exec_test 'pwd'
+exec_test 'cd .'
+exec_test 'pwd'
+exec_test 'cd ..'
+exec_test 'pwd'
 
 
 # PIPE TESTS
@@ -84,8 +96,6 @@ exec_test 'ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|
 exec_test 'ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls'
 
 # ENV EXPANSIONS + ESCAPE
-exec_test 'echo test     \    test'
-exec_test 'echo \"test'
 exec_test 'echo $TEST'
 exec_test 'echo "$TEST"'
 exec_test "echo '$TEST'"
@@ -96,7 +106,6 @@ exec_test 'echo $TEST$TEST$TEST'
 exec_test 'echo $TEST$TEST=lol$TEST""lol'
 exec_test 'echo    $TEST lol $TEST'
 exec_test 'echo test "" test "" test'
-exec_test 'echo "\$TEST"'
 exec_test 'echo "$=TEST"'
 exec_test 'echo "$"'
 exec_test 'echo "$?TEST"'
@@ -108,31 +117,53 @@ exec_test 'echo "$T1TEST"'
 ENV_SHOW="env | sort | grep -v SHLVL | grep -v _="
 EXPORT_SHOW="export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD"
 exec_test 'export ='
-exec_test 'export 1TEST= ;' $ENV_SHOW
-exec_test 'export TEST ;' $EXPORT_SHOW
-exec_test 'export ""="" ; ' $ENV_SHOW
-exec_test 'export TES=T="" ;' $ENV_SHOW
-exec_test 'export TE+S=T="" ;' $ENV_SHOW
-exec_test 'export TEST=LOL ; echo $TEST ;' $ENV_SHOW
-exec_test 'export TEST=LOL ; echo $TEST$TEST$TEST=lol$TEST'
-exec_test 'export TEST=LOL; export TEST+=LOL ; echo $TEST ;' $ENV_SHOW
+exec_test 'export 1TEST=' 
+exec_test $ENV_SHOW
+exec_test 'export TEST'
+exec_test $EXPORT_SHOW
+exec_test 'export ""="" '
+exec_test $ENV_SHOW
+exec_test 'export TES=T="" '
+exec_test $ENV_SHOW
+exec_test 'export TE+S=T="" '
+exec_test $ENV_SHOW
+exec_test 'export TEST=LOL'
+exec_test 'echo $TEST'
+exec_test $ENV_SHOW
+exec_test 'export TEST=LOL'
+exec_test 'echo $TEST$TEST$TEST=lol$TEST'
+exec_test 'export TEST=LOL'
+exec_test 'export TEST+=LOL'
+exec_test 'echo $TEST'
+exec_test $ENV_SHOW
 exec_test $ENV_SHOW
 exec_test $EXPORT_SHOW
-exec_test 'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' $ENV_SHOW
+exec_test 'export TEST="ls       -l     - a"' 
+exec_test 'echo $TEST' 
+exec_test '$LS'
+exec_test $ENV_SHOW
 
 # REDIRECTIONS
-exec_test 'echo test > ls ; cat ls'
-exec_test 'echo test > ls >> ls >> ls ; echo test >> ls; cat ls'
-exec_test '> lol echo test lol; cat lol'
-exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test'
+exec_test 'echo test > ls'
+exec_test 'cat ls'
+exec_test 'echo test > ls >> ls >> ls'
+exec_test 'echo test >> ls'
+exec_test 'cat ls'
+exec_test '> lol echo test lol'
+exec_test 'cat lol'
+exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test'
+exec_test 'cat test'
 exec_test 'cat < ls'
 exec_test 'cat < ls > ls'
 
 # MULTI TESTS
-exec_test 'echo testing multi ; echo "test 1 ; | and 2" ; cat tests/lorem.txt | grep Lorem'
+exec_test 'echo testing multi'
+exec_test 'echo "test 1'
+exec_test ' | and 2"'
+exec_test 'cat tests/lorem.txt | grep Lorem'
 
 # SYNTAX ERROR
-exec_test ';; test'
+exec_test 'test'
 exec_test '| test'
 exec_test 'echo > <'
 exec_test 'echo | |'
