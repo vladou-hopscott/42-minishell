@@ -31,6 +31,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/prompt.c\
 			$(SRC_DIR)/lexer.c\
 			$(SRC_DIR)/syntax_validation.c\
+			$(SRC_DIR)/syntax_validation2.c\
 			$(SRC_DIR)/parser.c\
 			$(SRC_DIR)/update_token_type.c\
 			$(SRC_DIR)/executor.c\

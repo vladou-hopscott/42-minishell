@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 11:22:11 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:04:51 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	builtin_export(int ac, char **av, char ***penv)
 		ft_freetbl(tbl, -1);
 		i++;
 	}
-	exit(SUCCESS);
 }
 
 // ======================= UNSET ====================================
@@ -100,7 +99,6 @@ void	builtin_unset(int ac, char **av, char ***penv)
 		tbl_remove(penv, av[i]);
 		i++;
 	}
-	exit(SUCCESS);
 }
 
 // ======================= ENV ====================================

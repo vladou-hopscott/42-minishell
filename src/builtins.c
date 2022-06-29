@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 11:21:04 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:39:48 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ extern t_sh	g_sh;
 void	builtin_echo(int ac, char **av, int fdout)
 {
 	int	i;
+	int	j;
 	int	ntrail;
 
 	ntrail = 1;
 	i = 1;
-	while ((i < ac) && \
-			(ft_strncmp(av[i], "-n", (ft_strlen("-n") + 1)) == 0))
+	while ((i < ac) && (av[i][0] == '-'))
 	{
+		j = 1;
+		while (av[i][j] == 'n')
+			j++;
+		if (j != (int)ft_strlen(av[i]))
+			break ;
 		ntrail = 0;
 		i++;
 	}
@@ -92,7 +97,23 @@ void	builtin_cd(int ac, char **av, char ***penv)
 	if (env_findkeypos("PWD", *penv) != -1)
 		*penv = env_export("PWD", newpath, *penv);
 	free(newpath);
-	exit(SUCCESS);
+}
+
+// ======================= EXIT ====================================
+
+void	builtin_exit(int ac, char **av)
+{
+	if (ac > 2)
+	{
+		ft_putstr_fd("bash: exit: too many arguments\n", 2);
+		set_error_exit_status(&g_sh, FAILURE);
+		exit(FAILURE);
+	}
+	else if (ac == 1)
+		exit(0);
+	else if (ac == 2)
+		exit(ft_atoi(av[1]));
+	exit(FAILURE);
 }
 
 // ======= OLD CD =======//

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 13:07:40 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/29 19:36:37 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ void	check_cmds(t_sh *sh)
 	cmdl = sh->cmd_line_lst;;
 	while (cmdl)
 	{
+		if (!cmdl->cmd)
+		{
+			sh->error = 1;
+			sh->exit_status = SUCCESS;
+			return;
+		}
 		if (check_cmd(cmdl, env) == FAILURE)
 		{
 			err_cmd_not_found(&g_sh, cmdl->cmd);

@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 12:15:10 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:39:11 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ char		*process_string_token(t_sh *sh, char *prompt);
 void		process_redirect_token(t_sh *sh);
 void		update_token_type_str(t_sh *sh);
 void		check_syntax_errors(t_sh *sh);
+int			is_redirection(t_token_type type);
+int			error_next_is_pipe(t_token *token);
+int			error_first_is_pipe(int i);
 
 //********** PARSER **********//
 void		parser(t_sh *s);
@@ -133,6 +136,7 @@ void		builtin_cd(int ac, char **av, char ***penv);
 void		builtin_env(int ac, char **env, int fdout);
 void		builtin_unset(int ac, char **av, char ***penv);
 void		builtin_export(int ac, char **av, char ***penv);
+void		builtin_exit(int ac, char **av);
 
 //********** ERRORS **********//
 void		err_cmd_not_found(t_sh *sh, char *cmd);
@@ -149,5 +153,8 @@ void		set_error_exit_status(t_sh *sh, int status);
 
 //********** MULTIPIPE **********//
 void		execute_pipes(t_sh *sh);
+
+//********** MAIN **********//
+int			check_exec_bin(t_cmd_line *cmdl, char **env);
 
 #endif

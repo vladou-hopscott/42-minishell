@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 13:10:36 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/29 19:10:00 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	executor(t_cmd_line *cmdl, char ***penv)
 	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env") + 1) == 0)
 		builtin_env(args_to_ac(cmdl->args), env, cmdl->fdout);
 	else if (ft_strncmp(cmdl->cmd, "exit", ft_strlen("exit") + 1) == 0)
-		exit(0);
+		builtin_exit(args_to_ac(cmdl->args), cmdl->args);
 	else
 		exec_bin(cmdl, env);
 }

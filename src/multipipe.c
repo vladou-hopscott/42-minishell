@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 17:01:20 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/06/29 20:07:13 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,58 @@ void	close_fds(int fdin, int fdout)
 		close(fdout);
 }
 
+int	check_fork(t_cmd_line *cmdl, char **env)
+{
+	if (ft_strncmp(cmdl->cmd, "echo", ft_strlen("echo") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd") + 1) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env") + 1) == 0)
+		return (SUCCESS);
+	else
+		return (check_exec_bin(cmdl, env));
+	return (FAILURE);
+}
+
 int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 {
 	pid_t	pid;
 	int		fdout;
 
+	pid = -1;
 	fdout = cmdl->fdout;
-	pid = fork();
-	if (pid < 0)
-		return (-1);
-	if (pid == 0)
+	if (check_fork(cmdl, sh->env) == SUCCESS)
 	{
-		if (fd != NULL)
+		pid = fork();
+		if (pid < 0)
+			return (-1);
+		if (pid == 0)
 		{
-			close(fd[0]);
-			fdout = fd[1];
+			if (fd != NULL)
+			{
+				close(fd[0]);
+				fdout = fd[1];
+			}
+			if (fdin != STDIN_FILENO)
+			{
+				dup2(fdin, STDIN_FILENO);
+				close(fdin);
+			}
+			if ((fdout != STDOUT_FILENO) && (cmdl->next != NULL))
+			{
+				dup2(fdout, STDOUT_FILENO);
+				close(fdout);
+			}
+			executor(cmdl, &sh->env);
+			return (0);
 		}
-		if (fdin != STDIN_FILENO)
-		{
-			dup2(fdin, STDIN_FILENO);
-			close(fdin);
-		}
-		if ((fdout != STDOUT_FILENO) && (cmdl->next != NULL))
-		{
-			dup2(fdout, STDOUT_FILENO);
-			close(fdout);
-		}
-		executor(cmdl, &sh->env);
-		return (0);
+		close_fds(fdin, fdout);
 	}
-	close_fds(fdin, fdout);
+	else
+	{
+		dup2(fdout, STDOUT_FILENO);
+		executor(cmdl, &sh->env);
+	}
 	return (pid);
 }
 
@@ -78,8 +100,9 @@ void	execute_pipes(t_sh *sh)
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{
-		if ((0 < waitpid(cmdl->pid, &status, 0)) && (WIFEXITED(status)))
-			set_error_exit_status(&g_sh, WEXITSTATUS(status));
+		if (cmdl->pid != -1)
+			if ((0 < waitpid(cmdl->pid, &status, 0)) && (WIFEXITED(status)))
+				set_error_exit_status(&g_sh, WEXITSTATUS(status));
 		cmdl = cmdl->next;
 	}
 }
