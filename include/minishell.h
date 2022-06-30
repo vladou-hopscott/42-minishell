@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:03:29 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/30 18:04:56 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ void		print_parser_result(t_sh *sh);
 //********** REDIRECTIONS **********//
 void		close_file_fdin(t_cmd_line **cmd_line);
 int			open_file_fdin(char *filename, t_cmd_line **cmd_line);
-int			update_fdin(t_cmd_line **cmd_line);
-int			update_fdout(t_cmd_line **cmd_line);
+int			update_fdin_fdout(t_cmd_line **cmd_line);
+int			update_fdin(t_cmd_line **cmd_line, t_token *token);
+int			update_fdout(t_cmd_line **cmd_line, t_token *token);
 
 //********** SIGNALS **********//
 void		handle_signals(void);

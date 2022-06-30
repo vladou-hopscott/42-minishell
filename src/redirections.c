@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:03 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:07:30 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 18:06:14 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,6 @@ int	open_file_fdout(t_token *token, t_cmd_line **cmd_line)
 	return (0);
 }
 
-int	update_fdout(t_cmd_line **cmd_line)
-{
-	t_token	*token;
-
-	token = (*cmd_line)->token_lst;
-	while (token)
-	{
-		if (token->type == OUTPUT || token->type == OUTPUT_APPEND)
-		{
-			if ((*cmd_line)->fdout != 1)
-				close((*cmd_line)->fdout);
-			if (open_file_fdout(token, cmd_line))
-				return (1);
-		}
-		token = token->next;
-	}
-	return (0);
-}
 
 int	open_file_fdin(char *filename, t_cmd_line **cmd_line)
 {
@@ -70,29 +52,72 @@ void	close_file_fdin(t_cmd_line **cmd_line)
 	}
 }
 
-int	update_fdin(t_cmd_line **cmd_line)
+int	update_fdout(t_cmd_line **cmd_line, t_token *token)
 {
-	t_token	*token;
+	if ((*cmd_line)->fdout != 1)
+		close((*cmd_line)->fdout);
+	if (open_file_fdout(token, cmd_line))
+		return (1);
+	return (0);
+}
+
+int	update_fdin(t_cmd_line **cmd_line, t_token *token)
+{
 	int		error;
 
 	error = 0;
-	token = (*cmd_line)->token_lst;
-	while (token)
-	{
-		if (token->type == INPUT || token->type == HEREDOC_LIMIT)
-		{
-			close_file_fdin(cmd_line);
-			if (token->type == INPUT)
-				error = open_file_fdin(token->value, cmd_line);
-			else
-				error = heredoc(token->value, cmd_line);
-			if (error)
-				return (1);
-		}
-		token = token->next;
-	}
+	close_file_fdin(cmd_line);
+	if (token->type == INPUT)
+		error = open_file_fdin(token->value, cmd_line);
+	else
+		error = heredoc(token->value, cmd_line);
+	if (error)
+		return (1);
 	return (0);
 }
+
+// int	update_fdout(t_cmd_line **cmd_line)
+// {
+// 	t_token	*token;
+
+// 	token = (*cmd_line)->token_lst;
+// 	while (token)
+// 	{
+// 		if (token->type == OUTPUT || token->type == OUTPUT_APPEND)
+// 		{
+// 			if ((*cmd_line)->fdout != 1)
+// 				close((*cmd_line)->fdout);
+// 			if (open_file_fdout(token, cmd_line))
+// 				return (1);
+// 		}
+// 		token = token->next;
+// 	}
+// 	return (0);
+// }
+
+// int	update_fdin(t_cmd_line **cmd_line)
+// {
+// 	t_token	*token;
+// 	int		error;
+
+// 	error = 0;
+// 	token = (*cmd_line)->token_lst;
+// 	while (token)
+// 	{
+// 		if (token->type == INPUT || token->type == HEREDOC_LIMIT)
+// 		{
+// 			close_file_fdin(cmd_line);
+// 			if (token->type == INPUT)
+// 				error = open_file_fdin(token->value, cmd_line);
+// 			else
+// 				error = heredoc(token->value, cmd_line);
+// 			if (error)
+// 				return (1);
+// 		}
+// 		token = token->next;
+// 	}
+// 	return (0);
+// }
 
 //MODE ARGUMENT OF OPEN FUNCTION : need to check which modes have to be applied
 // S_IRWXU  00700 user (file owner) has read, write, and execute permission
