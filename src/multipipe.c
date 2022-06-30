@@ -6,7 +6,7 @@
 /*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 11:02:50 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/06/30 11:09:03 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 			executor(cmdl, &sh->env);
 			return (0);
 		}
-		// close_fds(fdin, fdout);
+		close_fds(fdin, fdout);
 	}
 	executor(cmdl, &sh->env);
-	// close_fds(fdin, fdout);
+	close_fds(fdin, fdout);
 	return (pid);
 }
 
@@ -92,12 +92,12 @@ void	execute_pipes(t_sh *sh)
 	}
 	cmdl->pid = spawn_process(fdin, NULL, cmdl, sh);
 
-	// cmdl = sh->cmd_line_lst;
-	// while (cmdl)
-	// {
-	// 	close_fds(cmdl->fd[0], cmdl->fd[1]);
-	// 	cmdl = cmdl->next;
-	// }
+	cmdl = sh->cmd_line_lst;
+	while (cmdl)
+	{
+		close_fds(cmdl->fd[0], cmdl->fd[1]);
+		cmdl = cmdl->next;
+	}
 	// if ((sh->cmd_line_lst)->next != NULL)
 	// 	close_fds(cmdl->fd[0], cmdl->fd[1]);
 
