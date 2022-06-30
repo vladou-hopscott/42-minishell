@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 19:36:37 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:58:46 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ int	check_exec_bin(t_cmd_line *cmdl, char **env)
 	cpy = ft_strdup(cmdl->cmd);
 	if (access(cpy, F_OK) != 0)
 		cmd_pathfinder(&cpy, env);
-	free(cpy);
-	if (cmdl->cmd == NULL)
+	if (cpy == NULL)
+	{
+		free(cpy);
 		return (FAILURE);
+	}
+	free(cpy);
 	return (SUCCESS);
 }
 
