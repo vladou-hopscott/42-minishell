@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:54:20 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:59:10 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	find_first_arg_to_print(int ac, char **av, int *ntrail)
 			j++;
 		if (j != (int)ft_strlen(av[i]))
 			break ;
-		ntrail = 0;
+		*ntrail = 0;
 		i++;
 	}
 	return (i);
