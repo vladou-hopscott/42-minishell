@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 12:31:49 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 13:09:29 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 	{
 		pid = fork();
 		if (pid < 0)
-			return (-2);
+			set_error_exit_status(&g_sh, MAJOR_FAILURE);
 		if (pid == 0)
 		{
 			if (fd != NULL)
@@ -67,10 +67,10 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 			executor(cmdl, &sh->env);
 			return (0);
 		}
-		close_fds(fdin, fdout);
 	}
 	else
 		executor(cmdl, &sh->env);
+	close_fds(fdin, fdout);
 	return (pid);
 }
 
@@ -93,12 +93,12 @@ void	execute_pipes(t_sh *sh)
 
 	cmdl->pid = spawn_process(fdin, NULL, cmdl, sh);
 	
-	cmdl = sh->cmd_line_lst;
-	while (cmdl)
-	{
-		close_fds(cmdl->fd[0], cmdl->fd[1]);
-		cmdl = cmdl->next;
-	}
+	// cmdl = sh->cmd_line_lst;
+	// while (cmdl)
+	// {
+	// 	close_fds(cmdl->fd[0], cmdl->fd[1]);
+	// 	cmdl = cmdl->next;
+	// }
 	// if ((sh->cmd_line_lst)->next != NULL)
 	// 	close_fds(cmdl->fd[0], cmdl->fd[1]);
 

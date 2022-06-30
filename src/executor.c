@@ -3,48 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 19:10:00 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:47:15 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_sh	g_sh;
-
-// void	cmd_pathfinder(char **pcmd, char **env)
-// {
-// 	char	*cmd;
-// 	char	**paths;
-// 	char	*env_path;
-// 	char	*cmd_path;
-// 	size_t	i;
-
-// 	env_path = env_findkeyvalue("PATH", env);
-// 	if (*pcmd && env_path)
-// 	{
-// 		cmd = ft_strjoin("/", (*pcmd));
-// 		paths = ft_split(env_path, ':');
-// 		i = 0;
-// 		*pcmd = NULL;
-// 		while (paths && paths[i])
-// 		{
-// 			cmd_path = ft_strjoin(paths[i], cmd);
-// 			if (access(cmd_path, F_OK) == 0)
-// 			{
-// 				*pcmd = cmd_path;
-// 				break ;
-// 			}
-// 			free(cmd_path);
-// 			i++;
-// 		}
-// 		free(cmd);
-// 		ft_freetbl(paths, -1);
-// 	}
-// 	free(env_path);
-// }
 
 void	cmd_pathfinder(char **pcmd, char **env)
 {
