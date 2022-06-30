@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:59:44 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 15:01:11 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	dup_and_close_fds(int fdin, int fdout, t_cmd_line *cmdl)
 	}
 }
 
-int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
+void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 {
 	int		fdout;
 
@@ -68,7 +68,7 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 			}
 			dup_and_close_fds(fdin, fdout, cmdl);
 			executor(cmdl, &sh->env);
-			return (0);
+			return ;
 		}
 	}
 	else
@@ -88,12 +88,12 @@ void	execute_pipes(t_sh *sh)
 	{
 		sh->has_pipe = 1;
 		pipe(cmdl->fd);
-		cmdl->pid = spawn_process(fdin, cmdl->fd, cmdl, sh);
+		spawn_process(fdin, cmdl->fd, cmdl, sh);
 		close(cmdl->fd[1]);
 		fdin = cmdl->fd[0];
 		cmdl = cmdl->next;
 	}
-	cmdl->pid = spawn_process(fdin, NULL, cmdl, sh);
+	spawn_process(fdin, NULL, cmdl, sh);
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{
