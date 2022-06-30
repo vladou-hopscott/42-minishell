@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 11:09:03 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/06/30 12:31:49 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 	{
 		pid = fork();
 		if (pid < 0)
-			return (-1);
+			return (-2);
 		if (pid == 0)
 		{
 			if (fd != NULL)
@@ -69,8 +69,8 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 		}
 		close_fds(fdin, fdout);
 	}
-	executor(cmdl, &sh->env);
-	close_fds(fdin, fdout);
+	else
+		executor(cmdl, &sh->env);
 	return (pid);
 }
 
@@ -90,8 +90,9 @@ void	execute_pipes(t_sh *sh)
 		fdin = cmdl->fd[0];
 		cmdl = cmdl->next;
 	}
-	cmdl->pid = spawn_process(fdin, NULL, cmdl, sh);
 
+	cmdl->pid = spawn_process(fdin, NULL, cmdl, sh);
+	
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{

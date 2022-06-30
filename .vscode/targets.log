@@ -5,12 +5,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Wed Jun 29 20:20:55 2022
+# Make data base, printed on Thu Jun 30 12:34:26 2022
 
 # Variables
 
- 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -40,8 +40,6 @@ CURDIR := /sgoinfre/goinfre/Perso/swillis/minishell
 # makefile
 SHELL = /bin/sh
 # environment
-GDM_LANG = en
-# environment
 VTE_VERSION = 6003
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
@@ -50,7 +48,7 @@ _ = /usr/bin/code
 # makefile (from 'Makefile', line 20)
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include 
 # environment
-JOURNAL_STREAM = 9:213247
+JOURNAL_STREAM = 9:59281
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -74,15 +72,15 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from 'Makefile', line 73)
 OBJS := src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_validation2.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/redirections.o src/multipipe.o
 # environment
-MANAGERPID = 43405
+MANAGERPID = 5473
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-40b98a84-6a9a-4aa4-99d6-fb5dbe46ad95.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-fd880ab3-c572-4b89-be65-cb66407ec36f.sock
 # environment
-VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis
+VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis/minishell
 # environment
-XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session2
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
 # environment
-KRB5CCNAME = FILE:/tmp/krb5cc_40596_LBiF41
+KRB5CCNAME = FILE:/tmp/krb5cc_40596_wWUJwO
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -92,7 +90,7 @@ GPG_AGENT_INFO = /run/user/40596/gnupg/S.gpg-agent:0:1
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/e1r3p21.42.fr:@/tmp/.ICE-unix/43896,unix/e1r3p21.42.fr:/tmp/.ICE-unix/43896
+SESSION_MANAGER = local/e3r9p18.42.fr:@/tmp/.ICE-unix/6214,unix/e3r9p18.42.fr:/tmp/.ICE-unix/6214
 # environment
 XDG_RUNTIME_DIR = /run/user/40596
 # environment
@@ -102,7 +100,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 2d2e236baf1545269776a8f01842142f
+INVOCATION_ID = 16c098a6e6cf4e96b2c9e7070401e74e
 # makefile (from 'Makefile', line 19)
 LDFLAGS = -lreadline -L/usr/local/opt/readline/lib/
 # default
@@ -126,11 +124,11 @@ VSCODE_PIPE_LOGGING = true
 # makefile (from 'Makefile', line 79)
 PRINTF := lib/libftprintf/libftprintf.a
 # environment
-PWD = /sgoinfre/goinfre/Perso/swillis/minishell
+PWD = /mnt/nfs/homes/swillis/sgoinfre/minishell
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 43860
+SSH_AGENT_PID = 5903
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'Makefile', line 9)
@@ -194,13 +192,11 @@ LESS = -R
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /mnt/nfs/homes/swillis/sgoinfre/minishell
+OLDPWD = /mnt/nfs/homes/swillis/sgoinfre
 # default
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
-# environment
-LANGUAGE = en
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
@@ -234,11 +230,11 @@ LC_ALL = C
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/ccd93952_50f6_4595_aecc_ac7270f23ac8
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/aefe10ca_c0c5_4f80_bd2c_180a0940bbaf
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.78
+GNOME_TERMINAL_SERVICE = :1.88
 # default
 SUFFIXES := 
 # environment
@@ -260,9 +256,9 @@ TERM = xterm-256color
 # environment
 DOCKER_HOST = unix:///run/user/40596/docker.sock
 # environment
-VSCODE_PID = 45105
+VSCODE_PID = 9023
 # variable set hash-table stats:
-# Load=125/1024=12%, Rehash=0, Collisions=22/199=11%
+# Load=123/1024=12%, Rehash=0, Collisions=22/197=11%
 
 # Pattern-specific Variable Values
 
@@ -270,11 +266,11 @@ VSCODE_PID = 45105
 
 # Directories
 
-# include (device 60, inode 1656461): 7 files, 1 impossibilities.
-# . (device 60, inode 1656373): 11 files, no impossibilities.
-# src (device 60, inode 1656525): 64 files, no impossibilities so far.
+# include (device 55, inode 1656461): 7 files, 1 impossibilities.
+# . (device 55, inode 1656373): 12 files, no impossibilities.
+# src (device 55, inode 1656525): 64 files, no impossibilities so far.
 
-# 82 files, 1 impossibilities in 3 directories.
+# 83 files, 1 impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -287,45 +283,45 @@ VSCODE_PID = 45105
 # Files
 
 # Not a target:
- 
 src/executor_binary.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.738597157
+#  Last modified 2022-06-30 12:32:11.157209631
 #  File has been updated.
 #  Successfully updated.
 
+ 
 # Not a target:
 src/syntax_validation.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.378611824
+#  Last modified 2022-06-30 12:32:10.753225338
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/utils2.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.290574668
+#  Last modified 2022-06-30 12:32:11.789185061
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/update_token_type.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.554604654
+#  Last modified 2022-06-30 12:32:10.957217407
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/executor.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.618602047
+#  Last modified 2022-06-30 12:32:11.025214763
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/env_expand.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.474567171
+#  Last modified 2022-06-30 12:32:12.009176508
 #  File has been updated.
 #  Successfully updated.
 
@@ -345,62 +341,62 @@ all: minishell.a
 # Not a target:
 src/main.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.198619158
+#  Last modified 2022-06-30 12:32:10.545233424
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/builtins2.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.866591943
+#  Last modified 2022-06-30 12:32:11.293204344
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/executor_errors.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.678599602
+#  Last modified 2022-06-30 12:32:11.089212275
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/lexer.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.314614432
+#  Last modified 2022-06-30 12:32:10.685227981
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/quotes.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.606561794
+#  Last modified 2022-06-30 12:32:12.15317091
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/heredoc2.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.858551527
+#  Last modified 2022-06-30 12:32:12.429160179
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/multipipe.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:20:13.906974463
+#  Last modified 2022-06-30 12:32:12.629152404
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:20:52.00943189
+#  Last modified 2022-06-30 12:32:08.237323152
 #  File has been updated.
 #  Successfully updated.
 
 minishell: src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_validation2.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/redirections.o src/multipipe.o lib/libft/libft.a lib/libftprintf/libftprintf.a
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-29 20:20:14.230961274
+#  Last modified 2022-06-30 12:32:13.913102487
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 90):
@@ -409,14 +405,14 @@ minishell: src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/synta
 # Not a target:
 src/env_expand2.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.534564725
+#  Last modified 2022-06-30 12:32:12.077173864
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/syntax_validation2.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.434609543
+#  Last modified 2022-06-30 12:32:10.825222538
 #  File has been updated.
 #  Successfully updated.
 
@@ -433,14 +429,14 @@ fclean: clean
 # Not a target:
 src/free_values.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.162579883
+#  Last modified 2022-06-30 12:32:11.64519066
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/signals.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.722557067
+#  Last modified 2022-06-30 12:32:12.289165623
 #  File has been updated.
 #  Successfully updated.
 
@@ -453,14 +449,14 @@ minishell.a: minishell
 # Not a target:
 src/init_values.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.102582327
+#  Last modified 2022-06-30 12:32:11.573193458
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/utils.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.226577275
+#  Last modified 2022-06-30 12:32:11.71718786
 #  File has been updated.
 #  Successfully updated.
 
@@ -473,14 +469,14 @@ src/utils.o:
 # Not a target:
 src/env_manager_utils.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.406569942
+#  Last modified 2022-06-30 12:32:11.937179307
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/heredoc3.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.922548919
+#  Last modified 2022-06-30 12:32:12.497157536
 #  File has been updated.
 #  Successfully updated.
 
@@ -503,34 +499,34 @@ clean:
 # Not a target:
 src/builtins.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.798594713
+#  Last modified 2022-06-30 12:32:11.225206987
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/prompt.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.254616876
+#  Last modified 2022-06-30 12:32:10.61323078
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/cmds_linked_list.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.982587216
+#  Last modified 2022-06-30 12:32:11.433198901
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/heredoc.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.790554297
+#  Last modified 2022-06-30 12:32:12.361162823
 #  File has been updated.
 #  Successfully updated.
 
 lib/libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-29 20:17:08.930507852
+#  Last modified 2022-06-30 12:32:13.621113839
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 82):
@@ -539,13 +535,13 @@ lib/libft/libft.a:
 # Not a target:
 src/quotes_utils.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.66655935
+#  Last modified 2022-06-30 12:32:12.221168266
 #  File has been updated.
 #  Successfully updated.
 
 lib/libftprintf/libftprintf.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-29 20:17:09.174497911
+#  Last modified 2022-06-30 12:32:13.821106062
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 85):
@@ -554,36 +550,36 @@ lib/libftprintf/libftprintf.a:
 # Not a target:
 src/tokens_linked_list.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.930589335
+#  Last modified 2022-06-30 12:32:11.3612017
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/redirections.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.990546149
+#  Last modified 2022-06-30 12:32:12.561155048
 #  File has been updated.
 #  Successfully updated.
 
- 
 # Not a target:
 src/env_manager.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.346572387
+#  Last modified 2022-06-30 12:32:11.861182262
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/parser.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:06.494607099
+#  Last modified 2022-06-30 12:32:10.893219894
 #  File has been updated.
+ 
 #  Successfully updated.
 
 # Not a target:
 src/cmd_line_struct.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 20:17:07.042584772
+#  Last modified 2022-06-30 12:32:11.501196258
 #  File has been updated.
 #  Successfully updated.
 
@@ -595,12 +591,12 @@ src/cmd_line_struct.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 160 / storage = 2301 B / avg = 14 B
-# current buf: size = 8162 B / used = 2301 B / count = 160 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 161 / storage = 2316 B / avg = 14 B
+# current buf: size = 8162 B / used = 2316 B / count = 161 / avg = 14 B
 
-# strcache performance: lookups = 289 / hit rate = 44%
+# strcache performance: lookups = 290 / hit rate = 44%
 # hash-table stats:
-# Load=160/8192=2%, Rehash=0, Collisions=9/289=3%
-# Finished Make data base on Wed Jun 29 20:20:55 2022
+# Load=161/8192=2%, Rehash=0, Collisions=9/290=3%
+# Finished Make data base on Thu Jun 30 12:34:26 2022
 
  
