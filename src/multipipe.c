@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:09:29 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:04:57 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	execute_pipes(t_sh *sh)
 	fdin = cmdl->fdin;
 	while (cmdl->next)
 	{
+		sh->has_pipe = 1;
 		pipe(cmdl->fd);
 		cmdl->pid = spawn_process(fdin, cmdl->fd, cmdl, sh);
 		close(cmdl->fd[1]);

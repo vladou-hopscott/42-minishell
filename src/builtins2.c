@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 19:04:51 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:13:20 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,20 @@ void	builtin_export(int ac, char **av, char ***penv)
 	char	*value;
 
 	i = 1;
-	while (i < ac)
+	if (!g_sh.has_pipe)
 	{
-		env = *penv;
-		tbl = ft_split(av[i], '=');
-		key = ft_strdup(tbl[0]);
-		value = str_exportvalue(tbl);
-		*penv = env_export(key, value, env);
-		free(key);
-		free(value);
-		ft_freetbl(tbl, -1);
-		i++;
+		while (i < ac)
+		{
+			env = *penv;
+			tbl = ft_split(av[i], '=');
+			key = ft_strdup(tbl[0]);
+			value = str_exportvalue(tbl);
+			*penv = env_export(key, value, env);
+			free(key);
+			free(value);
+			ft_freetbl(tbl, -1);
+			i++;
+		}		
 	}
 }
 
@@ -94,10 +97,13 @@ void	builtin_unset(int ac, char **av, char ***penv)
 	int		i;
 
 	i = 1;
-	while (i < ac)
+	if (!g_sh.has_pipe)
 	{
-		tbl_remove(penv, av[i]);
-		i++;
+		while (i < ac)
+		{
+			tbl_remove(penv, av[i]);
+			i++;
+		}
 	}
 }
 
