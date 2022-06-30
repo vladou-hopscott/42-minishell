@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:16 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:55:17 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:35:34 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_cmd_line	*create_cmd_line(void)
 	elem->heredoc_mode = 0;
 	elem->append_mode = 0;
 	elem->heredoc_name = NULL;
+	elem->pid = -1;
 	return (elem);
 }
 

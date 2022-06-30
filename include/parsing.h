@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:42:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/28 00:29:04 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 10:28:31 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_cmd_line
 	int					fdout;
 	int					append_mode;
 	int					pid;
+	int					fd[2];
 	struct s_cmd_line	*next;
 }	t_cmd_line;
 

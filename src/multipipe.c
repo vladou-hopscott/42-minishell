@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 20:22:11 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 11:02:50 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 			executor(cmdl, &sh->env);
 			return (0);
 		}
-		close_fds(fdin, fdout);
+		// close_fds(fdin, fdout);
 	}
-	else
-		executor(cmdl, &sh->env);
+	executor(cmdl, &sh->env);
+	// close_fds(fdin, fdout);
 	return (pid);
 }
 
@@ -78,22 +78,29 @@ void	execute_pipes(t_sh *sh)
 {
 	int 		status;
 	int 		fdin;
-	int			fd[2];
 	t_cmd_line	*cmdl;
 
 	cmdl = sh->cmd_line_lst;
 	fdin = cmdl->fdin;
 	while (cmdl->next)
 	{
-		pipe(fd);
-		cmdl->pid = spawn_process(fdin, fd, cmdl, sh);
-		close(fd[1]);
-		fdin = fd[0];
+		pipe(cmdl->fd);
+		cmdl->pid = spawn_process(fdin, cmdl->fd, cmdl, sh);
+		close(cmdl->fd[1]);
+		fdin = cmdl->fd[0];
 		cmdl = cmdl->next;
 	}
 	cmdl->pid = spawn_process(fdin, NULL, cmdl, sh);
-	if ((sh->cmd_line_lst)->next != NULL)
-		close_fds(fd[0], fd[1]);
+
+	// cmdl = sh->cmd_line_lst;
+	// while (cmdl)
+	// {
+	// 	close_fds(cmdl->fd[0], cmdl->fd[1]);
+	// 	cmdl = cmdl->next;
+	// }
+	// if ((sh->cmd_line_lst)->next != NULL)
+	// 	close_fds(cmdl->fd[0], cmdl->fd[1]);
+
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{
