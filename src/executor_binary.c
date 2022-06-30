@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_binary.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:18 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/29 19:57:11 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:30:19 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,47 +34,18 @@ void	reset_stdin_stdout(int cpy_stdin, int cpy_stdout, t_cmd_line *cmdl)
 		close(cmdl->fdout);
 }
 
-// int	process_cmd(t_cmd_line *cmdl, char **env)
-// {
-// 	int		pid;
-// 	int		cpy_stdin;
-// 	int		cpy_stdout;
-// 	int		status;
-
-// 	update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
-// 	free(cmdl->args[0]);
-// 	cmdl->args[0] = ft_strdup(cmdl->cmd);
-// 	pid = fork();
-// 	if (pid < 0)
-// 	{
-// 		set_error_exit_status(&g_sh, MAJOR_FAILURE);
-// 		reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
-// 		return (1);
-// 	}
-// 	if (pid == 0)
-// 		execve(cmdl->cmd, cmdl->args, env);
-// 	if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
-// 		set_error_exit_status(&g_sh, WEXITSTATUS(status));
-// 	reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
-// 	return (0);
-// }
-
 void	exec_bin(t_cmd_line *cmdl, char **env)
 {
 	char	*cpy;
- 	//int		cpy_stdin;
- 	//int		cpy_stdout;
 
 	cpy = ft_strdup(cmdl->cmd);
 	if (access(cmdl->cmd, F_OK) != 0)
 		cmd_pathfinder(&cmdl->cmd, env);
 	if (cmdl->cmd)
 	{
-	 	//update_stdin_stdout(&cpy_stdin, &cpy_stdout, cmdl);
 		free(cmdl->args[0]);
 		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		execve(cmdl->cmd, cmdl->args, env);
-	 	//reset_stdin_stdout(cpy_stdin, cpy_stdout, cmdl);
 	}
 	else
 	{

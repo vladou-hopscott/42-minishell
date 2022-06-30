@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 12:47:15 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:53:47 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,42 @@
 
 extern t_sh	g_sh;
 
+void	cmd_pathfinder_utils(char **pcmd, char *env_path)
+{
+	int		i;
+	char	*cmd;
+	char	*cmd_path;
+	char	**paths;
+
+	paths = ft_split(env_path, ':');
+	cmd = *pcmd;
+	(*pcmd) = ft_strjoin("/", cmd);
+	free(cmd);
+	cmd = *pcmd;
+	*pcmd = NULL;
+	i = 0;
+	while (paths && paths[i])
+	{
+		cmd_path = ft_strjoin(paths[i], cmd);
+		if (access(cmd_path, F_OK) == 0)
+		{
+			*pcmd = cmd_path;
+			break ;
+		}
+		free(cmd_path);
+		i++;
+	}
+	free(cmd);
+	ft_freetbl(paths, -1);
+}
+
 void	cmd_pathfinder(char **pcmd, char **env)
 {
-	char	*cmd;
-	char	**paths;
 	char	*env_path;
-	char	*cmd_path;
-	size_t	i;
 
-	cmd = *pcmd;
 	env_path = env_findkeyvalue("PATH", env);
 	if (*pcmd && env_path)
-	{
-		(*pcmd) = ft_strjoin("/", cmd);
-		free(cmd);
-		cmd = *pcmd;
-		paths = ft_split(env_path, ':');
-		i = 0;
-		*pcmd = NULL;
-		while (paths && paths[i])
-		{
-			cmd_path = ft_strjoin(paths[i], cmd);
-			if (access(cmd_path, F_OK) == 0)
-			{
-				*pcmd = cmd_path;
-				break ;
-			}
-			free(cmd_path);
-			i++;
-		}
-		free(cmd);
-		ft_freetbl(paths, -1);
-	}
+		cmd_pathfinder_utils(pcmd, env_path);
 	free(env_path);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:13:20 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:50:13 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,22 @@ void	tbl_remove(char ***ptr, char *key)
 	tbl = *ptr;
 	pos = env_findkeypos(key, tbl);
 	if (pos != -1)
+		return ;
+	new = malloc(sizeof(char *) * (ft_tbllen(tbl) - 1));
+	if (!new)
+		return ;
+	i = 0;
+	j = 0;
+	while (tbl && tbl[i])
 	{
-		new = malloc(sizeof(char *) * (ft_tbllen(tbl) - 1));
-		if (new)
-		{
-			i = 0;
-			j = 0;
-			while (tbl && tbl[i])
-			{
-				if (i == pos)
-					i++;
-				else
-					new[j++] = ft_strdup(tbl[i++]);
-			}
-			new[j] = NULL;
-			*ptr = new;
-			ft_freetbl(tbl, -1);
-		}
+		if (i == pos)
+			i++;
+		else
+			new[j++] = ft_strdup(tbl[i++]);
 	}
+	new[j] = NULL;
+	*ptr = new;
+	ft_freetbl(tbl, -1);
 }
 
 void	builtin_unset(int ac, char **av, char ***penv)

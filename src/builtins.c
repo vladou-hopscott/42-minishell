@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:11:04 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:54:20 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ extern t_sh	g_sh;
 
 // ======================= ECHO ====================================
 
-void	builtin_echo(int ac, char **av, int fdout)
+int	find_first_arg_to_print(int ac, char **av, int *ntrail)
 {
 	int	i;
 	int	j;
-	int	ntrail;
 
-	ntrail = 1;
 	i = 1;
 	while ((i < ac) && (av[i][0] == '-'))
 	{
@@ -34,6 +32,16 @@ void	builtin_echo(int ac, char **av, int fdout)
 		ntrail = 0;
 		i++;
 	}
+	return (i);
+}
+
+void	builtin_echo(int ac, char **av, int fdout)
+{
+	int	i;
+	int	ntrail;
+
+	ntrail = 1;
+	i = find_first_arg_to_print(ac, av, &ntrail);
 	if (i < ac)
 		ft_putstr_fd(av[i++], fdout);
 	while (i < ac)
@@ -98,7 +106,7 @@ void	builtin_cd(int ac, char **av, char ***penv)
 		newpath = getcwd(NULL, 999999);
 		if (env_findkeypos("PWD", *penv) != -1)
 			*penv = env_export("PWD", newpath, *penv);
-		free(newpath);	
+		free(newpath);
 	}
 }
 
@@ -117,6 +125,6 @@ void	builtin_exit(int ac, char **av)
 			exit(0);
 		else if (ac == 2)
 			exit(ft_atoi(av[1]));
-		exit(FAILURE);		
+		exit(FAILURE);
 	}
 }

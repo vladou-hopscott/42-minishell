@@ -1,13 +1,14 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'src/main.o', needed by 'minishell'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Thu Jun 30 12:34:26 2022
+# Make data base, printed on Thu Jun 30 14:23:51 2022
 
 # Variables
 
@@ -74,7 +75,7 @@ OBJS := src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_v
 # environment
 MANAGERPID = 5473
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-fd880ab3-c572-4b89-be65-cb66407ec36f.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-dca099e6-56c8-40b7-8c22-cdb2560f4c57.sock
 # environment
 VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis/minishell
 # environment
@@ -256,7 +257,7 @@ TERM = xterm-256color
 # environment
 DOCKER_HOST = unix:///run/user/40596/docker.sock
 # environment
-VSCODE_PID = 9023
+VSCODE_PID = 24571
 # variable set hash-table stats:
 # Load=123/1024=12%, Rehash=0, Collisions=22/197=11%
 
@@ -267,10 +268,10 @@ VSCODE_PID = 9023
 # Directories
 
 # include (device 55, inode 1656461): 7 files, 1 impossibilities.
-# . (device 55, inode 1656373): 12 files, no impossibilities.
-# src (device 55, inode 1656525): 64 files, no impossibilities so far.
+# . (device 55, inode 1656373): 10 files, no impossibilities.
+# src (device 55, inode 1656525): 28 files, no impossibilities so far.
 
-# 83 files, 1 impossibilities in 3 directories.
+# 45 files, 1 impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -279,59 +280,52 @@ VSCODE_PID = 9023
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
+ 
 
 # Files
 
 # Not a target:
 src/executor_binary.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.157209631
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
- 
 # Not a target:
 src/syntax_validation.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.753225338
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/utils2.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.789185061
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/update_token_type.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.957217407
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/executor.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.025214763
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/env_expand.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.009176508
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: minishell.a
 #  Phony target (prerequisite of .PHONY).
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Successfully updated.
+#  File has not been updated.
 
 .PHONY: all clean fclean re
 #  Implicit rule search has not been done.
@@ -341,51 +335,44 @@ all: minishell.a
 # Not a target:
 src/main.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.545233424
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 
 # Not a target:
 src/builtins2.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.293204344
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/executor_errors.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.089212275
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/lexer.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.685227981
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/quotes.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.15317091
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/heredoc2.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.429160179
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/multipipe.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.629152404
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 Makefile:
@@ -396,25 +383,22 @@ Makefile:
 
 minishell: src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_validation2.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/redirections.o src/multipipe.o lib/libft/libft.a lib/libftprintf/libftprintf.a
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-30 12:32:13.913102487
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 90):
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $(EXE) -lreadline
 
 # Not a target:
 src/env_expand2.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.077173864
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/syntax_validation2.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.825222538
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
@@ -428,37 +412,32 @@ fclean: clean
 
 # Not a target:
 src/free_values.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.64519066
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/signals.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.289165623
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 minishell.a: minishell
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has been updated.
-#  Successfully updated.
+#  File has not been updated.
 
 # Not a target:
 src/init_values.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.573193458
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/utils.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.71718786
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -468,17 +447,15 @@ src/utils.o:
 
 # Not a target:
 src/env_manager_utils.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.937179307
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/heredoc3.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.497157536
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -498,105 +475,93 @@ clean:
 
 # Not a target:
 src/builtins.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.225206987
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/prompt.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.61323078
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/cmds_linked_list.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.433198901
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/heredoc.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.361162823
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 lib/libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-30 12:32:13.621113839
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 82):
 	make -C lib/libft -f Makefile
 
 # Not a target:
 src/quotes_utils.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.221168266
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 lib/libftprintf/libftprintf.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-30 12:32:13.821106062
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 85):
 	make -C lib/libftprintf -f Makefile
 
 # Not a target:
 src/tokens_linked_list.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.3612017
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/redirections.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:12.561155048
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/env_manager.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.861182262
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/parser.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:10.893219894
-#  File has been updated.
- 
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/cmd_line_struct.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 12:32:11.501196258
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=43/1024=4%, Rehash=0, Collisions=3/196=2%
+# Load=43/1024=4%, Rehash=0, Collisions=0/106=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 161 / storage = 2316 B / avg = 14 B
-# current buf: size = 8162 B / used = 2316 B / count = 161 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 94 / storage = 1275 B / avg = 13 B
+# current buf: size = 8162 B / used = 1275 B / count = 94 / avg = 13 B
 
-# strcache performance: lookups = 290 / hit rate = 44%
+# strcache performance: lookups = 132 / hit rate = 28%
 # hash-table stats:
-# Load=161/8192=2%, Rehash=0, Collisions=9/290=3%
-# Finished Make data base on Thu Jun 30 12:34:26 2022
+ 
+# Load=94/8192=1%, Rehash=0, Collisions=4/132=3%
+# Finished Make data base on Thu Jun 30 14:23:51 2022
 
  

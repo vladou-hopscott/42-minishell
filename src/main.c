@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:11:03 by swillis          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:29:15 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ void	check_cmds(t_sh *sh)
 	char		**env;
 
 	env = sh->env;
-	cmdl = sh->cmd_line_lst;;
+	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{
 		if (!cmdl->cmd)
 		{
 			sh->error = 1;
 			sh->exit_status = SUCCESS;
-			return;
+			return ;
 		}
 		if (check_cmd(cmdl, env) == FAILURE)
 		{
@@ -86,11 +86,10 @@ void	check_cmds(t_sh *sh)
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argv;
 	check_program_args(argc);
 	handle_signals();
 	init_program_values(&g_sh, env);
-	while (1)
+	while (argv)
 	{
 		listen_prompt(&g_sh);
 		lexer(&g_sh);
@@ -98,18 +97,18 @@ int	main(int argc, char **argv, char **env)
 		check_cmds(&g_sh);
 		if (g_sh.error)
 		{
-			free_values(&g_sh, 0);
+			free_values(&g_sh, SUCCESS);
 			init_prompt_values(&g_sh);
 			continue ;
 		}
 		execute_pipes(&g_sh);
-		free_values(&g_sh, 0);
+		free_values(&g_sh, SUCCESS);
 		if (!g_sh.error)
 			g_sh.exit_status = SUCCESS;
 		init_prompt_values(&g_sh);
 	}
-	free_values(&g_sh, 1);
-	if (g_sh.error == 1)
-		return (1);
-	return (0);
+	free_values(&g_sh, FAILURE);
+	if (g_sh.error == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }
