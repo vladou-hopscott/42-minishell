@@ -6,11 +6,13 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/06 17:42:48 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/06 18:06:40 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_sh	g_sh;
 
 char	*trim_quotes_in_delimitor(char **value, int *i, int *j)
 {
@@ -105,16 +107,15 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 	process_delimitor(&delimitor, &quotes);
 	if (initialize_heredoc(cmd_line))
 		return (1);
-
 	status = 0;
 	pid = fork();
 	if (pid == 0)
+		exit(process_heredoc(delimitor, cmd_line, quotes));
+	if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
 	{
-		process_heredoc(delimitor, cmd_line, quotes);
-		exit(0);
+		set_error_exit_status(&g_sh, WEXITSTATUS(status));
+		return (1);
 	}
-	else
-		waitpid(pid, &status, 0);
 	close((*cmd_line)->fdin);
 	if (open_file_fdin((*cmd_line)->heredoc_name, cmd_line))
 		return (1);
