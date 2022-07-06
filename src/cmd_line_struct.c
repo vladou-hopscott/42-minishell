@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_line_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:30:11 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/06/30 18:06:24 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,28 @@ int	update_args(t_cmd_line **cmd_line)
 	return (0);
 }
 
+int	update_fdin_fdout(t_cmd_line **cmd_line)
+{
+	t_token	*token;
+
+	token = (*cmd_line)->token_lst;
+	while (token)
+	{
+		if (token->type == INPUT || token->type == HEREDOC_LIMIT)
+		{
+			if (update_fdin(cmd_line, token))
+				return (1);
+		}
+		else if (token->type == OUTPUT || token->type == OUTPUT_APPEND)
+		{
+			if (update_fdout(cmd_line, token))
+				return (1);
+		}
+		token = token->next;
+	}
+	return (0);
+}
+
 void	update_elems_cmd_lines(t_sh *sh)
 {
 	t_cmd_line	*start;
@@ -65,8 +87,7 @@ void	update_elems_cmd_lines(t_sh *sh)
 	{
 		if (update_cmd(&sh->cmd_line_lst)
 			|| update_args(&sh->cmd_line_lst)
-			|| update_fdout(&sh->cmd_line_lst)
-			|| update_fdin(&sh->cmd_line_lst))
+			|| update_fdin_fdout(&sh->cmd_line_lst))
 		{
 			sh->error = 1;
 			sh->exit_status = FAILURE;
