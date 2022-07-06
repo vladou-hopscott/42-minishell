@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:28:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:32:59 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:43:44 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,6 @@ t_token	*add_middle_token(t_token *current, t_token_type type, char *value)
 	return (new);
 }
 
-void	print_tokens(t_token *li)
-{
-	while (li != NULL)
-	{
-		printf("[%s]", li->value);
-		li = li->next;
-	}
-	printf("\n");
-}
-
 int	count_arg_tokens(t_token *li)
 {
 	int	size;
@@ -109,4 +99,14 @@ int	count_arg_tokens(t_token *li)
 //		ft_set_null_free_elem(*a_list);
 //		*a_list = tmp;
 //	}
+//}
+
+//void	print_tokens(t_token *li)
+//{
+//	while (li != NULL)
+//	{
+//		printf("[%s]", li->value);
+//		li = li->next;
+//	}
+//	printf("\n");
 //}

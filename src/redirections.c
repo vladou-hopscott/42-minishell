@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:03 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 18:06:14 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:26:30 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,49 +75,6 @@ int	update_fdin(t_cmd_line **cmd_line, t_token *token)
 		return (1);
 	return (0);
 }
-
-// int	update_fdout(t_cmd_line **cmd_line)
-// {
-// 	t_token	*token;
-
-// 	token = (*cmd_line)->token_lst;
-// 	while (token)
-// 	{
-// 		if (token->type == OUTPUT || token->type == OUTPUT_APPEND)
-// 		{
-// 			if ((*cmd_line)->fdout != 1)
-// 				close((*cmd_line)->fdout);
-// 			if (open_file_fdout(token, cmd_line))
-// 				return (1);
-// 		}
-// 		token = token->next;
-// 	}
-// 	return (0);
-// }
-
-// int	update_fdin(t_cmd_line **cmd_line)
-// {
-// 	t_token	*token;
-// 	int		error;
-
-// 	error = 0;
-// 	token = (*cmd_line)->token_lst;
-// 	while (token)
-// 	{
-// 		if (token->type == INPUT || token->type == HEREDOC_LIMIT)
-// 		{
-// 			close_file_fdin(cmd_line);
-// 			if (token->type == INPUT)
-// 				error = open_file_fdin(token->value, cmd_line);
-// 			else
-// 				error = heredoc(token->value, cmd_line);
-// 			if (error)
-// 				return (1);
-// 		}
-// 		token = token->next;
-// 	}
-// 	return (0);
-// }
 
 //MODE ARGUMENT OF OPEN FUNCTION : need to check which modes have to be applied
 // S_IRWXU  00700 user (file owner) has read, write, and execute permission

@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:51:21 by vladimir          #+#    #+#             */
-/*   Updated: 2022/06/23 10:26:41 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:19:16 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	open_file_check(int fd, char *filename)
 		else if (errno == 2)
 			ft_putstr_fd(": No such file or directory\n", 2);
 		else
+		{
+			printf("open errno=%d\n", errno);
 			ft_putstr_fd(": An error occured\n", 2);
+		}
 		return (1);
 	}
 	return (0);
