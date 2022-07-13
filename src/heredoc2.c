@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:06:29 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:54:07 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ extern t_sh	g_sh;
 
 int	process_eof_heredoc(char **tmp, t_cmd_line **cmd_line)
 {
+	(void)cmd_line;
 	ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 1);
 	ft_free_null_str(tmp);
-	close((*cmd_line)->fdin);
-	unlink((*cmd_line)->heredoc_name);
-	ft_free_null_str(&(*cmd_line)->heredoc_name);
 	return (1);
 }
+// close((*cmd_line)->fdin);
+// unlink((*cmd_line)->heredoc_name);
+// ft_free_null_str(&(*cmd_line)->heredoc_name);
 
 char	*expand_envvar_in_heredoc(char *str, int *i, int *j, char **s1)
 {
