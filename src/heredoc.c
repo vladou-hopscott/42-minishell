@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/13 15:46:56 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:19:42 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,15 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 	process_delimitor(&delimitor, &quotes);
 	if (initialize_heredoc(cmd_line))
 		return (1);
-	status = 0;	
+	status = 0;
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		// signal(SIGINT, &manage_heredoc_signal)
 		exit(process_heredoc(delimitor, cmd_line, quotes));
+	}
 	if (waitpid(pid, &status, 0) < 0 && WIFEXITED(status))
 	{
 		set_error_exit_status(&g_sh, WEXITSTATUS(status));
