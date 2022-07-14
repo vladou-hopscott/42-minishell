@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:15 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:31:14 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:32:53 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ static void	handler(int sigtype, siginfo_t *siginfo, void *ucontext)
 		rl_replace_line("", 0);
 		rl_redisplay();
 		g_sh.exit_status = 130;
+	}
+}
+
+void	heredoc_handler(int sigtype)
+{
+	if (sigtype == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		// rl_redisplay();
+		g_sh.error = 1;
+		g_sh.exit_status = 130;
+		exit(130);
 	}
 }
 

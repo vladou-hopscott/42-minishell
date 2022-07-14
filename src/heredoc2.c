@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/13 15:54:07 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:47:33 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ extern t_sh	g_sh;
 
 int	process_eof_heredoc(char **tmp, t_cmd_line **cmd_line)
 {
-	(void)cmd_line;
 	ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 1);
+	ft_putstr_fd("\n", (*cmd_line)->fdin);
 	ft_free_null_str(tmp);
 	return (1);
 }
