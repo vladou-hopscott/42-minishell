@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 18:06:24 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:37:34 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	update_elems_cmd_lines(t_sh *sh)
 			|| update_fdin_fdout(&sh->cmd_line_lst))
 		{
 			sh->error = 1;
-			sh->exit_status = FAILURE;
+			if (!sh->exit_status)
+				sh->exit_status = FAILURE;
 		}
 		sh->cmd_line_lst = sh->cmd_line_lst->next;
 	}

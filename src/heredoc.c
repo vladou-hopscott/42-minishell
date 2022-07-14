@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/06 18:06:40 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:35:18 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	process_heredoc(char *delimitor, t_cmd_line **cmd_line, int quotes)
 	{
 		tmp = read_heredoc_line(cmd_line, quotes, delimitor);
 		if (!tmp)
-			return (1);
+			break;
 		if (is_delimitor_process(&tmp, &delimitor, cmd_line))
 			break ;
 		write_heredoc_line(&tmp, cmd_line, i);
@@ -108,14 +108,23 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 	if (initialize_heredoc(cmd_line))
 		return (1);
 	status = 0;
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
-		exit(process_heredoc(delimitor, cmd_line, quotes));
-	if ((0 < waitpid(pid, &status, 0)) && (WIFEXITED(status)))
 	{
-		set_error_exit_status(&g_sh, WEXITSTATUS(status));
-		return (1);
+		signal(SIGINT, &heredoc_handler);
+		exit(process_heredoc(delimitor, cmd_line, quotes));
 	}
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+	{
+		if (WEXITSTATUS(status))
+		{
+			set_error_exit_status(&g_sh, WEXITSTATUS(status));
+			return (1);
+		}
+	}
+	handle_signals();
 	close((*cmd_line)->fdin);
 	if (open_file_fdin((*cmd_line)->heredoc_name, cmd_line))
 		return (1);

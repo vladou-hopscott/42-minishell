@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 18:04:56 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/14 20:08:29 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int			update_fdout(t_cmd_line **cmd_line, t_token *token);
 
 //********** SIGNALS **********//
 void		handle_signals(void);
+void		heredoc_handler(int sigtype);
 
 //********** QUOTES **********//
 int			check_for_quotes(t_sh *sh);
