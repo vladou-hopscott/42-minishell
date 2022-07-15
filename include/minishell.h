@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/14 20:08:29 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/15 16:14:46 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void		builtin_exit(int ac, char **av);
 
 //********** ERRORS **********//
 void		err_cmd_not_found(t_sh *sh, char *cmd);
+void		err_export_invalid(t_sh *sh, char *key);
 
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);

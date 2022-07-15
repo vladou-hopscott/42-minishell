@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:50:13 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/15 16:14:09 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 extern t_sh	g_sh;
 
 // ======================= EXPORT ====================================
+
+int	is_valid_key(char *key)
+{
+	if (key[0] == '_')
+		return (1);
+	if ((key[0] >= 'A') && (key[0] <= 'Z'))
+		return (1);
+	if ((key[0] >= 'a') && (key[0] <= 'z'))
+		return (1);
+	return (0);
+}
 
 char	*str_exportvalue(char **tbl)
 {
@@ -49,13 +60,18 @@ void	builtin_export(int ac, char **av, char ***penv)
 			env = *penv;
 			tbl = ft_split(av[i], '=');
 			key = ft_strdup(tbl[0]);
-			value = str_exportvalue(tbl);
-			*penv = env_export(key, value, env);
+			if (is_valid_key(key))
+			{
+				value = str_exportvalue(tbl);
+				*penv = env_export(key, value, env);
+				free(value);
+			}
+			else
+				err_export_invalid(&g_sh, key);
 			free(key);
-			free(value);
 			ft_freetbl(tbl, -1);
 			i++;
-		}		
+		}
 	}
 }
 
