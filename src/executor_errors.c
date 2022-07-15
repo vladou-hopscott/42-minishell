@@ -6,7 +6,7 @@
 /*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:19:01 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/15 17:38:30 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,14 @@ void	err_export_invalid(t_sh *sh, char *key)
 	ft_putstr_fd("': not a valid identifier\n", 2);
 	sh->error = 1;
 	sh->exit_status = FAILURE;
+}
+
+void	err_exit_invalid(t_sh *sh, char *str)
+{
+	ft_putstr_fd("bash: exit: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+	sh->error = 1;
+	sh->exit_status = INVALID_EXIT;
+	exit(INVALID_EXIT);
 }

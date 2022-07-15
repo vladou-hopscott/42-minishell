@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:59:10 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/15 17:43:41 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,16 @@ void	builtin_exit(int ac, char **av)
 	}
 	else if (!g_sh.has_pipe)
 	{
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		if (ac == 1)
 			exit(0);
 		else if (ac == 2)
-			exit(ft_atoi(av[1]));
+		{
+			if (str_is_int(av[1]))
+				exit(ft_atoi(av[1]));
+			else
+				err_exit_invalid(&g_sh, av[1]);
+		}
 		exit(FAILURE);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:14:46 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/15 17:39:01 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef enum s_exit_status
 	FAILURE = 1,
 	MAJOR_FAILURE = 2,
 	CMD_NOT_FOUND = 127,
-	PGM_ABORTED = 132
+	PGM_ABORTED = 132,
+	INVALID_EXIT = 255
 }	t_exit_status;
 
 //*************** STRUCTURE PRINCIPALE ***************//
@@ -144,6 +145,7 @@ void		builtin_exit(int ac, char **av);
 //********** ERRORS **********//
 void		err_cmd_not_found(t_sh *sh, char *cmd);
 void		err_export_invalid(t_sh *sh, char *key);
+void		err_exit_invalid(t_sh *sh, char *str);
 
 //********** UTILS **********//
 int			str_has_only_spaces(char *str);
@@ -154,6 +156,9 @@ int			str_has_space_without_quotes(char *str);
 int			open_file_check(int fd, char *filename);
 int			ft_str_tbl_len(char **tbl);
 void		set_error_exit_status(t_sh *sh, int status);
+
+//********** INT_CHECK **********//
+int			str_is_int(char *str);
 
 //********** MULTIPIPE **********//
 void		execute_pipes(t_sh *sh);
