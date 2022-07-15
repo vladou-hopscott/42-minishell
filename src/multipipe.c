@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 15:01:11 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/15 18:42:05 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 		}
 	}
 	else
+	{
+		dup_and_close_fds(fdin, fdout, cmdl);
 		executor(cmdl, &sh->env);
+	}
 	close_fds(fdin, fdout);
 }
 
