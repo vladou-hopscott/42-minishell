@@ -6,7 +6,7 @@
 /*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:14:09 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/15 16:33:20 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	tbl_remove(char ***ptr, char *key)
 
 	tbl = *ptr;
 	pos = env_findkeypos(key, tbl);
-	if (pos != -1)
+	if (pos == -1)
 		return ;
 	new = malloc(sizeof(char *) * (ft_tbllen(tbl) - 1));
 	if (!new)

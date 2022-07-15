@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:53:47 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/15 16:36:50 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	cmd_pathfinder(char **pcmd, char **env)
 	env_path = env_findkeyvalue("PATH", env);
 	if (*pcmd && env_path)
 		cmd_pathfinder_utils(pcmd, env_path);
+	else
+		*pcmd = NULL;
 	free(env_path);
 }
 
