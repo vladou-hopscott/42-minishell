@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 18:42:05 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/16 16:41:55 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,26 @@ int	check_fork(t_cmd_line *cmdl, char **env)
 
 void	dup_and_close_fds(int fdin, int fdout, t_cmd_line *cmdl)
 {
-	if (fdin != STDIN_FILENO)
+	if (cmdl->fdin != STDIN_FILENO)
+	{
+		dup2(cmdl->fdin, STDIN_FILENO);
+		close(cmdl->fdin);
+		if (fdin != STDIN_FILENO)
+			close(fdin);
+	}
+	else if (fdin != STDIN_FILENO)
 	{
 		dup2(fdin, STDIN_FILENO);
 		close(fdin);
 	}
-	if ((fdout != STDOUT_FILENO) && (cmdl->next != NULL))
+	if (cmdl->fdout != STDOUT_FILENO)
+	{
+		dup2(cmdl->fdout, STDOUT_FILENO);
+		close(cmdl->fdout);
+		if (fdout != STDOUT_FILENO)
+			close(fdout);
+	}
+	else if ((fdout != STDOUT_FILENO) && (cmdl->next != NULL))
 	{
 		dup2(fdout, STDOUT_FILENO);
 		close(fdout);
@@ -62,10 +76,9 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 		if (cmdl->pid == 0)
 		{
 			if (fd != NULL)
-			{
 				close(fd[0]);
+			if (fd != NULL)
 				fdout = fd[1];
-			}
 			dup_and_close_fds(fdin, fdout, cmdl);
 			executor(cmdl, &sh->env);
 			return ;
