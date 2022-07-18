@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/18 10:37:44 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/18 11:54:14 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,31 @@ int	check_cmd(t_cmd_line *cmdl, char **env)
 	return (FAILURE);
 }
 
-void	check_cmds(t_sh *sh)
-{
-	t_cmd_line	*cmdl;
-	char		**env;
+// CANNOT USE THISE FUNCTION BEFORE EXECUTION.
+// CHECK NEEDS TO BE DONE WITHIN EACH cmdl EXECUTION
+// void	check_cmds(t_sh *sh)
+// {
+// 	t_cmd_line	*cmdl;
+// 	char		**env;
 
-	env = sh->env;
-	cmdl = sh->cmd_line_lst;
-	while (cmdl)
-	{
-		if (!cmdl->cmd)
-		{
-			sh->error = 1;
-			sh->exit_status = SUCCESS;
-			return ;
-		}
-		if (check_cmd(cmdl, env) == FAILURE)
-		{
-			err_cmd_not_found(&g_sh, cmdl->cmd);
-			return ;
-		}
-		cmdl = cmdl->next;
-	}
-}
+// 	env = sh->env;
+// 	cmdl = sh->cmd_line_lst;
+// 	while (cmdl)
+// 	{
+// 		if (!cmdl->cmd)
+// 		{
+// 			sh->error = 1;
+// 			sh->exit_status = SUCCESS;
+// 			return ;
+// 		}
+// 		if (check_cmd(cmdl, env) == FAILURE)
+// 		{
+// 			err_cmd_not_found(&g_sh, cmdl->cmd);
+// 			return ;
+// 		}
+// 		cmdl = cmdl->next;
+// 	}
+// }
 
 int	main(int argc, char **argv, char **env)
 {
@@ -94,7 +96,6 @@ int	main(int argc, char **argv, char **env)
 		listen_prompt(&g_sh);
 		lexer(&g_sh);
 		parser(&g_sh);
-		// check_cmds(&g_sh);
 		if (g_sh.error)
 		{
 			free_values(&g_sh, SUCCESS);
