@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 17:43:41 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/18 15:07:04 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,37 +76,6 @@ void	builtin_pwd(int ac, int fdout)
 		ft_putstr_fd("pwd: too many arguments\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
 		exit(FAILURE);
-	}
-}
-
-// ======================= CD ====================================
-
-void	builtin_cd(int ac, char **av, char ***penv)
-{
-	char	*path;
-	char	*newpath;
-
-	if (ac != 2)
-	{
-		ft_putstr_fd("command cd only accepts relative or absolute paths\n", 2);
-		set_error_exit_status(&g_sh, FAILURE);
-		return ;
-	}
-	if (!g_sh.has_pipe)
-	{
-		path = getcwd(NULL, 999999);
-		*penv = env_export("OLDPWD", path, *penv);
-		free(path);
-		if (chdir(av[1]) == -1)
-		{
-			perror(av[1]);
-			set_error_exit_status(&g_sh, FAILURE);
-			return ;
-		}
-		newpath = getcwd(NULL, 999999);
-		if (env_findkeypos("PWD", *penv) != -1)
-			*penv = env_export("PWD", newpath, *penv);
-		free(newpath);
 	}
 }
 

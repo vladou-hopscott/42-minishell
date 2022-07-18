@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:33:20 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/18 15:12:18 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,30 +118,5 @@ void	builtin_unset(int ac, char **av, char ***penv)
 			tbl_remove(penv, av[i]);
 			i++;
 		}
-	}
-}
-
-// ======================= ENV ====================================
-
-void	builtin_env(int ac, char **env, int fdout)
-{
-	int	i;
-
-	if (ac == 1)
-	{
-		i = 0;
-		while (env && env[i])
-		{
-			ft_putstr_fd(env[i], fdout);
-			ft_putchar_fd('\n', fdout);
-			i++;
-		}
-		exit(SUCCESS);
-	}
-	else
-	{
-		ft_putstr_fd("env: too many arguments\n", 2);
-		set_error_exit_status(&g_sh, FAILURE);
-		exit(FAILURE);
 	}
 }
