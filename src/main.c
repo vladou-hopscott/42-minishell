@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:19:15 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/18 09:51:49 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void	check_cmds(t_sh *sh)
 int	main(int argc, char **argv, char **env)
 {
 	check_program_args(argc);
-	handle_signals();
 	init_program_values(&g_sh, env);
 	while (argv)
 	{
+		handle_signals();
 		listen_prompt(&g_sh);
 		lexer(&g_sh);
 		parser(&g_sh);
