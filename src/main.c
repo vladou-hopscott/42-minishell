@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/18 09:51:49 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/18 10:37:44 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	main(int argc, char **argv, char **env)
 		listen_prompt(&g_sh);
 		lexer(&g_sh);
 		parser(&g_sh);
-		check_cmds(&g_sh);
+		// check_cmds(&g_sh);
 		if (g_sh.error)
 		{
 			free_values(&g_sh, SUCCESS);
