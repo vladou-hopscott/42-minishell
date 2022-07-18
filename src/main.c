@@ -6,7 +6,7 @@
 /*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/18 11:54:14 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/18 12:25:12 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 t_sh	g_sh;
 
+//The isatty() function tests whether fd is
+//an open file descriptor referring to a terminal.
 void	check_program_args(int argc)
 {
 	if (argc != 1)
 	{
 		ft_putstr_fd("Error: wrong number of arguments\n", 2);
+		exit(FAILURE);
+	}
+	if (!isatty(STDIN_FILENO))
+	{
+		ft_putstr_fd("Please use a valid fd...\n", 2);
 		exit(FAILURE);
 	}
 }
@@ -60,32 +67,6 @@ int	check_cmd(t_cmd_line *cmdl, char **env)
 	return (FAILURE);
 }
 
-// CANNOT USE THISE FUNCTION BEFORE EXECUTION.
-// CHECK NEEDS TO BE DONE WITHIN EACH cmdl EXECUTION
-// void	check_cmds(t_sh *sh)
-// {
-// 	t_cmd_line	*cmdl;
-// 	char		**env;
-
-// 	env = sh->env;
-// 	cmdl = sh->cmd_line_lst;
-// 	while (cmdl)
-// 	{
-// 		if (!cmdl->cmd)
-// 		{
-// 			sh->error = 1;
-// 			sh->exit_status = SUCCESS;
-// 			return ;
-// 		}
-// 		if (check_cmd(cmdl, env) == FAILURE)
-// 		{
-// 			err_cmd_not_found(&g_sh, cmdl->cmd);
-// 			return ;
-// 		}
-// 		cmdl = cmdl->next;
-// 	}
-// }
-
 int	main(int argc, char **argv, char **env)
 {
 	check_program_args(argc);
@@ -113,3 +94,29 @@ int	main(int argc, char **argv, char **env)
 		return (FAILURE);
 	return (SUCCESS);
 }
+
+// CANNOT USE THISE FUNCTION BEFORE EXECUTION.
+// CHECK NEEDS TO BE DONE WITHIN EACH cmdl EXECUTION
+// void	check_cmds(t_sh *sh)
+// {
+// 	t_cmd_line	*cmdl;
+// 	char		**env;
+
+// 	env = sh->env;
+// 	cmdl = sh->cmd_line_lst;
+// 	while (cmdl)
+// 	{
+// 		if (!cmdl->cmd)
+// 		{
+// 			sh->error = 1;
+// 			sh->exit_status = SUCCESS;
+// 			return ;
+// 		}
+// 		if (check_cmd(cmdl, env) == FAILURE)
+// 		{
+// 			err_cmd_not_found(&g_sh, cmdl->cmd);
+// 			return ;
+// 		}
+// 		cmdl = cmdl->next;
+// 	}
+// }
