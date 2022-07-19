@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/18 11:39:13 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/19 21:32:07 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 
 	fdout = cmdl->fdout;
 	if (!cmdl->cmd)
-		return;
+		return ;
 	if (check_fork(cmdl, sh->env) == SUCCESS)
 	{
 		if (ft_strncmp(cmdl->cmd, "./minishell", 12) == 0)

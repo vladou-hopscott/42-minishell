@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/14 21:35:18 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/19 21:31:49 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	process_heredoc(char *delimitor, t_cmd_line **cmd_line, int quotes)
 	{
 		tmp = read_heredoc_line(cmd_line, quotes, delimitor);
 		if (!tmp)
-			break;
+			break ;
 		if (is_delimitor_process(&tmp, &delimitor, cmd_line))
 			break ;
 		write_heredoc_line(&tmp, cmd_line, i);

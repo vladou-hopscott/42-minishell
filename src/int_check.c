@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   int_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 17:15:18 by scottwillis       #+#    #+#             */
-/*   Updated: 2022/07/15 17:33:49 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/19 21:32:00 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int	str_is_int(char *str)
 	itoa_num = ft_itoa(atoi_num);
 	if ((ft_strlen(ascii_num) == ft_strlen(itoa_num)) && \
 		(ft_strncmp(ascii_num, itoa_num, ft_strlen(ascii_num)) == 0))
-		{
-			free(ascii_num);
-			free(itoa_num);
-			return (1);
-		}
+	{
+		free(ascii_num);
+		free(itoa_num);
+		return (1);
+	}
 	free(ascii_num);
 	free(itoa_num);
 	return (0);

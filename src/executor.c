@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 16:36:50 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/19 21:30:56 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ void	executor(t_cmd_line *cmdl, char ***penv)
 
 	env = *penv;
 	if (ft_strncmp(cmdl->cmd, "echo", ft_strlen("echo") + 1) == 0)
-		builtin_echo(args_to_ac(cmdl->args), cmdl->args, cmdl->fdout);
+		builtin_echo(args_to_ac(cmdl->args), cmdl->args, STDOUT_FILENO);
 	else if (ft_strncmp(cmdl->cmd, "cd", ft_strlen("cd") + 1) == 0)
 		builtin_cd(args_to_ac(cmdl->args), cmdl->args, penv);
 	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd") + 1) == 0)
-		builtin_pwd(args_to_ac(cmdl->args), cmdl->fdout);
+		builtin_pwd(args_to_ac(cmdl->args), STDOUT_FILENO);
 	else if (ft_strncmp(cmdl->cmd, "export", ft_strlen("export") + 1) == 0)
 		builtin_export(args_to_ac(cmdl->args), cmdl->args, penv);
 	else if (ft_strncmp(cmdl->cmd, "unset", ft_strlen("unset") + 1) == 0)
 		builtin_unset(args_to_ac(cmdl->args), cmdl->args, penv);
 	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env") + 1) == 0)
-		builtin_env(args_to_ac(cmdl->args), env, cmdl->fdout);
+		builtin_env(args_to_ac(cmdl->args), env, STDOUT_FILENO);
 	else if (ft_strncmp(cmdl->cmd, "exit", ft_strlen("exit") + 1) == 0)
 		builtin_exit(args_to_ac(cmdl->args), cmdl->args);
 	else

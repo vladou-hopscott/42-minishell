@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:03 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/06 16:26:30 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/19 21:32:12 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	open_file_fdout(t_token *token, t_cmd_line **cmd_line)
 		return (1);
 	return (0);
 }
-
 
 int	open_file_fdin(char *filename, t_cmd_line **cmd_line)
 {
