@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:33:51 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:34:47 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:40:33 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
 
-//integrer egalement les tabulations
 int	str_has_only_spaces(char *str)
 {
 	int	i;
