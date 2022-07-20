@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/19 21:32:07 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:01:28 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 		return ;
 	if (check_fork(cmdl, sh->env) == SUCCESS)
 	{
-		if (ft_strncmp(cmdl->cmd, "./minishell", 12) == 0)
-			signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		cmdl->pid = fork();
 		if (cmdl->pid < 0)
 			set_error_exit_status(&g_sh, MAJOR_FAILURE);
 		if (cmdl->pid == 0)
 		{
+			handle_signals();
 			if (fd != NULL)
 				close(fd[0]);
 			if (fd != NULL)
