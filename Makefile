@@ -17,7 +17,7 @@ EXE := minishell
 
 CC := cc
 LDFLAGS ?= -lreadline -L/usr/local/opt/readline/lib/
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include #-g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include -g -fsanitize=address
 
 # Src files ======================================
 
@@ -57,6 +57,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/heredoc.c\
 			$(SRC_DIR)/heredoc2.c\
 			$(SRC_DIR)/heredoc3.c\
+			$(SRC_DIR)/heredoc4.c\
 			$(SRC_DIR)/redirections.c\
 			$(SRC_DIR)/multipipe.c\
 			$(SRC_DIR)/int_check.c\

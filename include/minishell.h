@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/15 17:39:01 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/20 15:47:01 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ char		*read_heredoc_line(t_cmd_line **cmd_line,
 				int quotes, char *delimitor);
 char		*expand_heredoc_line(char **str);
 void		write_heredoc_line(char **tmp, t_cmd_line **cmd_line, int i);
+char		*trim_quotes_in_delimitor(char **value, int *i, int *j);
+char		*process_quotes_in_delimitor(char **value);
 
 //********** EXECUTOR **********//
 void		executor(t_cmd_line *cmdl, char ***env);
