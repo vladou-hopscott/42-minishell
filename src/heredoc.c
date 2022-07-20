@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/19 21:31:49 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:30:01 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,30 +130,3 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 		return (1);
 	return (0);
 }
-
-//int	heredoc(char *delimitor, t_cmd_line **cmd_line)
-//{
-//	char	*tmp;
-//	int		i;
-//	int		quotes;
-
-//	quotes = 0;
-//	process_delimitor(&delimitor, &quotes);
-//	if (initialize_heredoc(cmd_line))
-//		return (1);
-//	i = 0;
-//	while (1)
-//	{
-//		tmp = read_heredoc_line(cmd_line, quotes, delimitor);
-//		if (!tmp)
-//			return (1);
-//		if (is_delimitor_process(&tmp, &delimitor, cmd_line))
-//			break ;
-//		write_heredoc_line(&tmp, cmd_line, i);
-//		i++;
-//	}
-//	close((*cmd_line)->fdin);
-//	if (open_file_fdin((*cmd_line)->heredoc_name, cmd_line))
-//		return (1);
-//	return (0);
-//}
