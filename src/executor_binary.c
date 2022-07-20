@@ -46,6 +46,8 @@ void	exec_bin(t_cmd_line *cmdl, char **env)
 		free(cmdl->args[0]);
 		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		execve(cmdl->cmd, cmdl->args, env);
+		perror(cmdl->cmd);
+		exit(errno);
 	}
 	else
 	{
