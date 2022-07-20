@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:16 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 10:35:34 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/20 16:41:04 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
 
 t_cmd_line	*create_cmd_line(void)
 {

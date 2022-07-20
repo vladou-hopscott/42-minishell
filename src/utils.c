@@ -6,14 +6,12 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:33:51 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 18:12:03 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:15:27 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
 
-//integrer egalement les tabulations
 int	str_has_only_spaces(char *str)
 {
 	int	i;

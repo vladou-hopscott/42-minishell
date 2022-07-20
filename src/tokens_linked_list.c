@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_linked_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:28:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/06 17:43:44 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:40:17 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
 
 t_token	*create_token(t_token_type type, char *value)
 {
