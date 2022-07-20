@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 15:48:40 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/20 16:17:19 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 		return (1);
 	handle_signals();
 	close((*cmd_line)->fdin);
+	if (quotes)
+		ft_free_null_str(&delimitor);
 	if (open_file_fdin((*cmd_line)->heredoc_name, cmd_line))
 		return (1);
 	return (0);
