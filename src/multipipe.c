@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 15:01:28 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:23:03 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 	int		fdout;
 
 	fdout = cmdl->fdout;
-	if (!cmdl->cmd)
-		return ;
 	if (check_fork(cmdl, sh->env) == SUCCESS)
 	{
 		signal(SIGINT, SIG_IGN);
@@ -80,19 +78,17 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 		{
 			handle_signals();
 			if (fd != NULL)
+			{
 				close(fd[0]);
-			if (fd != NULL)
 				fdout = fd[1];
+			}
 			dup_and_close_fds(fdin, fdout, cmdl);
 			executor(cmdl, &sh->env);
 			return ;
 		}
 	}
 	else
-	{
-		dup_and_close_fds(fdin, fdout, cmdl);
 		executor(cmdl, &sh->env);
-	}
 	close_fds(fdin, fdout);
 }
 
@@ -108,7 +104,8 @@ void	execute_pipes(t_sh *sh)
 	{
 		sh->has_pipe = 1;
 		pipe(cmdl->fd);
-		spawn_process(fdin, cmdl->fd, cmdl, sh);
+		if (cmdl->cmd)
+			spawn_process(fdin, cmdl->fd, cmdl, sh);
 		close(cmdl->fd[1]);
 		fdin = cmdl->fd[0];
 		cmdl = cmdl->next;
