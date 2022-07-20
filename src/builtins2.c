@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/18 15:12:18 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/20 15:36:04 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*str_exportvalue(char **tbl)
 void	builtin_export(int ac, char **av, char ***penv)
 {
 	int		i;
-	char	**env;
 	char	**tbl;
 	char	*key;
 	char	*value;
@@ -57,13 +56,12 @@ void	builtin_export(int ac, char **av, char ***penv)
 	{
 		while (i < ac)
 		{
-			env = *penv;
 			tbl = ft_split(av[i], '=');
 			key = ft_strdup(tbl[0]);
 			if (is_valid_key(key))
 			{
 				value = str_exportvalue(tbl);
-				*penv = env_export(key, value, env);
+				*penv = env_export(key, value, (*penv));
 				free(value);
 			}
 			else

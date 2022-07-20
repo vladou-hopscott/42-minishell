@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:15 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/19 21:32:18 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:30:43 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	heredoc_handler(int sigtype)
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		// rl_redisplay();
 		g_sh.error = 1;
 		g_sh.exit_status = 130;
 		exit(130);
