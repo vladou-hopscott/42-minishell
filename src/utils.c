@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:33:51 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:34:47 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:12:03 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	str_has_dollar_without_quotes(char *str)
 
 	i = 0;
 	quote_status = NO_QUOTE;
+	if (!ft_strncmp(str, "$", 2))
+		return (0);
 	while (str[i])
 	{
 		quote_status = check_quote_status_in_str(str[i], quote_status);
