@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 18:19:31 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 18:54:53 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	execute_pipes(t_sh *sh)
 	int			fdin;
 	t_cmd_line	*cmdl;
 
+	status = 0;
 	cmdl = sh->cmd_line_lst;
 	fdin = cmdl->fdin;
 	while (cmdl->next)
@@ -117,21 +118,7 @@ void	execute_pipes(t_sh *sh)
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{
-		if ((cmdl->pid != -1) && (0 < waitpid(cmdl->pid, &status, 0)))
-		{
-			set_error_exit_status(&g_sh, WEXITSTATUS(status));
-			if (WIFSIGNALED(status))
-			{
-				printf("WTERMSIG()=%d\n", WTERMSIG(status));
-				if (WTERMSIG(status) == 2)
-					set_error_exit_status(&g_sh, 130);
-				else if (WTERMSIG(status) == 3)
-				{
-					ft_putstr_fd("Quit (core dumped)\n", 2);
-					set_error_exit_status(&g_sh, 131);
-				}
-			}
-		}
+		wait_child(cmdl, status, sh);
 		cmdl = cmdl->next;
 	}
 }

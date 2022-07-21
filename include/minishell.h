@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:36:20 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/21 18:36:23 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 18:55:49 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			update_fdin(t_cmd_line **cmd_line, t_token *token);
 int			update_fdout(t_cmd_line **cmd_line, t_token *token);
 
 //********** SIGNALS **********//
-void		handle_signals(int	activate_sigquit);
+void		handle_signals(int activate_sigquit);
 void		heredoc_handler(int sigtype);
 
 //********** QUOTES **********//
@@ -165,6 +165,7 @@ int			str_is_int(char *str);
 
 //********** MULTIPIPE **********//
 void		execute_pipes(t_sh *sh);
+void		wait_child(t_cmd_line *cmdl, int status, t_sh *sh);
 
 //********** MAIN **********//
 int			check_exec_bin(t_cmd_line *cmdl, char **env);
