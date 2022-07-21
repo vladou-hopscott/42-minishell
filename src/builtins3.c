@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/21 13:15:47 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:57:43 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,10 @@ extern t_sh	g_sh;
 
 // ======================= CD ====================================
 
-void	execute_cd(char **av, char ***penv)
+void	execute_cd(char **av, char ***penv, char *path)
 {
-	char	*path;
 	char	*newpath;
 
-	path = getcwd(NULL, 999999);
-	if (!path)
-	{
-		ft_putstr_fd("chdir: error retrieving current directory\n", 2);
-		set_error_exit_status(&g_sh, FAILURE);
-		if (g_sh.has_pipe)
-			exit(FAILURE);
-		return ;
-	}
 	*penv = env_export("OLDPWD", path, *penv);
 	free(path);
 	if (chdir(av[1]) == -1)
@@ -48,6 +38,8 @@ void	execute_cd(char **av, char ***penv)
 
 void	builtin_cd(int ac, char **av, char ***penv)
 {
+	char	*path;
+
 	if (ac != 2)
 	{
 		ft_putstr_fd("command cd only accepts relative or absolute paths\n", 2);
@@ -56,7 +48,16 @@ void	builtin_cd(int ac, char **av, char ***penv)
 			exit(FAILURE);
 		return ;
 	}
-	execute_cd(av, penv);
+	path = getcwd(NULL, 999999);
+	if (!path)
+	{
+		ft_putstr_fd("chdir: error retrieving current directory\n", 2);
+		set_error_exit_status(&g_sh, FAILURE);
+		if (g_sh.has_pipe)
+			exit(FAILURE);
+		return ;
+	}
+	execute_cd(av, penv, path);
 	if (g_sh.has_pipe)
 		exit(SUCCESS);
 }

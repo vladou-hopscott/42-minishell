@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'src/main.o', needed by 'minishell'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'src/main.o', needed by 'minishell'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul 21 12:05:36 2022
+# Make data base, printed on Thu Jul 21 14:55:57 2022
 
 # Variables
 
@@ -49,7 +47,7 @@ _ = /usr/bin/code
 # makefile (from 'Makefile', line 20)
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include -g -fsanitize=address
 # environment
-JOURNAL_STREAM = 9:1854781
+JOURNAL_STREAM = 9:921824
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -73,15 +71,15 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from 'Makefile', line 76)
 OBJS := src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_validation2.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/builtins3.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/heredoc4.o src/redirections.o src/multipipe.o src/int_check.o
 # environment
-MANAGERPID = 524917
+MANAGERPID = 210983
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-2dcf67dd-7ac4-4b22-8c18-2eab070cf170.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-8bd5e69b-a988-4603-8062-4730bd9a2e61.sock
 # environment
-VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis
+VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis/minishell
 # environment
-XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session11
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session3
 # environment
-KRB5CCNAME = FILE:/tmp/krb5cc_40596_XRLeCh
+KRB5CCNAME = FILE:/tmp/krb5cc_40596_1seTxG
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -91,7 +89,7 @@ GPG_AGENT_INFO = /run/user/40596/gnupg/S.gpg-agent:0:1
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/e1r6p13.clusters.42paris.fr:@/tmp/.ICE-unix/525392,unix/e1r6p13.clusters.42paris.fr:/tmp/.ICE-unix/525392
+SESSION_MANAGER = local/e2r1p4.clusters.42paris.fr:@/tmp/.ICE-unix/211501,unix/e2r1p4.clusters.42paris.fr:/tmp/.ICE-unix/211501
 # environment
 XDG_RUNTIME_DIR = /run/user/40596
 # environment
@@ -101,7 +99,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = d0416e1891fb4f77afb9dd53290bad97
+INVOCATION_ID = 291c54c94d2249889087baa7c842e16b
 # makefile (from 'Makefile', line 19)
 LDFLAGS = -lreadline -L/usr/local/opt/readline/lib/
 # default
@@ -117,7 +115,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/40596/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 527605
+GIO_LAUNCHED_DESKTOP_FILE_PID = 212339
 # automatic
 %F = $(notdir $%)
 # environment
@@ -127,11 +125,11 @@ VSCODE_PIPE_LOGGING = true
 # makefile (from 'Makefile', line 82)
 PRINTF := lib/libftprintf/libftprintf.a
 # environment
-PWD = /sgoinfre/goinfre/Perso/swillis/minishell
+PWD = /mnt/nfs/homes/swillis/sgoinfre/minishell
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 525333
+SSH_AGENT_PID = 211465
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'Makefile', line 9)
@@ -197,7 +195,7 @@ LESS = -R
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /mnt/nfs/homes/swillis
+OLDPWD = /mnt/nfs/homes/swillis/sgoinfre
 # environment
 TERMINATOR_DBUS_PATH = /net/tenshu/Terminator2
 # default
@@ -261,9 +259,9 @@ TERMINATOR_DBUS_NAME = net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873
 # environment
 DOCKER_HOST = unix:///run/user/40596/docker.sock
 # environment
-VSCODE_PID = 528162
+VSCODE_PID = 213102
 # environment
-TERMINATOR_UUID = urn:uuid:0eefd8aa-da51-4908-89cf-72c78e3744d7
+TERMINATOR_UUID = urn:uuid:5ce65f3d-60c3-41bb-ac10-de1fbb8a3cb1
 # variable set hash-table stats:
 # Load=126/1024=12%, Rehash=0, Collisions=25/203=12%
 
@@ -273,12 +271,14 @@ TERMINATOR_UUID = urn:uuid:0eefd8aa-da51-4908-89cf-72c78e3744d7
 
 # Directories
 
-# include (device 58, inode 17980284): 7 files, 1 impossibilities.
-# . (device 58, inode 17980202): 9 files, no impossibilities.
-# src (device 58, inode 17980329): 16 files, no impossibilities so far.
+# include (device 56, inode 18378290): 7 files, 1 impossibilities.
+# . (device 56, inode 18378177): 9 files, no impossibilities.
+# src (device 56, inode 18378355): 6 files, no impossibilities so far.
 
+# 22 files, 1 impossibilities in 3 directories.
  
-# 32 files, 1 impossibilities in 3 directories.
+make: *** No rule to make target 'src/main.o', needed by 'minishell'.  Stop.
+
 
 # Implicit Rules
 
@@ -389,7 +389,7 @@ src/multipipe.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-21 12:05:27.833530618
+#  Last modified 2022-07-21 14:55:44.359723657
 #  File has been updated.
 #  Successfully updated.
 
@@ -558,7 +558,6 @@ src/env_manager.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
 # Not a target:
 src/parser.o:
@@ -573,6 +572,7 @@ src/cmd_line_struct.o:
 #  File has not been updated.
 
 # files hash-table stats:
+ 
 # Load=46/1024=4%, Rehash=0, Collisions=0/112=0%
 # VPATH Search Paths
 
@@ -580,12 +580,12 @@ src/cmd_line_struct.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 84 / storage = 1146 B / avg = 13 B
-# current buf: size = 8162 B / used = 1146 B / count = 84 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 74 / storage = 1025 B / avg = 13 B
+# current buf: size = 8162 B / used = 1025 B / count = 74 / avg = 13 B
 
-# strcache performance: lookups = 122 / hit rate = 31%
+# strcache performance: lookups = 112 / hit rate = 33%
 # hash-table stats:
-# Load=84/8192=1%, Rehash=0, Collisions=4/122=3%
-# Finished Make data base on Thu Jul 21 12:05:36 2022
+# Load=74/8192=1%, Rehash=0, Collisions=4/112=4%
+# Finished Make data base on Thu Jul 21 14:55:57 2022
 
  
