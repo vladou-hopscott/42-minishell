@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:35:53 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:35:54 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:26:55 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,14 @@ char	**env_export(char *key, char *value, char **env)
 	char	*tmp;
 	char	*str;
 
-	tmp = ft_strjoin(key, "=");
-	str = ft_strjoin(tmp, value);
-	free(tmp);
+	if (value != NULL)
+	{
+		tmp = ft_strjoin(key, "=");
+		str = ft_strjoin(tmp, value);
+		free(tmp);
+	}
+	else
+		str = ft_strdup(key);
 	i = env_findkeypos(key, env);
 	if (i == -1)
 		env = tbl_append(env, str);
@@ -82,6 +87,36 @@ char	**env_export(char *key, char *value, char **env)
 		free(env[i]);
 		env[i] = str;
 	}
+	return (env);
+}
+
+char	**env_export_append(char *key, char *value, char **env)
+{
+	int		i;
+	char	*nkey;
+	char	*tmp;
+	char	*str;
+	char	**tbl;
+
+	nkey = ft_strndup(key, ft_strlen(key) - 1);
+	tmp = ft_strjoin(nkey, "=");
+	str = ft_strjoin(tmp, value);
+	i = env_findkeypos(nkey, env);
+	if (i == -1)
+		env = tbl_append(env, str);
+	else
+	{
+		tbl = ft_split(env[i], '=');
+		value = ft_strjoin(tbl[1], value);
+		ft_freetbl(tbl, -1);
+		free(str);
+		str = ft_strjoin(tmp, value);
+		free(value);
+		free(env[i]);
+		env[i] = str;
+	}
+	free(nkey);
+	free(tmp);
 	return (env);
 }
 
