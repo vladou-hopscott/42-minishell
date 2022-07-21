@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 17:58:53 by swillis          ###   ########.fr       */
+/*   Created: 2022/07/21 18:36:20 by swillis           #+#    #+#             */
+/*   Updated: 2022/07/21 18:36:23 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			update_fdin(t_cmd_line **cmd_line, t_token *token);
 int			update_fdout(t_cmd_line **cmd_line, t_token *token);
 
 //********** SIGNALS **********//
-void		handle_signals(void);
+void		handle_signals(int	activate_sigquit);
 void		heredoc_handler(int sigtype);
 
 //********** QUOTES **********//

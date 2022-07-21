@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 15:36:41 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 17:01:54 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv, char **env)
 	init_program_values(&g_sh, env);
 	while (argv)
 	{
-		handle_signals();
+		handle_signals(0);
 		listen_prompt(&g_sh);
 		lexer(&g_sh);
 		parser(&g_sh);

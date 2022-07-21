@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 13:17:28 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 18:19:31 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	spawn_process(int fdin, int *fd, t_cmd_line *cmdl, t_sh *sh)
 			set_error_exit_status(&g_sh, MAJOR_FAILURE);
 		if (cmdl->pid == 0)
 		{
-			handle_signals();
+			handle_signals(1);
 			if (fd != NULL)
 			{
 				close(fd[0]);
@@ -118,7 +118,20 @@ void	execute_pipes(t_sh *sh)
 	while (cmdl)
 	{
 		if ((cmdl->pid != -1) && (0 < waitpid(cmdl->pid, &status, 0)))
+		{
 			set_error_exit_status(&g_sh, WEXITSTATUS(status));
+			if (WIFSIGNALED(status))
+			{
+				printf("WTERMSIG()=%d\n", WTERMSIG(status));
+				if (WTERMSIG(status) == 2)
+					set_error_exit_status(&g_sh, 130);
+				else if (WTERMSIG(status) == 3)
+				{
+					ft_putstr_fd("Quit (core dumped)\n", 2);
+					set_error_exit_status(&g_sh, 131);
+				}
+			}
+		}
 		cmdl = cmdl->next;
 	}
 }
