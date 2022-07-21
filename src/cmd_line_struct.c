@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_line_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/14 21:37:34 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:02:57 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ int	update_cmd(t_cmd_line **cmd_line)
 	{
 		if (token->type == CMD)
 		{
-			(*cmd_line)->cmd = ft_strdup(token->value);
-			if (!(*cmd_line)->cmd)
-				return (1);
+			if (token->value[0] != '\0')
+			{
+				(*cmd_line)->cmd = ft_strdup(token->value);
+				if (!(*cmd_line)->cmd)
+					return (1);
+			}
+			else
+				(*cmd_line)->cmd = NULL;
 		}
 		token = token->next;
 	}

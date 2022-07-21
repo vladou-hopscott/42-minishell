@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 18:12:34 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:02:23 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*delimit_envvar(char *str)
 	env_key = NULL;
 	i = 1;
 	if (ft_isdigit(str[i]))
-		return (env_key);
+		return (ft_strdup(""));
 	if (str[i] == '?')
 		return (ft_strdup("?"));
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
