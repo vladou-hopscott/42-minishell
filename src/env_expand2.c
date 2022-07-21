@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_expand2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:18:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:31:07 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:38:39 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_token	*create_tokens_within_tokens(t_token **token, char *str)
 	int		i;
 	int		j;
 	int		quote_status;
+	// char	*tmp;
 
 	quote_status = NO_QUOTE;
 	i = 0;
@@ -34,7 +35,11 @@ t_token	*create_tokens_within_tokens(t_token **token, char *str)
 		if (quote_status == NO_QUOTE && str[i] == ' ')
 		{
 			if (j == 0)
+			{
+				// tmp = (*token)->value;
 				(*token)->value = ft_strndup(str, i);
+				// ft_free_null_str(&tmp);
+			}
 			else
 				*token = add_middle_token(
 						(*token), STR, ft_strndup(&str[j], i - j));
@@ -44,6 +49,7 @@ t_token	*create_tokens_within_tokens(t_token **token, char *str)
 	}
 	if (i > j)
 		*token = add_middle_token((*token), STR, ft_strndup(&str[j], i - j));
+	ft_free_null_str(&str);
 	return (*token);
 }
 
