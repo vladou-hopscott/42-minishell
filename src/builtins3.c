@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/21 10:59:56 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/21 13:15:47 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	builtin_cd(int ac, char **av, char ***penv)
 		return ;
 	}
 	execute_cd(av, penv);
+	if (g_sh.has_pipe)
+		exit(SUCCESS);
 }
 
 // ======================= ENV ====================================

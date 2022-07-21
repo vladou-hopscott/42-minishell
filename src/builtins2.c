@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 10:34:19 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/21 13:15:43 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	builtin_export(int ac, char **av, char ***penv)
 		ft_freetbl(tbl, -1);
 		i++;
 	}
+	if (g_sh.has_pipe)
+		exit(SUCCESS);
 }
 
 // ======================= UNSET ====================================
@@ -114,4 +116,6 @@ void	builtin_unset(int ac, char **av, char ***penv)
 			i++;
 		}
 	}
+	if (g_sh.has_pipe)
+		exit(SUCCESS);
 }
