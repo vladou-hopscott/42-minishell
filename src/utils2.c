@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:51:21 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/15 17:14:59 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/21 12:24:02 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	open_file_check(int fd, char *filename)
 {
 	if (fd == -1)
 	{
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(filename, 2);
 		if (errno == 13)
 			ft_putstr_fd(": Permission denied\n", 2);

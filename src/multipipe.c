@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 10:36:50 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/21 12:14:34 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,13 @@ void	execute_pipes(t_sh *sh)
 		fdin = cmdl->fd[0];
 		cmdl = cmdl->next;
 	}
-	spawn_process(fdin, NULL, cmdl, sh);
+	if (cmdl->cmd)
+		spawn_process(fdin, NULL, cmdl, sh);
 	cmdl = sh->cmd_line_lst;
 	while (cmdl)
 	{
-		if (cmdl->pid != -1)
-			if ((0 < waitpid(cmdl->pid, &status, 0)) && (WIFEXITED(status)))
-				set_error_exit_status(&g_sh, WEXITSTATUS(status));
+		if ((cmdl->pid != -1) && (0 < waitpid(cmdl->pid, &status, 0)))
+			set_error_exit_status(&g_sh, WEXITSTATUS(status));
 		cmdl = cmdl->next;
 	}
 }

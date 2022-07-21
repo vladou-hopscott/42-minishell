@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 16:39:30 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 12:24:00 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern t_sh	g_sh;
 
 int	process_eof_heredoc(char **tmp, t_cmd_line **cmd_line)
 {
-	ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 1);
+	ft_putstr_fd("minishell: warning: here-document delimited by end-of-file\n", 1);
 	ft_putstr_fd("\n", (*cmd_line)->fdin);
 	ft_free_null_str(tmp);
 	return (1);

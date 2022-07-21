@@ -1,0 +1,5 @@
+make -C lib/libft -f Makefile
+make -C lib/libftprintf -f Makefile
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g -fsanitize=address -lreadline -L/usr/local/opt/readline/lib/ src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_validation2.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins.o src/builtins2.o src/builtins3.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/heredoc4.o src/redirections.o src/multipipe.o src/int_check.o lib/libft/libft.a lib/libftprintf/libftprintf.a -o minishell -lreadline
+make: Leaving directory '/sgoinfre/goinfre/Perso/swillis/minishell'
+ 
