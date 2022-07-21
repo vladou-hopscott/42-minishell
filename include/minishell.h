@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 15:02:10 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:01:18 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			update_fdin(t_cmd_line **cmd_line, t_token *token);
 int			update_fdout(t_cmd_line **cmd_line, t_token *token);
 
 //********** SIGNALS **********//
-void		handle_signals(void);
+void		handle_signals(int	activate_sigquit);
 void		heredoc_handler(int sigtype);
 
 //********** QUOTES **********//
