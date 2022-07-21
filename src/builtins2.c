@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 18:35:09 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 19:13:51 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char	*str_exportvalue(char **tbl)
 
 void	print_env(int ac, char **env, int fdout)
 {
-	int	i;
+	int		i;
+	char	**tbl;
 
 	if (ac == 1)
 	{
@@ -70,8 +71,17 @@ void	print_env(int ac, char **env, int fdout)
 		while (env && env[i])
 		{
 			ft_putstr_fd("export ", fdout);
-			ft_putstr_fd(env[i], fdout);
+			tbl = ft_split(env[i], '=');
+			ft_putstr_fd(tbl[0], fdout);
+			if (tbl[1] != NULL)
+			{
+				ft_putchar_fd('=', fdout);
+				ft_putchar_fd('"', fdout);
+				ft_putstr_fd(tbl[1], fdout);
+				ft_putchar_fd('"', fdout);
+			}
 			ft_putchar_fd('\n', fdout);
+			ft_freetbl(tbl, -1);
 			i++;
 		}
 	}

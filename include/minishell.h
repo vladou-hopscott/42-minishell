@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:36:20 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/21 18:36:23 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 19:01:40 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int			ft_str_tbl_len(char **tbl);
 void		set_error_exit_status(t_sh *sh, int status);
 
 //********** INT_CHECK **********//
+char		*ft_itoa(int n);
 int			str_is_int(char *str);
 
 //********** MULTIPIPE **********//

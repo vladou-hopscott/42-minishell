@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 17:01:54 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 19:14:53 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_sh	g_sh;
 
-//The isatty() function tests whether fd is
-//an open file descriptor referring to a terminal.
 void	check_program_args(int argc)
 {
 	if (argc != 1)
@@ -35,6 +33,8 @@ int	check_exec_bin(t_cmd_line *cmdl, char **env)
 	char	*cpy;
 
 	cpy = ft_strdup(cmdl->cmd);
+	if (cpy == NULL)
+		return (FAILURE);
 	if (access(cpy, F_OK) != 0)
 		cmd_pathfinder(&cpy, env);
 	if (cpy == NULL)
@@ -67,10 +67,40 @@ int	check_cmd(t_cmd_line *cmdl, char **env)
 	return (FAILURE);
 }
 
+void	set_shlvl(t_sh *sh, int lvl)
+{
+	int		i;
+	char	*value;
+	char	*str;
+	char	**tbl;
+
+	i = env_findkeypos("SHLVL", sh->env);
+	if (i == -1)
+		sh->env = tbl_append(sh->env, "SHLVL=0");
+	else
+	{
+		tbl = ft_split(sh->env[i], '=');
+		if (!tbl[1])
+			str = "SHLVL=0";
+		else
+		{
+			lvl = ft_atoi(tbl[1]);
+			lvl++;
+			value = ft_itoa(lvl);
+			str = ft_strjoin("SHLVL=", value);
+			free(value);
+		}
+		ft_freetbl(tbl, -1);
+		free(sh->env[i]);
+		sh->env[i] = str;
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	check_program_args(argc);
 	init_program_values(&g_sh, env);
+	set_shlvl(&g_sh, 0);
 	while (argv)
 	{
 		handle_signals(0);
@@ -94,29 +124,3 @@ int	main(int argc, char **argv, char **env)
 		return (FAILURE);
 	return (SUCCESS);
 }
-
-// CANNOT USE THISE FUNCTION BEFORE EXECUTION.
-// CHECK NEEDS TO BE DONE WITHIN EACH cmdl EXECUTION
-// void	check_cmds(t_sh *sh)
-// {
-// 	t_cmd_line	*cmdl;
-// 	char		**env;
-
-// 	env = sh->env;
-// 	cmdl = sh->cmd_line_lst;
-// 	while (cmdl)
-// 	{
-// 		if (!cmdl->cmd)
-// 		{
-// 			sh->error = 1;
-// 			sh->exit_status = SUCCESS;
-// 			return ;
-// 		}
-// 		if (check_cmd(cmdl, env) == FAILURE)
-// 		{
-// 			err_cmd_not_found(&g_sh, cmdl->cmd);
-// 			return ;
-// 		}
-// 		cmdl = cmdl->next;
-// 	}
-// }
