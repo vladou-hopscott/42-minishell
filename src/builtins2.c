@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 13:15:43 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 17:24:59 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,29 @@ extern t_sh	g_sh;
 
 int	is_valid_key(char *key)
 {
-	if (key[0] == '_')
-		return (1);
-	if ((key[0] >= 'A') && (key[0] <= 'Z'))
-		return (1);
-	if ((key[0] >= 'a') && (key[0] <= 'z'))
-		return (1);
-	return (0);
+	int	valid;
+	int	i;
+
+	if (!key)
+		return (0);
+	valid = 0;
+	if ((key[0] == '_') || ((key[0] >= 'A') && (key[0] <= 'Z')) \
+	|| ((key[0] >= 'a') && (key[0] <= 'z')))
+		valid = 1;
+	i = 0;
+	while (key && key[i])
+	{
+		if ((i + 1 < (int)ft_strlen(key)) && key[i] == '+')
+			valid = 0;
+		if ((i < (int)ft_strlen(key)) && key[i] == '-')
+			valid = 0;
+		i++;
+	}
+	if (valid == 0)
+		return (0);
+	if (key[i - 1] == '+')
+		valid = 2;
+	return (valid);
 }
 
 char	*str_exportvalue(char **tbl)
@@ -51,6 +67,17 @@ void	builtin_export(int ac, char **av, char ***penv)
 	char	*key;
 	char	*value;
 
+	if (ac == 1)
+	{
+		i = 0;
+		while ((*penv) && (*penv)[i])
+		{
+			ft_putstr_fd("export ", STDOUT_FILENO);
+			ft_putstr_fd((*penv)[i], STDOUT_FILENO);
+			ft_putchar_fd('\n', STDOUT_FILENO);
+			i++;
+		}
+	}
 	i = 1;
 	while (i < ac)
 	{
@@ -59,7 +86,10 @@ void	builtin_export(int ac, char **av, char ***penv)
 		if (is_valid_key(key))
 		{
 			value = str_exportvalue(tbl);
-			*penv = env_export(key, value, (*penv));
+			if (is_valid_key(key) == 2)
+				*penv = env_export_append(key, value, (*penv));
+			else
+				*penv = env_export(key, value, (*penv));
 			free(value);
 		}
 		else

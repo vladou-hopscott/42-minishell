@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/21 14:57:43 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 17:30:14 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,21 @@ void	builtin_cd(int ac, char **av, char ***penv)
 
 void	builtin_env(int ac, char **env, int fdout)
 {
-	int	i;
+	int		i;
+	char	**tbl;
 
 	if (ac == 1)
 	{
 		i = 0;
 		while (env && env[i])
 		{
-			ft_putstr_fd(env[i], fdout);
-			ft_putchar_fd('\n', fdout);
+			tbl = ft_split(env[i], '=');
+			if (tbl[1] != NULL)
+			{
+				ft_putstr_fd(env[i], fdout);
+				ft_putchar_fd('\n', fdout);
+			}
+			ft_freetbl(tbl, -1);
 			i++;
 		}
 		exit(SUCCESS);

@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'src/main.o', needed by 'minishell'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul 21 14:55:57 2022
+# Make data base, printed on Thu Jul 21 16:16:30 2022
 
 # Variables
 
@@ -73,7 +75,7 @@ OBJS := src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_v
 # environment
 MANAGERPID = 210983
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-8bd5e69b-a988-4603-8062-4730bd9a2e61.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/40596/vscode-ipc-20bc9f75-604b-4f94-9b27-13d0707e1ebd.sock
 # environment
 VSCODE_CWD = /sgoinfre/goinfre/Perso/swillis/minishell
 # environment
@@ -259,7 +261,7 @@ TERMINATOR_DBUS_NAME = net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873
 # environment
 DOCKER_HOST = unix:///run/user/40596/docker.sock
 # environment
-VSCODE_PID = 213102
+VSCODE_PID = 222154
 # environment
 TERMINATOR_UUID = urn:uuid:5ce65f3d-60c3-41bb-ac10-de1fbb8a3cb1
 # variable set hash-table stats:
@@ -275,10 +277,8 @@ TERMINATOR_UUID = urn:uuid:5ce65f3d-60c3-41bb-ac10-de1fbb8a3cb1
 # . (device 56, inode 18378177): 9 files, no impossibilities.
 # src (device 56, inode 18378355): 6 files, no impossibilities so far.
 
-# 22 files, 1 impossibilities in 3 directories.
  
-make: *** No rule to make target 'src/main.o', needed by 'minishell'.  Stop.
-
+# 22 files, 1 impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -567,12 +567,12 @@ src/parser.o:
 
 # Not a target:
 src/cmd_line_struct.o:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
- 
 # Load=46/1024=4%, Rehash=0, Collisions=0/112=0%
 # VPATH Search Paths
 
@@ -586,6 +586,6 @@ src/cmd_line_struct.o:
 # strcache performance: lookups = 112 / hit rate = 33%
 # hash-table stats:
 # Load=74/8192=1%, Rehash=0, Collisions=4/112=4%
-# Finished Make data base on Thu Jul 21 14:55:57 2022
+# Finished Make data base on Thu Jul 21 16:16:30 2022
 
  

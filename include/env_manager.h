@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:24:15 by swillis           #+#    #+#             */
-/*   Updated: 2022/06/16 10:16:07 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:05:22 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ char	**tbl_append(char **env, char *str);
 int		env_findkeypos(char *key, char **env);
 char	*env_findkeyvalue(char *key, char **env);
 char	**env_export(char *key, char *value, char **env);
+char	**env_export_append(char *key, char *value, char **env);
 
 #endif
