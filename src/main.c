@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 19:26:41 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 20:47:50 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	check_exec_bin(t_cmd_line *cmdl, char **env)
 {
 	char	*cpy;
 
+	if (cmdl->cmd == NULL)
+		return (FAILURE);
 	cpy = ft_strdup(cmdl->cmd);
 	if (cpy == NULL)
 		return (FAILURE);
@@ -76,13 +78,11 @@ void	set_shlvl(t_sh *sh, int lvl)
 
 	i = env_findkeypos("SHLVL", sh->env);
 	if (i == -1)
-		sh->env = tbl_append(sh->env, "SHLVL=1");
+		sh->env = tbl_append(sh->env, "SHLVL=0");
 	else
 	{
 		tbl = ft_split(sh->env[i], '=');
-		if (!tbl[1])
-			str = "SHLVL=1";
-		else
+		if (tbl && tbl[1])
 		{
 			lvl = ft_atoi(tbl[1]);
 			lvl++;
@@ -90,6 +90,8 @@ void	set_shlvl(t_sh *sh, int lvl)
 			str = ft_strjoin("SHLVL=", value);
 			free(value);
 		}
+		else
+			str = "SHLVL=0";
 		ft_freetbl(tbl, -1);
 		free(sh->env[i]);
 		sh->env[i] = str;
