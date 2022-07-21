@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 18:09:36 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 17:50:51 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:52:04 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strndup(const char *s, int len)
 	char	*dup;
 	int		i;
 
+	if (s == NULL)
+		return (NULL);
 	dup = ft_calloc(len + 1, sizeof(char));
 	if (!dup)
 		return (NULL);
