@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 12:23:59 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:03:46 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,28 @@ void	builtin_pwd(int ac, int fdout)
 {
 	char	*pwd;
 	char	*buf;
+	char	*err1;
+	char	*err2;
+	char	*err3;
 
-	if (ac == 1)
+	(void)ac;
+	err1 = "pwd: error retrieving current directory: getcwd: ";
+	err2 = "cannot access parent directories: No such file or directory\n";
+	buf = getcwd(NULL, 0);
+	if (!buf)
 	{
-		buf = getcwd(NULL, 0);
-		pwd = ft_strdup(buf);
-		free(buf);
-		ft_putstr_fd(pwd, fdout);
-		ft_putchar_fd('\n', fdout);
-		free(pwd);
-		exit(SUCCESS);
-	}
-	else
-	{
-		ft_putstr_fd("pwd: too many arguments\n", 2);
+		err3 = ft_strjoin(err1, err2);
+		ft_putstr_fd(err3, 2);
 		set_error_exit_status(&g_sh, FAILURE);
+		free(err3);
 		exit(FAILURE);
 	}
+	pwd = ft_strdup(buf);
+	free(buf);
+	ft_putstr_fd(pwd, fdout);
+	ft_putchar_fd('\n', fdout);
+	free(pwd);
+	exit(SUCCESS);
 }
 
 // ======================= EXIT ====================================
@@ -92,7 +97,7 @@ void	builtin_exit(int ac, char **av)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		if (ac == 1)
-			exit(0);
+			exit(g_sh.exit_status);
 		else if (ac == 2)
 		{
 			if (str_is_int(av[1]))

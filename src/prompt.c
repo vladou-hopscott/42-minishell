@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:21:55 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:59:00 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:27:10 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	listen_prompt(t_sh *sh)
 	{
 		sh->error = 1;
 		ft_putstr_fd("exit\n", 1);
-		exit(SUCCESS);
+		exit(sh->exit_status);
 	}
 	if (sh->prompt[0] != '\0')
 		add_history(sh->prompt);
