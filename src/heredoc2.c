@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 12:24:00 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:45:17 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,41 @@ int	process_eof_heredoc(char **tmp, t_cmd_line **cmd_line)
 	return (1);
 }
 
+char	*delimit_envvar_heredoc(char *str)
+{
+	int		i;
+	char	*env_key;
+
+	env_key = NULL;
+	i = 1;
+	if (ft_isdigit(str[i]))
+		return (NULL);
+	if (str[i] == '?')
+		return (ft_strdup("?"));
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+		i++;
+	env_key = ft_strndup(str + 1, i - 1);
+	return (env_key);
+}
+
 char	*expand_envvar_in_heredoc(char *str, int *i, int *j, char **s1)
 {
 	char	*env_key;
 	char	*env_val;
+	char	*tmp;
 
 	env_key = NULL;
 	env_val = NULL;
 	if (!ft_strncmp(str, "$$", 2))
 	{
+		tmp = *s1;
 		*s1 = ft_strjoin(*s1, "$");
+		ft_free_null_str(&tmp);
 		*i = *i + 1;
 		*j = *i;
 		return (*s1);
 	}
-	env_key = delimit_envvar(str);
+	env_key = delimit_envvar_heredoc(str);
 	if (env_key && env_key[0] == '\0')
 		env_val = ft_strdup("$");
 	else
