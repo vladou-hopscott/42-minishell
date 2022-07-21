@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 15:36:04 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 10:34:19 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,21 @@ void	builtin_export(int ac, char **av, char ***penv)
 	char	*value;
 
 	i = 1;
-	if (!g_sh.has_pipe)
+	while (i < ac)
 	{
-		while (i < ac)
+		tbl = ft_split(av[i], '=');
+		key = ft_strdup(tbl[0]);
+		if (is_valid_key(key))
 		{
-			tbl = ft_split(av[i], '=');
-			key = ft_strdup(tbl[0]);
-			if (is_valid_key(key))
-			{
-				value = str_exportvalue(tbl);
-				*penv = env_export(key, value, (*penv));
-				free(value);
-			}
-			else
-				err_export_invalid(&g_sh, key);
-			free(key);
-			ft_freetbl(tbl, -1);
-			i++;
+			value = str_exportvalue(tbl);
+			*penv = env_export(key, value, (*penv));
+			free(value);
 		}
+		else
+			err_export_invalid(&g_sh, key);
+		free(key);
+		ft_freetbl(tbl, -1);
+		i++;
 	}
 }
 

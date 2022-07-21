@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/18 15:12:23 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/21 10:31:33 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	execute_cd(char **av, char ***penv)
 	{
 		ft_putstr_fd("chdir: error retrieving current directory\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
+		exit(FAILURE);
 		return ;
 	}
 	*penv = env_export("OLDPWD", path, *penv);
@@ -34,6 +35,7 @@ void	execute_cd(char **av, char ***penv)
 	{
 		perror(av[1]);
 		set_error_exit_status(&g_sh, FAILURE);
+		exit(FAILURE);
 		return ;
 	}
 	newpath = getcwd(NULL, 999999);
@@ -48,10 +50,13 @@ void	builtin_cd(int ac, char **av, char ***penv)
 	{
 		ft_putstr_fd("command cd only accepts relative or absolute paths\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
-		return ;
+		exit(FAILURE);
 	}
-	if (!g_sh.has_pipe)
+	else if (!g_sh.has_pipe)
+	{
 		execute_cd(av, penv);
+		exit(SUCCESS);
+	}
 }
 
 // ======================= ENV ====================================
