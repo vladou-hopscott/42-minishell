@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:37:25 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 12:24:01 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 15:02:27 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	error_next_is_null(t_token *token)
 {
 	if (token == NULL)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n",
+			2);
 		return (1);
 	}
 	return (0);
