@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 14:58:34 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 19:45:44 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	err_exit_invalid(t_sh *sh, char *str)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 	sh->error = 1;
-	sh->exit_status = INVALID_EXIT;
-	exit(INVALID_EXIT);
+	sh->exit_status = 2;
+	exit(2);
 }
