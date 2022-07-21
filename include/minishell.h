@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:39:05 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 15:02:10 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:58:53 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void		builtin_pwd(int ac, int fdout);
 void		builtin_cd(int ac, char **av, char ***penv);
 void		builtin_env(int ac, char **env, int fdout);
 void		builtin_unset(int ac, char **av, char ***penv);
-void		builtin_export(int ac, char **av, char ***penv);
+void		builtin_export(int ac, char **av, char ***penv, int fdout);
 void		builtin_exit(int ac, char **av);
 
 //********** ERRORS **********//

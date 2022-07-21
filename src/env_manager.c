@@ -3,14 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:35:57 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:27:32 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 18:12:45 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*env_findkeyvalue(char *key, char **env)
+{
+	int		i;
+	char	**tbl;
+	char	*val;
+
+	i = env_findkeypos(key, env);
+	if (i == -1)
+		return (NULL);
+	tbl = ft_split(env[i], '=');
+	val = ft_strdup(tbl[1]);
+	ft_freetbl(tbl, -1);
+	return (val);
+}
+
+char	**env_export(char *key, char *value, char **env)
+{
+	int		i;
+	char	*tmp;
+	char	*str;
+
+	if (value != NULL)
+	{
+		tmp = ft_strjoin(key, "=");
+		str = ft_strjoin(tmp, value);
+		free(tmp);
+	}
+	else
+		str = ft_strdup(key);
+	i = env_findkeypos(key, env);
+	if (i == -1)
+		env = tbl_append(env, str);
+	else
+	{
+		free(env[i]);
+		env[i] = str;
+	}
+	return (env);
+}
 
 char	**env_getcwd(char **env)
 {
@@ -37,19 +77,6 @@ char	**env_getpath(char **env)
 	free(path);
 	return (env);
 }
-
-// char	**init_environment(void)
-// {
-// 	char	**env;
-
-// 	env = malloc(sizeof(char *));
-// 	if (!env)
-// 		return (NULL);
-// 	env[0] = NULL;
-// 	env = env_getcwd(env);
-// 	env = env_getpath(env);
-// 	return (env);
-// }
 
 char	**copy_environment(char **env)
 {

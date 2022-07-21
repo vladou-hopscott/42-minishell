@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/19 21:30:56 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 17:58:07 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	executor(t_cmd_line *cmdl, char ***penv)
 	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd") + 1) == 0)
 		builtin_pwd(args_to_ac(cmdl->args), STDOUT_FILENO);
 	else if (ft_strncmp(cmdl->cmd, "export", ft_strlen("export") + 1) == 0)
-		builtin_export(args_to_ac(cmdl->args), cmdl->args, penv);
+		builtin_export(args_to_ac(cmdl->args), cmdl->args, penv, cmdl->fdout);
 	else if (ft_strncmp(cmdl->cmd, "unset", ft_strlen("unset") + 1) == 0)
 		builtin_unset(args_to_ac(cmdl->args), cmdl->args, penv);
 	else if (ft_strncmp(cmdl->cmd, "env", ft_strlen("env") + 1) == 0)

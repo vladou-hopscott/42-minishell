@@ -40,6 +40,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/builtins.c\
 			$(SRC_DIR)/builtins2.c\
 			$(SRC_DIR)/builtins3.c\
+			$(SRC_DIR)/builtins4.c\
 			$(SRC_DIR)/tokens_linked_list.c\
 			$(SRC_DIR)/cmds_linked_list.c\
 			$(SRC_DIR)/cmd_line_struct.c\
