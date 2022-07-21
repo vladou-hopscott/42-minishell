@@ -4,7 +4,7 @@
 
 #VARIABLE=VALUE
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 NAME = libft.a
 
 SRCS = ft_bzero.c\

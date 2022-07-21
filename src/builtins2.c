@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 19:13:51 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:15:11 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,15 @@ void	builtin_export(int ac, char **av, char ***penv, int fdout)
 	{
 		tbl = ft_split(av[i], '=');
 		key = ft_strdup(tbl[0]);
-		if (is_valid_key(key))
-		{
-			value = str_exportvalue(tbl);
-			if (is_valid_key(key) == 2)
-				*penv = env_export_append(key, value, (*penv));
-			else
-				*penv = env_export(key, value, (*penv));
-			free(value);
-		}
+		value = str_exportvalue(tbl);
+		if (is_valid_key(key) == 1)
+			*penv = env_export(key, value, (*penv));
+		else if ((is_valid_key(key) == 2) && (value != NULL))
+			*penv = env_export_append(key, value, (*penv));
 		else
 			err_export_invalid(&g_sh, key);
+		if (value)
+			free(value);
 		free(key);
 		ft_freetbl(tbl, -1);
 	}
