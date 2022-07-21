@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 19:26:41 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 20:37:29 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	check_exec_bin(t_cmd_line *cmdl, char **env)
 {
 	char	*cpy;
 
+	if (cmdl->cmd == NULL)
+		return (FAILURE);
 	cpy = ft_strdup(cmdl->cmd);
 	if (cpy == NULL)
 		return (FAILURE);

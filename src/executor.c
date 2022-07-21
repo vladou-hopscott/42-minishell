@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 17:58:07 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 20:41:23 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ void	cmd_pathfinder(char **pcmd, char **env)
 	char	*env_path;
 
 	env_path = env_findkeyvalue("PATH", env);
+	if (env_path == NULL)
+	{
+		free(*pcmd);
+		*pcmd = NULL;
+		return ;
+	}
 	if (*pcmd && env_path)
 		cmd_pathfinder_utils(pcmd, env_path);
-	else
-		*pcmd = NULL;
 	free(env_path);
 }
 

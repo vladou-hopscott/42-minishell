@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:56:16 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:04:27 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:41:38 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	tokenize_after_env_exp(t_sh *sh)
 	sh->cmd_line_lst = start;
 }
 
-//transformation des tokens en list chainee de commandes via le parser
 void	parser(t_sh *sh)
 {
 	if (sh->error)
