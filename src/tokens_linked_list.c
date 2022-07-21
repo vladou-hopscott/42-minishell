@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_linked_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:28:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 16:40:17 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 19:23:45 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,36 +76,3 @@ int	count_arg_tokens(t_token *li)
 	}
 	return (size);
 }
-
-//void	ft_set_null_free_elem(t_token *elem)
-//{
-//	if (!elem)
-//		return ;
-//	elem->value = NULL;
-//	elem->next = NULL;
-//	free(elem);
-//}
-
-//void	ft_set_null_free_list(t_token **a_list)
-//{
-//	t_token	*tmp;
-
-//	if (!(*a_list))
-//		return ;
-//	while (*a_list)
-//	{
-//		tmp = (*a_list)->next;
-//		ft_set_null_free_elem(*a_list);
-//		*a_list = tmp;
-//	}
-//}
-
-//void	print_tokens(t_token *li)
-//{
-//	while (li != NULL)
-//	{
-//		printf("[%s]", li->value);
-//		li = li->next;
-//	}
-//	printf("\n");
-//}

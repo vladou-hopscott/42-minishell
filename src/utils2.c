@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:51:21 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/21 12:24:02 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/21 19:23:51 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	open_file_check(int fd, char *filename)
 		else if (errno == 2)
 			ft_putstr_fd(": No such file or directory\n", 2);
 		else
-		{
-			printf("open errno=%d\n", errno);
 			ft_putstr_fd(": An error occured\n", 2);
-		}
 		return (1);
 	}
 	return (0);
@@ -49,36 +46,3 @@ void	set_error_exit_status(t_sh *sh, int status)
 	sh->exit_status = status;
 	sh->error = 1;
 }
-
-//printing parsing result
-//void	print_parser_result(t_sh *sh)
-//{
-//	t_cmd_line	*temp;
-//	int	j;
-
-//	if (sh->error == 1)
-//		return ;
-//	temp = sh->cmd_line_lst;
-//	j = 1;
-//	while (temp)
-//	{
-//		printf("***CMD_LINE %d ***\n", j);
-//		printf("tokens : \n");
-//		print_tokens(temp->token_lst);
-//		printf("cmd=%s\n",temp->cmd);
-//		int i = 0;
-//		printf("args: [");
-//		while (temp->args[i])
-//		{
-//			printf("%s,", temp->args[i]);
-//			i++;
-//		}
-//		printf("]");
-//		printf("\nfdout=%d, fdin=%d\n", temp->fdout, temp->fdin);
-//		printf("heredoc_mode=%d, append_mode=%d\n"
-//, temp->heredoc_mode, temp->append_mode);
-//		printf("\n");
-//		temp = temp->next;
-//		j++;
-//	}
-//}
