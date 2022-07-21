@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 17:28:27 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/21 19:11:47 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	process_heredoc(char *delimitor, t_cmd_line **cmd_line, int quotes)
 		i++;
 	}
 	close((*cmd_line)->fdin);
-	return (g_sh.exit_status);
+	return (0);
 }
 
 int	wait_heredoc(int pid, int *status)
