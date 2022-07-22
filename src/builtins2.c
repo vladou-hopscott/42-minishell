@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 21:15:11 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 11:09:55 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,16 @@ char	*str_exportvalue(char **tbl)
 	int		i;
 	char	*value;
 
-	if (tbl[1] == NULL)
-		return (NULL);
-	value = ft_strdup(tbl[1]);
-	i = 2;
-	while (tbl && tbl[i])
+	value = NULL;
+	if (tbl && tbl[1])
 	{
-		value = ft_strjoin(value, tbl[i]);
-		i++;
+		value = ft_strdup(tbl[1]);
+		i = 2;
+		while (tbl && tbl[i])
+		{
+			value = ft_strjoin(value, tbl[i]);
+			i++;
+		}
 	}
 	return (value);
 }
@@ -89,6 +91,13 @@ void	print_env(int ac, char **env, int fdout)
 		exit(SUCCESS);
 }
 
+void	free_key_value(char *value, char *key)
+{
+	if (value)
+		free(value);
+	free(key);
+}
+
 void	builtin_export(int ac, char **av, char ***penv, int fdout)
 {
 	int		i;
@@ -100,17 +109,18 @@ void	builtin_export(int ac, char **av, char ***penv, int fdout)
 	while (++i < ac)
 	{
 		tbl = ft_split(av[i], '=');
-		key = ft_strdup(tbl[0]);
-		value = str_exportvalue(tbl);
-		if (is_valid_key(key) == 1)
-			*penv = env_export(key, value, (*penv));
-		else if ((is_valid_key(key) == 2) && (value != NULL))
-			*penv = env_export_append(key, value, (*penv));
-		else
-			err_export_invalid(&g_sh, key);
-		if (value)
-			free(value);
-		free(key);
+		if (tbl[0])
+		{
+			key = ft_strdup(tbl[0]);
+			value = str_exportvalue(tbl);
+			if (is_valid_key(key) == 1)
+				*penv = env_export(key, value, (*penv));
+			else if ((is_valid_key(key) == 2) && (value != NULL))
+				*penv = env_export_append(key, value, (*penv));
+			else
+				err_export_invalid(&g_sh, key);
+			free_key_value(value, key);
+		}
 		ft_freetbl(tbl, -1);
 	}
 	print_env(ac, *penv, fdout);
