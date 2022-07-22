@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 12:08:35 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 13:52:43 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,27 @@ void	update_env(char *str, char **tbl, char ***penv)
 	char	*key;
 	char	*value;
 
-	key = ft_strdup(tbl[0]);
-	if (!key)
+	if (str[0] == '=')
+		err_export_invalid(&g_sh, str);
+	if (str[0] == '=')
 		return ;
-	value = str_exportvalue(tbl);
-	if (is_valid_key(key, str, value) == 0)
-		err_export_invalid(&g_sh, key);
-	else if (is_valid_key(key, str, value) == 1)
-		*penv = env_export(key, value, (*penv));
-	else if (is_valid_key(key, str, value) == 2)
-		*penv = env_export_append(key, value, (*penv));
-	else if (is_valid_key(key, str, value) == 3)
-		*penv = env_export_append(key, " ", (*penv));
-	else if (is_valid_key(key, str, value) == 4)
-		*penv = env_export(key, " ", (*penv));
-	if (value)
-		free(value);
+	key = ft_strdup(tbl[0]);
+	if (key)
+	{
+		value = str_exportvalue(tbl);
+		if (is_valid_key(key, str, value) == 0)
+			err_export_invalid(&g_sh, key);
+		else if (is_valid_key(key, str, value) == 1)
+			*penv = env_export(key, value, (*penv));
+		else if (is_valid_key(key, str, value) == 2)
+			*penv = env_export_append(key, value, (*penv));
+		else if (is_valid_key(key, str, value) == 3)
+			*penv = env_export_append(key, " ", (*penv));
+		else if (is_valid_key(key, str, value) == 4)
+			*penv = env_export(key, " ", (*penv));
+		if (value)
+			free(value);
+	}
 	free(key);
 }
 
