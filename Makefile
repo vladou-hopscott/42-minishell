@@ -17,7 +17,7 @@ EXE := minishell
 
 CC := cc
 LDFLAGS ?= -lreadline -L/usr/local/opt/readline/lib/
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include -g -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include #-g -fsanitize=address
 
 # Src files ======================================
 

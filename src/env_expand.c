@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 14:02:23 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/22 13:27:12 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*expand_envvars_in_token(char **value)
 	if (!str_has_dollar_without_quotes(*value))
 		return (NULL);
 	set_init_values(&idx, &s1, &s2, &quote_status);
-	while ((*value)[idx.i])
+	while (idx.i <= (int)ft_strlen((*value)) && (*value)[idx.i])
 	{
 		quote_status = check_quote_status_in_str((*value)[idx.i], quote_status);
 		if (quote_status == NO_QUOTE && (*value)[idx.i] == '$')

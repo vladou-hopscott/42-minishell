@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_line_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 20:37:13 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 13:38:22 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	update_args(t_cmd_line **cmd_line)
 	i = 0;
 	while (token)
 	{
-		if (token->type == CMD || token->type == ARG)
+		if ((token->type == CMD || token->type == ARG)
+			&& token->value[0] != '\0')
 		{
 			(*cmd_line)->args[i] = ft_strndup(
 					token->value, ft_strlen(token->value));
