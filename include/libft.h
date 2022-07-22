@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:04:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/13 16:14:29 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 11:41:49 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	**ft_freetbl(char **tbl, int pos);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_free_null_str(char **str);
 int		ft_isalnum(int c);
+int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/21 18:06:40 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:15:03 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,27 @@
 extern t_sh	g_sh;
 
 // ======================= UNSET ====================================
+
+int	unset_is_valid_key(char *key)
+{
+	int	i;
+
+	i = 0;
+	if (key == NULL)
+		return (SUCCESS);
+	if (key[i] == '\0')
+		return (SUCCESS);
+	if (key[i] != '_' && !ft_isalpha(key[i]))
+		return (FAILURE);
+	i = 1;
+	while (key && key[i])
+	{
+		if (key[i] != '_' && !ft_isalnum(key[i]))
+			return (FAILURE);
+		i++;
+	}
+	return (SUCCESS);
+}
 
 void	tbl_remove(char ***ptr, char *key)
 {
@@ -50,13 +71,16 @@ void	builtin_unset(int ac, char **av, char ***penv)
 	int		i;
 
 	i = 1;
-	if (!g_sh.has_pipe)
+	while (i < ac)
 	{
-		while (i < ac)
+		if (unset_is_valid_key(av[i]) == FAILURE)
 		{
-			tbl_remove(penv, av[i]);
-			i++;
+			err_unset_invalid(&g_sh, av[i]);
+			return ;
 		}
+		if (!g_sh.has_pipe)
+			tbl_remove(penv, av[i]);
+		i++;
 	}
 	if (g_sh.has_pipe)
 		exit(SUCCESS);
