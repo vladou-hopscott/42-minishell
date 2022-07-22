@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 13:52:43 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 17:14:17 by scottwillis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,40 +55,13 @@ char	*str_exportvalue(char **tbl)
 		i = 2;
 		while (tbl && tbl[i])
 		{
+			if (tbl[i])
+				value = ft_strjoin(value, "=");
 			value = ft_strjoin(value, tbl[i]);
 			i++;
 		}
 	}
 	return (value);
-}
-
-void	print_env(int ac, char **env, int fdout)
-{
-	int		i;
-	char	**tbl;
-
-	if (ac == 1)
-	{
-		i = -1;
-		while (env && env[++i])
-		{
-			ft_putstr_fd("export ", fdout);
-			tbl = ft_split(env[i], '=');
-			ft_putstr_fd(tbl[0], fdout);
-			if (tbl[1] != NULL)
-			{
-				ft_putchar_fd('=', fdout);
-				ft_putchar_fd('"', fdout);
-				if (ft_strncmp(tbl[1], " ", ft_strlen(" ") + 1) != 0)
-					ft_putstr_fd(tbl[1], fdout);
-				ft_putchar_fd('"', fdout);
-			}
-			ft_putchar_fd('\n', fdout);
-			ft_freetbl(tbl, -1);
-		}
-	}
-	if (g_sh.has_pipe)
-		exit(SUCCESS);
 }
 
 void	update_env(char *str, char **tbl, char ***penv)
@@ -120,6 +93,38 @@ void	update_env(char *str, char **tbl, char ***penv)
 	free(key);
 }
 
+void	print_env(char **env, int fdout)
+{
+	int		i;
+	int		j;
+	char	**tbl;
+
+	i = -1;
+	while (env && env[++i])
+	{
+		ft_putstr_fd("export ", fdout);
+		tbl = ft_split(env[i], '=');
+		ft_putstr_fd(tbl[0], fdout);
+		if (tbl && tbl[1])
+		{
+			ft_putstr_fd("=\"", fdout);
+			if (ft_strncmp(tbl[1], " ", ft_strlen(" ") + 1) != 0)
+			{
+				j = 0;
+				while (tbl[++j])
+				{
+					ft_putstr_fd(tbl[j], fdout);
+					if (tbl[j + 1])
+						ft_putchar_fd('=', fdout);
+				}
+			}
+			ft_putchar_fd('"', fdout);
+		}
+		ft_putchar_fd('\n', fdout);
+		ft_freetbl(tbl, -1);
+	}
+}
+
 void	builtin_export(int ac, char **av, char ***penv, int fdout)
 {
 	int		i;
@@ -135,5 +140,8 @@ void	builtin_export(int ac, char **av, char ***penv, int fdout)
 			err_export_invalid(&g_sh, av[i]);
 		ft_freetbl(tbl, -1);
 	}
-	print_env(ac, *penv, fdout);
+	if (ac == 1)
+		print_env(*penv, fdout);
+	if (g_sh.has_pipe)
+		exit(SUCCESS);
 }
