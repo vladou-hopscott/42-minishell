@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:17:49 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:38:38 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,28 @@ void	init_prompt_values(t_sh *sh)
 	sh->has_pipe = 0;
 }
 
+char	**init_environment(void)
+{
+	char	**env;
+
+	env = malloc(sizeof(char *));
+	if (!env)
+		return (NULL);
+	env[0] = NULL;
+	env = env_getcwd(env);
+	env = env_getpath(env);
+	return (env);
+}
+
 void	init_program_values(t_sh *sh, char **env)
 {
 	ft_memset(sh, 0, sizeof(t_sh));
 	init_prompt_values(sh);
 	sh->exit_status = SUCCESS;
-	sh->env = copy_environment(env);
+	if (env == NULL)
+		sh->env = init_environment();
+	else
+		sh->env = copy_environment(env);
 	if (sh->error || sh->env == NULL)
 	{
 		ft_putstr_fd("Error\n", 2);

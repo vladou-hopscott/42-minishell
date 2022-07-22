@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 20:47:50 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:47:24 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ void	set_shlvl(t_sh *sh, int lvl)
 	char	**tbl;
 
 	i = env_findkeypos("SHLVL", sh->env);
+	str = ft_strdup("SHLVL=0");
 	if (i == -1)
-		sh->env = tbl_append(sh->env, "SHLVL=0");
+		sh->env = tbl_append(sh->env, str);
 	else
 	{
 		tbl = ft_split(sh->env[i], '=');
@@ -87,12 +88,10 @@ void	set_shlvl(t_sh *sh, int lvl)
 			lvl = ft_atoi(tbl[1]);
 			lvl++;
 			value = ft_itoa(lvl);
+			free(str);
 			str = ft_strjoin("SHLVL=", value);
 			free(value);
 		}
-		else
-			str = "SHLVL=0";
-		ft_freetbl(tbl, -1);
 		free(sh->env[i]);
 		sh->env[i] = str;
 	}
