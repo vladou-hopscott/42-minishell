@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/21 17:30:14 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 18:25:30 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_cd(char **av, char ***penv, char *path)
 		perror(av[1]);
 		set_error_exit_status(&g_sh, FAILURE);
 		if (g_sh.has_pipe)
-			exit(FAILURE);
+			ft_free_values_exit(&g_sh, FAILURE);
 		return ;
 	}
 	newpath = getcwd(NULL, 999999);
@@ -45,7 +45,7 @@ void	builtin_cd(int ac, char **av, char ***penv)
 		ft_putstr_fd("command cd only accepts relative or absolute paths\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
 		if (g_sh.has_pipe)
-			exit(FAILURE);
+			ft_free_values_exit(&g_sh, FAILURE);
 		return ;
 	}
 	path = getcwd(NULL, 999999);
@@ -54,12 +54,12 @@ void	builtin_cd(int ac, char **av, char ***penv)
 		ft_putstr_fd("chdir: error retrieving current directory\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
 		if (g_sh.has_pipe)
-			exit(FAILURE);
+			ft_free_values_exit(&g_sh, FAILURE);
 		return ;
 	}
 	execute_cd(av, penv, path);
 	if (g_sh.has_pipe)
-		exit(SUCCESS);
+		ft_free_values_exit(&g_sh, SUCCESS);
 }
 
 // ======================= ENV ====================================
@@ -83,12 +83,12 @@ void	builtin_env(int ac, char **env, int fdout)
 			ft_freetbl(tbl, -1);
 			i++;
 		}
-		exit(SUCCESS);
+		ft_free_values_exit(&g_sh, SUCCESS);
 	}
 	else
 	{
 		ft_putstr_fd("env: too many arguments\n", 2);
 		set_error_exit_status(&g_sh, FAILURE);
-		exit(FAILURE);
+		ft_free_values_exit(&g_sh, FAILURE);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/22 12:15:03 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:25:38 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ void	builtin_unset(int ac, char **av, char ***penv)
 		i++;
 	}
 	if (g_sh.has_pipe)
-		exit(SUCCESS);
+		ft_free_values_exit(&g_sh, SUCCESS);
 }

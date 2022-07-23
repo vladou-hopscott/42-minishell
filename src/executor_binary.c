@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:18 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 12:20:53 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 18:25:49 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec_bin(t_cmd_line *cmdl, char **env)
 		cmdl->args[0] = ft_strdup(cmdl->cmd);
 		execve(cmdl->cmd, cmdl->args, env);
 		perror(cmdl->cmd);
-		exit(errno);
+		ft_free_values_exit(&g_sh, errno);
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 17:14:17 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/23 18:35:11 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,16 @@ void	print_env(char **env, int fdout)
 		if (tbl && tbl[1])
 		{
 			ft_putstr_fd("=\"", fdout);
-			if (ft_strncmp(tbl[1], " ", ft_strlen(" ") + 1) != 0)
+			j = 0;
+			while (tbl[++j] && (ft_strncmp(tbl[1], " ", ft_strlen(" ") + 1)))
 			{
-				j = 0;
-				while (tbl[++j])
-				{
-					ft_putstr_fd(tbl[j], fdout);
-					if (tbl[j + 1])
-						ft_putchar_fd('=', fdout);
-				}
+				ft_putstr_fd(tbl[j], fdout);
+				if (tbl[j + 1])
+					ft_putchar_fd('=', fdout);
 			}
 			ft_putchar_fd('"', fdout);
 		}
-		ft_putchar_fd('\n', fdout);
+		ft_putstr_fd("\"\n", fdout);
 		ft_freetbl(tbl, -1);
 	}
 }
@@ -143,5 +140,5 @@ void	builtin_export(int ac, char **av, char ***penv, int fdout)
 	if (ac == 1)
 		print_env(*penv, fdout);
 	if (g_sh.has_pipe)
-		exit(SUCCESS);
+		ft_free_values_exit(&g_sh, SUCCESS);
 }

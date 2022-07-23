@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 16:18:54 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:28:33 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	err_cmd_not_found(t_sh *sh, char *cmd)
 	sh->error = 1;
 	sh->exit_status = CMD_NOT_FOUND;
 	if (sh->has_pipe)
-		exit(CMD_NOT_FOUND);
+		ft_free_values_exit(sh, CMD_NOT_FOUND);
 }
 
 void	err_export_invalid(t_sh *sh, char *key)
@@ -31,7 +31,7 @@ void	err_export_invalid(t_sh *sh, char *key)
 	sh->error = 1;
 	sh->exit_status = FAILURE;
 	if (sh->has_pipe)
-		exit(FAILURE);
+		ft_free_values_exit(sh, FAILURE);
 }
 
 void	err_unset_invalid(t_sh *sh, char *key)
@@ -42,7 +42,7 @@ void	err_unset_invalid(t_sh *sh, char *key)
 	sh->error = 1;
 	sh->exit_status = FAILURE;
 	if (sh->has_pipe)
-		exit(FAILURE);
+		ft_free_values_exit(sh, FAILURE);
 }
 
 void	err_exit_invalid(t_sh *sh, char *str)

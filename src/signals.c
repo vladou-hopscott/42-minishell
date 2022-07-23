@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:27:15 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 18:54:00 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:26:34 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	heredoc_handler(int sigtype)
 		rl_replace_line("", 0);
 		g_sh.error = 1;
 		g_sh.exit_status = 130;
-		exit(130);
+		ft_free_values_exit(&g_sh, 130);
 	}
 }
 
@@ -50,7 +50,7 @@ void	sigquit_handler(int sigtype)
 		rl_replace_line("", 0);
 		g_sh.error = 1;
 		g_sh.exit_status = 131;
-		exit(131);
+		ft_free_values_exit(&g_sh, 131);
 	}
 }
 

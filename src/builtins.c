@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 16:20:32 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:22:30 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	builtin_echo(int ac, char **av, int fdout)
 	}
 	if (ntrail)
 		ft_putchar_fd('\n', fdout);
-	exit(SUCCESS);
+	ft_free_values_exit(&g_sh, SUCCESS);
 }
 
 // ======================= PWD ====================================
@@ -74,21 +74,20 @@ void	builtin_pwd(int ac, int fdout)
 		ft_putstr_fd(err3, 2);
 		set_error_exit_status(&g_sh, FAILURE);
 		free(err3);
-		exit(FAILURE);
+		ft_free_values_exit(&g_sh, FAILURE);
 	}
 	pwd = ft_strdup(buf);
 	free(buf);
 	ft_putstr_fd(pwd, fdout);
 	ft_putchar_fd('\n', fdout);
 	free(pwd);
-	exit(SUCCESS);
+	ft_free_values_exit(&g_sh, SUCCESS);
 }
 
 // ======================= EXIT ====================================
 
 void	builtin_exit(int ac, char **av)
 {
-	//CETTE ERREUR N'EXISTE PAS DANS BASH
 	if (ac > 2)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
