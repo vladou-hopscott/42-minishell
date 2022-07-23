@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:21:55 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 20:27:10 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 15:53:37 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	listen_prompt(t_sh *sh)
 	{
 		sh->error = 1;
 		ft_putstr_fd("exit\n", 1);
+		free_values(sh, FAILURE);
 		exit(sh->exit_status);
 	}
 	if (sh->prompt[0] != '\0')

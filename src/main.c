@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 12:47:24 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 16:06:20 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	set_shlvl(t_sh *sh, int lvl)
 			str = ft_strjoin("SHLVL=", value);
 			free(value);
 		}
-		free(sh->env[i]);
+		ft_free_null_str(&sh->env[i]);
+		ft_freetbl(tbl, -1);
 		sh->env[i] = str;
 	}
 }
