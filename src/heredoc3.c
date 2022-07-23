@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/22 16:01:58 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:11:53 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static	char	*choose_filename(void)
 		file_exists = open(filename, O_RDONLY);
 		i++;
 	}
-	close(file_exists);
+	if (file_exists != -1)
+		close(file_exists);
 	return (filename);
 }
 

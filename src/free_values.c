@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:23:39 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/23 18:35:41 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:13:35 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	free_cmd_line_lst(t_cmd_line *cmd_line)
 		ft_free_null_str(&cmd_line->cmd);
 		free_delete_heredoc_file(cmd_line);
 		ft_freetbl(cmd_line->args, -1);
-		if (cmd_line->fdin != 0)
+		if (cmd_line->fdin != 0 && cmd_line->fdin != -1)
 			close(cmd_line->fdin);
-		if (cmd_line->fdout != 1)
+		if (cmd_line->fdout != 1 && cmd_line->fdout != -1)
 			close(cmd_line->fdout);
 		free(cmd_line);
 		cmd_line = NULL;
