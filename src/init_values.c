@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 18:28:50 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:42:50 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	init_program_values(t_sh *sh, char **env)
 	if (sh->error || sh->env == NULL)
 	{
 		ft_putstr_fd("Error\n", 2);
-		ft_free_values_exit(sh, FAILURE);
+		ft_free_values_exit(sh, FAILURE, 1);
 	}
 }

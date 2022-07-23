@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 18:35:11 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:44:09 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,5 @@ void	builtin_export(int ac, char **av, char ***penv, int fdout)
 	if (ac == 1)
 		print_env(*penv, fdout);
 	if (g_sh.has_pipe)
-		ft_free_values_exit(&g_sh, SUCCESS);
+		ft_free_values_exit(&g_sh, SUCCESS, 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 18:07:42 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:42:03 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,17 @@ int	main(int argc, char **argv, char **env)
 		parser(&g_sh);
 		if (g_sh.error)
 		{
-			free_values(&g_sh, SUCCESS);
+			free_values(&g_sh, SUCCESS, 1);
 			init_prompt_values(&g_sh);
 			continue ;
 		}
 		execute_pipes(&g_sh);
-		free_values(&g_sh, SUCCESS);
+		free_values(&g_sh, SUCCESS, 1);
 		if (!g_sh.error)
 			g_sh.exit_status = SUCCESS;
 		init_prompt_values(&g_sh);
 	}
-	free_values(&g_sh, FAILURE);
+	free_values(&g_sh, FAILURE, 1);
 	if (g_sh.error == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);

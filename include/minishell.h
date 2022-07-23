@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:17:57 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/23 16:20:05 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:41:00 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_sh
 //********** INITIALIZATION **********//
 void		init_program_values(t_sh *sh, char **env);
 void		init_prompt_values(t_sh *sh);
-void		free_values(t_sh *sh, int free_env);
-void		ft_free_values_exit(t_sh *sh, int exit_status);
+void		free_values(t_sh *sh, int free_env, int del_hd_file);
+void		ft_free_values_exit(t_sh *sh, int exit_status, int del_hd_file);
 
 //********** PROMPT **********//
 void		listen_prompt(t_sh *sh);

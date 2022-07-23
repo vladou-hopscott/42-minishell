@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 18:22:30 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:45:43 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	builtin_echo(int ac, char **av, int fdout)
 	}
 	if (ntrail)
 		ft_putchar_fd('\n', fdout);
-	ft_free_values_exit(&g_sh, SUCCESS);
+	ft_free_values_exit(&g_sh, SUCCESS, 1);
 }
 
 // ======================= PWD ====================================
@@ -74,14 +74,14 @@ void	builtin_pwd(int ac, int fdout)
 		ft_putstr_fd(err3, 2);
 		set_error_exit_status(&g_sh, FAILURE);
 		free(err3);
-		ft_free_values_exit(&g_sh, FAILURE);
+		ft_free_values_exit(&g_sh, FAILURE, 1);
 	}
 	pwd = ft_strdup(buf);
 	free(buf);
 	ft_putstr_fd(pwd, fdout);
 	ft_putchar_fd('\n', fdout);
 	free(pwd);
-	ft_free_values_exit(&g_sh, SUCCESS);
+	ft_free_values_exit(&g_sh, SUCCESS, 1);
 }
 
 // ======================= EXIT ====================================
@@ -97,14 +97,14 @@ void	builtin_exit(int ac, char **av)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		if (ac == 1)
-			ft_free_values_exit(&g_sh, g_sh.exit_status);
+			ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
 		else if (ac == 2)
 		{
 			if (str_is_int(av[1]))
-				ft_free_values_exit(&g_sh, ft_atoi(av[1]));
+				ft_free_values_exit(&g_sh, ft_atoi(av[1]), 1);
 			else
 				err_exit_invalid(&g_sh, av[1]);
 		}
-		ft_free_values_exit(&g_sh, FAILURE);
+		ft_free_values_exit(&g_sh, FAILURE, 1);
 	}
 }

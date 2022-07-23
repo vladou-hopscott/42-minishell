@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 19:11:47 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:56:53 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 	if (pid == 0)
 	{
 		signal(SIGINT, &heredoc_handler);
-		exit(process_heredoc(delimitor, cmd_line, quotes));
+		ft_free_values_exit(&g_sh,
+			process_heredoc(delimitor, cmd_line, quotes), 0);
 	}
 	if (wait_heredoc(pid, &status))
 		return (1);

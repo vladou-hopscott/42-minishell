@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 18:28:33 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:43:21 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	err_cmd_not_found(t_sh *sh, char *cmd)
 	sh->error = 1;
 	sh->exit_status = CMD_NOT_FOUND;
 	if (sh->has_pipe)
-		ft_free_values_exit(sh, CMD_NOT_FOUND);
+		ft_free_values_exit(sh, CMD_NOT_FOUND, 1);
 }
 
 void	err_export_invalid(t_sh *sh, char *key)
@@ -31,7 +31,7 @@ void	err_export_invalid(t_sh *sh, char *key)
 	sh->error = 1;
 	sh->exit_status = FAILURE;
 	if (sh->has_pipe)
-		ft_free_values_exit(sh, FAILURE);
+		ft_free_values_exit(sh, FAILURE, 1);
 }
 
 void	err_unset_invalid(t_sh *sh, char *key)
@@ -42,7 +42,7 @@ void	err_unset_invalid(t_sh *sh, char *key)
 	sh->error = 1;
 	sh->exit_status = FAILURE;
 	if (sh->has_pipe)
-		ft_free_values_exit(sh, FAILURE);
+		ft_free_values_exit(sh, FAILURE, 1);
 }
 
 void	err_exit_invalid(t_sh *sh, char *str)
@@ -52,5 +52,5 @@ void	err_exit_invalid(t_sh *sh, char *str)
 	ft_putstr_fd(": numeric argument required\n", 2);
 	sh->error = 1;
 	sh->exit_status = MAJOR_FAILURE;
-	ft_free_values_exit(sh, MAJOR_FAILURE);
+	ft_free_values_exit(sh, MAJOR_FAILURE, 1);
 }
