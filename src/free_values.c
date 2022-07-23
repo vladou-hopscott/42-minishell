@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:23:39 by vladimir          #+#    #+#             */
-/*   Updated: 2022/06/20 19:13:41 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:26:19 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ void	free_values(t_sh *sh, int free_env)
 	free_cmd_line_lst(sh->cmd_line_lst);
 	if (free_env)
 		ft_freetbl(sh->env, -1);
+}
+
+void	ft_free_values_exit(t_sh *sh, int exit_status)
+{
+	free_values(sh, FAILURE);
+	rl_clear_history();
+	exit(exit_status);
 }

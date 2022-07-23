@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 11:57:44 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:18:54 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	err_exit_invalid(t_sh *sh, char *str)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 	sh->error = 1;
-	sh->exit_status = 2;
-	exit(2);
+	sh->exit_status = MAJOR_FAILURE;
+	ft_free_values_exit(sh, MAJOR_FAILURE);
 }
