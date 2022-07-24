@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:04:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 11:40:56 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:50:46 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	*ft_calloc(size_t n, size_t size);
 int		is_in_charset(char c, const char *charset);
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_atoi(char *nptr);
+long long	    ft_atoll(char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size);
 char	*ft_strdup(char *s);
 char	*ft_strndup(const char *s, int len);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 19:45:43 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/24 23:57:05 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,35 @@ void	builtin_pwd(int ac, int fdout)
 
 void	builtin_exit(int ac, char **av)
 {
+	if (ac == 1)
+	{
+		printf("ac==1\n");
+		if (!g_sh.has_pipe)
+		{
+			printf("g_sh.has_pipe=%d\n", g_sh.has_pipe);
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
+			ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
+		}
+	}
+	else
+	{
+		if (str_is_long_long(av[1]))
+		{
+			if (ac > 2)
+			{
+				if (!g_sh.has_pipe)
+					ft_putstr_fd("exit\n", STDOUT_FILENO);
+				ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+				set_error_exit_status(&g_sh, FAILURE);
+			}
+			else
+				ft_free_values_exit(&g_sh, ft_atoll(av[1]), 1);
+		}
+		else
+			err_exit_invalid(&g_sh, av[1]);
+	}
+}
+/*
 	if (ac > 2)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
@@ -100,11 +129,11 @@ void	builtin_exit(int ac, char **av)
 			ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
 		else if (ac == 2)
 		{
-			if (str_is_int(av[1]))
-				ft_free_values_exit(&g_sh, ft_atoi(av[1]), 1);
+			if (str_is_long_long(av[1]))
+				ft_free_values_exit(&g_sh, ft_atoll(av[1]), 1);
 			else
 				err_exit_invalid(&g_sh, av[1]);
 		}
 		ft_free_values_exit(&g_sh, FAILURE, 1);
 	}
-}
+	*/

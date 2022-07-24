@@ -63,6 +63,7 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/multipipe.c\
 			$(SRC_DIR)/multipipe2.c\
 			$(SRC_DIR)/int_check.c\
+			$(SRC_DIR)/long_long_check.c\
 
 # Make all ========================================
 

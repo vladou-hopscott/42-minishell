@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:17:57 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/23 19:41:00 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:24:33 by vladimir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void		set_error_exit_status(t_sh *sh, int status);
 //********** INT_CHECK **********//
 char		*ft_itoa(int n);
 int			str_is_int(char *str);
+int			str_is_long_long(char *str);
 
 //********** MULTIPIPE **********//
 void		execute_pipes(t_sh *sh);
