@@ -17,7 +17,7 @@ EXE := minishell
 
 CC := cc
 LDFLAGS ?= -lreadline -L/usr/local/opt/readline/lib/
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include -g3 #-fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include
 
 # Src files ======================================
 
@@ -113,9 +113,5 @@ fclean : clean
 # Additional ========================================
 
 re : fclean all
-
-valgrind: ${NAME}
-	@valgrind --suppressions=cmd_valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose --log-file=valgrind-out.txt ./minishell
-	@vim valgrind-out.txt
 
 .PHONY : all clean fclean re
