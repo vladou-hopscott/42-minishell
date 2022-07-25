@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 19:12:33 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:38:41 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,7 @@ void	executor(t_cmd_line *cmdl, char ***penv)
 	else if (ft_strncmp(cmdl->cmd, "exit", ft_strlen("exit") + 1) == 0)
 		builtin_exit(args_to_ac(cmdl->args), cmdl->args);
 	else if (cmdl->cmd[0] == '\0')
-	{
-		if (!cmdl->cmd_is_empty_doll)
-			err_cmd_not_found(&g_sh, cmdl->cmd);
-		if (g_sh.has_pipe)
-			ft_free_values_exit(&g_sh, SUCCESS, 1);
-	}
+		err_cmd_not_found(&g_sh, cmdl->cmd);
 	else
 		exec_bin(cmdl, (*penv));
 }

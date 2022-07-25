@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:18:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 18:52:19 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:26:55 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	expand_envvars_in_tokens(t_cmd_line **cmd_line)
 			if (new_value)
 			{
 				if (new_value[0] == '\0')
-					(*cmd_line)->cmd_is_empty_doll = 1;
+					token->tk_is_empty_doll = 1;
 				temp = token->value;
 				token->value = new_value;
 				ft_free_null_str(&temp);

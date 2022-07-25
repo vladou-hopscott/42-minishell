@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:16 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 18:50:12 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:29:56 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_cmd_line	*create_cmd_line(void)
 		return (NULL);
 	elem->args = NULL;
 	elem->cmd = NULL;
-	elem->cmd_is_empty_doll = 0;
 	elem->next = NULL;
 	elem->str = NULL;
 	elem->token_lst = NULL;

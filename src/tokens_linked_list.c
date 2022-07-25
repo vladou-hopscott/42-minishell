@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:28:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 19:23:45 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:21:52 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*create_token(t_token_type type, char *value)
 	elem->value = ft_strdup(value);
 	elem->next = NULL;
 	elem->quote = NO_QUOTE;
+	elem->tk_is_empty_doll = 0;
 	return (elem);
 }
 

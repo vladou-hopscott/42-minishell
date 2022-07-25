@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_token_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:04:43 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/16 10:32:47 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:37:21 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	update_token_type(t_token **token, int *has_cmd)
 		(*token)->next->type = HEREDOC_LIMIT;
 	else if ((*token)->type == STR)
 	{
-		if (!(*has_cmd))
+		if (!(*has_cmd) && !(*token)->tk_is_empty_doll)
 		{
 			(*token)->type = CMD;
 			*has_cmd = 1;
