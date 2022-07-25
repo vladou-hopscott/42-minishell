@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/24 23:57:05 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:30:22 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ void	builtin_pwd(int ac, int fdout)
 
 void	builtin_exit(int ac, char **av)
 {
+	// printf("ac=%d\n", ac);
 	if (ac == 1)
 	{
-		printf("ac==1\n");
 		if (!g_sh.has_pipe)
 		{
-			printf("g_sh.has_pipe=%d\n", g_sh.has_pipe);
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
 		}
+		ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
 	}
 	else
 	{
