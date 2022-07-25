@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 13:19:46 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 17:00:55 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	heredoc(char *dl, t_cmd_line **cmd_line)
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_free_values_exit(&g_sh, ph(dl, cmd_line, q), 0);
 		signal(SIGINT, &heredoc_handler);
+		ft_free_values_exit(&g_sh, ph(dl, cmd_line, q), 0);
 	}
 	if (wait_heredoc(pid, &status))
 		return (1);

@@ -6,13 +6,11 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:54:59 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 15:00:58 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:27:30 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_sh	g_sh;
 
 int	process_eof_heredoc(char **tmp, t_cmd_line **cmd_line)
 {

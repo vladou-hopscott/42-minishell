@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 13:50:47 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 17:02:54 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,19 @@ int	update_fdin_fdout(t_cmd_line **cmd_line)
 
 void	update_elems_cmd_lines(t_sh *sh)
 {
-	t_cmd_line	*start;
+	t_cmd_line	*cmdl;
 
-	start = sh->cmd_line_lst;
-	while (sh->cmd_line_lst)
+	cmdl = sh->cmd_line_lst;
+	while (cmdl)
 	{
-		if (update_cmd(&sh->cmd_line_lst)
-			|| update_args(&sh->cmd_line_lst)
-			|| update_fdin_fdout(&sh->cmd_line_lst))
+		if (update_cmd(&cmdl)
+			|| update_args(&cmdl)
+			|| update_fdin_fdout(&cmdl))
 		{
 			sh->error = 1;
 			if (!sh->exit_status)
 				sh->exit_status = FAILURE;
 		}
-		sh->cmd_line_lst = sh->cmd_line_lst->next;
+		cmdl = cmdl->next;
 	}
-	sh->cmd_line_lst = start;
 }

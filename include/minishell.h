@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:17:57 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/25 14:39:18 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 17:01:38 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void		ft_set_null_free_list(t_token **a_list);
 t_token		*add_middle_token(t_token *current, t_token_type type, char *value);
 
 /* ********* HERE DOCUMENTS ********* */
-int			heredoc(char *delimitor, t_cmd_line **cmd_line);
+// int			heredoc(char *delimitor, t_cmd_line **cmd_line);
+int			heredoc(char *dl, t_cmd_line **cmd_line);
 int			initialize_heredoc(t_cmd_line **cmd_line);
 int			run_children(char *delimitor);
 char		*read_heredoc_line(t_cmd_line **cmd_line,
