@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:23:39 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/23 19:53:30 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:18:30 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	free_cmd_line_lst(t_cmd_line *cmd_line, int del_hd_file)
 		free_token_lst(cmd_line->token_lst);
 		ft_free_null_str(&cmd_line->cmd);
 		free_delete_heredoc_file(cmd_line, del_hd_file);
-		ft_freetbl(cmd_line->args, -1);
+		if (cmd_line->args)
+			ft_freetbl(cmd_line->args, -1);
 		if (cmd_line->fdin != 0 && cmd_line->fdin != -1)
 			close(cmd_line->fdin);
 		if (cmd_line->fdout != 1 && cmd_line->fdout != -1)
