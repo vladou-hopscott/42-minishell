@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:07 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 11:30:22 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:48:19 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,10 @@ void	builtin_pwd(int ac, int fdout)
 
 void	builtin_exit(int ac, char **av)
 {
-	// printf("ac=%d\n", ac);
 	if (ac == 1)
 	{
 		if (!g_sh.has_pipe)
-		{
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
-			ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
-		}
 		ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
 	}
 	else
@@ -108,6 +104,8 @@ void	builtin_exit(int ac, char **av)
 					ft_putstr_fd("exit\n", STDOUT_FILENO);
 				ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 				set_error_exit_status(&g_sh, FAILURE);
+				if (g_sh.has_pipe)
+					ft_free_values_exit(&g_sh, FAILURE, 1);
 			}
 			else
 				ft_free_values_exit(&g_sh, ft_atoll(av[1]), 1);
@@ -116,24 +114,3 @@ void	builtin_exit(int ac, char **av)
 			err_exit_invalid(&g_sh, av[1]);
 	}
 }
-/*
-	if (ac > 2)
-	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		set_error_exit_status(&g_sh, FAILURE);
-	}
-	else if (!g_sh.has_pipe)
-	{
-		ft_putstr_fd("exit\n", STDOUT_FILENO);
-		if (ac == 1)
-			ft_free_values_exit(&g_sh, g_sh.exit_status, 1);
-		else if (ac == 2)
-		{
-			if (str_is_long_long(av[1]))
-				ft_free_values_exit(&g_sh, ft_atoll(av[1]), 1);
-			else
-				err_exit_invalid(&g_sh, av[1]);
-		}
-		ft_free_values_exit(&g_sh, FAILURE, 1);
-	}
-	*/

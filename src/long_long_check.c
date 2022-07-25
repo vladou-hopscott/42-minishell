@@ -68,7 +68,7 @@ static int	format_input_str(char *str)
 
 	i = 0;
 	sign = +1;
-	while (str[i] && ft_isspace(str[i]))
+	while (str[i] && (ft_isspace(str[i]) || str[i] == '0'))
 		i++;
 	if (str[i] && (str[i] == '+' || str[i] == '-'))
 	{
