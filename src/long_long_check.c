@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 12:15:19 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 16:32:05 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:01:10 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,22 @@ int	str_is_long_long(char *str)
 	char		*ascii_num;
 	long long	atoll_num;
 	char		*lltoa_num;
+	char		*cpy;
 
-	i = format_input_str(str);
-	ascii_num = ft_strdup(&str[i]);
+	cpy = ft_strdup(str);
+	i = format_input_str(cpy);
+	ascii_num = ft_strdup(&cpy[i]);
 	atoll_num = ft_atoll(ascii_num);
 	lltoa_num = ft_lltoa(atoll_num);
 	if ((ft_strlen(ascii_num) == ft_strlen(lltoa_num)) && \
 		(ft_strncmp(ascii_num, lltoa_num, ft_strlen(ascii_num)) == 0))
 	{
+		free(cpy);
 		free(ascii_num);
 		free(lltoa_num);
 		return (1);
 	}
+	free(cpy);
 	free(ascii_num);
 	free(lltoa_num);
 	return (0);
