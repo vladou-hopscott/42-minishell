@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   long_long_check.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/25 12:15:19 by vnafissi          #+#    #+#             */
+/*   Updated: 2022/07/25 12:16:12 by vnafissi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -28,7 +39,7 @@ char	*ft_lltoa(long long n)
 {
 	unsigned long long	i;
 	unsigned long long	un;
-	char			    *str;
+	char				*str;
 
 	i = ft_numlen_ll(n);
 	str = malloc((ft_numlen_ll(n) + 1) * sizeof(char));
@@ -86,10 +97,10 @@ static int	format_input_str(char *str)
 
 int	str_is_long_long(char *str)
 {
-	int		    i;
-	char	    *ascii_num;
+	int			i;
+	char		*ascii_num;
 	long long	atoll_num;
-	char	    *lltoa_num;
+	char		*lltoa_num;
 
 	i = format_input_str(str);
 	ascii_num = ft_strdup(&str[i]);
