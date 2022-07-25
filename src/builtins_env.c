@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:07:49 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/25 11:38:58 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 12:08:29 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	builtin_env(int ac, char **env, int fdout)
 		i = 0;
 		while (env && env[i])
 		{
-			tbl = ft_split(env[i], '=');
+			tbl = ft_split_export(env[i]);
 			if (tbl[1] != NULL)
 			{
 				ft_putstr_fd(env[i], fdout);

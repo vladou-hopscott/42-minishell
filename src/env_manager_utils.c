@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:35:53 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 21:16:00 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 12:09:47 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	env_findkeypos(char *key, char **env)
 	i = 0;
 	while (env && env[i])
 	{
-		tbl = ft_split(env[i], '=');
+		tbl = ft_split_export(env[i]);
 		str = tbl[0];
 		if (ft_strncmp(str, key, ft_strlen(key)) == 0
 			&& ft_strlen(key) == ft_strlen(str))
@@ -71,7 +71,7 @@ char	*env_export_append_utils(char *tmp, char *envi, char *value)
 	char	*nvalue;
 	char	*str;
 
-	tbl = ft_split(envi, '=');
+	tbl = ft_split_export(envi);
 	nvalue = ft_strjoin(tbl[1], value);
 	ft_freetbl(tbl, -1);
 	str = ft_strjoin(tmp, nvalue);

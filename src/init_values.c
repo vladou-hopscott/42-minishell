@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:50 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 12:00:38 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 12:09:03 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_shlvl(t_sh *sh, int i, int lvl, char *str)
 		sh->env = tbl_append(sh->env, str);
 	else
 	{
-		tbl = ft_split(sh->env[i], '=');
+		tbl = ft_split_export(sh->env[i]);
 		if (tbl && tbl[1])
 		{
 			if (str_is_int(tbl[1]))
