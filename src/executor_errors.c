@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 15:29:54 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 16:52:20 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void	err_cmd_not_found(t_sh *sh, char *cmd)
 	ft_putstr_fd(": command not found\n", 2);
 	sh->error = 1;
 	sh->exit_status = CMD_NOT_FOUND;
+	ft_free_null_str(&cmd);
 	if (sh->has_pipe)
-	{
-		ft_free_null_str(&cmd);
 		ft_free_values_exit(sh, CMD_NOT_FOUND, 1);
-	}
 }
 
 void	err_export_invalid(t_sh *sh, char *key)
