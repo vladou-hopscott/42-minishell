@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   long_long_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 12:15:19 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 12:16:12 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:32:05 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	format_input_str(char *str)
 
 	i = 0;
 	sign = +1;
-	while (str[i] && (ft_isspace(str[i]) || str[i] == '0'))
+	while (str[i] && (ft_isspace(str[i])))
 		i++;
 	if (str[i] && (str[i] == '+' || str[i] == '-'))
 	{
@@ -90,8 +90,13 @@ static int	format_input_str(char *str)
 			str[i] = '-';
 		i++;
 	}
-	if (sign < 0)
+	while (str[i] && (str[i] == '0') && str[i + 1])
+		i++;
+	if ((sign < 0) && (str[i] != '0'))
+	{
+		str[i - 1] = '-';
 		i -= 1;
+	}
 	return (i);
 }
 
