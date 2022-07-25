@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:12:24 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/21 20:37:34 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:58:03 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	check_fork(t_cmd_line *cmdl, char **env)
 {
 	if (g_sh.has_pipe)
 		return (SUCCESS);
+	if (cmdl->cmd[0] == '\0')
+		return (FAILURE);
 	if (ft_strncmp(cmdl->cmd, "echo", ft_strlen("echo") + 1) == 0)
 		return (SUCCESS);
 	else if (ft_strncmp(cmdl->cmd, "pwd", ft_strlen("pwd") + 1) == 0)

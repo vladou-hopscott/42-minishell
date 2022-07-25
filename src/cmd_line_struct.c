@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:12 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 13:38:22 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:50:47 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,9 @@ int	update_cmd(t_cmd_line **cmd_line)
 	{
 		if (token->type == CMD)
 		{
-			if (token->value[0] != '\0')
-			{
-				(*cmd_line)->cmd = ft_strdup(token->value);
-				if (!(*cmd_line)->cmd)
-					return (1);
-			}
-			else
-				(*cmd_line)->cmd = NULL;
+			(*cmd_line)->cmd = ft_strdup(token->value);
+			if (!(*cmd_line)->cmd)
+				return (1);
 		}
 		token = token->next;
 	}
@@ -47,8 +42,7 @@ int	update_args(t_cmd_line **cmd_line)
 	i = 0;
 	while (token)
 	{
-		if ((token->type == CMD || token->type == ARG)
-			&& token->value[0] != '\0')
+		if (token->type == CMD || token->type == ARG)
 		{
 			(*cmd_line)->args[i] = ft_strndup(
 					token->value, ft_strlen(token->value));
