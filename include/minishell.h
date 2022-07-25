@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vladimir <vladimir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:17:57 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/24 18:24:33 by vladimir         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:48:57 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void		builtin_env(int ac, char **env, int fdout);
 void		builtin_unset(int ac, char **av, char ***penv);
 void		builtin_export(int ac, char **av, char ***penv, int fdout);
 void		builtin_exit(int ac, char **av);
+char		**ft_split_export(char *str);
 
 //********** ERRORS **********//
 void		err_cmd_not_found(t_sh *sh, char *cmd);

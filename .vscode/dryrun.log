@@ -1,0 +1,44 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/sgoinfre/goinfre/Perso/swillis/minishell'
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_cd.o src/builtins_cd.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_echo.o src/builtins_echo.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_env.o src/builtins_env.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_exit.o src/builtins_exit.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_export.o src/builtins_export.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_pwd.o src/builtins_pwd.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/builtins_unset.o src/builtins_unset.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/tokens_linked_list.o src/tokens_linked_list.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/cmds_linked_list.o src/cmds_linked_list.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/cmd_line_struct.o src/cmd_line_struct.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/init_values.o src/init_values.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/free_values.o src/free_values.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/utils.o src/utils.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/utils2.o src/utils2.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/env_manager.o src/env_manager.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/env_manager_utils.o src/env_manager_utils.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/env_expand.o src/env_expand.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/env_expand2.o src/env_expand2.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/quotes.o src/quotes.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/quotes_utils.o src/quotes_utils.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/signals.o src/signals.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/heredoc.o src/heredoc.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/heredoc2.o src/heredoc2.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/heredoc3.o src/heredoc3.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/heredoc4.o src/heredoc4.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/redirections.o src/redirections.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/multipipe.o src/multipipe.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/multipipe2.o src/multipipe2.c
+ 
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/int_check.o src/int_check.c
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3    -c -o src/long_long_check.o src/long_long_check.c
+make -C lib/libft -f Makefile
+make -C lib/libftprintf -f Makefile
+cc -Wall -Wextra -Werror -Iinclude -I/usr/local/opt/readline/include -g3  -lreadline -L/usr/local/opt/readline/lib/ src/main.o src/prompt.o src/lexer.o src/syntax_validation.o src/syntax_validation2.o src/parser.o src/update_token_type.o src/executor.o src/executor_errors.o src/executor_binary.o src/builtins_cd.o src/builtins_echo.o src/builtins_env.o src/builtins_exit.o src/builtins_export.o src/builtins_pwd.o src/builtins_unset.o src/tokens_linked_list.o src/cmds_linked_list.o src/cmd_line_struct.o src/init_values.o src/free_values.o src/utils.o src/utils2.o src/env_manager.o src/env_manager_utils.o src/env_expand.o src/env_expand2.o src/quotes.o src/quotes_utils.o src/signals.o src/heredoc.o src/heredoc2.o src/heredoc3.o src/heredoc4.o src/redirections.o src/multipipe.o src/multipipe2.o src/int_check.o src/long_long_check.o lib/libft/libft.a lib/libftprintf/libftprintf.a -o minishell -lreadline
+make: Leaving directory '/sgoinfre/goinfre/Perso/swillis/minishell'
+ 

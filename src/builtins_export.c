@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins2.c                                        :+:      :+:    :+:   */
+/*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:14 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 19:44:09 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:40:26 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 extern t_sh	g_sh;
 
-// ======================= EXPORT ====================================
 int	is_valid_key(char *key, char *str, char *value)
 {
 	int	valid;
@@ -43,27 +42,6 @@ int	is_valid_key(char *key, char *str, char *value)
 	return (valid);
 }
 
-char	*str_exportvalue(char **tbl)
-{
-	int		i;
-	char	*value;
-
-	value = NULL;
-	if (tbl && tbl[1])
-	{
-		value = ft_strdup(tbl[1]);
-		i = 2;
-		while (tbl && tbl[i])
-		{
-			if (tbl[i])
-				value = ft_strjoin(value, "=");
-			value = ft_strjoin(value, tbl[i]);
-			i++;
-		}
-	}
-	return (value);
-}
-
 void	update_env(char *str, char **tbl, char ***penv)
 {
 	char	*key;
@@ -76,7 +54,7 @@ void	update_env(char *str, char **tbl, char ***penv)
 	key = ft_strdup(tbl[0]);
 	if (key)
 	{
-		value = str_exportvalue(tbl);
+		value = ft_strdup(tbl[1]);
 		if (is_valid_key(key, str, value) == 0)
 			err_export_invalid(&g_sh, key);
 		else if (is_valid_key(key, str, value) == 1)
@@ -96,30 +74,44 @@ void	update_env(char *str, char **tbl, char ***penv)
 void	print_env(char **env, int fdout)
 {
 	int		i;
-	int		j;
 	char	**tbl;
 
 	i = -1;
 	while (env && env[++i])
 	{
 		ft_putstr_fd("export ", fdout);
-		tbl = ft_split(env[i], '=');
+		tbl = ft_split_export(env[i]);
 		ft_putstr_fd(tbl[0], fdout);
 		if (tbl && tbl[1])
 		{
 			ft_putstr_fd("=\"", fdout);
-			j = 0;
-			while (tbl[++j] && (ft_strncmp(tbl[1], " ", ft_strlen(" ") + 1)))
-			{
-				ft_putstr_fd(tbl[j], fdout);
-				if (tbl[j + 1])
-					ft_putchar_fd('=', fdout);
-			}
+			if (ft_strncmp(tbl[1], " ", ft_strlen(" ") + 1) != 0)
+				ft_putstr_fd(tbl[1], fdout);
 			ft_putchar_fd('"', fdout);
 		}
-		ft_putstr_fd("\"\n", fdout);
+		ft_putstr_fd("\n", fdout);
 		ft_freetbl(tbl, -1);
 	}
+}
+
+char	**ft_split_export(char *str)
+{
+	int		i;
+	char	**tbl;
+
+	tbl = malloc(3 * sizeof(char *));
+	if (!tbl)
+		return (NULL);
+	i = -1;
+	while (str && str[++i])
+		if (str[i] == '=')
+			break ;
+	tbl[0] = ft_strndup(str, i);
+	tbl[1] = NULL;
+	if (i != (int)ft_strlen(str))
+		tbl[1] = ft_strdup(&str[i + 1]);
+	tbl[2] = NULL;
+	return (tbl);
 }
 
 void	builtin_export(int ac, char **av, char ***penv, int fdout)
@@ -130,7 +122,7 @@ void	builtin_export(int ac, char **av, char ***penv, int fdout)
 	i = 0;
 	while (++i < ac)
 	{
-		tbl = ft_split(av[i], '=');
+		tbl = ft_split_export(av[i]);
 		if (tbl[0])
 			update_env(av[i], tbl, penv);
 		else

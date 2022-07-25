@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:29:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 19:42:03 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:44:47 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,40 +69,10 @@ int	check_cmd(t_cmd_line *cmdl, char **env)
 	return (FAILURE);
 }
 
-void	set_shlvl(t_sh *sh, int lvl)
-{
-	int		i;
-	char	*value;
-	char	*str;
-	char	**tbl;
-
-	i = env_findkeypos("SHLVL", sh->env);
-	str = ft_strdup("SHLVL=0");
-	if (i == -1)
-		sh->env = tbl_append(sh->env, str);
-	else
-	{
-		tbl = ft_split(sh->env[i], '=');
-		if (tbl && tbl[1])
-		{
-			lvl = ft_atoi(tbl[1]);
-			lvl++;
-			value = ft_itoa(lvl);
-			free(str);
-			str = ft_strjoin("SHLVL=", value);
-			free(value);
-		}
-		ft_free_null_str(&sh->env[i]);
-		ft_freetbl(tbl, -1);
-		sh->env[i] = str;
-	}
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	check_program_args(argc);
 	init_program_values(&g_sh, env);
-	set_shlvl(&g_sh, 0);
 	while (argv)
 	{
 		handle_signals(0);

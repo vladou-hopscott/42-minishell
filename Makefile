@@ -37,10 +37,13 @@ SRCS	:= 	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/executor.c\
 			$(SRC_DIR)/executor_errors.c\
 			$(SRC_DIR)/executor_binary.c\
-			$(SRC_DIR)/builtins.c\
-			$(SRC_DIR)/builtins2.c\
-			$(SRC_DIR)/builtins3.c\
-			$(SRC_DIR)/builtins4.c\
+			$(SRC_DIR)/builtins_cd.c\
+			$(SRC_DIR)/builtins_echo.c\
+			$(SRC_DIR)/builtins_env.c\
+			$(SRC_DIR)/builtins_exit.c\
+			$(SRC_DIR)/builtins_export.c\
+			$(SRC_DIR)/builtins_pwd.c\
+			$(SRC_DIR)/builtins_unset.c\
 			$(SRC_DIR)/tokens_linked_list.c\
 			$(SRC_DIR)/cmds_linked_list.c\
 			$(SRC_DIR)/cmd_line_struct.c\
