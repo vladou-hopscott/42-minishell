@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:08:34 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/26 20:17:01 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:35:51 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//Alloue (avec malloc(3)) et retourne une chaine de
-//caractères représentant l’integer reçu en argument.
-//Les nombres négatifs doivent être gérés.
 
 #include "libft.h"
 

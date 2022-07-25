@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:36:42 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 13:27:12 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:35 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ char	*expand_envvar(char *str, t_idx *idx, char **s1, t_quote qs)
 	return (*s1);
 }
 
-//BASH VARIABLE NAME
-// a-z, A-Z, _ and 0-9
-// May NOT begin with a number
 char	*delimit_envvar(char *str)
 {
 	int		i;

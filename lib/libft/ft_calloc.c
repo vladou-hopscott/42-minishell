@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 18:08:19 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:04:05 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:35:42 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// allocates memory for an array of n elements of size bytes each and returns
-//  a pointer to the allocated memory.
 void	*ft_calloc(size_t n, size_t size)
 {
 	void	*ptr;

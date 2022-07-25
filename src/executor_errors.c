@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 14:28:24 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:29:53 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	err_cmd_not_found(t_sh *sh, char *cmd)
 		ft_free_null_str(&cmd);
 		ft_free_values_exit(sh, CMD_NOT_FOUND, 1);
 	}
-
 }
 
 void	err_export_invalid(t_sh *sh, char *key)

@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:02:30 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:02:31 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:35:46 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// vérifie si l'on a un caractère alphanumérique.
-//C'est équivalent à (isalpha(c) || isdigit(c)).
 
 #include "libft.h"
 

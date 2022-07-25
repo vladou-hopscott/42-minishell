@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:02:35 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:02:36 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:13 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//Écrit la chaine de caractères ’s’ sur le file
-//descriptor donné.
 
 #include "libft.h"
 

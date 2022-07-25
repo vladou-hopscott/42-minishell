@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:04:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 12:20:26 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:41 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-// necessary libraries.
 # include <stdlib.h>
 # include <unistd.h>
-// libraries for testing functions
 # include <stdio.h>
 # include <ctype.h>
 # include <string.h>
 
-// prototypes
 long long		ft_atoll(char *str);
 size_t			ft_strlen(const char *s);
 void			ft_bzero(void *ptr, size_t n);

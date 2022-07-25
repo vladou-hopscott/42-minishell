@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:44:03 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/04/13 16:44:04 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:35:59 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// The strlcpy() function copies up to size - 1 characters from
-// the NUL-terminated string src to dst, NUL-terminating the result.
 
 #include "libft.h"
 

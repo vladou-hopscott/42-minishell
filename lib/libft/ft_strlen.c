@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 18:10:06 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:03:25 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:19 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// calcule la longueur de la chaîne de caractères s,
-// sans compter l'octet nul « \0 » final.
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;

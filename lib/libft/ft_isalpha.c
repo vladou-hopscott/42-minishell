@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:58 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/22 11:40:29 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:08 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// vérifie si l'on a un caractère alphabetique.
 
 #include "libft.h"
 

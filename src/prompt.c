@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:21:55 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 19:42:46 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:49 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//The line returned is allocated with malloc(3);
-//the caller must free it when finished.
 void	listen_prompt(t_sh *sh)
 {
 	sh->prompt = readline("➜ minishell ");

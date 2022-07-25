@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:24:37 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/05/31 21:26:28 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:54 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	check_quote_status_in_str(char c, int quote_status)
 	return (quote_status);
 }
 
-//check if there are unclosed quotes. if so, return error status 1
 int	check_for_quotes(t_sh *sh)
 {
 	int	i;

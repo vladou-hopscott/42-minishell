@@ -6,7 +6,7 @@
 /*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:17:57 by swillis           #+#    #+#             */
-/*   Updated: 2022/07/25 11:48:57 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 14:39:18 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include "parsing.h"
 # include "env_manager.h"
 
-//********************** EXIT STATUS **********************//
+/* ********************* EXIT STATUS ********************* */
 
 typedef enum s_exit_status
 {
@@ -41,7 +41,7 @@ typedef enum s_exit_status
 	INVALID_EXIT = 255
 }	t_exit_status;
 
-//*************** STRUCTURE PRINCIPALE ***************//
+/* ************** STRUCTURE PRINCIPALE ************** */
 typedef struct s_sh
 {
 	char			**env;
@@ -55,18 +55,18 @@ typedef struct s_sh
 	int				has_pipe;
 }	t_sh;
 
-//********************** FUNCTIONS **********************//
+/* ********************* FUNCTIONS ********************* */
 
-//********** INITIALIZATION **********//
+/* ********* INITIALIZATION ********* */
 void		init_program_values(t_sh *sh, char **env);
 void		init_prompt_values(t_sh *sh);
 void		free_values(t_sh *sh, int free_env, int del_hd_file);
 void		ft_free_values_exit(t_sh *sh, int exit_status, int del_hd_file);
 
-//********** PROMPT **********//
+/* ********* PROMPT ********* */
 void		listen_prompt(t_sh *sh);
 
-//********** LEXER **********//
+/* ********* LEXER ********* */
 void		lexer(t_sh *sh);
 void		tokenizer(t_sh *sh);
 char		*process_string_token(t_sh *sh, char *prompt);
@@ -77,7 +77,7 @@ int			is_redirection(t_token_type type);
 int			error_next_is_pipe(t_token *token);
 int			error_first_is_pipe(int i);
 
-//********** PARSER **********//
+/* ********* PARSER ********* */
 void		parser(t_sh *s);
 t_cmd_line	*add_back_cmd_line(t_cmd_line *list);
 t_cmd_line	*create_cmd_line(void);
@@ -97,30 +97,30 @@ void		update_token_type_heredoc_limit(t_sh *sh);
 void		update_tokens_hd_limit(t_cmd_line **cmd_line);
 void		print_parser_result(t_sh *sh);
 
-//********** REDIRECTIONS **********//
+/* ********* REDIRECTIONS ********* */
 void		close_file_fdin(t_cmd_line **cmd_line);
 int			open_file_fdin(char *filename, t_cmd_line **cmd_line);
 int			update_fdin_fdout(t_cmd_line **cmd_line);
 int			update_fdin(t_cmd_line **cmd_line, t_token *token);
 int			update_fdout(t_cmd_line **cmd_line, t_token *token);
 
-//********** SIGNALS **********//
+/* ********* SIGNALS ********* */
 void		handle_signals(int activate_sigquit);
 void		heredoc_handler(int sigtype);
 
-//********** QUOTES **********//
+/* ********* QUOTES ********* */
 int			check_for_quotes(t_sh *sh);
 int			check_quote_status_in_str(char c, int quote_status);
 void		interpret_remove_quotes(t_sh *sh);
 
-//********** LINKED LIST TOKENS **********//
+/* ********* LINKED LIST TOKENS ********* */
 t_token		*create_token(t_token_type type, char *value);
 t_token		*add_back_token(t_token *list, t_token_type type, char *value);
 void		print_tokens(t_token *li);
 void		ft_set_null_free_list(t_token **a_list);
 t_token		*add_middle_token(t_token *current, t_token_type type, char *value);
 
-//********** HERE DOCUMENTS **********//
+/* ********* HERE DOCUMENTS ********* */
 int			heredoc(char *delimitor, t_cmd_line **cmd_line);
 int			initialize_heredoc(t_cmd_line **cmd_line);
 int			run_children(char *delimitor);
@@ -132,12 +132,12 @@ char		*trim_quotes_in_delimitor(char **value, int *i, int *j);
 char		*process_quotes_in_delimitor(char **value);
 char		*expand_envvar_in_heredoc(char *str, int *i, int *j, char **s1);
 
-//********** EXECUTOR **********//
+/* ********* EXECUTOR ********* */
 void		executor(t_cmd_line *cmdl, char ***env);
 void		exec_bin(t_cmd_line *cmdl, char **env);
 void		cmd_pathfinder(char **pcmd, char **env);
 
-//********** BUILTINS **********//
+/* ********* BUILTINS ********* */
 void		builtin_echo(int ac, char **av, int fdout);
 void		builtin_pwd(int ac, int fdout);
 void		builtin_cd(int ac, char **av, char ***penv);
@@ -147,13 +147,13 @@ void		builtin_export(int ac, char **av, char ***penv, int fdout);
 void		builtin_exit(int ac, char **av);
 char		**ft_split_export(char *str);
 
-//********** ERRORS **********//
+/* ********* ERRORS ********* */
 void		err_cmd_not_found(t_sh *sh, char *cmd);
 void		err_export_invalid(t_sh *sh, char *key);
 void		err_exit_invalid(t_sh *sh, char *str);
 void		err_unset_invalid(t_sh *sh, char *key);
 
-//********** UTILS **********//
+/* ********* UTILS ********* */
 int			str_has_only_spaces(char *str);
 int			str_has_charset(char *str, char *charset);
 int			str_has_quotes(char *str);
@@ -163,16 +163,16 @@ int			open_file_check(int fd, char *filename);
 int			ft_str_tbl_len(char **tbl);
 void		set_error_exit_status(t_sh *sh, int status);
 
-//********** INT_CHECK **********//
+/* ********* INT_CHECK ********* */
 char		*ft_itoa(int n);
 int			str_is_int(char *str);
 int			str_is_long_long(char *str);
 
-//********** MULTIPIPE **********//
+/* ********* MULTIPIPE ********* */
 void		execute_pipes(t_sh *sh);
 void		wait_child(t_cmd_line *cmdl, int status, t_sh *sh);
 
-//********** MAIN **********//
+/* ********* MAIN ********* */
 int			check_exec_bin(t_cmd_line *cmdl, char **env);
 
 #endif

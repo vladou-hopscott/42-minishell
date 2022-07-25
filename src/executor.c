@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:27 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 13:47:46 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:52 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	cmd_pathfinder(char **pcmd, char **env)
 		cmd_pathfinder_utils(pcmd, env_path);
 	free(env_path);
 }
-
-// ======================= EXEC ====================================
 
 int	args_to_ac(char **av)
 {

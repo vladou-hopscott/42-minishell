@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:23:39 by vladimir          #+#    #+#             */
-/*   Updated: 2022/07/25 14:18:30 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:33:02 by swillis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ void	ft_free_values_exit(t_sh *sh, int exit_status, int del_hd_file)
 {
 	free_values(sh, 1, del_hd_file);
 	rl_clear_history();
+	close(2);
+	close(1);
+	close(0);
 	exit(exit_status);
 }
