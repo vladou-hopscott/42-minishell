@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:04 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 19:56:53 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:12:58 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_delimitor_process(char **tmp, char **delimitor, t_cmd_line **cmd_line)
 	return (0);
 }
 
-int	process_heredoc(char *delimitor, t_cmd_line **cmd_line, int quotes)
+int	ph(char *delimitor, t_cmd_line **cmd_line, int quotes)
 {
 	char	*tmp;
 	int		i;
@@ -69,14 +69,14 @@ int	wait_heredoc(int pid, int *status)
 	return (0);
 }
 
-int	heredoc(char *delimitor, t_cmd_line **cmd_line)
+int	heredoc(char *dl, t_cmd_line **cmd_line)
 {
-	int	quotes;
+	int	q;
 	int	pid;
 	int	status;
 
-	quotes = 0;
-	process_delimitor(&delimitor, &quotes);
+	q = 0;
+	process_delimitor(&dl, &q);
 	if (initialize_heredoc(cmd_line))
 		return (1);
 	status = 0;
@@ -85,15 +85,14 @@ int	heredoc(char *delimitor, t_cmd_line **cmd_line)
 	if (pid == 0)
 	{
 		signal(SIGINT, &heredoc_handler);
-		ft_free_values_exit(&g_sh,
-			process_heredoc(delimitor, cmd_line, quotes), 0);
+		ft_free_values_exit(&g_sh, ph(dl, cmd_line, q), 0);
 	}
 	if (wait_heredoc(pid, &status))
 		return (1);
 	handle_signals(0);
 	close((*cmd_line)->fdin);
-	if (quotes)
-		ft_free_null_str(&delimitor);
+	if (q)
+		ft_free_null_str(&dl);
 	if (open_file_fdin((*cmd_line)->heredoc_name, cmd_line))
 		return (1);
 	return (0);
