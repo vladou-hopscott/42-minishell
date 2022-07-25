@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/25 16:52:20 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:09:23 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	err_cmd_not_found(t_sh *sh, char *cmd)
 	ft_putstr_fd(": command not found\n", 2);
 	sh->error = 1;
 	sh->exit_status = CMD_NOT_FOUND;
-	ft_free_null_str(&cmd);
+	if (cmd[0])
+		ft_free_null_str(&cmd);
 	if (sh->has_pipe)
 		ft_free_values_exit(sh, CMD_NOT_FOUND, 1);
 }
