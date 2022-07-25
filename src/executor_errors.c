@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:37:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/23 19:43:21 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:28:24 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	err_cmd_not_found(t_sh *sh, char *cmd)
 	sh->error = 1;
 	sh->exit_status = CMD_NOT_FOUND;
 	if (sh->has_pipe)
+	{
+		ft_free_null_str(&cmd);
 		ft_free_values_exit(sh, CMD_NOT_FOUND, 1);
+	}
+
 }
 
 void	err_export_invalid(t_sh *sh, char *key)
