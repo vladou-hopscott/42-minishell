@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scottwillis <scottwillis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:42:22 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/06/30 10:28:31 by scottwillis      ###   ########.fr       */
+/*   Updated: 2022/07/25 18:49:39 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_idx
 typedef struct s_cmd_line
 {
 	char				*cmd;
+	int					cmd_is_empty_doll;
 	t_token				*token_lst;
 	char				*str;
 	char				**args;

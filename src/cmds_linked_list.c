@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swillis <swillis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:55:16 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/07/20 16:41:04 by swillis          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:50:12 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_cmd_line	*create_cmd_line(void)
 		return (NULL);
 	elem->args = NULL;
 	elem->cmd = NULL;
+	elem->cmd_is_empty_doll = 0;
 	elem->next = NULL;
 	elem->str = NULL;
 	elem->token_lst = NULL;
