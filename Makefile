@@ -16,8 +16,14 @@ EXE := minishell
 # Compilation ====================================
 
 CC := cc
-LDFLAGS ?= -lreadline -L/usr/local/opt/readline/lib/
-CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include
+
+# # Linux
+# LDFLAGS ?= -lreadline -L/usr/local/opt/readline/lib/
+# CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/usr/local/opt/readline/include
+
+# Macos
+LDFLAGS ?= -lreadline -L/opt/homebrew/opt/readline/lib
+CFLAGS ?= -Wall -Wextra -Werror -I$(INC_DIR) -I/opt/homebrew/opt/readline/include
 
 # Src files ======================================
 
